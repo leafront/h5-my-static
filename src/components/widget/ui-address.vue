@@ -12,8 +12,8 @@
         <span v-show="currentRegion.name" @click="toggleLocationName(2)">{{currentRegion.name}}</span>
         <strong v-show="isChecked">请选择</strong>
       </div>
-      <div class="ui-address" id="addressList">
-        <ul class="font ui-address-list">
+      <div class="ui-address">
+        <ul class="font ui-address-list" id="addressList">
           <li v-for="(item,index) in list" :key="index" @click="selectLocation(item)"><span>{{item.name}}</span></li>
         </ul>
       </div>
@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 
-  import IScroll from '@/libs/IScroll'
+  import utils from '@/widget/utils'
 
   import request from '@/widget/request'
 
@@ -55,7 +55,35 @@
           id: '',
           name: ''
         },
-        locationIndex: 0
+        locationIndex: 0,
+        isClickArea: true
+      }
+    },
+    watch: {
+      isPicker () {
+
+        /**
+         *
+         * 阻止弹层外的元素滚动
+         */
+        document.getElementById('addressList').addEventListener('touchmove',(event) => {
+
+          if (!utils.isPassive()) {
+
+            event.preventDefault()
+
+          }
+        })
+
+        document.getElementById('addressList').addEventListener('touchmove',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
+
+        document.getElementById('addressList').addEventListener('scroll',(event) => {
+
+          event.stopPropagation()
+        },utils.isPassive() ? {passive: true} : false)
       }
     },
     methods: {
@@ -91,14 +119,17 @@
        * @param {String} addressName 地址名称
        */
       selectLocation ({id,code,name}) {
-
+        if (!this.isClickArea) {
+          return
+        }
+        this.isClickArea = false
         let {
           locationIndex,
           provinceList
         } = this
 
         if (locationIndex < 3) {
-          
+
           locationIndex = parseInt(locationIndex) + 1
         }
 
@@ -162,6 +193,7 @@
         }).then((results) => {
           const data = results.data
           if (results.code  == 0 && data) {
+            this.isClickArea = true
             this.list = data
             if (this.locationIndex == 1)  {
               this.cityList = data
@@ -180,6 +212,8 @@
       toggleLocationName (index) {
 
         this.isChecked = 1
+
+        this.isClickArea = true
 
         this.currentRegion= {
           id: '',
@@ -217,15 +251,6 @@
     },
     created () {
       this.getProvinceList()
-    },
-    watch: {
-      list () {
-        this.$nextTick(() => {
-          new IScroll('#addressList',{
-            scrollX: false
-          })
-        })
-      }
     }
   }
 </script>

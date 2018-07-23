@@ -3,18 +3,18 @@
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
     <AppHeader :title="editTitle" :isBorder="isBorder" v-show="editHeader" :backFn="backAction">
-      <div class="ui-header-right">
+      <div class="ui-header-right" @click="editUserInfo">
         <span>确认</span>
       </div>
     </AppHeader>
-    <div class="scroll-view-wrapper my-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper my-view" :class="{'visibility': pageView, 'scroll_view_hidden': showAddress}">
       <div class="my-personal">
         <div class="my-personal-upload">
           <span class="c3">头像</span>
-          <img :src="userInfo.url160x160"/>
-          <input type="file" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
+          <img :src="headPicUrl"/>
+          <input type="file" @change="uploadHeadPic($event)" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
-        <div class="my-personal-item" @click="editPopup(1,'编辑昵称')">
+        <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
           <strong>{{userInfo.nickname}}</strong>
           <div class="ui-right-bottom">
@@ -38,7 +38,7 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item" @click="editPopup(2, '编辑地址')">
           <span>地址</span>
           <strong>{{userInfo.userAddress}}</strong>
           <div class="ui-right-bottom">
@@ -50,11 +50,11 @@
           <span>性别</span>
           <strong>{{userInfo.sexName}}</strong>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item" @click="togglePicker(true)">
           <span>生日</span>
           <strong>{{userInfo.birthdayStr}}</strong>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item" @click="editPopup(3, '编辑邮编')">
           <span>邮编</span>
           <strong>{{userInfo.zipCode}}</strong>
           <div class="ui-right-bottom">
@@ -62,7 +62,7 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item" @click="editPopup(4, '编辑邮箱')">
           <span>邮箱</span>
           <strong>{{userInfo.email}}</strong>
           <div class="ui-right-bottom">
@@ -85,7 +85,7 @@
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 1">
       <input type="text" v-model="userInfo.nickname" placeholder="昵称" maxlength="20"/>
-      <div class="my-personal-close-icon">
+      <div class="my-personal-close-icon"  v-show="userInfo.nickname" @click="deleteInputText('nickname')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-close"></use>
         </svg>
@@ -93,7 +93,7 @@
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 2">
       <input type="text" v-model="userInfo.userAddress" placeholder="详细地址" maxlength="40"/>
-      <div class="my-personal-close-icon">
+      <div class="my-personal-close-icon" v-show="userInfo.userAddress" @click="deleteInputText('userAddress')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-close"></use>
         </svg>
@@ -101,15 +101,15 @@
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 3">
       <input type="text" v-model="userInfo.zipCode" placeholder="邮编" maxlength="40"/>
-      <div class="my-personal-close-icon">
+      <div class="my-personal-close-icon" v-show="userInfo.zipCode" @click="deleteInputText('zipCode')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-close"></use>
         </svg>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 4">
-      <input type="text" v-model="userInfo.zipCode" placeholder="邮箱" maxlength="40"/>
-      <div class="my-personal-close-icon">
+      <input type="text" v-model="userInfo.email" placeholder="邮箱" maxlength="40"/>
+      <div class="my-personal-close-icon" v-show="userInfo.email" @click="deleteInputText('email')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-close"></use>
         </svg>
@@ -119,6 +119,14 @@
                @toggleLocation="toggleLocation"
                @selectValue="selectValue">
     </UIAddress>
+    <UIDatePicker
+      :start="start"
+      :end="end"
+      :selectValue="checkedValue"
+      :isPicker="isPicker"
+      @togglePicker="togglePicker"
+      @confirm="confirm">
+    </UIDatePicker>
   </div>
 </template>
 
@@ -126,7 +134,15 @@
 
   import AppHeader from '@/components/common/header'
 
+  import ImageUpload from '@/components/widget/imageUpload'
+
   import UIAddress from '@/components/widget/ui-address'
+
+  import UIDatePicker from '@/components/widget/ui-date-picker'
+
+  import config from '@/config/index'
+
+  import utils from '@/widget/utils'
 
   import * as Model from '@/model/setting'
 
@@ -148,11 +164,18 @@
         },
         editHeader: false,
         personalPopup: -1,
-        showAddress: false
+        showAddress: false,
+        headPicUrl: '',
+        start: 1920,
+        checkedValue: ['1990','01','10'],
+        end:  new Date().getFullYear(),
+        isPicker: false
       }
     },
     components: {
       AppHeader,
+      ImageUpload,
+      UIDatePicker,
       UIAddress
     },
     methods: {
@@ -171,6 +194,14 @@
         this.editHeader = true
         this.editTitle = title
       },
+      confirm (val) {
+        const data = {
+          birthday: val
+        }
+        this.userInfo.birthdayStr  = val
+        this.isPicker = false
+        this.updateUserInfo(data)
+      },
       getUserInfo () {
         Model.getUserInfo({
           type: 'POST'
@@ -181,6 +212,7 @@
             this.$hideLoading()
             this.pageView = true
             this.userInfo = data
+            this.headPicUrl = data.url160x160 || config.staticPath + '/my-static/images/logo-laiyifen.png'
           } else {
             this.$toast(result.message)
           }
@@ -227,7 +259,11 @@
        * 显示切换收货地址
        */
       toggleLocation (val) {
+        utils.appViewFixed()
         this.showAddress = val
+      },
+      togglePicker (val) {
+        this.isPicker = val
       },
       /**
        * 更新个人资料信息
@@ -242,13 +278,69 @@
 
           const data = result.data
           if (result.code == 0 ) {
-            this.$toast('保存成功')
+            this.$toast('资料修改成功')
           } else {
             this.$toast(result.message)
           }
 
         })
       },
+      deleteInputText (key) {
+
+        this.userInfo[key] = ''
+
+      },
+      editUserInfo () {
+        const {
+          personalPopup
+        } = this
+        const data = {}
+        const editStatus = {
+          "1": "nickname",
+          "2": "userAddress",
+          "3": "zipCode",
+          "4": "email"
+        }
+
+        const editKey = editStatus[personalPopup]
+        data[editKey] = this.userInfo[editKey]
+        this.updateUserInfo(data)
+        this.backAction()
+
+      },
+      uploadHeadPic (event) {
+        this.$showPageLoading()
+        const file = event.currentTarget.files[0]
+        const imageUpload = new ImageUpload(file, {
+          url: '/api/fileUpload/putObjectWithForm.do',
+          data: {
+            suffix: 'png'
+          },
+          fileKey: 'file',
+          onUpload:(result) =>{
+
+            const data = result.data
+            this.$hidePageLoading()
+
+            if (result.code == 0 && data) {
+
+              const filePath =  data.filePath
+              this.headPicUrl = filePath
+                event.target.value = ''
+              this.updateUserInfo({headPicUrl:filePath})
+
+            } else {
+
+              this.$toast(result.message)
+            }
+
+          },
+          onError: () =>{
+            this.$toast('网络服务器错误')
+          }
+        })
+        imageUpload.start();
+      }
     },
     created() {
       this.$showLoading()

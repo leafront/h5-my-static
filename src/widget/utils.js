@@ -23,6 +23,9 @@ const utils = {
   qq () {
     return this.ua.indexOf('QQBrowser') > -1;
   },
+  nativeQQ () {
+    return (this.ios() && this.ua.indexOf('UIWebView') > -1) || (this.android() && this.ua.indexOf('Mobile MQQBrowser') > -1);
+  },
   weixin () {
     return this.ua.indexOf('MicroMessenger') > -1;
   },
@@ -352,9 +355,7 @@ const utils = {
   appViewFixed () {
 
     const appView = document.getElementById('app')
-
     if (appView.classList.contains('app_fixed')){
-
       appView.classList.remove('app_fixed')
 
     } else {

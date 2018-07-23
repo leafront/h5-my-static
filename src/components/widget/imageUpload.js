@@ -410,7 +410,7 @@ ImageUpload.prototype = {
 			fd.append(i,options.data[i]);
 		}
 
-		fd.append('files',this.formBlob,fileName)
+		fd.append('file',this.formBlob)
 
 		xhr.send(fd);
 

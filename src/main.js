@@ -15,7 +15,9 @@ import filter from '@/filters'
 
 import Toast from '@/components/toast'
 
-import loading from '@/components/loading'
+import Loading from '@/components/loading'
+
+import PageLoading from '@/components/pageLoading'
 
 import showModal from '@/components/showModal'
 
@@ -29,7 +31,9 @@ Vue.use(Toast,{    //支持全局配置
 	duration: "1500"
 })
 
-Vue.use(loading)
+Vue.use(Loading)
+
+Vue.use(PageLoading)
 
 router.beforeEach((to, from, next) => {
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-header-wrapper">
+  <div class="ui-header-wrapper" v-if="showHeader">
     <div class="ui-header" :class="{'ui-header-border':isBorder}">
       <div class="ui-header-back" @click="backAction">
         <svg class="icon ui-header-back_btn" aria-hidden="true">
@@ -25,8 +25,10 @@
         isApp: utils.isApp()
       }
     },
-    created () {
-
+    computed: {
+      showHeader () {
+        return !(utils.weixin() || utils.nativeQQ())
+      }
     },
     methods: {
       backAction () {
