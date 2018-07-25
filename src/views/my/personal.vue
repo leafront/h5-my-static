@@ -7,12 +7,12 @@
         <span>确认</span>
       </div>
     </AppHeader>
-    <div class="scroll-view-wrapper my-view" :class="{'visibility': pageView, 'scroll_view_hidden': showAddress}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': showAddress}">
       <div class="my-personal">
         <div class="my-personal-upload">
           <span class="c3">头像</span>
           <img :src="headPicUrl"/>
-          <input type="file" @change="uploadHeadPic($event)" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
+          <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
         <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
@@ -25,10 +25,6 @@
         <div class="my-personal-item">
           <span>手机号码</span>
           <strong>{{userInfo.mobile}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
         </div>
         <div class="my-personal-item" @click="toggleLocation(true)">
           <span>地区</span>
@@ -46,9 +42,9 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item" @click="toggleSex(true)">
           <span>性别</span>
-          <strong>{{userInfo.sexName}}</strong>
+          <strong>{{userInfo.sex == 0 ? '男' : '女' }}</strong>
         </div>
         <div class="my-personal-item" @click="togglePicker(true)">
           <span>生日</span>
@@ -115,9 +111,10 @@
         </svg>
       </div>
     </div>
-    <UIAddress :showAddress="showAddress"
-               @toggleLocation="toggleLocation"
-               @selectValue="selectValue">
+    <UIAddress
+      :showAddress="showAddress"
+      @toggleLocation="toggleLocation"
+      @selectValue="selectValue">
     </UIAddress>
     <UIDatePicker
       :start="start"
@@ -127,6 +124,7 @@
       @togglePicker="togglePicker"
       @confirm="confirm">
     </UIDatePicker>
+    <UISex :sexPopup="sexPopup" @toggleSex="toggleSex" @checkedSex="checkedSex"></UISex>
   </div>
 </template>
 
@@ -138,11 +136,17 @@
 
   import UIAddress from '@/components/widget/ui-address'
 
+  import UISex from '@/components/common/ui-sex'
+
   import UIDatePicker from '@/components/widget/ui-date-picker'
 
   import config from '@/config/index'
 
   import utils from '@/widget/utils'
+
+  import validate from '@/widget/validate'
+
+  import app from '@/widget/app'
 
   import * as Model from '@/model/setting'
 
@@ -169,24 +173,37 @@
         start: 1920,
         checkedValue: ['1990','01','10'],
         end:  new Date().getFullYear(),
-        isPicker: false
+        isPicker: false,
+        sexPopup: false
       }
     },
     components: {
       AppHeader,
       ImageUpload,
       UIDatePicker,
-      UIAddress
+      UIAddress,
+      UISex
     },
     methods: {
       pageAction(url) {
         this.$router.push(url)
+      },
+      toggleSex (val) {
+        this.sexPopup = val
+      },
+      checkedSex (val) {
+        this.userInfo.sex = val
+        const data =  {
+          sex: val
+        }
+        this.updateUserInfo(data,'保存成功')
       },
       backAction () {
         this.personalPopup = -1
         this.pageView = true
         this.editHeader = false
         this.editTitle = ''
+        this.getUserInfo()
       },
       editPopup (val,title) {
         this.personalPopup = val
@@ -244,15 +261,27 @@
           location.href = '/my/authentication.html?isEdit=0'
         }
       },
-      selectValue ({provinceCode,cityId,regionId,provinceName,cityName,regionName}) {
+      selectValue ({provinceCode,cityCode,regionCode,provinceName,cityName,regionName}) {
 
         this.userInfo.userProvinceCode = provinceCode
-        this.userInfo.userCityCode = cityId
-        this.userInfo.userRegionCode = regionId
+        this.userInfo.userCityCode = cityCode
+        this.userInfo.userRegionCode = regionCode
         this.userInfo.userProvince = provinceName
         this.userInfo.userCity = cityName
         this.userInfo.userRegion = regionName
         this.userInfo.addressDetail = provinceName + ' ' +  cityName + ' ' + regionName
+
+        const data = {
+          userProvinceCode: provinceCode,
+          userCityCode: cityCode,
+          userRegionCode: regionCode,
+          userProvince: provinceName,
+          userCity: cityName,
+          userRegion: regionName
+        }
+
+        this.updateUserInfo(data,'保存成功')
+
       },
       /**
        *
@@ -264,12 +293,20 @@
       },
       togglePicker (val) {
         this.isPicker = val
+        let birthday = this.userInfo.birthdayStr
+
+        if (birthday && val) {
+          birthday =  birthday.split('-')
+          this.checkedValue = birthday
+        }
       },
       /**
        * 更新个人资料信息
        * @param data
        */
-      updateUserInfo (data) {
+      updateUserInfo (data,message) {
+
+        let messageStr  = message || '资料修改成功'
 
         Model.updateUserInfo({
           type: 'POST',
@@ -278,7 +315,7 @@
 
           const data = result.data
           if (result.code == 0 ) {
-            this.$toast('资料修改成功')
+            this.$toast(messageStr)
           } else {
             this.$toast(result.message)
           }
@@ -302,15 +339,75 @@
           "4": "email"
         }
 
+        const tipsMessage = {
+          "nickname": "请输入昵称",
+          "userAddress": "请输入详细地址",
+          "zipCode": "请输入邮编",
+          "email": "请输入邮箱"
+        }
+
         const editKey = editStatus[personalPopup]
-        data[editKey] = this.userInfo[editKey]
+
+        const editVal = this.userInfo[editKey]
+
+        if (!editVal) {
+          this.$toast(tipsMessage[editKey])
+          return
+        }
+
+        if (personalPopup == 3 && editVal) {
+          if (!validate.isZipCode(editVal)) {
+            this.$toast('请输入正确的邮编')
+            return
+          }
+        }
+
+        if (personalPopup == 4 && editVal) {
+          if (!validate.isEmail(editVal)) {
+            this.$toast('请输入正确的邮箱')
+            return
+          }
+        }
+
+        data[editKey] = editVal
         this.updateUserInfo(data)
         this.backAction()
 
       },
+      /**
+       * app图片上传
+       */
+      appUploadHeadPic () {
+        if (utils.isApp) {
+          app.postMessage("uploadPhoto", {
+            maxCount:  1,
+            isNeedCut: 1
+          }, (result)=> {
+            const data = { headPicUrl:result }
+            this.headPicUrl = result
+            Model.updateUserInfo({
+              type: 'POST',
+              data
+            }).then((result) => {
+              if (result.code != 0) {
+                this.$toast(result.message)
+              }
+            })
+          })
+        }
+      },
+      /**
+       * H5 图片上传
+       * @param event
+       */
       uploadHeadPic (event) {
+
+        if (utils.isApp()) {
+          return
+        }
         this.$showPageLoading()
         const file = event.currentTarget.files[0]
+
         const imageUpload = new ImageUpload(file, {
           url: '/api/fileUpload/putObjectWithForm.do',
           data: {
@@ -326,8 +423,8 @@
 
               const filePath =  data.filePath
               this.headPicUrl = filePath
-                event.target.value = ''
-              this.updateUserInfo({headPicUrl:filePath})
+              event.target.value = ''
+              this.updateUserInfo({headPicUrl:filePath},'头像修改成功')
 
             } else {
 
@@ -336,10 +433,11 @@
 
           },
           onError: () =>{
-            this.$toast('网络服务器错误')
+            this.$toast('请求出错，请稍后再试')
           }
         })
-        imageUpload.start();
+        imageUpload.start()
+
       }
     },
     created() {
@@ -399,13 +497,14 @@
       width: .8rem;
       height: .8rem;
       border-radius: 50%;
+      background: #ddd;
     }
     .my-personal-file{
       position: absolute;
       left:0;
       top:0;
       height: 1.2rem;
-      width: 7.2rem;
+      width: 100%;
       opacity: 0;
     }
   }

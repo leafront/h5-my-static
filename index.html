@@ -11,10 +11,7 @@
     <title>来伊份商城</title>
 	  <script type="text/javascript">
 			(function (win) {
-				var flex = function flex(normal, baseFontSize, fontscale) {
-					var _baseFontSize = baseFontSize || 100;
-					var _fontscale = fontscale || 1;
-
+				var flex = function flex() {
 					var doc = win.document;
 					var ua = navigator.userAgent;
 					var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
@@ -26,28 +23,27 @@
 						// 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;
 						dpr = 1;
 					}
-					var scale = normal ? 1 : 1 / dpr;
-
+					var scale =  1 / dpr;
 					var metaEl = doc.querySelector('meta[name="viewport"]');
 					if (!metaEl) {
 						metaEl = doc.createElement('meta');
 						metaEl.setAttribute('name', 'viewport');
 						doc.head.appendChild(metaEl);
 					}
+          var clientWidth = doc.documentElement.clientWidth;
 
-					var ratio = 1
-
-					if ( document.documentElement.clientWidth <= 1200) {
-
-						ratio = document.documentElement.clientWidth / 375
-
-					}
-
+					var docFontSize = 50 + 'px'
+					if (clientWidth <= 1200) {
+            docFontSize = (clientWidth * dpr) / 7.5 + 'px';
+            if (clientWidth < 375 && !isIos && dpr <= 2) {
+              docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
+            }
+          }
 					metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
-					doc.documentElement.style.fontSize = normal ? '50px' : _baseFontSize / 2 * dpr * ratio * _fontscale + 'px';
+					doc.documentElement.style.fontSize = docFontSize;
 				};
 
-				flex(false, 100, 1);
+				flex();
 			})(window);
 	  </script>
   </head>
@@ -60,5 +56,9 @@
     <!-- built files will be auto injected -->
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/my-static/iconfont.js?v=<%= htmlWebpackPlugin.options.getTime %>"></script>
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/my-static/fastclick/index.js"></script>
+    <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/my-static/vconsole/index.js"></script>-->
+    <!--<script>-->
+      <!--var vConsole = new VConsole()-->
+    <!--</script>-->
   </body>
 </html>

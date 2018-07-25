@@ -1,8 +1,8 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" @backFn="backAction">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
-    <div class="scroll-view-wrapper my-view" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-setting-list">
         <div class="my-setting-item" @click="routerAction('/my/personal')">
           <span class="c3">个人资料</span>
@@ -18,7 +18,7 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-setting-item" @click="pageAction('/setting/about-us.html')">
+        <div class="my-setting-item" @click="routerAction('/my/aboutus')">
           <span class="c3">关于我们</span>
           <div class="ui-right-bottom">
             <i class="ui-arrow-right-icon1"></i>
@@ -29,7 +29,7 @@
           <span class="c3">清除图片缓存</span>
           <strong class="c3 font" v-if="cache">{{cache}}</strong>
         </div>
-        <div class="my-setting-item">
+        <div class="my-setting-item" @click="toggleContactPopup(true)">
           <span class="c3">联系客服</span>
           <div class="ui-right-bottom">
             <i class="ui-arrow-right-icon1"></i>
@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    <UIContact :contactPopup="contactPopup" @toggleContactPopup="toggleContactPopup"></UIContact>
     <div class="my-setting-logout" @click="logoutAction" v-if="loggedIn">
       <div class="ui-submit">
         <span>退出当前账户</span>
@@ -60,30 +61,11 @@
   </div>
 </template>
 
-<style lang="scss">
-  .my-setting-list{
-    background: #fff;
-    padding-left: .3rem;
-    margin-top: .2rem;
-  }
-  .my-setting-item{
-    height:.88rem;
-    padding-right: .3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: .01rem solid #ddd;
-    span{
-      font-size: .32rem;
-      font-weight: 400;
-    }
-  }
-</style>
-
-
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
+
+  import UIContact from '@/components/common/ui-contact'
 
   import utils from '@/widget/utils'
 
@@ -103,13 +85,18 @@
         pageView: true,
         isApp: utils.isApp(),
         cache: '0MB',
-        loggedIn: app.loggedIn()
+        loggedIn: app.loggedIn(),
+        contactPopup: false
       }
     },
     components: {
-      AppHeader
+      AppHeader,
+      UIContact
     },
     methods: {
+      toggleContactPopup (val) {
+        this.contactPopup = val
+      },
       backAction () {
         if (this.isApp) {
           app.back()
@@ -169,3 +156,26 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .my-setting-list{
+    background: #fff;
+    padding-left: .3rem;
+    margin-top: .2rem;
+  }
+  .my-setting-item{
+    height:.88rem;
+    padding-right: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: .01rem solid #ddd;
+    &:last-child{
+      border-bottom:0;
+    }
+    span{
+      font-size: .32rem;
+      font-weight: 400;
+    }
+  }
+</style>

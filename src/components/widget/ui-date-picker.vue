@@ -34,7 +34,7 @@
           <div class="ui-picker__indicator"></div>
         </div></div>
     </div>
-    <div class="ui-mask" :class="{'active':isPicker}" @click="cancel"></div>
+    <div class="ui-mask" :class="{'active':isPicker}"></div>
   </div>
 </template>
 
@@ -147,7 +147,7 @@
         const self = this
         this.scroll = []
         this.checkedDate =  [this.selectYear, this.selectMonth, this.selectDate]
-        const itemHeight = document.querySelector('.ui-picker__item').offsetHeight
+        const itemHeight = parseFloat(document.documentElement.style.fontSize) * .68
         const groupEle = document.querySelectorAll('.ui-picker__group')
         const len = groupEle.length
 
@@ -177,17 +177,15 @@
             }
 
             self.checkedDate.splice(idx,1,index)
-
+            self.scroll[len-1].refresh()
             if (idx == 1) {
               const prevDays = self.checkedDate[2]
               const nextDays =  self.months[index].children.length - 1
               const daysIndex = prevDays > nextDays ? nextDays : prevDays
-              console.log(prevDays,nextDays)
               self.checkedDate.splice(2,1,daysIndex)
               self.scroll[len-1].scrollTo(0,-daysIndex * itemHeight )
             }
             iscroll.scrollTo(0, -index * itemHeight)
-
           })
           this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
         })

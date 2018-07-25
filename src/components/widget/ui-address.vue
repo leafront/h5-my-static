@@ -141,7 +141,7 @@
 
           this.currentProvince = {
             name,
-            id
+            code
           }
           this.list = provinceList
 
@@ -149,18 +149,18 @@
 
           this.currentCity = {
             name,
-            id
+            code
           }
         } else if (locationIndex == 3) {
           this.currentRegion = {
             name,
-            id
+            code
           }
 
           this.$emit('toggleLocation',false)
-          const provinceCode = this.currentProvince.id
-          const cityId = this.currentCity.id
-          const regionId = this.currentRegion.id
+          const provinceCode = this.currentProvince.code
+          const cityCode = this.currentCity.code
+          const regionCode = this.currentRegion.code
           const provinceName = this.currentProvince.name
           const cityName = this.currentCity.name
           const regionName = this.currentRegion.name
@@ -169,8 +169,8 @@
 
           this.$emit('selectValue',{
             provinceCode,
-            cityId,
-            regionId,
+            cityCode,
+            regionCode,
             provinceName,
             cityName,
             regionName,

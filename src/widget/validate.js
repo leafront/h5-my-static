@@ -106,6 +106,18 @@ const validate = {
       return false
 
     }
+  },
+  /**
+   * @param {string} zipCode
+   * @returns {boolean}
+   * @example
+   * Lizard.isZipCode('430406')
+   */
+  isZipCode (text){
+
+    var pattern = /^[0-9]{6}$/;
+
+    return pattern.test(text);
   }
 }
 

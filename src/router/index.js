@@ -9,6 +9,12 @@ const MySetting = r => require.ensure([], () => r(require('@/views/my/setting.vu
 
 const MyPersonal = r => require.ensure([], () => r(require('@/views/my/personal.vue')),'MyPersonal')
 
+const MyAboutUs = r => require.ensure([], () => r(require('@/views/my/aboutus.vue')),'MyAboutUs')
+
+const MyProtocol = r => require.ensure([], () => r(require('@/views/my/protocol.vue')),'MyProtocol')
+
+const MySecurity = r => require.ensure([], () => r(require('@/views/my/security.vue')),'MySecurity')
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +40,27 @@ export default new Router({
       component: MyPersonal,
       meta: {
         title: '个人资料'
+      }
+    }, {
+      path: '/my/aboutus',
+      name: 'MyAboutUs',
+      component: MyAboutUs,
+      meta: {
+        title: '关于我们'
+      }
+    }, {
+      path: '/my/protocol',
+      name: 'MyProtocol',
+      component: MyProtocol,
+      meta: {
+        title: '软件使用许可协议'
+      }
+    }, {
+      path: '/my/security',
+      name: 'MySecurity',
+      component: MySecurity,
+      meta: {
+        title: '特别说明'
       }
     }
   ]
