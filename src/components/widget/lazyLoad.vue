@@ -150,40 +150,42 @@
 			/**
 			 * @param {Object} el
 			 *
-			 */
-
+       *
+       */
+			
 			loadImg(el) { //加载图片
 
 				el.dataset.LazyLoadImgState = 'start'
 
-				const img = new Image()
+        const imgUrl = el.dataset.src
 
-				img.src = el.dataset.src
+        if (imgUrl) {
 
-				img.addEventListener('load', () => {
+          const img = new Image()
 
-					el.setAttribute('src',img.src)
+          img.src = imgUrl
 
-					el.dataset.LazyLoadImgState = 'success'
+          img.addEventListener('load', () => {
 
-					el.classList.add('successImg')
+            el.setAttribute('src',img.src)
 
+            el.dataset.LazyLoadImgState = 'success'
 
-				}, false)
+            el.classList.add('successImg')
 
-				img.addEventListener('error', () => {
+          }, false)
 
-					delete el.dataset.src
+          img.addEventListener('error', () => {
 
-					el.dataset.LazyLoadImgState = 'error'
+            delete el.dataset.src
 
-				}, false)
+            el.dataset.LazyLoadImgState = 'error'
+
+          }, false)
+        }
 			}
 		}
-
 	}
-
-
 </script>
 
 <style lang="scss">

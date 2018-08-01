@@ -6,7 +6,7 @@
       <div class="my-group-view" id="my-group-view">
         <div class="my-group-menu">
           <ul class="my-group-menu-list">
-            <li :class="{'active': index == status}" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>
+            <li :class="{'active': index == status}" :key="item.orderCode" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>
           </ul>
         </div>
         <LazyLoad :list="list" :options="{ele:'my-group-item-pic',scrollEle: 'my-group-scroll'}">
@@ -216,6 +216,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        width: 4.5rem;
       }
       p{
         padding-left: .15rem;
