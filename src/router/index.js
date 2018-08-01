@@ -2,7 +2,6 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 
-
 const PageError = r => require.ensure([], () => r(require('@/views/my/error/404.vue')),'PageError')
 
 const MySetting = r => require.ensure([], () => r(require('@/views/my/setting.vue')),'MySetting')
@@ -14,6 +13,10 @@ const MyAboutUs = r => require.ensure([], () => r(require('@/views/my/aboutus.vu
 const MyProtocol = r => require.ensure([], () => r(require('@/views/my/protocol.vue')),'MyProtocol')
 
 const MySecurity = r => require.ensure([], () => r(require('@/views/my/security.vue')),'MySecurity')
+
+const MyMessage = r => require.ensure([], () => r(require('@/views/my/message.vue')),'MySecurity')
+
+const MyGroupList = r => require.ensure([], () => r(require('@/views/my/group/list.vue')),'MyGroupList')
 
 Vue.use(Router)
 
@@ -61,6 +64,22 @@ export default new Router({
       component: MySecurity,
       meta: {
         title: '特别说明'
+      }
+    }, {
+      path: '/my/message',
+      name: 'MyMessage',
+      component: MyMessage,
+      meta: {
+        title: '消息设置',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/group/list',
+      name: 'MyGroupList',
+      component: MyGroupList,
+      meta: {
+        title: '我的团',
+        requireLogin: true
       }
     }
   ]

@@ -2,6 +2,8 @@ import ajax from './ajax'
 
 import app from '@/widget/app'
 
+import store from '@/widget/store'
+
 import utils from './utils'
 
 import config from '@/config/index'
@@ -9,7 +11,7 @@ import config from '@/config/index'
 export default function request (url,options){
 
   const ut = app.getUserToken()
-  const data = Object.assign({ ut, platformId: config.platformId },options.data)
+  const data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },options.data)
   const defaults = {
     isHeader:true,
     type: options.type,
@@ -50,9 +52,17 @@ export default function request (url,options){
     defaults.url =  defaults.data ?  defaults.url + '?' + defaults.data: defaults.url
   }
 
-  return new Promise((resolve, reject) => {
+  const cache = options.cache || false
+
+  const expires = options.expires || 30 * 60 * 1000
+
+  function sendAjax (resolve) {
 
     ajax(defaults).then((results) => {
+      let cacheData = {
+        times: new Date().getTime() + expires,
+        results
+      }
 
       if (results.code == "99" && process.env.NODE_ENV != 'develop') {
         app.deleteUserToken()
@@ -62,10 +72,40 @@ export default function request (url,options){
           const from = utils.getRelatedUrl()
           window.location.href = `/login.html?from=` + encodeURIComponent(from);
         }
+      } else {
+        if (results.code == 0) {
+          store.set(url, cacheData,'local')
+        }
       }
+
       resolve(results)
+
     })
+  }
 
+  return new Promise((resolve, reject) => {
+
+    let currentTime = new Date().getTime()
+
+    if (cache && store.get(url,'local')) {
+
+      const getCacheTime = store.get(url,'local').times
+
+      if (currentTime < getCacheTime) {
+
+        resolve(store.get(url,'local').results)
+
+      } else {
+
+        store.remove(url,'local')
+
+        sendAjax(resolve)
+
+      }
+
+    } else {
+
+      sendAjax (resolve)
+    }
   })
-
 }

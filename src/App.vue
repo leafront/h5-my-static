@@ -31,4 +31,5 @@ export default {
   @import './styles/loading.scss';
   @import './styles/toast.scss';
   @import './styles/dialog.scss';
+  @import './styles/ui-switch.scss';
 </style>

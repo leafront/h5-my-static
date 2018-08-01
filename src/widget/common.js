@@ -84,9 +84,6 @@ const common = {
       provinceName: pName,
       areaCode:aCode
     }
-  },
-  getSetting () {
-
   }
 }
 

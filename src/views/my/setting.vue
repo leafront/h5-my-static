@@ -36,7 +36,7 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-setting-item" v-if="isApp" @click="pageAction('/setting/message.html')">
+        <div class="my-setting-item" v-if="isApp" @click="routerAction('/my/message')">
           <span class="c3">消息设置</span>
           <div class="ui-right-bottom">
             <i class="ui-arrow-right-icon1"></i>

@@ -1,3 +1,4 @@
+
 import config from '@/config/index'
 
 const utils = {
@@ -44,21 +45,21 @@ const utils = {
     clearTimeout(this.timer)
 
   },
-	serialize(value) {
-		return JSON.stringify(value);
-	},
+  serialize(value) {
+    return JSON.stringify(value);
+  },
 
-	deserialize(value) {
+  deserialize(value) {
 
-		if (typeof value != 'string' || value == '') return '';
+    if (typeof value != 'string' || value == '') return '';
 
-		try {
-			return JSON.parse(value);
-		} catch (e) {
+    try {
+      return JSON.parse(value);
+    } catch (e) {
 
-			return '';
-		}
-	},
+      return '';
+    }
+  },
   /**
    * 获得主机名
    * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
@@ -68,17 +69,17 @@ const utils = {
     var url = location.protocol + "//" + location.host
     return url
   },
-	isLocalStorageSupported() {
-		var testKey = 'test',
-			storage = window.sessionStorage;
-		try {
-			storage.setItem(testKey, 'testValue');
-			storage.removeItem(testKey);
-			return true;
-		} catch (error) {
-			return false;
-		}
-	},
+  isLocalStorageSupported() {
+    var testKey = 'test',
+      storage = window.sessionStorage;
+    try {
+      storage.setItem(testKey, 'testValue');
+      storage.removeItem(testKey);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 
   /**
    *
@@ -125,70 +126,70 @@ const utils = {
       }
     }
   },
-	isWeixinIphoneX (){
+  isWeixinIphoneX (){
 
-		const isWeixin = this.weixin()
+    const isWeixin = this.weixin()
 
-		const ua = window.navigator.userAgent.toLowerCase()
+    const ua = window.navigator.userAgent.toLowerCase()
 
-		const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
+    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
 
-		return (isWeixin && isPhoneX)
-	},
-	/**
-	 * @param {Object} obj
-	 * @returns {string}
-	 * @example
-	 * util.queryStringify({name:'leafront',age:23}) =>  'name=leafront&age=23'
-	 *
-	 */
+    return (isWeixin && isPhoneX)
+  },
+  /**
+   * @param {Object} obj
+   * @returns {string}
+   * @example
+   * util.queryStringify({name:'leafront',age:23}) =>  'name=leafront&age=23'
+   *
+   */
 
-	queryStringify (obj) {
+  queryStringify (obj) {
 
-		function toQueryPair(key,value) {
+    function toQueryPair(key,value) {
 
-			if (value==='') {
+      if (value==='') {
 
-				return key;
+        return key;
 
-			}
+      }
 
-			return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
+      return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
 
-		}
+    }
 
-		var result = [];
+    var result = [];
 
-		for (var key in obj) {
+    for (var key in obj) {
 
-			key = encodeURIComponent(key);
+      key = encodeURIComponent(key);
 
-			var values = obj[key];
+      var values = obj[key];
 
-			if (values && values.constructor == Array) {
+      if (values && values.constructor == Array) {
 
-				var queryValues = [];
+        var queryValues = [];
 
-				for (var i = 0, len = values.length; i < len; i++) {
+        for (var i = 0, len = values.length; i < len; i++) {
 
-					queryValues.push(toQueryPair(key, values[i]));
+          queryValues.push(toQueryPair(key, values[i]));
 
-				}
+        }
 
-				result = result.concat(queryValues);
+        result = result.concat(queryValues);
 
-			} else {
+      } else {
 
-				result.push(toQueryPair(key,values));
+        result.push(toQueryPair(key,values));
 
-			}
+      }
 
-		}
+    }
 
 
-		return result.join('&');
+    return result.join('&');
 
-	},
+  },
   /**
    *
    * @param {String || null } text
@@ -254,28 +255,28 @@ const utils = {
 
     return hashObj;
   },
-	isPassive() {
+  isPassive() {
 
-		let supportsPassiveOption = false
-		try {
-			addEventListener("test", null, Object.defineProperty({}, 'passive', {
-				get: function () {
-					supportsPassiveOption = true
-				}
-			}));
-		} catch(e) {}
-		return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+    let supportsPassiveOption = false
+    try {
+      addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () {
+          supportsPassiveOption = true
+        }
+      }));
+    } catch(e) {}
+    return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
-	},
-	isContained (arr1,arr2){
-		if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
-		if(arr1.length < arr2.length) return false;
-		var aStr = arr1.toString();
-		for(var i = 0, len = arr2.length; i < len; i++){
-			if(aStr.indexOf(b[i]) == -1) return false;
-		}
-		return true;
-	},
+  },
+  isContained (arr1,arr2){
+    if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
+    if(arr1.length < arr2.length) return false;
+    var aStr = arr1.toString();
+    for(var i = 0, len = arr2.length; i < len; i++){
+      if(aStr.indexOf(b[i]) == -1) return false;
+    }
+    return true;
+  },
 
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365;
@@ -347,7 +348,7 @@ const utils = {
   //清空用户登录UT
   //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
   deleteUserToken () {
-    this.setCookie('lyfh5ut', "")
+    this.setCookie('lyfh5ut', "");
   },
   isPhoneX (){
 
@@ -366,7 +367,9 @@ const utils = {
   appViewFixed () {
 
     const appView = document.getElementById('app')
+
     if (appView.classList.contains('app_fixed')){
+
       appView.classList.remove('app_fixed')
 
     } else {
@@ -377,11 +380,26 @@ const utils = {
   trim (text) {
     return text.replace(/\s+/g, "")
   },
+  imgScale (url,q = 95){
+    const getDeviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth
+    const pattern = /http:\/\/.*?(gif|png|jpg)/gi
+    if (url.indexOf('.jpg') > -1 || url.indexOf('.png') > -1) {
+      const scaleImage = url.replace(pattern,(res) => {
+        if (res.indexOf('http://cdn.oudianyun.com') > -1) {
+          return `${res}@base@tag=imgScale&q=${q}&m=1&w=${getDeviceWidth}`
+        } else {
+          return res
+        }
+      })
+      return scaleImage
+    } else {
+      return url
+    }
+  },
   loadScript (url,success) {
     const script = document.createElement("script")
     script.type = 'text/javascript'
     script.src = config.staticPath + url
-    script.defer = 'defer'
     document.getElementsByTagName('head')[0].appendChild(script)
     script.onload = () => {
       success && success()
