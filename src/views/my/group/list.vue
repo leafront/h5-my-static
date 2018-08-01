@@ -24,7 +24,7 @@
             <div class="my-group-action">
               <span class="font c3" v-if="item.status != 1 && item.status != 2">查看团详情</span>
               <span class="font c3" >查看订单详情</span>
-              <span class="active font c3" v-if="item.status == 1 || item.status == 2">邀请好友参团</span>
+              <span class="active font c3" @click="shareAction(item)" v-if="(item.status == 6 || item.status == 2) && (isApp || isWeixin)">邀请好友参团</span>
             </div>
           </div>
         </LazyLoad>
@@ -34,6 +34,7 @@
           <p>暂时没有相关团单哦</p>
         </div>
       </div>
+      <UIShare></UIShare>
     </div>
   </div>
 </template>
@@ -44,11 +45,23 @@
 
   import PageLoading from '@/components/common/pageLoading'
 
+  import UIShare from '@/components/widget/ui-share'
+
+  import config from '@/config/index'
+
   import * as Model from '@/model/group'
 
   import utils from '@/widget/utils'
 
+  import weixin_share from '@/common/weixin_share'
+
   import LazyLoad from '@/components/widget/lazyLoad'
+
+  import store from '@/widget/store'
+
+  import {mapGetters, mapActions} from 'vuex'
+
+  import app from '@/widget/app'
 
   export default {
     data () {
@@ -62,15 +75,22 @@
         status: 0,
         showLoading: false,
         isScrollLoad: true,
-        totalPage: 1
+        totalPage: 1,
+        shareCodeNum: null,
+        isApp: utils.isApp(),
+        isWeixin: utils.weixin()
       }
     },
     components: {
       AppHeader,
       PageLoading,
-      LazyLoad
+      LazyLoad,
+      UIShare
     },
     methods: {
+      ...mapActions([
+        'updateShareMenu'
+      ]),
       checkedList (val) {
         if (val == this.status) {
           return
@@ -143,9 +163,69 @@
             this.getGroupList(1)
           })()
         }
+      },
+      shareAction (item) {
+        let url = ''
+        const patchGrouponInstId = item.patchGrouponInstId
+        const shareCodeNum = this.shareCodeNum
+        const productInfo = item.productInfo
+        const attendeeList = item.attendeeList
+        if(shareCodeNum) {
+          url = config.hostPath + '/group/group-detail.html?instId='+item.patchGrouponInstId + '&shareCode=' + shareCodeNum
+        } else {
+          url = config.hostPath + '/group/group-detail.html?instId='+item.patchGrouponInstId
+        }
+
+        const shareConfig = {
+          link: url,
+          url: url,
+          title: '',
+          desc: '',
+          description: '',
+          imgUrl: item.patchGrouponMainPicUrl,
+          pic: item.patchGrouponMainPicUrl
+        }
+        if (productInfo && productInfo[0]) {
+          const patchGrouponPrice = item.patchGrouponPrice
+          const productName = productInfo[0].name
+          const title = '我买了' + patchGrouponPrice +'元【' +productName + '】'
+          shareConfig.title = title
+        }
+        if(attendeeList) {
+          const totalMembers = item.totalMembers - attendeeList.length
+          const patchGrouponDesc = item.patchGrouponDesc || ''
+          const description = '还差' + totalMembers + '人 ' + patchGrouponDesc
+          shareConfig.desc = description
+          shareConfig.description  = description
+        }
+
+        this.hybridShareAction(shareConfig)
+
+      },
+      hybridShareAction (shareConfig) {
+        if (utils.isApp()) {
+          app.postMessage('share',{
+            url: shareConfig.url,
+            title: shareConfig.title,
+            description: shareConfig.description,
+            url160x160: shareConfig.pic,
+            pic: shareConfig.pic
+          },() => {
+
+          })
+        } else if (utils.weixin()) {
+          this.updateShareMenu(true)
+          weixin_share.weixinShare(shareConfig)
+        }
       }
     },
     created () {
+      const shareCodeNum = store.get('s_currentsharecode','session')
+      if (shareCodeNum) {
+        this.shareCodeNum = shareCodeNum
+      }
+      utils.setCookie('ut','c956b1e813a6b44c601dadd5367df3af53')
+      utils.setCookie('lyf_ut','c956b1e813a6b44c601dadd5367df3af53')
       this.$showLoading()
       this.getGroupList()
     }
