@@ -1,8 +1,6 @@
 
-const price = function (val) {
-
-	return Number(val).toFixed(2)
-
+const price = (value) => {
+  return parseFloat(isNaN(value) ? '' : value).toFixed(2)
 }
 
 const imgScale = function (url, width){
