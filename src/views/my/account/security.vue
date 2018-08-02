@@ -4,7 +4,7 @@
     </AppHeader>
     <div class="scroll-view-wrapper":class="{'visibility': pageView}">
       <div class="my-account-security">
-        <div class="my-account-security-item">
+        <div class="my-account-security-item" v-if="userInfo.memberCardNo">
           <span>会员卡号</span>
           <p class="font">{{userInfo.memberCardNo}}</p>
         </div>
