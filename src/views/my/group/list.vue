@@ -240,7 +240,6 @@
   .my-group-view{
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
   .my_group_empty{
     display: flex;
@@ -249,6 +248,7 @@
     flex-direction: column;
     background: #fff;
     flex:1;
+    padding-top: 3rem;
     img{
       width: 3rem;
       height: 3rem;
