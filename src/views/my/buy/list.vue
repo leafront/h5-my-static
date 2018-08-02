@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper"  id="my-buy-list-scroll" @scroll="scrollLoadList" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" id="my-buy-list-scroll" @scroll="scrollLoadList" :class="{'visibility': pageView}">
       <div class="my-buy-view" id="my-buy-view">
         <div class="my-buy-list">
           <LazyLoad :list="list" :options="{ele:'my-buy-item-pic',scrollEle: 'my-buy-list-scroll'}">
@@ -24,6 +24,9 @@
           </LazyLoad>
         </div>
         <PageLoading :showLoading="showLoading"></PageLoading>
+        <div class="my_buy_empty" v-show="pageView && !list.length">
+          <p>暂时没有相关常购清单</p>
+        </div>
       </div>
     </div>
   </div>
@@ -87,9 +90,9 @@
               }, 1000)
             }
             if (type == 1) {
-              this.list = this.list.concat(data.data || [])
+              //this.list = this.list.concat(data.data || [])
             } else {
-              this.list = data.data || []
+              //this.list = data.data || []
             }
           } else {
             if (currentPage > 1) {
@@ -154,6 +157,17 @@
 </script>
 
 <style lang="scss">
+  .my_buy_empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex:1;
+    padding-top: .5rem;
+    p{
+      font-size: .3rem;
+    }
+  }
   .my-buy-view{
     padding-top: .2rem;
     background: #f0f0f0;

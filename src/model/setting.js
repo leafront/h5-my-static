@@ -7,3 +7,6 @@ export const getUserInfo = (data) => request('/api/my/user/info', data)
 export const getRealNameAuthInfo = (data) => request('/ouser-center/realNameAuth/getRealNameAuthInfo.do', data)
 
 export const updateUserInfo = (data) => request('/api/my/user/updateInfo', data)
+
+export const checkPassword = (data) => request('/ouser-web/unionLogin/checkPassword.do',data)
+

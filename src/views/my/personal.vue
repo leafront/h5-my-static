@@ -219,6 +219,9 @@
         this.isPicker = false
         this.updateUserInfo(data)
       },
+      /**
+       * 获取用户信息
+       */
       getUserInfo () {
         Model.getUserInfo({
           type: 'POST'

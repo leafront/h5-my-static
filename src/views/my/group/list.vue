@@ -30,7 +30,7 @@
         </LazyLoad>
         <PageLoading :showLoading="showLoading"></PageLoading>
         <div class="my_group_empty" v-show="pageView && !list.length">
-          <img src="./images/my_empty_group.png"/>
+          <img src="../images/my_empty_group.png"/>
           <p>暂时没有相关团单哦</p>
         </div>
       </div>
@@ -227,8 +227,6 @@
       if (shareCodeNum) {
         this.shareCodeNum = shareCodeNum
       }
-      utils.setCookie('ut','c956b1e813a6b44c601dadd5367df3af53')
-      utils.setCookie('lyf_ut','c956b1e813a6b44c601dadd5367df3af53')
       this.$showLoading()
       this.getGroupList()
     }
@@ -254,8 +252,7 @@
       height: 3rem;
     }
     p{
-      color: #bbb;
-      font-size: .32rem;
+      font-size: .3rem;
     }
   }
   .my-group-action{

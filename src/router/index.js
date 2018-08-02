@@ -20,6 +20,8 @@ const MyGroupList = r => require.ensure([], () => r(require('@/views/my/group/li
 
 const MyBuyList = r => require.ensure([], () => r(require('@/views/my/buy/list.vue')),'MyBuyList')
 
+const MyAccountSecurity = r => require.ensure([], () => r(require('@/views/my/account/security.vue')),'MyAccountSecurity')
+
 Vue.use(Router)
 
 export default new Router({
@@ -89,6 +91,14 @@ export default new Router({
       component: MyBuyList,
       meta: {
         title: '常购清单',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/account/security',
+      name: 'MyAccountSecurity',
+      component: MyAccountSecurity,
+      meta: {
+        title: '账户安全',
         requireLogin: true
       }
     }
