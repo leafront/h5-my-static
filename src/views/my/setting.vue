@@ -11,7 +11,7 @@
             <i class="ui-arrow-right-icon2"></i>
           </div>
         </div>
-        <div class="my-setting-item" @click="pageAction('/setting/account-security.html')">
+        <div class="my-setting-item" @click="routerAction('/my/account/security')">
           <span class="c3">账户安全</span>
           <div class="ui-right-bottom">
             <i class="ui-arrow-right-icon1"></i>
