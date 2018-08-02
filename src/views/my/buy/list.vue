@@ -191,7 +191,7 @@
     }
   }
   .my-buy-item-cart{
-    padding: .3rem .3rem .2rem .3rem;
+    padding: .3rem .3rem .2rem .5rem;
     position: absolute;
     right:0;
     bottom:0;
