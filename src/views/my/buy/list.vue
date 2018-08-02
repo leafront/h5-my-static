@@ -5,9 +5,9 @@
     <div class="scroll-view-wrapper" id="my-buy-list-scroll" @scroll="scrollLoadList" :class="{'visibility': pageView}">
       <div class="my-buy-view" id="my-buy-view">
         <div class="my-buy-list">
-          <LazyLoad :list="list" :options="{ele:'my-buy-item-pic',scrollEle: 'my-buy-list-scroll'}">
+          <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-buy-list-scroll'}">
             <div class="my-buy-item" :key="index" v-for="(item,index) in list">
-              <img class="my-buy-item-pic pic-lazyLoad":data-src="item['url160x160']"/>
+              <div class="my-buy-item-pic pic-lazyLoad" :data-src="item['url160x160']"></div>
               <div class="my-buy-item-des">
                 <h4 class="font">{{item.name}}</h4>
                 <div class="my-by-item-info">
@@ -181,10 +181,14 @@
     display: flex;
     position: relative;
     border-bottom: .01rem solid #e0e0e0;
+    &:last-child {
+      border-bottom: 0;
+    }
     .my-buy-item-pic{
       width: 1rem;
       height: 1rem;
       border-radius: 50%;
+      background-size: 100% auto;
     }
   }
   .my-buy-item-des{

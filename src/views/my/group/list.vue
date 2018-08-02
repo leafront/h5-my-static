@@ -9,10 +9,10 @@
             <li :class="{'active': index == status}" :key="item.orderCode" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>
           </ul>
         </div>
-        <LazyLoad :list="list" :options="{ele:'my-group-item-pic',scrollEle: 'my-group-scroll'}">
+        <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-group-scroll'}">
           <div class="my-group-info" v-for="item in list">
             <div class="my-group-item">
-              <img class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"/>
+              <div class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"></div>
               <div class="my-group-item-des">
                 <h4 class="font c3">{{item.patchGrouponTitle}}</h4>
                 <p><strong>{{item.totalMembers}}人团</strong><span>¥</span><b>{{item.patchGrouponPrice}}</b><span>/件</span></p>
@@ -286,6 +286,7 @@
     .my-group-item-pic{
       width: 1.2rem;
       height: 1.2rem;
+      background-size: 100% auto;
     }
     .my-group-item-des{
       display: flex;
