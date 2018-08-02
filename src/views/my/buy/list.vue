@@ -90,9 +90,9 @@
               }, 1000)
             }
             if (type == 1) {
-              //this.list = this.list.concat(data.data || [])
+              this.list = this.list.concat(data.data || [])
             } else {
-              //this.list = data.data || []
+              this.list = data.data || []
             }
           } else {
             if (currentPage > 1) {
