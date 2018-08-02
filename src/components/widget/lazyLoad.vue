@@ -118,7 +118,7 @@
 				} else {
 
 					list.forEach((el) => {
-            
+
 						if (!el.dataset.LazyLoadImgState && this.getClientRect(el, this.default.position)) {
 
 							this.loadImg(el)
