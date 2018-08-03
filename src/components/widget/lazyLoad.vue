@@ -109,7 +109,7 @@
 
 			scrollLoad () {
 
-				const list = Array.prototype.slice.apply(this.appView.getElementsByClassName(this.default.ele))
+				const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
 
 				if (!list.length && this.default.complete) {
 
@@ -167,7 +167,7 @@
 
             el.style.backgroundImage = 'url('+imgUrl+')'
 
-            el.classList.remove('pic-lazyLoad')
+            delete el.dataset.src
 
             el.dataset.LazyLoadImgState = 'success'
 
@@ -177,13 +177,13 @@
 
           img.addEventListener('error', () => {
 
-            el.classList.remove('pic-lazyLoad')
+            delete el.dataset.src
 
             el.dataset.LazyLoadImgState = 'error'
 
           }, false)
         } else {
-          el.classList.remove('pic-lazyLoad')
+          delete el.dataset.src
         }
 			}
 		}
