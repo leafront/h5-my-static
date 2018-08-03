@@ -11,7 +11,7 @@
         </div>
         <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-group-scroll'}">
           <div class="my-group-info" v-for="item in list">
-            <div class="my-group-item">
+            <div class="my-group-item" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">
               <div class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"></div>
               <div class="my-group-item-des">
                 <h4 class="font c3">{{item.patchGrouponTitle}}</h4>
