@@ -11,7 +11,7 @@
       <div class="my-personal">
         <div class="my-personal-upload">
           <span class="c3">头像</span>
-          <img :src="headPicUrl"/>
+          <div class="my-personal-pic" :style="{'backgroundImage': 'url('+headPicUrl+')'}"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
         <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
@@ -411,7 +411,7 @@
         this.$showPageLoading()
         const file = event.currentTarget.files[0]
 
-        const imageUpload = new ImageUpload(file, {
+        ImageUpload.start(file, {
           url: '/api/fileUpload/putObjectWithForm.do',
           data: {
             suffix: 'png'
@@ -439,8 +439,6 @@
             this.$toast('请求出错，请稍后再试')
           }
         })
-        imageUpload.start()
-
       }
     },
     created() {
@@ -496,11 +494,13 @@
     span{
       font-size: .32rem;
     }
-    img {
+    .my-personal-pic {
       width: .8rem;
       height: .8rem;
       border-radius: 50%;
       background: #ddd;
+      background:url(/my-static/images/logo-laiyifen.png) no-repeat center;
+      background-size: .8rem auto;
     }
     .my-personal-file{
       position: absolute;
