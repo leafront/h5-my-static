@@ -499,7 +499,7 @@
       height: .8rem;
       border-radius: 50%;
       background: #ddd;
-      background:url(/my-static/images/logo-laiyifen.png) no-repeat center;
+      background:url(/webapp-static/images/logo-laiyifen.png) no-repeat center;
       background-size: .8rem auto;
     }
     .my-personal-file{

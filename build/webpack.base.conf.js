@@ -16,17 +16,17 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    // vendor: [
-    //   'vue',
-    //   'vuex',
-    //   'vue-router',
-    //   './src/widget/store.js',
-    //   './src/widget/ajax.js',
-    //   './src/widget/request.js',
-    //   './src/widget/utils.js',
-    //   './src/widget/common.js',
-    //   './src/widget/app.js'
-    // ]
+    vendor: [
+      'vue',
+      'vuex',
+      'vue-router',
+      './src/widget/store.js',
+      './src/widget/ajax.js',
+      './src/widget/request.js',
+      './src/widget/utils.js',
+      './src/widget/common.js',
+      './src/widget/app.js'
+    ]
   },
   output: {
     path: config[configEnv].assetsRoot,
@@ -38,6 +38,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'path': resolve('http://static.lyf.edu.laiyifen.com')
     }
   },
   module: {

@@ -54,7 +54,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      staticPath: '',
+      staticPath: 'http://static.lyf.edu.laiyifen.com',
       getTime: new Date().getTime(),
       filename: 'index.html',
       template: 'index.html',

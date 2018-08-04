@@ -90,14 +90,29 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
+      filename: 'webapp-static/js/vendor.js?v=1.0',
       minChunks (module) {
         // any required modules inside node_modules are extracted to vendor
+
+        const pathName = path.join(__dirname, '../node_modules')
+
+        const baseName = path.join(__dirname, '../src')
+
+        const moduleList = [
+          pathName + 'vue',
+          pathName + 'vuex',
+          pathName + 'vue-router',
+          baseName + '/widget/store.js',
+          baseName + '/widget/ajax.js',
+          baseName + '/widget/request.js',
+          baseName + '/widget/utils.js',
+          baseName +'/widget/common.js',
+          baseName +'/widget/app.js'
+        ]
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
+          moduleList.indexOf(module.resource) > -1
         )
       }
     }),

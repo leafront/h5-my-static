@@ -290,7 +290,7 @@ const weixin_share = {
 }
 
 if (utils.weixin()) {
-  utils.loadScript('/my-static/weixin-js-sdk/index.js',() => {
+  utils.loadScript('/webapp-static/weixin-js-sdk/index.js',() => {
 
   //初始化微信分享
   weixin_share.initWeixinShare()

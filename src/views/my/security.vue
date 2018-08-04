@@ -35,12 +35,6 @@
     },
     components: {
       AppHeader
-    },
-    methods: {
-
-    },
-    created () {
-
     }
   }
 

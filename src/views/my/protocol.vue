@@ -46,12 +46,6 @@
     },
     components: {
       AppHeader
-    },
-    methods: {
-
-    },
-    created () {
-
     }
   }
 
