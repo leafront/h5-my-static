@@ -1,10 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
-      <div class="ui-header-right" @click="pageAction('/order/invoice/rule')">
-        <span>开票说明</span>
-      </div>
-    </AppHeader>
+    <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper":class="{'visibility': pageView}">
       <div class="my-account-security">
         <div class="my-account-security-item" v-if="userInfo.memberCardNo">
