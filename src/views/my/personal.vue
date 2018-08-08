@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <AppHeader :title="editTitle" :isBorder="isBorder" v-show="editHeader" :backFn="backAction">
+    <AppHeader :title="editTitle" :isBorder="isBorder" v-show="editHeader" :isShowHeader="isShowHeader" :backFn="backAction">
       <div class="ui-header-right" @click="editUserInfo">
         <span>确认</span>
       </div>
@@ -17,10 +17,7 @@
         <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
           <strong>{{userInfo.nickname}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-personal-item">
           <span>手机号码</span>
@@ -29,18 +26,12 @@
         <div class="my-personal-item" @click="toggleLocation(true)">
           <span>地区</span>
           <strong>{{userInfo.addressDetail}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-personal-item" @click="editPopup(2, '编辑地址')">
           <span>地址</span>
           <strong>{{userInfo.userAddress}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-personal-item" @click="toggleSex(true)">
           <span>性别</span>
@@ -53,18 +44,12 @@
         <div class="my-personal-item" @click="editPopup(3, '编辑邮编')">
           <span>邮编</span>
           <strong>{{userInfo.zipCode}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-personal-item" @click="editPopup(4, '编辑邮箱')">
           <span>邮箱</span>
           <strong>{{userInfo.email}}</strong>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
       </div>
       <div class="my-personal-auth">
@@ -73,10 +58,7 @@
       <div class="my-personal-auth-item" @click="identityAuth">
         <span>实名认证</span>
         <strong>{{isIdentityTips[identityStatus]}}</strong>
-        <div class="ui-right-bottom">
-          <i class="ui-arrow-right-icon1"></i>
-          <i class="ui-arrow-right-icon2"></i>
-        </div>
+        <div class="ui-right-bottom"></div>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 1">
@@ -157,6 +139,7 @@
         title: '个人资料',
         editTitle: '',
         pageView: false,
+        isShowHeader: true,
         userInfo: {},
         identityStatus: 7,
         isIdentityTips: {

@@ -22,6 +22,10 @@ const MyBuyList = r => require.ensure([], () => r(require('@/views/my/buy/list.v
 
 const MyAccountSecurity = r => require.ensure([], () => r(require('@/views/my/account/security.vue')),'MyAccountSecurity')
 
+const MyWallet = r => require.ensure([], () => r(require('@/views/my/wallet.vue')),'MyWallet')
+
+const MyBankList = r => require.ensure([], () => r(require('@/views/my/bank/list.vue')),'MyBankList')
+
 Vue.use(Router)
 
 export default new Router({
@@ -99,6 +103,22 @@ export default new Router({
       component: MyAccountSecurity,
       meta: {
         title: '账户安全',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/wallet',
+      name: 'MyWallet',
+      component: MyWallet,
+      meta: {
+        title: '我的钱包',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/bank/list',
+      name: 'MyBankList',
+      component: MyBankList,
+      meta: {
+        title: '银行卡',
         requireLogin: true
       }
     }

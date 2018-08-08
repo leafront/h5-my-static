@@ -17,7 +17,7 @@ export default function request (url,options){
     type: options.type,
     data,
     async: true,
-    url:url,
+    url: url,
     timeout: options.timeout || 6000,
     dataType: options.dataType || 'json',
     headers: {
@@ -73,7 +73,7 @@ export default function request (url,options){
           window.location.href = `/login.html?from=` + encodeURIComponent(from);
         }
       } else {
-        if (results.code == 0) {
+        if (results.code == 0 && cache) {
           store.set(url, cacheData,'local')
         }
       }
@@ -106,6 +106,7 @@ export default function request (url,options){
     } else {
 
       sendAjax (resolve)
+
     }
   })
 }

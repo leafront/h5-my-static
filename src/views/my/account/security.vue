@@ -1,6 +1,9 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
+      <div class="ui-header-right" @click="pageAction('/order/invoice/rule')">
+        <span>开票说明</span>
+      </div>
     </AppHeader>
     <div class="scroll-view-wrapper":class="{'visibility': pageView}">
       <div class="my-account-security">
@@ -14,17 +17,11 @@
         </div>
         <div class="my-account-security-item" v-if="hasPassword" @click="pageAction('/setting/changepasswd1.html')">
           <span>密码修改</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-account-security-item" v-if="!hasPassword" @click="pageAction('/setting/bindpassword.html')">
           <span>密码添加</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
       </div>
     </div>

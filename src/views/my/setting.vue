@@ -6,24 +6,15 @@
       <div class="my-setting-list">
         <div class="my-setting-item" @click="routerAction('/my/personal')">
           <span class="c3">个人资料</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-setting-item" @click="routerAction('/my/account/security')">
           <span class="c3">账户安全</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-setting-item" @click="routerAction('/my/aboutus')">
           <span class="c3">关于我们</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-setting-item" v-if="isApp" @click="clearCache">
           <span class="c3">清除图片缓存</span>
@@ -31,24 +22,15 @@
         </div>
         <div class="my-setting-item" @click="toggleContactPopup(true)">
           <span class="c3">联系客服</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-setting-item" v-if="isApp" @click="routerAction('/my/message')">
           <span class="c3">消息设置</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
         <div class="my-setting-item" v-if="isApp" @click="pageAction('/setting/trustedDevice/trustedDevice.html')">
           <span class="c3">可信设备管理</span>
-          <div class="ui-right-bottom">
-            <i class="ui-arrow-right-icon1"></i>
-            <i class="ui-arrow-right-icon2"></i>
-          </div>
+          <div class="ui-right-bottom"></div>
         </div>
       </div>
     </div>
