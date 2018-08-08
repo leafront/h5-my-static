@@ -11,7 +11,7 @@
       <div class="my-personal">
         <div class="my-personal-upload">
           <span class="c3">头像</span>
-          <div class="my-personal-pic" :style="{'backgroundImage': 'url('+headPicUrl+')'}"/>
+          <div class="my-personal-pic" v-if="headPicUrl" :style="{'backgroundImage': 'url('+headPicUrl+')'}"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
         <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
