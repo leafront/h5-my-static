@@ -211,8 +211,8 @@
         }).then((result) => {
 
           const data = result.data
+					this.$hideLoading()
           if (result.code == 0 && data) {
-            this.$hideLoading()
             this.pageView = true
             this.userInfo = data
             this.headPicUrl = data.url160x160 || config.staticPath + '/my-static/images/logo-laiyifen.png'
