@@ -222,7 +222,7 @@ body{
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
-		transform: translateY(.02rem);
+		transform: translateY(.04rem);
 
   }
   to {
@@ -234,7 +234,7 @@ body{
 @keyframes fadeIn {
 	from {
 		opacity: 0;
-		transform: translateY(.02rem);
+		transform: translateY(.04rem);
 	}
 	to {
 		opacity: 1;
