@@ -61,7 +61,7 @@
             this.userInfo = data
             const mobile = data.mobile
             if (mobile) {
-              store.set('username',mobile,'local')
+							localStorage.setItem('username',mobile)
             }
           } else {
             this.$toast(result.message)
