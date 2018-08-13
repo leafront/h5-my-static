@@ -71,7 +71,6 @@
     top:0;
     span{
       font-size: .3rem;
-      color: #333;
     }
   }
 
@@ -113,7 +112,7 @@
       top:0;
       transform: translateX(-50%);
       font-size: .36rem;
-      color:#030303;
+      color:#333;
       text-align: center;
     }
   }
