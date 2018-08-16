@@ -431,7 +431,7 @@ const ImageUploadFactory = (function () {
     createImageUpload (file,options) {
 
       if (isEmptyObject(exitsImageUploads)) {
-        const imageUpload = new ImageUpload(file,options)
+        const imageUpload = new (file,options)
         exitsImageUploads = imageUpload
         return imageUpload
       } else {

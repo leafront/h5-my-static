@@ -79,7 +79,6 @@
         this.isClickMessage = false
 
         app.postMessage( name,{status: this[name]},(result) => {
-          alert(result)
           if (result == 1) {
             this[name] = messageName
             store.set('SETTING_'+ name, messageName,'local')

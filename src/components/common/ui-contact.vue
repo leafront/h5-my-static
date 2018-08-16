@@ -4,7 +4,7 @@
     <div class="ui-contact" :class="{'active': contactPopup}">
       <h5>客服工作时间：每日8:00-21:00</h5>
       <p class="ff6900" @click="callPhone">400-8819777</p>
-      <p>取消</p>
+      <p @click="toggleContactPopup(false)">取消</p>
     </div>
   </div>
 </template>
