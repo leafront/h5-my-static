@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-aboutUs">
         <img src="./images/about-us-logo.png"/>
-        <p v-if="appVersion">V{{appVersion}}</p>
+        <p class="font" v-if="appVersion">V{{appVersion}}</p>
         <p class="font">Copyright@2011-2017</p>
         <p class="font">来伊份官网商城 All Right Reserved</p>
       </div>
