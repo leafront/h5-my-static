@@ -61,8 +61,6 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
-  import config from '@/config/index'
-
   import app from '@/widget/app'
 
   export default {
