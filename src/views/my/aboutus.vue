@@ -5,6 +5,7 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-aboutUs">
         <img src="./images/about-us-logo.png"/>
+        <p v-if="appVersion">V{{appVersion}}</p>
         <p class="font">Copyright@2011-2017</p>
         <p class="font">来伊份官网商城 All Right Reserved</p>
       </div>
@@ -21,6 +22,35 @@
     </div>
   </div>
 </template>
+
+<script type="text/javascript">
+
+  import AppHeader from '@/components/common/header'
+
+  import utils from '@/widget/utils'
+
+  const uaParams = utils.getUaParams()
+
+  export default {
+    data () {
+      return {
+        isBorder: true,
+        title: '关于我们',
+        pageView: true,
+        appVersion: uaParams.version || ""
+      }
+    },
+    components: {
+      AppHeader
+    },
+    methods: {
+      pageAction (url) {
+        this.$router.push(url)
+      }
+    }
+  }
+
+</script>
 
 <style lang="scss">
   .my-aboutUs{
@@ -60,27 +90,3 @@
     }
   }
 </style>
-
-<script type="text/javascript">
-
-  import AppHeader from '@/components/common/header'
-
-  export default {
-    data () {
-      return {
-        isBorder: true,
-        title: '关于我们',
-        pageView: true
-      }
-    },
-    components: {
-      AppHeader
-    },
-    methods: {
-      pageAction (url) {
-        this.$router.push(url)
-      }
-    }
-  }
-
-</script>
