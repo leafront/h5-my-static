@@ -61,6 +61,8 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
+  import config from '@/config/index'
+
   import app from '@/widget/app'
 
   export default {
@@ -167,12 +169,17 @@
           })()
         }
       },
+      /**
+       * 分享操作
+       * @param item
+       */
       shareAction (item) {
         let url = ''
         const patchGrouponInstId = item.patchGrouponInstId
         const shareCodeNum = this.shareCodeNum
         const productInfo = item.productInfo
         const attendeeList = item.attendeeList
+        const frontPromotionType = item.frontPromotionType
         if(shareCodeNum) {
           url = config.hostPath + '/group/group-detail.html?instId='+item.patchGrouponInstId + '&shareCode=' + shareCodeNum
         } else {
@@ -188,10 +195,16 @@
           imgUrl: item.patchGrouponMainPicUrl,
           pic: item.patchGrouponMainPicUrl
         }
+        let shareTag = ''
+        if (frontPromotionType == 2001) {
+          shareTag = '拼团'
+        } else if (frontPromotionType == 2002) {
+          shareTag = '抽奖团'
+        }
         if (productInfo && productInfo[0]) {
           const patchGrouponPrice = item.patchGrouponPrice
           const productName = productInfo[0].name
-          const title = '我买了' + patchGrouponPrice +'元【' +productName + '】'
+          const title = '【'+shareTag+'】'+'我买了' + patchGrouponPrice +'元【' +productName + '】'
           shareConfig.title = title
         }
         if(attendeeList) {
@@ -202,17 +215,24 @@
           shareConfig.description  = description
         }
 
-        this.hybridShareAction(shareConfig)
+        this.hybridShareAction(shareConfig, patchGrouponInstId)
 
       },
-      hybridShareAction (shareConfig) {
+      /**
+       * 调用app和微信分享
+       * @param shareConfig
+       */
+      hybridShareAction (shareConfig, patchGrouponId) {
         if (utils.isApp()) {
           app.postMessage('share',{
             url: shareConfig.url,
             title: shareConfig.title,
             description: shareConfig.description,
             url160x160: shareConfig.pic,
-            pic: shareConfig.pic
+            pic: shareConfig.pic,
+            isMiniProgram: true,
+            originalId: config.originalId,
+            miniProgramPage: `/pages/group/detail/index?id=${patchGrouponId}`
           },() => {
 
           })
