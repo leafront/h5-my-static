@@ -30,7 +30,7 @@
 						metaEl.setAttribute('name', 'viewport');
 						doc.head.appendChild(metaEl);
 					}
-          var clientWidth = doc.documentElement.clientWidth;
+          var clientWidth = doc.documentElement.clientWidth || 375;
 
 					var docFontSize = 50 + 'px'
 					if (clientWidth <= 1200) {
