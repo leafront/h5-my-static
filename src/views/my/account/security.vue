@@ -75,11 +75,9 @@
         }).then((result) => {
 
           const data = result.data
-          if (result.code == 0) {
+          if (data == 0) {
             this.hasPassword = false
-          } else {
-            this.$toast(result.message)
-          }
+          } 
           return result
         })
       }
