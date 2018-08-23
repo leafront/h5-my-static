@@ -77,7 +77,7 @@
           const data = result.data
           if (data == 0) {
             this.hasPassword = false
-          } 
+          }
           return result
         })
       }
