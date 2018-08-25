@@ -216,6 +216,7 @@
       height: .44rem;
       background: url(./images/cart.png) no-repeat;
       background-size: .44rem auto;
+      display: block;
     }
   }
 </style>
