@@ -16,9 +16,7 @@
                 </div>
               </div>
               <div class="my-buy-item-cart" @click="addBuyListCart(item)">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-cart"></use>
-                </svg>
+                <i class="icon"></i>
               </div>
             </div>
           </LazyLoad>
@@ -216,7 +214,8 @@
     .icon{
       width: .44rem;
       height: .44rem;
-      color: #ff6900;
+      background: url(./images/cart.png) no-repeat;
+      background-size: .44rem auto;
     }
   }
 </style>

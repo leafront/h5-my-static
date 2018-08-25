@@ -64,33 +64,25 @@
     <div class="my-personal_popup" v-show="personalPopup == 1">
       <input type="text" v-model="userInfo.nickname" placeholder="昵称" maxlength="20"/>
       <div class="my-personal-close-icon"  v-show="userInfo.nickname" @click="deleteInputText('nickname')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-close"></use>
-        </svg>
+        <i class="icon"></i>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 2">
       <input type="text" v-model="userInfo.userAddress" placeholder="详细地址" maxlength="40"/>
       <div class="my-personal-close-icon" v-show="userInfo.userAddress" @click="deleteInputText('userAddress')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-close"></use>
-        </svg>
+        <i class="icon"></i>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 3">
       <input type="text" v-model="userInfo.zipCode" placeholder="邮编" maxlength="40"/>
       <div class="my-personal-close-icon" v-show="userInfo.zipCode" @click="deleteInputText('zipCode')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-close"></use>
-        </svg>
+        <i class="icon"></i>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 4">
       <input type="text" v-model="userInfo.email" placeholder="邮箱" maxlength="40"/>
       <div class="my-personal-close-icon" v-show="userInfo.email" @click="deleteInputText('email')">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-close"></use>
-        </svg>
+        <i class="icon"></i>
       </div>
     </div>
     <UIAddress
@@ -456,9 +448,10 @@
     align-items: center;
     padding: 0 .3rem 0 .2rem;
     .icon{
+      background: url('/my-static/images/close.png') no-repeat;
+      background-size: .4rem auto;
       width:.4rem;
       height: .4rem;
-      color:#999;
     }
   }
   .my-personal{
