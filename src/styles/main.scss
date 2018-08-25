@@ -184,13 +184,6 @@ body{
      normalize.css 中也包含这行 */
   overflow: hidden;
 }
-
-.pageLoading-icon{
-  width: .45rem;
-  height: .45rem;
-  margin-right: 0.15rem;
-  animation: loading 1s steps(12, end) infinite;
-}
 @keyframes loading {
   0% {
     transform: rotate3d(0, 0, 1, 0deg);

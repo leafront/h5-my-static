@@ -2,9 +2,8 @@
   <div class="ui-header-wrapper" v-if="showHeader">
     <div class="ui-header" :class="{'ui-header-border':isBorder}">
       <div class="ui-header-back" @click="backAction">
-        <svg class="icon ui-header-back_btn" aria-hidden="true">
-          <use xlink:href="#icon-back"></use>
-        </svg>
+        <div class="ui-header-back_btn">
+        </div>
       </div>
       <h4 class="ui-header-title">{{title}}</h4>
       <slot></slot>
@@ -94,14 +93,9 @@
     }
     .ui-header-back{
       height: .88rem;
-      padding: 0 .3rem 0 .15rem;
+      padding: 0 .3rem 0 .28rem;
       display: flex;
       align-items: center;
-    }
-    .ui-header-back_btn{
-      font-size: .46rem;
-      color:#ff6900;
-      font-weight: bold;
     }
     .ui-header-title{
       height:.88rem;
@@ -133,6 +127,30 @@
       &.active{
         transform: rotate(90deg);
       }
+    }
+  }
+
+  .ui-header-back_btn{
+    position:relative;
+    width: .48rem;
+    height: .48rem;
+    &:before,&:after{
+      content: '';
+      width: .3rem;
+      height: .03rem;
+      background: #ff6900;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      transform-origin: left center;
+    }
+    &:before{
+      transform: rotate(-42.5deg);
+    }
+    &:after{
+     transform: rotate(42.5deg);
     }
   }
 

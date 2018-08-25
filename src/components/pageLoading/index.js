@@ -19,9 +19,8 @@ const pageLoading = {
         template: `
 			<div class="ui-pageLoading-mask">
 			 <div class="ui-mask-cont">
-         <svg class="pageLoading-icon" aria-hidden="true">
-            <use xlink:href="#icon-loading"></use>
-          </svg>
+         <i class="pageLoading-icon">
+          </i>
           <p>努力加载中...</p>
 			 </div>   
 			 </div>
