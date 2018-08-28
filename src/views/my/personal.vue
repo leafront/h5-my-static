@@ -448,7 +448,7 @@
     align-items: center;
     padding: 0 .3rem 0 .2rem;
     .icon{
-      background: url('/my-static/images/close.png') no-repeat;
+      background: url('./images/close.png') no-repeat;
       background-size: .4rem auto;
       width:.4rem;
       height: .4rem;
