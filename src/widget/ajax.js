@@ -19,7 +19,7 @@ import config from '@/config/index'
 
 export default function ajax (options){
 
-  const baseHostPath = options.hostPath || config.hostPath
+  const baseHostPath = options.hostPath || location.origin
 
 	return new Promise((resolve, reject) => {
 
