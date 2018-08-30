@@ -356,7 +356,7 @@
        * app图片上传
        */
       appUploadHeadPic () {
-        if (utils.isApp) {
+        if (utils.isApp()) {
           app.postMessage("uploadPhoto", {
             maxCount:  1,
             isNeedCut: 1
