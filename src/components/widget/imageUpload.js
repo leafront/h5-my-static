@@ -396,7 +396,8 @@ ImageUpload.prototype = {
       fd.append(i,options.data[i])
     }
 
-    fd.append('files',imageUploadDatabase.formBlob)
+    fd.append('files',imageUploadDatabase.formBlob,fileName)
+
     xhr.send(fd)
 
     return xhr
@@ -443,6 +444,7 @@ const ImageUploadFactory = (function () {
 
 
 const ImageUploadManager = (function () {
+
 
   let imageUploadDatabase = {}
 
