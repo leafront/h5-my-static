@@ -289,10 +289,11 @@ ImageUpload.prototype = {
   },
   drawImage(img,orientation,imageUploadDatabase) {
 
-    const options = imageUploadDatabase
+    const params = imageUploadDatabase
+
+    const options = imageUploadDatabase.options
 
     //生成比例
-
     var w = img.width,
       h = img.height,
       scale = w / h
@@ -354,7 +355,7 @@ ImageUpload.prototype = {
 
       drawImageIOSFix(ctx, img, 0, 0, img.width, img.height, 0, 0, w, h)
       base64 = canvas.toDataURL('image/jpeg', options.quality)
-      options.formBlob = this.getSource(base64,imageUploadDatabase)
+      params.formBlob = this.getSource(base64,imageUploadDatabase)
     }
 
     // 修复android
@@ -363,7 +364,7 @@ ImageUpload.prototype = {
       ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, w, h)
       var encoder = new JPEGEncoder()
       base64 = encoder.encode(ctx.getImageData(0, 0, w, h), options.quality * 100)
-      options.formBlob = this.getSource(base64,imageUploadDatabase)
+      params.formBlob = this.getSource(base64,imageUploadDatabase)
     }
     this.upload(imageUploadDatabase)
   },

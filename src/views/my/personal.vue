@@ -392,8 +392,8 @@
             suffix: 'png'
           },
           fileKey: 'file',
-          quality: '.2',
-          imageMinZoomWidth: 300,
+          quality: '.5',
+          imageMinZoomWidth: 200,
           onUpload:(result) =>{
 
             const data = result.data
