@@ -136,8 +136,9 @@
     height: .48rem;
     &:before,&:after{
       content: '';
-      width: .3rem;
       height: .03rem;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
       background: #ff6900;
       display: block;
       position: absolute;
@@ -146,11 +147,17 @@
       transform: translate(-50%,-50%);
       transform-origin: left top;
     }
-    &:before{
-      transform: rotate(-42.5deg);
+    &:before {
+      width: .24rem;
     }
     &:after{
-     transform: rotate(42.5deg);
+      width: .26rem;
+    }
+    &:before{
+      transform: rotate(-45deg);
+    }
+    &:after{
+     transform: rotate(45deg);
     }
   }
 
