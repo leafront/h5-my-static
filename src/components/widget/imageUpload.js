@@ -387,7 +387,7 @@ ImageUpload.prototype = {
       }
     }
 
-    const fileName = imageUploadDatabase.file.name.replace(/\.png|\.jpg|\.gif|\.webp/,'.jpeg')
+    //const fileName = imageUploadDatabase.file.name.replace(/\.png|\.jpg|\.gif|\.webp/,'.jpeg')
 
     options.data[options.fileKey] = imageUploadDatabase.formBlob
 
@@ -396,7 +396,7 @@ ImageUpload.prototype = {
       fd.append(i,options.data[i])
     }
 
-    fd.append('files',imageUploadDatabase.formBlob,fileName)
+   // fd.append('file',imageUploadDatabase.formBlob)
 
     xhr.send(fd)
 
