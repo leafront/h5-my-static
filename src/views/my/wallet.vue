@@ -5,12 +5,12 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-wallet-card">
         <div class="my-wallet-card-item" v-if="info.yCardBalance" @click="pageAction('/pay/youdianCard.html')">
-          <strong class="cfff">0</strong>
+          <strong class="cfff">{{info.yCardBalance || 0}}</strong>
           <span class="font cfff">悠点卡</span>
         </div>
-        <i class="my-wallet-icon-line" v-if="info.yCardBalance"></i>
+        <i class="my-wallet-icon-line" v-if="info.eCardBalance"></i>
         <div class="my-wallet-card-item" @click="pageAction('/my/pointCards-list.html')">
-          <strong class="cfff">0</strong>
+          <strong class="cfff">{{info.eCardBalance || 0}}</strong>
           <span class="font cfff">伊点卡</span>
         </div>
       </div>
