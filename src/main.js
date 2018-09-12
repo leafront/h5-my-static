@@ -35,6 +35,12 @@ Vue.use(Loading)
 
 Vue.use(PageLoading)
 
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    window.FastClick.attach(document.body)
+  }, false)
+}
+
 router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title

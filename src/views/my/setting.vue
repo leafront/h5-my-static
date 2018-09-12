@@ -119,7 +119,7 @@
 
           if (result.code == 0) {
 
-            utils.deleteUserToken()
+            app.deleteUserToken()
             store.remove('lyfuid','local')
             distribution.clearCurrentDistributionData() //清除分销商的信息
             if (this.isApp) {
