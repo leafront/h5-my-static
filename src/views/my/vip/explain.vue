@@ -10,14 +10,29 @@
 
 <script type="text/javascript">
 
+  import AppHeader from '@/components/common/header'
+
+
   export default {
     data () {
       return {
         isBorder: true,
-        title: '银行卡',
+        title: '会员权益说明',
         pageView: true
+      }
+    },
+    components: {
+      AppHeader
+    },
+    methods: {
+      pageAction (url) {
+        this.$router.push(url)
       }
     }
   }
 
 </script>
+
+<style lang="scss">
+</style>
+

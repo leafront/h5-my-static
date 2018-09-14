@@ -24,7 +24,11 @@ const MyAccountSecurity = r => require.ensure([], () => r(require('@/views/my/ac
 
 const MyWallet = r => require.ensure([], () => r(require('@/views/my/wallet.vue')),'MyWallet')
 
-const MyBankList = r => require.ensure([], () => r(require('@/views/my/bank/list.vue')),'MyBankList')
+const MyVipIndex = r => require.ensure([], () => r(require('@/views/my/vip/index.vue')),'MyVipIndex')
+
+const MyVipRule = r => require.ensure([], () => r(require('@/views/my/vip/rule.vue')),'MyVipRule')
+
+const MyVipExplain = r => require.ensure([], () => r(require('@/views/my/vip/explain.vue')),'MyVipExplain')
 
 Vue.use(Router)
 
@@ -114,11 +118,35 @@ export default new Router({
         requireLogin: true
       }
     }, {
-      path: '/my/bank/list',
-      name: 'MyBankList',
-      component: MyBankList,
+      path: '/my/vip/index',
+      name: 'MyVipIndex',
+      component: MyVipIndex,
       meta: {
-        title: '银行卡',
+        title: '会员中心',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/vip/rule',
+      name: 'MyVipRule',
+      component: MyVipRule,
+      meta: {
+        title: '会员升降级规则',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/vip/rule',
+      name: 'MyVipRule',
+      component: MyVipRule,
+      meta: {
+        title: '会员升降级规则',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/vip/explain',
+      name: 'MyVipExplain',
+      component: MyVipExplain,
+      meta: {
+        title: '会员权益说明',
         requireLogin: true
       }
     }
