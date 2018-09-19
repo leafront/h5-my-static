@@ -82,7 +82,7 @@
       return {
         isBorder: true,
         title: '会员中心',
-        pageView: true,
+        pageView: false,
         vip_banner: [],
         vip_description: '',
         vip_interests: [],
@@ -226,7 +226,7 @@
        * 获取会员个人信息
        */
       getUserVipInfo () {
-       // this.$showLoading()
+        this.$showLoading()
         Promise.all([
           this.getUserInfo(),
           this.getWalletInfo()
