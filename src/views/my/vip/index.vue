@@ -38,7 +38,7 @@
         <span class="font-s c9">BEST</span>
       </div>
       <div class="my-vip-best">
-        <img :src="item.imageUrl" v-for="item in vip_interests"/>
+        <img :src="item.imageUrl" class="pic-lazyLoad" v-for="item in vip_interests"/>
       </div>
       <div class="my-vip-title">
         <h5 class="font-xb c3">会员最爱买</h5>
