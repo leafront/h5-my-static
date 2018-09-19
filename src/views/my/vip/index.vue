@@ -87,7 +87,7 @@
       return {
         isBorder: true,
         title: '会员中心',
-        pageView: true,
+        pageView: false,
         vip_banner: [],
         vip_description: '',
         vip_interests: [],
