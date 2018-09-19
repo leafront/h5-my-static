@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-vip-explain">
         <div class="my-vip-explain-line"></div>
-        <div class="my-vip-explain-item" @click="checkList(index)" :class="{'active': checkedIndex == index}" v-for="(item,index) in levelList">
+        <div class="my-vip-explain-item" @click="checkList(index)" :class="{'active': userLevel == index}" v-for="(item,index) in levelList">
           <p>{{item}}</p>
           <span></span>
         </div>
@@ -13,8 +13,8 @@
       <div class="my-vip-explain-des">
         <i class="my-vip-icon"></i>
         <div class="my-vip-explain-txt">
-          <h4 class="c3">{{interestsList[checkedIndex].level}} <span class="font-xs">{{interestsList[checkedIndex].title}}</span></h4>
-          <div class="my-vip-des-item" :key="i" v-for="(item,i) in interestsList[checkedIndex].des">
+          <h4 class="c3">{{interestsList[userLevel].level}} <span class="font-xs">{{interestsList[userLevel].title}}</span></h4>
+          <div class="my-vip-des-item" :key="i" v-for="(item,i) in interestsList[userLevel].des">
             <h5>{{item.title}}<i class="my-vip-tips" v-if="item.icon"></i></h5>
             <p>{{item.content}}</p>
           </div>
@@ -28,6 +28,8 @@
 
   import AppHeader from '@/components/common/header'
 
+  import utils from '@/widget/utils'
+
   export default {
     data () {
       return {
@@ -35,7 +37,7 @@
         title: '会员权益说明',
         pageView: true,
         levelList: ['VIP1','VIP2','VIP3','VIP4','VIP5'],
-        checkedIndex: 0,
+        userLevel: 0,
         interestsList: [{
           level: 'VIP1权益',
           tile: '消费0~200元获得',
@@ -161,7 +163,13 @@
         this.$router.push(url)
       },
       checkList (val) {
-        this.checkedIndex = val
+        this.userLevel = val
+      }
+    },
+    created () {
+      const userLevel = utils.query('level')
+      if (userLevel) {
+        this.userLevel = userLevel >= 4 ? 4 : userLevel
       }
     }
   }

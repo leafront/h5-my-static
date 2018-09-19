@@ -29,7 +29,7 @@
         <div class="my-vip-des-pic">
           <img :src="vip_description"/>
         </div>
-        <div class="my-vip-des-btn" @click="pageAction('/my/vip/explain')">
+        <div class="my-vip-des-btn" @click="explainAction">
           <span class="font-b cfff">查看权益详情</span>
         </div>
       </div>
@@ -106,6 +106,14 @@
     methods: {
       pageAction (url) {
         this.$router.push(url)
+      },
+      explainAction () {
+        const {
+          userLevel
+        } = this.userInfo
+        if (userLevel) {
+          this.$router.push(`/my/vip/explain?level=${userLevel-1}`)
+        }
       },
       getDolphinList () {
         Model.getDolphinList({
@@ -255,7 +263,7 @@
        * 获取会员个人信息
        */
       getUserVipInfo () {
-        //this.$showLoading()
+        this.$showLoading()
         Promise.all([
           this.getUserInfo(),
           this.getWalletInfo()
