@@ -27,7 +27,7 @@
           <span class="font-s c9">RIGHTS</span>
         </div>
         <div class="my-vip-des-pic">
-          <img :src="vip_description"/>
+          <img :src="vip_description" class="pic-lazyLoad"/>
         </div>
         <div class="my-vip-des-btn" @click="explainAction">
           <span class="font-b cfff">查看权益详情</span>
