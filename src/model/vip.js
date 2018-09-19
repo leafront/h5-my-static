@@ -10,3 +10,5 @@ export const getRankPrice = (data) => request('/api/realTime/getPriceStockList',
 export const getUserInfo = (data) => request('/api/my/user/info', data)
 
 export const getWalletInfo = (data) => request('/api/my/wallet/summary', data)
+
+export const addBuyListCart = (data) => request('/api/cart/addItem', data)

@@ -113,7 +113,7 @@
 
 				if (!list.length && this.default.complete) {
 
-					this.appView.removeEventListener('scroll',this.scrollImg,false)
+					this.appView.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
 
 				} else {
 
@@ -142,7 +142,7 @@
 
 				this.scrollLoad()
 
-				this.appView.addEventListener('scroll',this.scrollImg,false)
+				this.appView.addEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
 
 			},
 			/**

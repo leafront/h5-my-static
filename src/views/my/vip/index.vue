@@ -5,11 +5,11 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img src="http://cdn.oudianyun.com/lyf/prod/frontier-guide/1536316815859_6008_42.png"/>
+          <img :src="userInfo['url220x220']"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
-              <p>V1会员</p>
+              <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
             <div class="my-vip-integral">
               <p>会员积分：{{walletInfo.point}}</p>
@@ -45,14 +45,14 @@
         <span class="font-s c9">HOT</span>
       </div>
       <LazyLoad :list="rankList" :options="{ele:'pic-lazyLoad',scrollEle: 'my-vip-scroll'}">
-        <div class="my-vip-cart">
-          <div class="my-vip-cart-item" v-for="item in rankList">
+        <div class="my-vip-cart" id="my-vip-cart">
+          <div class="my-vip-cart-item" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
             <p class="ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
-              <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price}}</span>
-              <strong class="c9" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].marketPrice}}</strong>
-              <div class="my-vip-cart-add-wrapper">
+              <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].marketPrice | price }}</span>
+              <strong class="c9" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price | price}}</strong>
+              <div class="my-vip-cart-add-wrapper" @click="addBuyListCart(item)">
                 <div class="my-vip-cart-add">
                   <i></i>
                 </div>
@@ -63,6 +63,9 @@
       </LazyLoad>
       <div class="my-vip-cart-bottom">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
+      </div>
+      <div class="user-fixed-cart" :class="{'active': fixedCart}">
+        <i></i>
       </div>
     </div>
   </div>
@@ -77,19 +80,22 @@
 
   import LazyLoad from '@/components/widget/lazyLoad'
 
+  import utils from '@/widget/utils'
+
   export default {
     data () {
       return {
         isBorder: true,
         title: '会员中心',
-        pageView: false,
+        pageView: true,
         vip_banner: [],
         vip_description: '',
         vip_interests: [],
         userInfo: {},
         walletInfo: {},
         rankList: [],
-        rankPrice: {}
+        rankPrice: {},
+        fixedCart: false
       }
     },
     components: {
@@ -223,10 +229,33 @@
         })
       },
       /**
+       * 添加常购清单
+       */
+      addBuyListCart (item) {
+        this.$showPageLoading()
+        const sessionId = utils.getSessionId()
+        Model.addBuyListCart({
+          type: 'POST',
+          data: {
+            sessionId,
+            num: 1,
+            mpId: item.mpId
+          }
+        }).then((result) => {
+          const data = result.data
+          this.$hidePageLoading()
+          if (result.code == 0 && data) {
+            this.$toast('添加购物车成功')
+          } else {
+            this.$toast(result.message)
+          }
+        })
+      },
+      /**
        * 获取会员个人信息
        */
       getUserVipInfo () {
-        this.$showLoading()
+        //this.$showLoading()
         Promise.all([
           this.getUserInfo(),
           this.getWalletInfo()
@@ -241,12 +270,29 @@
             }
           }
         })
+      },
+      fixedCartBottom () {
+        const cartEl = document.getElementById('my-vip-cart')
+        const cartTop = cartEl.offsetTop
+        document.getElementById('my-vip-scroll').addEventListener('scroll', (event) => {
+          const scrollTop = event.target.scrollTop
+          utils.throttle(() => {
+            if (scrollTop > cartTop) {
+              this.fixedCart = true
+            } else {
+              this.fixedCart = false
+            }
+          },200)()
+        },utils.isPassive() ? {passive: true} : false)
       }
     },
     created () {
       this.getUserVipInfo()
       this.getDolphinList()
       this.getRankList()
+    },
+    mounted () {
+      this.fixedCartBottom()
     }
   }
 
@@ -395,14 +441,29 @@
     align-items: center;
     height: .42rem;
     p{
-      margin-left: .2rem;
-      height: .3rem;
-      padding: 0 .1rem;
-      line-height: .3rem;
-      border-radius: .06rem;
-      background: linear-gradient(left, #FFCF00, #FF9600);
-      color: #fff;
-      font-size: .2rem;
+      background: url(./images/vip-index-sprite.png) no-repeat;
+      background-size: 3.5rem auto;
+      width: .82rem;
+      height: .26rem;
+      margin-left: .16rem;
+      &.icon1{
+        background-position: -.82rem -.06rem;
+      }
+      &.icon2{
+        background-position: -.82rem -.39rem;
+      }
+      &.icon3{
+        background-position: -1.70rem -.06rem;
+      }
+      &.icon4{
+        background-position: -1.70rem -.39rem;
+      }
+      &.icon5{
+        background-position: -2.58rem -.07rem;
+      }
+      &.icon6{
+        background-position: -2.58rem -.39rem;
+      }
     }
   }
   .my-vip-info{
@@ -429,6 +490,30 @@
   .my-vip-integral{
     p{
       color: #fff;
+    }
+  }
+  .user-fixed-cart{
+    position: fixed;
+    right: .3rem;
+    bottom: 2.3rem;
+    width: 1rem;
+    height: 1rem;
+    background: linear-gradient(left,#FFAA2B,#FF6A22);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    z-index: -10;
+    &.active{
+      visibility: visible;
+      z-index: 100;
+    }
+    i{
+      background: url(./images/vip-index-sprite.png) no-repeat -.06rem -.09rem;
+      background-size: 3.5rem auto;
+      width: .6rem;
+      height: .54rem;
     }
   }
 </style>
