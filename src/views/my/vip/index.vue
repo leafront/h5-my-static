@@ -64,7 +64,7 @@
       <div class="my-vip-cart-bottom">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
       </div>
-      <div class="user-fixed-cart" @click="cartAction('/cart.html')" :class="{'active': fixedCart}">
+      <div class="user-fixed-cart" :class="{'active': fixedCart == 1}" @click="cartAction('/cart.html')">
         <i></i>
       </div>
     </div>
@@ -87,7 +87,7 @@
       return {
         isBorder: true,
         title: '会员中心',
-        pageView: false,
+        pageView: true,
         vip_banner: [],
         vip_description: '',
         vip_interests: [],
@@ -95,7 +95,7 @@
         walletInfo: {},
         rankList: [],
         rankPrice: {},
-        fixedCart: false
+        fixedCart: 0
       }
     },
     components: {
@@ -267,11 +267,12 @@
         const cartTop = cartEl.offsetTop
         document.getElementById('my-vip-scroll').addEventListener('scroll', (event) => {
           const scrollTop = event.target.scrollTop
+	        console.log(scrollTop,cartTop)
           utils.throttle(() => {
             if (scrollTop > cartTop) {
-              this.fixedCart = true
+              this.fixedCart = 1
             } else {
-              this.fixedCart = false
+              this.fixedCart = 0
             }
           },200)()
         },utils.isPassive() ? {passive: true} : false)
@@ -493,20 +494,18 @@
     height: 1rem;
     background: linear-gradient(left,#FFAA2B,#FF6A22);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-    z-index: -10;
+    display: none;
+	  z-index: 100;
+	  padding: .23rem .2rem;
     &.active{
-      visibility: visible;
-      z-index: 100;
+      display: block;
     }
     i{
       background: url(./images/vip-index-sprite.png) no-repeat -.06rem -.09rem;
       background-size: 3.5rem auto;
       width: .6rem;
       height: .54rem;
+	    display: block;
     }
   }
 </style>
