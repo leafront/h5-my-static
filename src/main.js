@@ -54,13 +54,11 @@ router.beforeEach((to, from, next) => {
     } else {
 
       if (utils.isApp()) {
-
         app.login()
+        next()
 
       } else {
-
         const from = utils.getRelatedUrl()
-
         window.location.href = `/login.html?from=` + encodeURIComponent(from);
       }
     }
