@@ -157,7 +157,7 @@ const weixin_share = {
 
     if (utils.weixin()) {
 
-      const returnURL = window.encodeURIComponent(config.hostPath + location.pathname)
+      const returnURL = config.hostPath + location.pathname
       Model.getSign({
         type: 'GET',
         data: {

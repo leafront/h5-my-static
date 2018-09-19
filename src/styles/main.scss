@@ -173,6 +173,12 @@ body{
   }
 }
 
+.ellipsis{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 @keyframes loading {
   0% {
     transform: rotate3d(0, 0, 1, 0deg);

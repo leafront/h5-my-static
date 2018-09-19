@@ -32,4 +32,5 @@ export default {
   @import './styles/toast.scss';
   @import './styles/dialog.scss';
   @import './styles/ui-switch.scss';
+  @import './styles/slidershow.scss';
 </style>

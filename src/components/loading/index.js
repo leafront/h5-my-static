@@ -1,3 +1,6 @@
+
+import utils from '@/widget/utils'
+
 const pageLoading = {
   installed: false,
   install (Vue, options) {
@@ -27,10 +30,12 @@ const pageLoading = {
       document.body.appendChild(tpl)
 
       //阻止遮罩滑动
-      tpl.addEventListener("touchmove", function(e) {
+      tpl.addEventListener('touchmove', function(e) {
+        if (!utils.isPassive()) {
+          e.preventDefault()
+        }
         e.stopPropagation()
-        e.preventDefault()
-      })
+      },utils.isPassive() ? {passive: true} : false)
 
       pageLoading.installed = true
 
