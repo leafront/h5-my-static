@@ -11,7 +11,7 @@
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
               <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
-            <div class="my-vip-integral">
+            <div class="my-vip-integral" v-if="walletInfo.point">
               <p>会员积分：{{walletInfo.point}}</p>
             </div>
           </div>
@@ -64,7 +64,7 @@
       <div class="my-vip-cart-bottom">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
       </div>
-      <div class="user-fixed-cart" :class="{'active': fixedCart}">
+      <div class="user-fixed-cart" @click="cartAction('/cart.html')" :class="{'active': fixedCart}">
         <i></i>
       </div>
     </div>
@@ -87,7 +87,7 @@
       return {
         isBorder: true,
         title: '会员中心',
-        pageView: true,
+        pageView: false,
         vip_banner: [],
         vip_description: '',
         vip_interests: [],
@@ -114,6 +114,9 @@
         if (userLevel) {
           this.$router.push(`/my/vip/explain?level=${userLevel-1}`)
         }
+      },
+      cartAction (url) {
+        location.href = url
       },
       getDolphinList () {
         Model.getDolphinList({
@@ -202,22 +205,23 @@
        * 获取用户信息
        */
       getUserInfo () {
-        return Model.getUserInfo({
+        Model.getUserInfo({
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
           const data = result.data
+          this.$hideLoading()
           if (result.code == 0 && data) {
             this.userInfo = data
+            this.pageView = true
           }
-          return result
         })
       },
       /**
        * 获取用户钱包信息
        */
       getWalletInfo () {
-        return Model.getWalletInfo({
+        Model.getWalletInfo({
           type: 'GET',
           ignoreLogin: true,
           data: {
@@ -233,7 +237,6 @@
           if (result.code == 0 && data) {
             this.walletInfo = data
           }
-          return result
         })
       },
       /**
@@ -259,26 +262,6 @@
           }
         })
       },
-      /**
-       * 获取会员个人信息
-       */
-      getUserVipInfo () {
-        this.$showLoading()
-        Promise.all([
-          this.getUserInfo(),
-          this.getWalletInfo()
-        ]).then((result) => {
-          if (result) {
-            let isSendSuccess = result.every((item) => {
-              return item.code == 0
-            })
-            if (isSendSuccess) {
-              this.$hideLoading()
-              this.pageView = true
-            }
-          }
-        })
-      },
       fixedCartBottom () {
         const cartEl = document.getElementById('my-vip-cart')
         const cartTop = cartEl.offsetTop
@@ -295,7 +278,9 @@
       }
     },
     created () {
-      this.getUserVipInfo()
+      this.$showLoading()
+      this.getUserInfo()
+      this.getWalletInfo()
       this.getDolphinList()
       this.getRankList()
     },
@@ -401,7 +386,7 @@
       width: 5.8rem;
       height: .86rem;
       background: linear-gradient(left, #FFAA2B, #FF6A22);
-      box-shadow: 0 .02rem .1rem #FF9A00;
+      box-shadow: 0 .02rem .04rem #FF9A00;
     }
   }
   .my-vip-index-des{
