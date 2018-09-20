@@ -37,7 +37,7 @@
         <h5 class="font-xb c3">精选权益</h5>
         <span class="font-s c9">BEST</span>
       </div>
-      <LazyLoad :list="vip_interests" :options="{ele:'pic-lazyLoad',scrollEle: 'my-vip-scroll'}">
+      <LazyLoad :list="vip_interests" :options="{ele:'my-vip-best-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-best">
           <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
         </div>
@@ -46,7 +46,7 @@
         <h5 class="font-xb c3">会员最爱买</h5>
         <span class="font-s c9">HOT</span>
       </div>
-      <LazyLoad :list="rankList" :options="{ele:'pic-lazyLoad',scrollEle: 'my-vip-scroll'}">
+      <LazyLoad :list="rankList" :options="{ele:'my-vip-cart-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-cart" id="my-vip-cart">
           <div class="my-vip-cart-item" @click="routerAction(`/detail.html?itemId=${item.mpId}`)" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
