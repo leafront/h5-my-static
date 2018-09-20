@@ -159,11 +159,11 @@
           if (result.code == 0 && data) {
             const rankList = data.listObj
             if (rankList && rankList.length) {
-             const rankListArr = rankList.slice(0,20)
-             this.rankList = rankListArr
-             rankListArr.forEach((item) => {
-               mpIds.push(item.mpId)
-             })
+              const rankListArr = rankList.slice(0,20)
+              this.rankList = rankListArr
+              rankListArr.forEach((item) => {
+                mpIds.push(item.mpId)
+              })
             }
           }
           return mpIds
@@ -320,7 +320,7 @@
   }
   .my-vip-cart-add-wrapper{
     position: absolute;
-    right: 0;
+    right: .2rem;
     top:0;
     padding: .16rem .2rem .2rem .3rem;
   }
@@ -503,20 +503,18 @@
     height: 1rem;
     background: linear-gradient(left,#FFAA2B,#FF6A22);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-    z-index: -10;
+    display: none;
+    padding: .23rem .2rem;
+    z-index: 100;
     &.active{
-      visibility: visible;
-      z-index: 100;
+      display: block;
     }
     i{
       background: url(./images/vip-index-sprite.png) no-repeat -.06rem -.09rem;
       background-size: 3.5rem auto;
       width: .6rem;
       height: .54rem;
+      display: block;
     }
   }
 </style>
