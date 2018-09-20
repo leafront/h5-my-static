@@ -170,7 +170,7 @@
     },
     created () {
       const userLevel = utils.query('level')
-      if (userLevel > 1) {
+      if (userLevel > 0) {
         this.userLevel = userLevel - 1 >= 4 ? 4 : userLevel - 1
       } else {
         this.userLevel = 1
