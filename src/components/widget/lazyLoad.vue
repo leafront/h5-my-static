@@ -166,6 +166,7 @@
           img.addEventListener('load', () => {
 
             setTimeout(() => {
+
               el.style.backgroundImage = 'url('+imgUrl+')'
 
               delete el.dataset.src
@@ -173,6 +174,7 @@
               el.dataset.LazyLoadImgState = 'success'
 
               el.classList.add('successImg')
+
             },200)
 
           }, false)
