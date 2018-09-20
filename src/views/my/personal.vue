@@ -9,7 +9,7 @@
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView, 'scroll_view_hidden': showAddress}">
       <div class="my-personal">
-        <div class="my-personal-upload">
+        <div class="my-personal-upload ui-bottom-line">
           <span class="c3">头像</span>
           <div class="my-personal-pic" v-if="headPicUrl" :style="{'background': 'url('+headPicUrl+')'}"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
@@ -19,11 +19,11 @@
           <strong>{{userInfo.nickname}}</strong>
           <div class="ui-right-bottom"></div>
         </div>
-        <div class="my-personal-item">
+        <div class="my-personal-item ui-bottom-line">
           <span>手机号码</span>
           <strong>{{userInfo.mobile}}</strong>
         </div>
-        <div class="my-personal-item" @click="toggleLocation(true)">
+        <div class="my-personal-item ui-bottom-line" @click="toggleLocation(true)">
           <span>地区</span>
           <strong>{{userInfo.addressDetail}}</strong>
           <div class="ui-right-bottom"></div>
@@ -467,7 +467,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: .01rem solid #e0e0e0;
     position: relative;
     span{
       font-size: .32rem;
@@ -517,7 +516,6 @@
     height: .88rem;
     align-items: center;
     padding-right: .3rem;
-    border-bottom: .01rem solid #e0e0e0;
     &:last-child{
       border-bottom:0;
     }

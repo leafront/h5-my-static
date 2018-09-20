@@ -169,6 +169,8 @@
 
               el.style.backgroundImage = 'url('+imgUrl+')'
 
+              el.style.backgroundSize = '100% auto'
+
               delete el.dataset.src
 
               el.dataset.LazyLoadImgState = 'success'

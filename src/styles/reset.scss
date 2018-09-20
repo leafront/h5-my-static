@@ -3,7 +3,7 @@ html{
 }
 body {
 	background-color: #fff;
-	font-family:Microsoft Yahei,PingFangSC-Regular, Helvetica, Arial, "Lucida Grande", Verdana, STXihei, Sans-serif;
+	font-family: PingFangSC-Regular,Microsoft Yahei, Helvetica, Arial, "Lucida Grande", Verdana, STXihei, Sans-serif;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
 	display: block;
@@ -43,19 +43,11 @@ input {
 	font-size: 100%;
 }
 
-i{
+i,b{
 	font-style: normal;
 }
 
-input[type="submit"],
-input[type="reset"],
-input[type="button"],
-input[type='text'],
-input[type='tel'],
-input[type='number'],
-select,
-textarea,
-button {
+input,select, textarea, button {
 	-webkit-appearance: none;
 	outline: none;
 }
@@ -80,7 +72,6 @@ input:-webkit-autofill {
 
 input:focus {
 	outline: none;
-
 }
 a {
 	text-decoration: none;
@@ -124,10 +115,50 @@ b, strong,h1,h2,h3,h4,h5,h6 {
   color: #ff6900;
 }
 
+.p30{
+  padding: 0 .3rem;
+}
+
+.pt15{
+  padding-top: .15rem;
+}
+
+.pt20{
+  padding-top: .2rem;
+}
+
+.pt30{
+  padding-top: .3rem;
+}
+
+.pd15{
+  padding-bottom: .15rem;
+}
+
+.pd20{
+  padding-bottom: .2rem;
+}
+
+.pd30{
+  padding-bottom: .3rem;
+}
+
+.mt15{
+  margin-top: .15rem;
+}
 .mt20{
   margin-top: .2rem;
 }
-
 .mt30 {
   margin-top: .3rem;
+}
+
+.md15{
+  margin-bottom: .15rem;
+}
+.md20{
+  margin-bottom: .2rem;
+}
+.md30 {
+  margin-bottom: .3rem;
 }

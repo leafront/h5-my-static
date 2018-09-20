@@ -11,9 +11,9 @@
         </div>
         <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-group-scroll'}">
           <div class="my-group-info" v-for="item in list">
-            <div class="my-group-item" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">
+            <div class="my-group-item ui-bottom-line" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">
               <div class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"></div>
-              <div class="my-group-item-des">
+              <div class="my-group-item-des ui-ellipsis">
                 <h4 class="font c3">{{item.patchGrouponTitle}}</h4>
                 <p><strong>{{item.totalMembers}}人团</strong><span>¥</span><b>{{item.patchGrouponPrice}}</b><span>/件</span></p>
               </div>
@@ -300,7 +300,6 @@
     padding: .24rem .3rem;
     display: flex;
     position: relative;
-    border-bottom: .01rem solid #e0e0e0;
     .my-group-item-pic{
       width: 1.2rem;
       height: 1.2rem;
@@ -312,9 +311,6 @@
       padding-left: .3rem;
       justify-content: space-between;
       h4{
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
         width: 4.5rem;
       }
       p{

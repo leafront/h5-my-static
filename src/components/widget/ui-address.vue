@@ -6,7 +6,7 @@
       <div class="ui-address-tit">
         <h4 class="c3">选择地区</h4>
       </div>
-      <div class="ui-address-checked c3 font">
+      <div class="ui-address-checked ui-ellipsis c3 font">
         <span v-show="currentProvince.name" @click="toggleLocationName(0)">{{currentProvince.name}}</span>
         <span v-show="currentCity.name" @click="toggleLocationName(1)">{{currentCity.name}}</span>
         <span v-show="currentRegion.name" @click="toggleLocationName(2)">{{currentRegion.name}}</span>

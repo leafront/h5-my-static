@@ -11,7 +11,7 @@
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
               <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
-            <div class="my-vip-integral" v-if="walletInfo.point">
+            <div class="my-vip-integral">
               <p>会员积分：{{walletInfo.point}}</p>
             </div>
           </div>
@@ -50,7 +50,7 @@
         <div class="my-vip-cart" id="my-vip-cart">
           <div class="my-vip-cart-item" @click="routerAction(`/detail.html?itemId=${item.mpId}`)" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
-            <p class="ellipsis c3">{{item.name}}</p>
+            <p class="ui-ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
               <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].marketPrice | price }}</span>
               <strong class="c9" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price | price}}</strong>
@@ -223,6 +223,8 @@
           if (result.code == 0 && data) {
             this.userInfo = data
             this.pageView = true
+          } else {
+            this.$toast(result.message)
           }
         })
       },
@@ -368,7 +370,6 @@
     .my-vip-cart-pic{
       width: 3.22rem;
       height: 3.22rem;
-      background-size: 100% auto;
     }
     p{
       padding-top: .16rem;

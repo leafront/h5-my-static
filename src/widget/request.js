@@ -18,7 +18,7 @@ export default function request (url,options){
     data,
     async: true,
     url: url,
-    timeout: options.timeout || 6000,
+    timeout: options.timeout || 30000,
     dataType: options.dataType || 'json',
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",

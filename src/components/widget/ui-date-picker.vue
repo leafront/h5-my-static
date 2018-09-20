@@ -7,7 +7,7 @@
       </div>
       <div class = "ui-picker__bd">
         <div class="ui-picker__group">
-          <ul class="ui-picker__content">
+          <ul class="ui-picker__content ui-ellipsis">
             <li v-for="num in 3"></li>
             <li class="ui-picker__item" :class="{'active': checkedDate[0]== index}" v-for="(item,index) in pickerData">{{item.label}}</li>
             <li v-for="num in 3"></li>
@@ -16,7 +16,7 @@
           <div class="ui-picker__indicator"></div>
         </div>
         <div class="ui-picker__group">
-          <ul class="ui-picker__content">
+          <ul class="ui-picker__content ui-ellipsis">
             <li v-for="num in 3"></li>
             <li class="ui-picker__item" :class="{'active': checkedDate[1]== index}" v-for="(item,index) in months">{{item.label}}</li>
             <li v-for="num in 3"></li>
@@ -25,7 +25,7 @@
           <div class="ui-picker__indicator"></div>
         </div>
         <div class="ui-picker__group" v-if="isDays">
-          <ul class="ui-picker__content">
+          <ul class="ui-picker__content ui-ellipsis">
             <li v-for="num in 3"></li>
             <li class="ui-picker__item" :class="{'active': checkedDate[2]== index}" v-for="(item,index) in dates">{{item.label}}</li>
             <li v-for="num in 3"></li>
@@ -318,9 +318,6 @@
     height: .68rem;
     text-align: center;
     color: #999;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     font-size:.32rem;
     &.active {
        color: #333;

@@ -6,7 +6,7 @@
       <div class="my-buy-view" id="my-buy-view">
         <div class="my-buy-list">
           <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-buy-list-scroll'}">
-            <div class="my-buy-item" :key="index" v-for="(item,index) in list">
+            <div class="my-buy-item ui-bottom-line" :key="index" v-for="(item,index) in list">
               <div class="my-buy-item-pic pic-lazyLoad" :data-src="item['url160x160']"></div>
               <div class="my-buy-item-des">
                 <h4 class="font">{{item.name}}</h4>
@@ -178,7 +178,6 @@
     padding: .2rem 0;
     display: flex;
     position: relative;
-    border-bottom: .01rem solid #e0e0e0;
     &:last-child {
       border-bottom: 0;
     }
