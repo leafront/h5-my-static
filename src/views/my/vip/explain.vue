@@ -163,13 +163,17 @@
         this.$router.push(url)
       },
       checkList (val) {
+        const userLevel = val + 1
         this.userLevel = val
+        history.replaceState(null,null,`/my/vip/explain?level=${userLevel}`)
       }
     },
     created () {
       const userLevel = utils.query('level')
-      if (userLevel) {
+      if (userLevel > 1) {
         this.userLevel = userLevel - 1 >= 4 ? 4 : userLevel - 1
+      } else {
+        this.userLevel = 1
       }
     }
   }

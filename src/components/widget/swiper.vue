@@ -173,7 +173,7 @@
 					setTimeout(() => {
 						this.clearAnimate()
 						this.setWrapperPos(-this.itemLength * width)
-					}, 300);
+					}, 300)
 					this.startTime = new Date().getTime();
 				} else if (Math.abs(this.x) >= (this.itemLength +1) * width) {
 					index = 1
@@ -203,17 +203,17 @@
 				if (autoIndex > this.itemLength) {
           this.$emit('toggleIndex', 1)
 					setTimeout(() => {
-						this.clearAnimate();
-						this.setWrapperPos(-this.itemWidth);
-					}, 310);
+						this.clearAnimate()
+						this.setWrapperPos(-this.itemWidth)
+					}, 310)
 				}
 
 				this.wrapper.style.cssText = 'transition:300ms ease-in; -webkit-transition:300ms ease-in; transform: translate3d(' + x + 'px, 0, 0); -webkit-transform:translate3d(' + x + 'px, 0, 0)'
 			},
 			startAutoPlay () {
 				if (this.isAutoPlay && this.itemLength > 1) {
-					//this.stopAutoPlay();
-					//this.autoPlayTimer = setInterval(() => this.autoPlay(), this.autoTime)
+					this.stopAutoPlay()
+					this.autoPlayTimer = setInterval(() => this.autoPlay(), this.autoTime)
 				}
 			},
 			stopAutoPlay () {
