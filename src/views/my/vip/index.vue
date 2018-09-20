@@ -46,13 +46,13 @@
       </div>
       <LazyLoad :list="rankList" :options="{ele:'pic-lazyLoad',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-cart" id="my-vip-cart">
-          <div class="my-vip-cart-item" v-for="item in rankList" v-if="rankList && rankList.length">
+          <div class="my-vip-cart-item" @click="routerAction(`/detail.html?itemId=${item.mpId}`)" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
             <p class="ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
               <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].marketPrice | price }}</span>
               <strong class="c9" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price | price}}</strong>
-              <div class="my-vip-cart-add-wrapper" @click="addBuyListCart(item)">
+              <div class="my-vip-cart-add-wrapper" @click="addBuyListCart($event,item)">
                 <div class="my-vip-cart-add">
                   <i></i>
                 </div>
@@ -249,7 +249,8 @@
       /**
        * 添加常购清单
        */
-      addBuyListCart (item) {
+      addBuyListCart ($event,item) {
+        $event.stopPropagation()
         this.$showPageLoading()
         const sessionId = utils.getSessionId()
         Model.addBuyListCart({
