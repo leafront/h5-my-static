@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img :src="userInfo['url220x220']"/>
+          <img class="pic-lazyLoad" :src="userInfo['url220x220']"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -95,7 +95,9 @@
         walletInfo: {},
         rankList: [],
         rankPrice: {},
-        fixedCart: false
+        fixedCart: false,
+        vipScrollEle: null,
+        cartTop: 0
       }
     },
     components: {
@@ -263,18 +265,21 @@
         })
       },
       fixedCartBottom () {
+        utils.throttle(() => {
+          const scrollTop =  this.vipScrollEle.scrollTop
+          if (scrollTop > this.cartTop) {
+            this.fixedCart = true
+          } else {
+            this.fixedCart = false
+          }
+        },200)()
+      },
+      fixedCartScroll () {
+        const vipScrollEle = document.getElementById('my-vip-scroll')
         const cartEl = document.getElementById('my-vip-cart')
-        const cartTop = cartEl.offsetTop
-        document.getElementById('my-vip-scroll').addEventListener('scroll', (event) => {
-          const scrollTop = event.target.scrollTop
-          utils.throttle(() => {
-            if (scrollTop > cartTop) {
-              this.fixedCart = true
-            } else {
-              this.fixedCart = false
-            }
-          },200)()
-        },utils.isPassive() ? {passive: true} : false)
+        this.vipScrollEle = vipScrollEle
+        this.cartTop = cartEl.offsetTop
+        vipScrollEle.addEventListener('scroll',this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
       }
     },
     created () {
@@ -285,7 +290,10 @@
       this.getRankList()
     },
     mounted () {
-      this.fixedCartBottom()
+      this.fixedCartScroll()
+    },
+    destroyed () {
+      this.vipScrollEle.removeEventListener('scroll', this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
     }
   }
 
@@ -312,7 +320,7 @@
   }
   .my-vip-cart-add-wrapper{
     position: absolute;
-    right: .2rem;
+    right: 0;
     top:0;
     padding: .16rem .2rem .2rem .3rem;
   }
@@ -359,6 +367,7 @@
     .my-vip-cart-pic{
       width: 3.22rem;
       height: 3.22rem;
+      background-size: 100% auto;
     }
     p{
       padding-top: .16rem;
@@ -393,9 +402,9 @@
     padding-top: .16rem;
   }
   .my-vip-des-pic{
-    min-height: 4.65rem;
     img {
       width: 100%;
+      min-height: 4.65rem;
     }
   }
   .my-vip-title{
@@ -470,7 +479,8 @@
       width: 1.2rem;
       height: 1.2rem;
       border-radius: 50%;
-      border: .03rem solid rgba(255,255,255,.8);
+      border: .02rem solid rgba(255,255,255,.8);
+      background-size: 100% auto;
     }
   }
   .my-vip-user-txt{

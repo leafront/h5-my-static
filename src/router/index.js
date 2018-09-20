@@ -134,14 +134,6 @@ export default new Router({
         requireLogin: true
       }
     }, {
-      path: '/my/vip/rule',
-      name: 'MyVipRule',
-      component: MyVipRule,
-      meta: {
-        title: '会员升降级规则',
-        requireLogin: true
-      }
-    }, {
       path: '/my/vip/explain',
       name: 'MyVipExplain',
       component: MyVipExplain,

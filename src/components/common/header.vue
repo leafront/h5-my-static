@@ -132,33 +132,10 @@
 
   .ui-header-back_btn{
     position:relative;
-    width: .48rem;
-    height: .48rem;
-    &:before,&:after{
-      content: '';
-      height: .03rem;
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-      background: #ff6900;
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      transform-origin: left top;
-    }
-    &:before {
-      width: .24rem;
-    }
-    &:after{
-      width: .26rem;
-    }
-    &:before{
-      transform: rotate(-45deg);
-    }
-    &:after{
-     transform: rotate(45deg);
-    }
+    width: .26rem;
+    height: .44rem;
+    background: url(./images/header_back_icon.png) no-repeat;
+    background-size: .26rem auto;
   }
 
 </style>
