@@ -37,9 +37,11 @@
         <h5 class="font-xb c3">精选权益</h5>
         <span class="font-s c9">BEST</span>
       </div>
-      <div class="my-vip-best">
-        <img @click="routerAction(item.linkUrl)" :src="item.imageUrl" class="pic-lazyLoad" v-for="item in vip_interests"/>
-      </div>
+      <LazyLoad :list="vip_interests" :options="{ele:'pic-lazyLoad',scrollEle: 'my-vip-scroll'}">
+        <div class="my-vip-best">
+          <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
+        </div>
+      </LazyLoad>
       <div class="my-vip-title">
         <h5 class="font-xb c3">会员最爱买</h5>
         <span class="font-s c9">HOT</span>
@@ -376,7 +378,7 @@
   }
   .my-vip-best{
     padding: 0 .3rem .48rem;
-    img{
+    .my-vip-best-pic{
       margin-top: .16rem;
       width:100%;
       height: 2.16rem;
