@@ -38,7 +38,7 @@
         <span class="font-s c9">BEST</span>
       </div>
       <div class="my-vip-best">
-        <img :src="item.imageUrl" class="pic-lazyLoad" v-for="item in vip_interests"/>
+        <img @click="routerAction(item.linkUrl)" :src="item.imageUrl" class="pic-lazyLoad" v-for="item in vip_interests"/>
       </div>
       <div class="my-vip-title">
         <h5 class="font-xb c3">会员最爱买</h5>
@@ -109,12 +109,17 @@
       pageAction (url) {
         this.$router.push(url)
       },
+      routerAction (url) {
+        if (url) {
+          location.href = url
+        }
+      },
       explainAction () {
         const {
           userLevel
         } = this.userInfo
         if (userLevel) {
-          this.$router.push(`/my/vip/explain?level=${userLevel-1}`)
+          this.$router.push(`/my/vip/explain?level=${userLevel}`)
         }
       },
       cartAction (url) {

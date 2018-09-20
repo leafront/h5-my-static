@@ -169,7 +169,7 @@
     created () {
       const userLevel = utils.query('level')
       if (userLevel) {
-        this.userLevel = userLevel >= 4 ? 4 : userLevel
+        this.userLevel = userLevel - 1 >= 4 ? 4 : userLevel - 1
       }
     }
   }
@@ -200,6 +200,7 @@
       line-height: .5rem;
       color: #333;
       display: flex;
+      align-items: center;
       .my-vip-tips{
         width: .4rem;
         height: .4rem;

@@ -165,13 +165,15 @@
 
           img.addEventListener('load', () => {
 
-            el.style.backgroundImage = 'url('+imgUrl+')'
+            setTimeout(() => {
+              el.style.backgroundImage = 'url('+imgUrl+')'
 
-            delete el.dataset.src
+              delete el.dataset.src
 
-            el.dataset.LazyLoadImgState = 'success'
+              el.dataset.LazyLoadImgState = 'success'
 
-            el.classList.add('successImg')
+              el.classList.add('successImg')
+            },200)
 
           }, false)
 
