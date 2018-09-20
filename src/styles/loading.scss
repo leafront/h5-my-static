@@ -13,10 +13,11 @@
 }
 
 .ui-showLoading-gif{
-  width: 4.2rem;
-  height: 1.9rem;
-  background:url('/my-static/images/loading.png') no-repeat;
-  background-size: 4.2rem auto;
+  width: .48rem;
+  height: .48rem;
+  background:url('/my-static/images/showLoading.png') no-repeat;
+  background-size: .48rem auto;
+	animation: loading 1s steps(12, end) infinite;
 }
 
 .ui-pageLoading-mask{

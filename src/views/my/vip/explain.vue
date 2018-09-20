@@ -173,7 +173,7 @@
       if (userLevel > 0) {
         this.userLevel = userLevel - 1 >= 4 ? 4 : userLevel - 1
       } else {
-        this.userLevel = 1
+        this.userLevel = 0
       }
     }
   }
