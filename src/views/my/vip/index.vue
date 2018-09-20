@@ -12,7 +12,7 @@
               <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
             <div class="my-vip-integral">
-              <p>会员积分：{{walletInfo.point}}</p>
+              <p>会员积分：{{walletInfo.point || 0}}</p>
             </div>
           </div>
           <div class="my-vip-user-level" @click="pageAction('/my/vip/rule')">
