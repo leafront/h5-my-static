@@ -14,7 +14,7 @@
           <div class="my-personal-pic" v-if="headPicUrl" :style="{'background': 'url('+headPicUrl+')'}"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
-        <div class="my-personal-item" @click="editPopup(1, '编辑昵称')">
+        <div class="my-personal-item ui-bottom-line" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
           <strong>{{userInfo.nickname}}</strong>
           <div class="ui-right-bottom"></div>
@@ -28,20 +28,20 @@
           <strong>{{userInfo.addressDetail}}</strong>
           <div class="ui-right-bottom"></div>
         </div>
-        <div class="my-personal-item" @click="editPopup(2, '编辑地址')">
+        <div class="my-personal-item ui-bottom-line" @click="editPopup(2, '编辑地址')">
           <span>地址</span>
           <strong>{{userInfo.userAddress}}</strong>
           <div class="ui-right-bottom"></div>
         </div>
-        <div class="my-personal-item" @click="toggleSex(true)">
+        <div class="my-personal-item ui-bottom-line" @click="toggleSex(true)">
           <span>性别</span>
           <strong>{{userInfo.sex == 0 ? '男' : '女' }}</strong>
         </div>
-        <div class="my-personal-item" @click="togglePicker(true)">
+        <div class="my-personal-item ui-bottom-line" @click="togglePicker(true)">
           <span>生日</span>
           <strong>{{userInfo.birthdayStr}}</strong>
         </div>
-        <div class="my-personal-item" @click="editPopup(3, '编辑邮编')">
+        <div class="my-personal-item ui-bottom-line" @click="editPopup(3, '编辑邮编')">
           <span>邮编</span>
           <strong>{{userInfo.zipCode}}</strong>
           <div class="ui-right-bottom"></div>
@@ -516,9 +516,6 @@
     height: .88rem;
     align-items: center;
     padding-right: .3rem;
-    &:last-child{
-      border-bottom:0;
-    }
     .ui-right-bottom{
       margin-left: .2rem;
     }
