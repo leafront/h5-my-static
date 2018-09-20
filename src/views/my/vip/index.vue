@@ -64,12 +64,13 @@
       <div class="my-vip-cart-bottom">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
       </div>
-      <div class="user-fixed-cart" @click="cartAction('/cart.html')" :class="{'active': fixedCart}">
+      <div class="user-fixed-cart" @click="routerAction('/cart.html')" :class="{'active': fixedCart}">
         <i></i>
       </div>
     </div>
   </div>
 </template>
+
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
@@ -122,9 +123,9 @@
           this.$router.push(`/my/vip/explain?level=${userLevel}`)
         }
       },
-      cartAction (url) {
-        location.href = url
-      },
+      /**
+       * 获取广告位
+       */
       getDolphinList () {
         Model.getDolphinList({
           type: 'GET',
@@ -214,7 +215,6 @@
       getUserInfo () {
         Model.getUserInfo({
           type: 'GET',
-          ignoreLogin: true
         }).then((result) => {
           const data = result.data
           this.$hideLoading()
@@ -230,12 +230,7 @@
       getWalletInfo () {
         Model.getWalletInfo({
           type: 'GET',
-          ignoreLogin: true,
           data: {
-            isECard: 1,
-            isYCard: 1,
-            isBean: 1,
-            isCoupon: 1,
             isPoint: 1
           }
         }).then((result) => {
@@ -304,8 +299,6 @@
   }
 
 </script>
-
-
 
 <style lang="scss">
   .my-vip-cart-bottom{
