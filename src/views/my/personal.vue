@@ -11,7 +11,7 @@
       <div class="my-personal">
         <div class="my-personal-upload ui-bottom-line">
           <span class="c3">头像</span>
-          <img :src="headPicUrl" class="my-personal-pic"/>
+          <img v-if="headPicUrl" :src="headPicUrl" class="my-personal-pic"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
         <div class="my-personal-item ui-bottom-line" @click="editPopup(1, '编辑昵称')">
@@ -144,7 +144,7 @@
         editHeader: false,
         personalPopup: -1,
         showAddress: false,
-        headPicUrl: config.staticPath + '/my-static/images/logo-laiyifen.png',
+        headPicUrl: '',
         start: 1920,
         checkedValue: ['1990','01','10'],
         end:  new Date().getFullYear(),
@@ -208,9 +208,7 @@
             const headPicUrl = data.url160x160
             this.pageView = true
             this.userInfo = data
-            if (headPicUrl) {
-              this.headPicUrl = headPicUrl
-            }
+            this.headPicUrl = headPicUrl || config.staticPath + '/my-static/images/logo-laiyifen.png'
           } else {
             this.$toast(result.message)
           }

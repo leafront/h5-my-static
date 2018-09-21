@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img class="my-vip-info-pic" @click="pageAction('/my/personal')" :src="headerPic"/>
+          <img class="my-vip-info-pic" v-if="headerPic" @click="pageAction('/my/personal')" :src="headerPic"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -97,7 +97,7 @@
         vip_description: '',
         vip_interests: [],
         userInfo: {},
-        headerPic: config.staticPath + '/my-static/images/logo-laiyifen.png',
+        headerPic: '',
         walletInfo: {},
         rankList: [],
         rankPrice: {},
@@ -235,9 +235,7 @@
           this.$hideLoading()
           if (result.code == 0 && data) {
             const headerPic = data['url220x220']
-            if (headerPic) {
-              this.headerPic = headerPic
-            }
+            this.headerPic = headerPic || config.staticPath + '/my-static/images/logo-laiyifen.png'
             this.userInfo = data
             this.pageView = true
           } else {
