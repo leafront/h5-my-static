@@ -11,7 +11,7 @@
       <div class="my-personal">
         <div class="my-personal-upload ui-bottom-line">
           <span class="c3">头像</span>
-          <div class="my-personal-pic" v-if="headPicUrl" :style="{'background': 'url('+headPicUrl+')'}"/>
+          <img :src="headPicUrl" class="my-personal-pic"/>
           <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
         </div>
         <div class="my-personal-item ui-bottom-line" @click="editPopup(1, '编辑昵称')">
@@ -475,8 +475,6 @@
       width: .8rem;
       height: .8rem;
       border-radius: 50%;
-      background:url('./images/logo-laiyifen.png') no-repeat center;
-      background-size: .8rem auto;
     }
     .my-personal-file{
       position: absolute;

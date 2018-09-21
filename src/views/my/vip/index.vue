@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <div class="my-vip-info-pic" @click="pageAction('/my/personal')" :style="{'background': 'url('+userInfo['url220x220']+') no-repeat','backgroundSize':'100% auto'}"></div>
+          <img class="my-vip-info-pic" @click="pageAction('/my/personal')" :src="headerPic"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -85,6 +85,8 @@
 
   import utils from '@/widget/utils'
 
+  import config from '@/config/index'
+
   export default {
     data () {
       return {
@@ -95,6 +97,7 @@
         vip_description: '',
         vip_interests: [],
         userInfo: {},
+        headerPic: '',
         walletInfo: {},
         rankList: [],
         rankPrice: {},
@@ -231,6 +234,7 @@
           const data = result.data
           this.$hideLoading()
           if (result.code == 0 && data) {
+            this.headerPic = data['url220x220'] || config.staticPath + '/my-static/images/logo-laiyifen.png'
             this.userInfo = data
             this.pageView = true
           } else {
@@ -498,7 +502,6 @@
       height: 1.2rem;
       border-radius: 50%;
       border: .02rem solid rgba(255,255,255,.8);
-      background: url(../images/logo-laiyifen.png) no-repeat;
     }
   }
   .my-vip-user-txt{
