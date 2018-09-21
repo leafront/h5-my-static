@@ -234,7 +234,7 @@
           const data = result.data
           this.$hideLoading()
           if (result.code == 0 && data) {
-            const headerPic = data['url120x120']
+            const headerPic = data.headPicUrl
             this.headerPic = headerPic || config.staticPath + '/my-static/images/logo-laiyifen.png'
             this.userInfo = data
             this.pageView = true
