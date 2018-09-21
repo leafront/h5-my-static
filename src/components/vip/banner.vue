@@ -14,7 +14,7 @@
 </template>
 <style lang="scss">
   .my-vip-banner{
-    margin: .16rem .3rem 0 .3rem;
+    margin: .16rem 4% 0 4%;
     padding-bottom: .24rem;
     overflow: hidden;
   }
@@ -27,7 +27,7 @@
     data () {
       return {
         index: 1,
-        itemWidth: '6.9rem',
+        itemWidth: document.documentElement.clientWidth * .92 + 'px',
         itemHeight: '1.2rem'
       }
     },
