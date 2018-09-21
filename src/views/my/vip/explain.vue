@@ -252,6 +252,7 @@
     border-radius: 50%;
     position: relative;
     z-index:10;
+    transition: all .3s cubic-bezier(0.4, 0.01, 0.165, 0.99);
     p{
       width: 100%;
       height: 100%;

@@ -425,6 +425,7 @@
     padding-top: .16rem;
   }
   .my-vip-des-pic{
+    display: flex;
     img {
       width: 100%;
       min-height: 4.65rem;
