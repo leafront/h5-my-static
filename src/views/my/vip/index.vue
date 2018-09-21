@@ -325,7 +325,7 @@
     position: absolute;
     right: .2rem;
     top:0;
-    padding: .22rem .2rem .2rem .3rem;
+    padding: .2rem .2rem .2rem .3rem;
   }
   .my-vip-cart-add{
     width: .32rem;
