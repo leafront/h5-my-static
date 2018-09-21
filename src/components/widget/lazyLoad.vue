@@ -177,7 +177,7 @@
 
               el.classList.add('successImg')
 
-            },0)
+            },150)
 
           }, false)
 
