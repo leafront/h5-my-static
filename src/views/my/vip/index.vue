@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img class="pic-lazyLoad" @click="pageAction('/my/personal')" :src="userInfo['url220x220']"/>
+          <div class="my-vip-info-pic" @click="pageAction('/my/personal')" :style="{'background': 'url('+userInfo['url220x220']+') no-repeat','backgroundSize':'100% auto'}"></div>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -493,12 +493,12 @@
     background-size: 5.32rem auto;
     padding-top: .15rem;
     padding-left: .25rem;
-    img {
+    .my-vip-info-pic {
       width: 1.2rem;
       height: 1.2rem;
       border-radius: 50%;
       border: .02rem solid rgba(255,255,255,.8);
-      background-size: 100% auto;
+      background: url(../images/logo-laiyifen.png) no-repeat;
     }
   }
   .my-vip-user-txt{
