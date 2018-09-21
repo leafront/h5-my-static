@@ -97,7 +97,7 @@
         vip_description: '',
         vip_interests: [],
         userInfo: {},
-        headerPic: '',
+        headerPic: config.staticPath + '/my-static/images/logo-laiyifen.png',
         walletInfo: {},
         rankList: [],
         rankPrice: {},
@@ -234,7 +234,10 @@
           const data = result.data
           this.$hideLoading()
           if (result.code == 0 && data) {
-            this.headerPic = data['url220x220'] || config.staticPath + '/my-static/images/logo-laiyifen.png'
+            const headerPic = data['url220x220']
+            if (headerPic) {
+              this.headerPic = headerPic
+            }
             this.userInfo = data
             this.pageView = true
           } else {

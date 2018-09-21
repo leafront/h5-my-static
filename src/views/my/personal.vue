@@ -144,7 +144,7 @@
         editHeader: false,
         personalPopup: -1,
         showAddress: false,
-        headPicUrl: '',
+        headPicUrl: config.staticPath + '/my-static/images/logo-laiyifen.png',
         start: 1920,
         checkedValue: ['1990','01','10'],
         end:  new Date().getFullYear(),
@@ -205,9 +205,12 @@
           const data = result.data
 					this.$hideLoading()
           if (result.code == 0 && data) {
+            const headPicUrl = data.url160x160
             this.pageView = true
             this.userInfo = data
-            this.headPicUrl = data.url160x160 || config.staticPath + '/my-static/images/logo-laiyifen.png'
+            if (headPicUrl) {
+              this.headPicUrl = headPicUrl
+            }
           } else {
             this.$toast(result.message)
           }
