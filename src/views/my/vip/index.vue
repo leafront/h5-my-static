@@ -109,14 +109,23 @@
       LazyLoad
     },
     methods: {
+      /**
+       * @param {String} url
+       */
       pageAction (url) {
         this.$router.push(url)
       },
+      /**
+       * @param {String} url
+       */
       routerAction (url) {
         if (url) {
           location.href = url
         }
       },
+      /**
+       * 会员权益说明
+       */
       explainAction () {
         const {
           userLevel
@@ -154,6 +163,7 @@
       },
       /**
        * 获取商品排行榜
+       *
        */
       getRankList () {
         Model.getRankList({
@@ -269,6 +279,9 @@
           }
         })
       },
+      /**
+       * 固定底部购物车
+       */
       fixedCartBottom () {
         utils.throttle(() => {
           const scrollTop =  this.vipScrollEle.scrollTop
@@ -279,6 +292,9 @@
           }
         },200)()
       },
+      /**
+       * 滚动和事件监听底部购物车
+       */
       fixedCartScroll () {
         const vipScrollEle = document.getElementById('my-vip-scroll')
         const cartEl = document.getElementById('my-vip-cart')

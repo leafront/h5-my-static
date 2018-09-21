@@ -159,9 +159,17 @@
       AppHeader
     },
     methods: {
+      /**
+       * 页面跳转
+       * @param {String} url
+       */
       pageAction (url) {
         this.$router.push(url)
       },
+      /**
+       * 切换会员等级显示内容
+       * @param {Number} val
+       */
       checkList (val) {
         const userLevel = val + 1
         this.userLevel = val
