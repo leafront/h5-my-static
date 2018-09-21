@@ -6,6 +6,8 @@
 </template>
 <script>
 
+  import utils from '@/widget/utils'
+
 	export default {
 		props:{
 		  index: {
@@ -96,7 +98,9 @@
 
 				this._move(e, differX)
 
-				e.preventDefault()
+        if (!utils.isPassive()) {
+          e.preventDefault()
+        }
 			},
 			touchend (e) {
 				if (!this.isValid) return
