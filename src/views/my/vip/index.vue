@@ -42,7 +42,7 @@
           <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
         </div>
       </LazyLoad>
-      <div class="my-vip-title">
+      <div class="my-vip-title" v-if="rankList && rankList.length">
         <h5 class="font-xb c3">会员最爱买</h5>
         <span class="font-s c9">HOT</span>
       </div>
@@ -63,10 +63,10 @@
           </div>
         </div>
       </LazyLoad>
-      <div class="my-vip-cart-bottom">
+      <div class="my-vip-cart-bottom" v-if="rankList && rankList.length">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
       </div>
-      <div class="user-fixed-cart" @click="routerAction('/cart.html')" :class="{'active': fixedCart}">
+      <div class="user-fixed-cart" v-if="rankList && rankList.length" @click="routerAction('/cart.html')" :class="{'active': fixedCart}">
         <i></i>
       </div>
     </div>
