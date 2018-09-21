@@ -33,18 +33,6 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1;
   },
-  setTimeout (callback,times) {
-
-    this.timer = setTimeout(() => {
-      callback()
-    },times)
-
-  },
-  clearTimeout () {
-
-    clearTimeout(this.timer)
-
-  },
   serialize(value) {
     return JSON.stringify(value);
   },
@@ -125,16 +113,6 @@ const utils = {
         fn.apply(context, args)
       }
     }
-  },
-  isWeixinIphoneX (){
-
-    const isWeixin = this.weixin()
-
-    const ua = window.navigator.userAgent.toLowerCase()
-
-    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
-
-    return (isWeixin && isPhoneX)
   },
   /**
    * @param {Object} obj
@@ -268,16 +246,6 @@ const utils = {
     return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
   },
-  isContained (arr1,arr2){
-    if(!(arr1 instanceof Array) || !(arr2 instanceof Array)) return false;
-    if(arr1.length < arr2.length) return false;
-    var aStr = arr1.toString();
-    for(var i = 0, len = arr2.length; i < len; i++){
-      if(aStr.indexOf(b[i]) == -1) return false;
-    }
-    return true;
-  },
-
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365;
     var exp = new Date();
@@ -333,31 +301,6 @@ const utils = {
 
     return sid;
   },
-  /**
-   * 根据团单号构造支付成功的返回的页面url
-   * {String} orderCode
-   */
-  getPayBackUrl (orderCode) {
-    var url = location.protocol + "//" + location.host
-
-    url += `/pay/pay-success.html?orderCode=${orderCode}`
-
-    return url
-  },
-  isPhoneX (){
-
-    const isWeixin = this.weixin()
-    const isApp = this.isApp()
-    const ua = window.navigator.userAgent.toLowerCase();
-    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
-    return (isWeixin && isPhoneX ) || (isApp && isPhoneX)
-
-  },
-  removeAppViewFixed: function () {
-    const appView = document.getElementById('app')
-    appView.classList.remove('app_fixed')
-
-  },
   appViewFixed () {
 
     const appView = document.getElementById('app')
@@ -373,22 +316,6 @@ const utils = {
   },
   trim (text) {
     return text.replace(/\s+/g, "")
-  },
-  imgScale (url,q = 95){
-    const getDeviceWidth = document.documentElement.clientWidth > 750 ? 750 : document.documentElement.clientWidth
-    const pattern = /http:\/\/.*?(gif|png|jpg)/gi
-    if (url.indexOf('.jpg') > -1 || url.indexOf('.png') > -1) {
-      const scaleImage = url.replace(pattern,(res) => {
-        if (res.indexOf('http://cdn.oudianyun.com') > -1) {
-          return `${res}@base@tag=imgScale&q=${q}&m=1&w=${getDeviceWidth}`
-        } else {
-          return res
-        }
-      })
-      return scaleImage
-    } else {
-      return url
-    }
   },
   loadScript (url,success) {
     const script = document.createElement("script")

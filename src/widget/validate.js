@@ -10,54 +10,6 @@ const validate = {
     return pattern.test(text)
 
   },
-  isMessageCode (text){
-
-	  const pattern = /^[0-9]{6}$/
-
-    return pattern.test(text)
-  },
-
-  /**
-   *
-   * @param {string} text
-   * @returns {boolean}
-   */
-
-  isNumber (text) {
-
-	  const pattern = /^[0-9]\d{0,8}$/
-
-    return pattern.test(text)
-
-  },
-
-  /**
-   * @param {Number || String} text
-   * @returns {boolean}
-   */
-
-  checkNumber (text) {
-
-	  const pattern = /^[0-9]+.?[0-9]*$/
-
-    return pattern.test(text)
-
-  },
-
-  /**
-   *
-   * @param {string} text
-   *
-   * @returns {boolean}
-   */
-
-  isPercent (text) {
-
-	  const pattern = /^((\d+\.?\d*)|(\d*\.\d+))$/
-
-    return pattern.test(text)
-
-  },
   /**
    * 邮箱验证
    * @param {string} email
@@ -70,42 +22,6 @@ const validate = {
 	  const pattern = /^([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/
 
     return pattern.test(text)
-  },
-
-  /**
-   *
-   * @param {string} password
-   * @returns {boolean}
-   */
-  isPass (text){
-
-	  const pattern = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/
-
-    return pattern.test(text)
-
-  },
-  /**
-   * 验证是否为真实姓名，中英文和数字，中文算两个，长度不超过20
-   * @param {string} name 姓名
-   * @return {boolean}
-   * @example
-   * validate.isName('张三')
-   */
-  isName  (text) {
-
-	  const pattern = /^([\u4e00-\u9fa5]|[A-Za-z_])+$/
-
-    if (pattern.test(text)) {
-
-      text = text.replace(/[\u4e00-\u9fa5]/g, '__')
-
-      return text.length <= 20
-
-    } else {
-
-      return false
-
-    }
   },
   /**
    * @param {string} zipCode

@@ -13,24 +13,6 @@ const DISTRIBUTOR_ID = "distributorId"
 const CUR_DISTRIBUTOR = "currDistributor"
 
 const distribution = {
-
-  /**
-   * 获取当前用户的上家sharecode，目前上家的sharecode会存储在cookie里。
-   * @return {String} shareCode
-   */
-  getInviterShareCode() {
-    return utils.getCookie(SHANGJIA_SHARE_CODE || "")
-  },
-
-  /**
-   * 设置上家的
-   * @param {String} sharecode
-   */
-  setInviterShareCode(shareCode) {
-    if (shareCode) {
-     utils.setCookie(SHANGJIA_SHARE_CODE, shareCode);
-    }
-  },
   /**
    * 20170706增加清除上级sharecode（影响未知），修复详情页普通用户分享普通商品，
    * 注册不应该带sharecode，绑定到默认分销商下级，
