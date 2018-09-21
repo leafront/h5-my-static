@@ -93,7 +93,7 @@
     }
     .ui-header-back{
       height: .88rem;
-      padding: 0 .3rem 0 .28rem;
+      padding: 0 .3rem 0 .3rem;
       display: flex;
       align-items: center;
     }
