@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img class="pic-lazyLoad" :src="userInfo['url220x220']"/>
+          <img class="pic-lazyLoad" @click="pageAction('/my/personal')" :src="userInfo['url220x220']"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -325,7 +325,7 @@
     position: absolute;
     right: .2rem;
     top:0;
-    padding: .16rem .2rem .2rem .3rem;
+    padding: .22rem .2rem .2rem .3rem;
   }
   .my-vip-cart-add{
     width: .32rem;
