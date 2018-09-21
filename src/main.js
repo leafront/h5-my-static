@@ -19,15 +19,11 @@ import Loading from '@/components/loading'
 
 import PageLoading from '@/components/pageLoading'
 
-import showModal from '@/components/showModal'
-
-Vue.use(showModal)
-
 Object.keys(filter).forEach(key => {
 	Vue.filter(key, filter[key])
 })
 
-Vue.use(Toast,{    //支持全局配置
+Vue.use(Toast,{
 	duration: "1500"
 })
 
@@ -55,7 +51,6 @@ router.beforeEach((to, from, next) => {
 
       if (utils.isApp()) {
         app.login()
-        next()
 
       } else {
         const from = to.fullPath
