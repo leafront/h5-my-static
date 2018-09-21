@@ -254,6 +254,9 @@
 
 	}
 
-
 </script>
+
+<style lang="scss">
+  @import '../../styles/slidershow.scss';
+</style>
 

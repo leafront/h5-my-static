@@ -124,6 +124,7 @@
 </script>
 
 <style lang="scss">
+  @import '../../styles/ui-switch.scss';
   .my-message{
     padding-left: .2rem;
     margin-top: .2rem;

@@ -30,7 +30,4 @@ export default {
   @import './styles/main.scss';
   @import './styles/loading.scss';
   @import './styles/toast.scss';
-  @import './styles/dialog.scss';
-  @import './styles/ui-switch.scss';
-  @import './styles/slidershow.scss';
 </style>
