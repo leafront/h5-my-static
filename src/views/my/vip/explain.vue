@@ -276,7 +276,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        bottom: -.58rem;
+        bottom: -.56rem;
         width: 0;
         height: 0;
         border-left: .2rem solid transparent;
