@@ -16,21 +16,21 @@ if (utils.isLocalStorageSupported()) {
 
 	store.set = function(key, val,storageType) {
     const storage = getStorageType(storageType)
-		storage[key] = utils.serialize(val);
+		storage[key] = utils.serialize(val)
 	}
 	store.get = function(key,storageType) {
     const storage = getStorageType(storageType)
 
-		return utils.deserialize(storage[key]);
+		return utils.deserialize(storage[key])
 	}
 	store.remove = function(key,storageType) {
 
     const storage = getStorageType(storageType)
-		delete storage[key];
+		delete storage[key]
 	}
 	store.clear = function(storageType) {
     const storage = getStorageType(storageType)
-		storage.clear();
+		storage.clear()
 	}
 
 } else {
@@ -41,15 +41,15 @@ if (utils.isLocalStorageSupported()) {
 
 		if (window.name) {
 
-      windowStorage = utils.deserialize(window.name);
+      windowStorage = utils.deserialize(window.name)
 
 		} else {
 
-      windowStorage = {};
+      windowStorage = {}
 
 		}
 
-    windowStorage[key] = val;
+    windowStorage[key] = val
 
 		window.name = utils.serialize(windowStorage);
 
@@ -58,7 +58,7 @@ if (utils.isLocalStorageSupported()) {
 
 		if (window.name) {
 
-			return utils.deserialize(window.name)[key];
+			return utils.deserialize(window.name)[key]
 
 		} else {
 
@@ -69,20 +69,20 @@ if (utils.isLocalStorageSupported()) {
 	}
 	store.remove = function(key,storageType) {
 
-    windowStorage = utils.deserialize(window.name);
+    windowStorage = utils.deserialize(window.name)
 
-		delete windowStorage[key];
+		delete windowStorage[key]
 
-		window.name = utils.serialize(windowStorage);
+		window.name = utils.serialize(windowStorage)
 
 	}
 	store.clear = function() {
 
-		window.name = '';
+		window.name = ''
 
 	}
 }
 
-export default store;
+export default store
 
 
