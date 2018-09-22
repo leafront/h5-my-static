@@ -228,7 +228,7 @@
   }
   .my-vip-explain{
     height: 1.76rem;
-    background: linear-gradient(left,#FF8E0C,#FF5E28);
+    background: linear-gradient(top,#FF8E0C,#FF5E28);
     padding: 0 .1rem;
     display: flex;
     align-items: center;
@@ -274,13 +274,14 @@
       }
       span{
         position: absolute;
-        left: .32rem;
-        bottom: -.56rem;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -.58rem;
         width: 0;
         height: 0;
         border-left: .2rem solid transparent;
         border-right: .2rem solid transparent;
-        border-top: .25rem solid #FF8E0C;
+        border-top: .25rem solid #FF5E28;
       }
     }
   }
