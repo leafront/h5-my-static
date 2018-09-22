@@ -1,7 +1,5 @@
 import utils from './utils'
 
-import store from './store'
-
 //回调函数计数
 var count = 0;
 
@@ -143,22 +141,6 @@ const app = {
     }
     return  ut;
   },
-
-  //获取distributorId 分销商ID
-  getDistributorId () {
-    return  store.get(this.distributorId,'session');
-  },
-
-  //设置分销商ID
-  setDistributorId (type, id) {
-    let dtype = store.get(this.distributorType);
-    if(type >= dtype) {//优先级按照type大小  覆盖原有值
-      store.set(this.distributorType, type,'session');
-      store.set(this.distributorId, id || '','session');
-      store.set(this.distributorId, id || '','session');//track 埋点需要
-    }
-  },
-
   //设置UT
   setUserToken (ut) {
     utils.setCookie(this.utName, ut);
