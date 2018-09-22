@@ -87,6 +87,8 @@
 
   import config from '@/config/index'
 
+  import app from '@/widget/app'
+
   export default {
     data () {
       return {
