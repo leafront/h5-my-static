@@ -104,7 +104,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           baseName + '/widget/ajax.js',
           baseName + '/widget/request.js',
           baseName + '/widget/utils.js',
-          baseName +'/widget/common.js',
           baseName +'/widget/app.js'
         ]
         return (

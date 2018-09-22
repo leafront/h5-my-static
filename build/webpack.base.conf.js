@@ -15,18 +15,7 @@ const configEnv = process.env.NODE_ENV || "develop"
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js',
-    vendor: [
-      'vue',
-      'vuex',
-      'vue-router',
-      './src/widget/store.js',
-      './src/widget/ajax.js',
-      './src/widget/request.js',
-      './src/widget/utils.js',
-      './src/widget/common.js',
-      './src/widget/app.js'
-    ]
+    app: './src/main.js'
   },
   output: {
     path: config[configEnv].assetsRoot,
