@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
@@ -112,6 +112,13 @@
       LazyLoad
     },
     methods: {
+      backAction () {
+        if (utils.isApp()) {
+          app.back()
+        } else {
+          location.href = '/index.html'
+        }
+      },
       /**
        * @param {String} url
        */
