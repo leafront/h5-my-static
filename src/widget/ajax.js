@@ -17,25 +17,31 @@
 
 import config from '@/config/index'
 
-export default function ajax (options){
-
-  const baseHostPath = options.hostPath || location.origin
+export default function ajax ({
+  hostPath = location.origin,
+  url,
+  async = true,
+  timeout = 30000,
+  type,
+  headers,
+  dataType = 'json'
+}){
 
 	return new Promise((resolve, reject) => {
 
 		const xhr = new XMLHttpRequest()
 
-		xhr.open(options.type, baseHostPath + options.url, options.async)
+		xhr.open(type, hostPath + url, async)
 
-		xhr.timeout = options.timeout
+		xhr.timeout = timeout
 
 		//设置请求头
-		for (var k in options.headers) {
+		for (var k in headers) {
 
-			xhr.setRequestHeader(k, options.headers[k])
+			xhr.setRequestHeader(k, headers[k])
 		}
 
-		xhr.responseType = options.dataType
+		xhr.responseType = dataType
 
 		xhr.onreadystatechange = () => {
 
@@ -56,7 +62,7 @@ export default function ajax (options){
 			}
 		}
 
-    options.type == "GET" ? xhr.send(null) : 	xhr.send(options.data)
+    type == "GET" ? xhr.send(null) : 	xhr.send(data)
 
 	})
 }

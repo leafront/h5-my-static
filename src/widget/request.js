@@ -8,57 +8,61 @@ import utils from './utils'
 
 import config from '@/config/index'
 
-export default function request (url,options){
+export default function request (url,{
+  type,
+  timeout,
+  dataType,
+  data,
+  cache = false,
+  expires = 30 * 60 * 1000,
+  headers
+}){
 
   const ut = app.getUserToken()
-  const data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },options.data)
-  const defaults = {
+  const options = {
     isHeader:true,
-    type: options.type,
+    type,
     data,
     async: true,
     url: url,
-    timeout: options.timeout || 30000,
-    dataType: options.dataType || 'json',
+    timeout,
+    dataType,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "X-Requested-With": "XMLHttpRequest",
       "Accept": "application/json"
     }
   }
+  options.data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },data)
 
-  if (defaults.type == 'GET') {
+  if (options.type == 'GET') {
 
-    defaults.data.cashe = new Date().getTime()
+    options.data.cashe = new Date().getTime()
   }
 
-  if (options.headers) {
+  if (headers) {
 
-    defaults.headers["Content-Type"] = options.headers["Content-Type"]
-    defaults.data = JSON.stringify(options.data)
+    options.headers["Content-Type"] = headers["Content-Type"]
+    options.data = JSON.stringify(options.data)
 
   } else {
 
-    defaults.data = utils.queryStringify(defaults.data)
+    options.data = utils.queryStringify(options.data)
   }
 
   if (app.loggedIn()) {
 
-    defaults.headers.ut = app.getUserToken()
+    options.headers.ut = app.getUserToken()
 
   }
-  if (defaults.type == "GET") {
+  if (type == "GET") {
 
-    defaults.url =  defaults.data ?  defaults.url + '?' + defaults.data: defaults.url
+    options.url =  data ?  url + '?' + options.data: url
   }
 
-  const cache = options.cache || false
+  function httpRequest (resolve) {
 
-  const expires = options.expires || 30 * 60 * 1000
-
-  function sendAjax (resolve) {
-
-    ajax(defaults).then((results) => {
+    ajax(options).then((results) => {
       let cacheData = {
         times: new Date().getTime() + expires,
         results
@@ -99,13 +103,13 @@ export default function request (url,options){
 
         store.remove(url,'local')
 
-        sendAjax(resolve)
+        httpRequest(resolve)
 
       }
 
     } else {
 
-      sendAjax (resolve)
+      httpRequest (resolve)
 
     }
   })
