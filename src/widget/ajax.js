@@ -1,21 +1,9 @@
 /**
  *
  * @param {Object} options
- * arguments
- * type:'GET',
- * timeout: 3000,
- * hostPath: 'http://m.laiyifen.com'
- * headers:{
-	 *  Content-Type:'application/json'
-	 * },
- * data:{
-	 *  name:'leafront'
-	 * }
  *
  * @returns {Promise}
  */
-
-import config from '@/config/index'
 
 export default function ajax ({
   hostPath = location.origin,
@@ -24,7 +12,8 @@ export default function ajax ({
   timeout = 30000,
   type,
   headers,
-  dataType = 'json'
+  dataType = 'json',
+  data
 }){
 
 	return new Promise((resolve, reject) => {
