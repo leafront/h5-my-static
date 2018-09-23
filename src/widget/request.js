@@ -35,7 +35,7 @@ export default function request (url,{
   }
   options.data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },data)
 
-  if (options.type == 'GET') {
+  if (type == 'GET') {
 
     options.data.cashe = new Date().getTime()
   }
