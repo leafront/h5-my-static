@@ -1,5 +1,5 @@
 <template>
-	<div class="slideshow-wrap">
+	<div class="slideshow-wrap pic-lazyLoad">
 		<slot name="banner"></slot>
 		<slot name="dot"></slot>
 	</div>
@@ -46,8 +46,7 @@
 			autoTime: {
 				type: Number,
 				default: 5000
-			},
-
+			}
 		},
 
 		data () {
@@ -246,7 +245,7 @@
 			}
 
 		},
-		beforeDestroy () {
+		destroyed () {
 
 			clearInterval(this.autoPlayTimer)
 

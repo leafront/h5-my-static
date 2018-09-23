@@ -1,7 +1,7 @@
 <template>
   <div class="my-vip-banner">
-    <swiper :list="bannerList" :index="index" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
-      <ul slot="banner" class="slideshow-item pic-lazyLoad" :style="{'height':itemHeight}">
+    <swiper :list="bannerList" :preventDefault="true" :index="index" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
+      <ul slot="banner" class="slideshow-item" :style="{'height':itemHeight}">
         <li v-for="item in bannerList" :style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
           <img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
         </li>
