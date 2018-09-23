@@ -134,6 +134,7 @@ const app = {
         ut = checkUt;
       }
     }
+    alert(JSON.stringify(utils.getUaParams()))
     if(utils.isApp()){
       if(!ut){//部分手机不能正常写入cookie
         ut = utils.getUaParams().ut;
