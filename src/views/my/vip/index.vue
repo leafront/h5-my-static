@@ -349,6 +349,7 @@
     }
     strong{
       padding-left: .1rem;
+      text-decoration: line-through;
     }
   }
   .my-vip-cart-add-wrapper{
