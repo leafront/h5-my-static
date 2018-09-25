@@ -207,9 +207,10 @@
        * 获取商品排行价格
        */
       getRankPrice (mpIds) {
-        if (!mpIds) {
+        if (!mpIds.length) {
           return
         }
+	      mpIds = mpIds.join(',')
         Model.getRankPrice({
           type: 'GET',
           data: {
