@@ -57,7 +57,7 @@ export default function request (url,{
   }
   if (type == "GET") {
 
-    options.url =  data ?  url + '?' + options.data: url
+    options.url =  options.data ?  url + '?' + options.data: url
   }
 
   function httpRequest (resolve) {
