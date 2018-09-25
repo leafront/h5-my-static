@@ -536,11 +536,12 @@
     height: 1rem;
     background: linear-gradient(left,#FFAA2B,#FF6A22);
     border-radius: 50%;
-    display: none;
+    visibility: hidden;
     padding: .23rem .2rem;
     z-index: 100;
+    display: block;
     &.active{
-      display: block;
+      visibility: visible;
     }
     i{
       background: url(./images/vip-index-sprite.png) no-repeat -.06rem -.09rem;
