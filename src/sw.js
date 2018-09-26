@@ -40,7 +40,7 @@ self.addEventListener('activate', function (event) {
       return Promise.all(
         cacheNames.map(function (cacheName) {
           // 不在白名单的缓存全部清理掉
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
+          if (cacheKey !== cacheName) {
             // 删除缓存
             return caches.delete(cacheName)
           }
