@@ -30,8 +30,8 @@ self.addEventListener('fetch', function (event) {
         return fetch(event.request)
       }
     )
-  );
-});
+  )
+})
 
 // 新 Service Workers 线程取得控制权后，将会触发其 activate 事件
 self.addEventListener('activate', function (event) {
@@ -45,7 +45,7 @@ self.addEventListener('activate', function (event) {
             return caches.delete(cacheName)
           }
         })
-      );
+      )
     })
   )
 })

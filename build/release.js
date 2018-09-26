@@ -10,6 +10,7 @@ const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('../config')
 const webpackConfig = require('./webpack.release.conf')
+const exec = require('child_process').exec
 
 const spinner = ora('building for release...')
 spinner.start()
@@ -26,7 +27,18 @@ rm(path.join(config.release.assetsRoot, config.release.assetsSubDirectory), err 
       chunks: false,
       chunkModules: false
     }) + '\n\n')
+    const movePath = path.join(__dirname, '../target')
 
+    exec(`mv ${movePath}/sw.js ${movePath}/my-static/sw.js`,(err,stdout,stderr) => {
+
+      if (err) {
+        console.log(err);
+
+        throw new Error(err);
+      }
+
+      console.log(stdout)
+    })
     if (stats.hasErrors()) {
       console.log(chalk.red('  Build failed with errors.\n'))
       process.exit(1)

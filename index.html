@@ -51,6 +51,11 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/fastclick/index.js"></script>
+    <script type="text/javascript">
+      if ('serviceWorker' in navigator && location.protocol == 'https:') {
+        navigator.serviceWorker.register('<%= htmlWebpackPlugin.options.staticPath %>/my-static/sw.js')
+      }
+    </script>
     <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/my-static/vconsole/index.js"></script>-->
     <!--<script>-->
       <!--var vConsole = new VConsole()-->
