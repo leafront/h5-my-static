@@ -1,84 +1,84 @@
 html{
-	font-size:100px;
+  font-size:100px;
 }
 body {
-	background-color: #fff;
-	font-family: Microsoft Yahei,PingFangSC-Regular,Helvetica, Arial, "Lucida Grande", Verdana, STXihei, Sans-serif;
+  background-color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
-	display: block;
+  display: block;
 }
 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,textarea,p,blockquote,th,td,button {
-	margin: 0;
-	padding: 0;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	text-size-adjust: none;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  text-size-adjust: none;
+  box-sizing: border-box;
 }
 
 button,h1,h2,h3,h4,h5,h6{
 
-	font-size: 100%;
+  font-size: 100%;
 
 }
 fieldset,img,button {
 
-	border: 0
+  border: 0
 }
 
 img{
-	vertical-align: top;
+  vertical-align: top;
 }
 li{
-	list-style: none;
+  list-style: none;
 }
 
 input {
-	background: transparent;
-	border: none;
-	box-shadow: none;
-	border-radius: 0;
-	font-size: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-size: 100%;
 }
 
 i,b{
-	font-style: normal;
+  font-style: normal;
 }
 
 input,select, textarea, button {
-	-webkit-appearance: none;
-	outline: none;
+  -webkit-appearance: none;
+  outline: none;
 }
 
 .clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: "020";
-	clear: both;
-	height: 0;
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: "020";
+  clear: both;
+  height: 0;
 }
 
 .clearfix {
-	zoom: 1;
-	clear: both;
+  zoom: 1;
+  clear: both;
 }
 
 input:-webkit-autofill {
-	-webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 input:focus {
-	outline: none;
+  outline: none;
 }
 a {
-	text-decoration: none;
-	tap-highlight-color: transparent;
-	color:#fff;
+  text-decoration: none;
+  tap-highlight-color: transparent;
+  color:#fff;
 }
 b, strong,h1,h2,h3,h4,h5,h6 {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 .font-xb{
@@ -88,13 +88,13 @@ b, strong,h1,h2,h3,h4,h5,h6 {
   font-size: .3rem;
 }
 .font {
-	font-size: .28rem;
+  font-size: .28rem;
 }
 .font-s {
-	font-size: .26rem;
+  font-size: .26rem;
 }
 .font-xs {
-	font-size: .24rem;
+  font-size: .24rem;
 }
 
 .c3{

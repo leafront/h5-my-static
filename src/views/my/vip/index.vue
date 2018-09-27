@@ -459,7 +459,7 @@
       background:rgba(173,75,25,0.33);
       display: flex;
       border: .02rem solid rgba(106,26,26,0.34);
-      border-radius: .19rem;
+      border-radius: .3rem;
       justify-content: center;
       align-items: center;
       font-size: .2rem;
