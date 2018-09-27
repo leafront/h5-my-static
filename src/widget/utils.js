@@ -39,33 +39,24 @@ const utils = {
 
   deserialize(value) {
 
-    if (typeof value != 'string' || value == '') return '';
+    if (typeof value != 'string' || value == '') return ''
 
     try {
-      return JSON.parse(value);
+      return JSON.parse(value)
     } catch (e) {
 
-      return '';
+      return ''
     }
-  },
-  /**
-   * 获得主机名
-   * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
-   * 返回：http://pintuan.test.odianyun.com
-   */
-  getHost () {
-    var url = location.protocol + "//" + location.host
-    return url
   },
   isLocalStorageSupported() {
     var testKey = 'test',
-      storage = window.sessionStorage;
+      storage = window.sessionStorage
     try {
-      storage.setItem(testKey, 'testValue');
-      storage.removeItem(testKey);
-      return true;
+      storage.setItem(testKey, 'testValue')
+      storage.removeItem(testKey)
+      return true
     } catch (error) {
-      return false;
+      return false
     }
   },
 
@@ -125,48 +116,31 @@ const utils = {
   queryStringify (obj) {
 
     function toQueryPair(key,value) {
-
       if (value==='') {
-
         return key;
-
       }
-
-      return key + '=' + encodeURIComponent(value==='' ? '' : String(value));
-
+      return key + '=' + encodeURIComponent(value==='' ? '' : String(value))
     }
 
-    var result = [];
-
+    let result = []
     for (var key in obj) {
 
-      key = encodeURIComponent(key);
-
-      var values = obj[key];
-
+      key = encodeURIComponent(key)
+      const values = obj[key]
       if (values && values.constructor == Array) {
 
-        var queryValues = [];
-
-        for (var i = 0, len = values.length; i < len; i++) {
-
-          queryValues.push(toQueryPair(key, values[i]));
-
+        const queryValues = []
+        for (let i = 0, len = values.length; i < len; i++) {
+          queryValues.push(toQueryPair(key, values[i]))
         }
-
-        result = result.concat(queryValues);
+        result = result.concat(queryValues)
 
       } else {
-
-        result.push(toQueryPair(key,values));
-
+        result.push(toQueryPair(key,values))
       }
-
     }
 
-
     return result.join('&');
-
   },
   /**
    *
@@ -175,63 +149,32 @@ const utils = {
    * @return {Object}
    */
 
-  query (){
+  query (strName){
 
-    var strParame = arguments[0]
+    const queryObj = {}
+    const query = location.search.substring(1) // Get query string
 
-    var args = {};
+    const pairs = query.split("&") // Break at ampersand
 
-    var query = location.search.substring(1); // Get query string
+    for (let i = 0; i < pairs.length; i++) {
 
-    var pairs = query.split("&") // Break at ampersand
-
-    for (var i = 0; i < pairs.length; i++) {
-
-      var pos = pairs[i].indexOf('=') // Look for "name=value"
+      const pos = pairs[i].indexOf('=') // Look for "name=value"
 
       if (pos == -1) continue // If not found, skip
 
-      var argname = pairs[i].substring(0, pos); // Extract the name
+      const paramsName = pairs[i].substring(0, pos) // Extract the name
 
-      var value = pairs[i].substring(pos + 1); // Extract the value
+      let value = pairs[i].substring(pos + 1) // Extract the value
 
-      value = decodeURIComponent(value); // Decode it, if needed
+      value = decodeURIComponent(value) // Decode it, if needed
 
-      args[argname] = value // Store as a property
+      queryObj[paramsName] = value // Store as a property
     }
-    if (strParame == undefined) {
-
-      return args
-
-    }else {
-
-      return args[strParame] // Return the object
+    if (strName) {
+      return queryObj[strName] // Return the object
+    } else {
+      return queryObj
     }
-  },
-
-  /**
-   * 获取url hash的值
-   * 例：/details.html?itemid=1#sort=asc&price=100
-   * 返回: {sort: "asc", price: 100 }
-   */
-  hashFormat (url) {
-    var hashObj = {};
-    var sind = url.indexOf('#');
-    if (sind >= 0) {
-      var hstr = url.substring(sind+1);
-      var paramsList = hstr.split("&");
-      for(var i=0; i<paramsList.length; i++) {
-        var param = paramsList[i];
-        var pind = param.indexOf("=");
-        if (pind>=0) {
-          hashObj[param.substring(0, pind)] = param.substr(pind + 1);
-        } else {
-          hashObj[param] = "";
-        }
-      }
-    }
-
-    return hashObj;
   },
   isPassive() {
 
@@ -243,28 +186,28 @@ const utils = {
         }
       }));
     } catch(e) {}
-    return supportsPassiveOption;   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+    return supportsPassiveOption  //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
   },
   setCookie (name, value, options ) {
-    var Days = (options && options.day) || 365;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname;
+    var Days = (options && options.day) || 365
+    var exp = new Date()
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
   },
   getCookie (name) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
     if (arr = document.cookie.match(reg))
-      return unescape(arr[2]);
+      return unescape(arr[2])
     else
-      return null;
+      return null
   },
   delCookie (name) {
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval = this.getCookie(name);
+    var exp = new Date()
+    exp.setTime(exp.getTime() - 1)
+    var cval = this.getCookie(name)
     if (cval != null)
-      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname;
+      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
   },
   getUaParams: function () {
     var matchers = this.ua.match(/\-\-\[([\s\S]+?)\]\-\-/i);
@@ -281,25 +224,25 @@ const utils = {
    * 返回：/my-center/home.html?p=1
    */
   getRelatedUrl () {
-    return location.pathname + (location.search || "") + (location.hash || "");
+    return location.pathname + (location.search || "")
   },
   getSessionId () {
+    let sid = ''
     if (utils.isApp()){
-      var sid = utils.getUaParams().sessionId;
+      sid = utils.getUaParams().sessionId
+    } else {
+      sid = utils.getCookie('sessionId')
     }
-
-    else
-      var sid = utils.getCookie('sessionId');
 
     if (!sid) {
-      var now = new Date();
+      const now = new Date()
       //随机数字
-      var randNum = Math.round(Math.random() * 1000);
-      sid = now.getTime() + "" + randNum;
-      utils.setCookie('sessionId', sid);
+      const randNum = Math.round(Math.random() * 1000)
+      sid = now.getTime() + "" + randNum
+      utils.setCookie('sessionId', sid)
     }
 
-    return sid;
+    return sid
   },
   appViewFixed () {
 

@@ -19,6 +19,7 @@ export default function request (url,{
 }){
 
   const ut = app.getUserToken()
+  const errorCode = 99
   const options = {
     isHeader:true,
     type,
@@ -33,27 +34,28 @@ export default function request (url,{
       "Accept": "application/json"
     }
   }
-  options.data = Object.assign({ ut, platform: config.platform, companyId: config.companyId, platformId: config.platformId },data)
+  options.data = Object.assign({
+    ut,
+    platform: config.platform,
+    companyId: config.companyId,
+    platformId: config.platformId
+  },data)
+
+  if (app.loggedIn()) {
+    options.headers.ut = ut
+  }
 
   if (type == 'GET') {
-
     options.data.cashe = new Date().getTime()
   }
 
-  if (headers) {
-
+  if (headers &&
+    headers['Content-Type'] == 'application/json'
+  ) {
     options.headers["Content-Type"] = headers["Content-Type"]
     options.data = JSON.stringify(options.data)
-
   } else {
-
     options.data = utils.queryStringify(options.data)
-  }
-
-  if (app.loggedIn()) {
-
-    options.headers.ut = app.getUserToken()
-
   }
   if (type == "GET") {
 
@@ -68,7 +70,9 @@ export default function request (url,{
         results
       }
 
-      if (results.code == '99' && process.env.NODE_ENV != 'develop') {
+      if (results.code == errorCode &&
+        process.env.NODE_ENV != 'develop'
+      ) {
         app.deleteUserToken()
         if (utils.isApp()) {
           app.login()
@@ -82,7 +86,6 @@ export default function request (url,{
           store.set(url, cacheData,'local')
         }
       }
-
       resolve(results)
 
     })

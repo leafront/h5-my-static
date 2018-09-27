@@ -2,13 +2,8 @@ const Toast = {
   installed: false,
   install (Vue, options) {
     if(Toast.installed) return
-    let opt = {
-      // 默认持续时间
-      duration: "2000"
-    }
-    // 使用options的配置
-    for(let i in options) {
-      opt[i] = options[i]
+    const opt = {
+      duration: options.duration || '2000'
     }
     Vue.prototype.$toast = (toast) => {
 
@@ -36,7 +31,6 @@ const Toast = {
       }, opt.duration)
 
       Toast.installed = true
-
     }
   }
 }
