@@ -1,7 +1,5 @@
 import utils from '@/widget/utils'
 
-import config from '@/config/index'
-
 import * as Model from '@/model/wx_share'
 
 import mall_setting from '@/widget/mall_setting'
