@@ -74,7 +74,7 @@ export default function request (url,{
           app.login()
         } else {
           const from = utils.getRelatedUrl()
-          window.location.href = `/login.html?from=` + encodeURIComponent(from);
+          window.location.href = `/login.html?from=` + encodeURIComponent(from)
         }
       } else {
         if (results.code == 0 && cache) {

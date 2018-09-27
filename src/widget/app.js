@@ -80,8 +80,6 @@ const app = {
   },
   //user token name
   utName: "lyfh5ut",
-  distributorId: 'distributorId',
-  distributorType: 'distributorType',//0接口获取1地址栏获取2登录成功后获取
 
   //判断用户是否已登录
   loggedIn () {
@@ -157,7 +155,7 @@ const app = {
     } else {
 
       const from = utils.getRelatedUrl()
-      window.location.href = `/login.html?from=` + encodeURIComponent(from);
+      window.location.href = `/login.html?from=` + encodeURIComponent(from)
     }
   },
   toast (text,times = 1500) {

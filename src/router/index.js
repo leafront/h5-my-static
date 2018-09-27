@@ -54,7 +54,8 @@ export default new Router({
       name: 'MyPersonal',
       component: MyPersonal,
       meta: {
-        title: '个人资料'
+        title: '个人资料',
+        requireLogin: true
       }
     }, {
       path: '/my/aboutus',
