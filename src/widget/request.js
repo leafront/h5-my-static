@@ -60,22 +60,23 @@ export default function request (url,{
     options.url =  options.data ?  url + '?' + options.data: url
   }
 
-  function httpRequest (resolve) {
+  function httpRequest (resolve,reject) {
 
     ajax(options).then((results) => {
-      let cacheData = {
+      const cacheData = {
         times: new Date().getTime() + expires,
         results
       }
 
-      if (results.code == "99" && process.env.NODE_ENV != 'develop') {
+      if (results.code == '99' && process.env.NODE_ENV != 'develop') {
         app.deleteUserToken()
         if (utils.isApp()) {
           app.login()
         } else {
           const from = utils.getRelatedUrl()
-          window.location.href = `/login.html?from=` + encodeURIComponent(from)
+          location.href = `/login.html?from=` + encodeURIComponent(from)
         }
+        reject(results)
       } else {
         if (results.code == 0 && cache) {
           store.set(url, cacheData,'local')
@@ -103,13 +104,13 @@ export default function request (url,{
 
         store.remove(url,'local')
 
-        httpRequest(resolve)
+        httpRequest(resolve,reject)
 
       }
 
     } else {
 
-      httpRequest (resolve)
+      httpRequest (resolve,reject)
 
     }
   })

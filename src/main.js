@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title
 
-  if (to.matched.some(record => record.meta.requireLogin)) {
+  if (to.matched.some(record => record.meta.requireLogin) && process.env.NODE_ENV != 'develop') {
 
     //判断用户已经登录
     if (app.loggedIn()) {
