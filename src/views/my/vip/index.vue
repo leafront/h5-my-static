@@ -186,8 +186,10 @@
               vip_interests
             } = data
             this.vip_banner = vip_banner
-            this.vip_description = vip_description.length && vip_description[0].imageUrl
             this.vip_interests = vip_interests
+            if ( vip_description.length && vip_description[0].imageUrl) {
+              this.vip_description = vip_description[0].imageUrl
+            }
           } else {
             this.$toast(result.message)
           }
