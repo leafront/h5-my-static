@@ -55,8 +55,13 @@
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
             <p class="ui-ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
-              <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].marketPrice | price }}</span>
-              <strong class="c9" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price | price}}</strong>
+              <div class="my-vip-pirce-wrapper" v-if="rankPrice[item.mpId] && rankPrice[item.mpId].promotionPrice">
+                <span class="font">¥{{(rankPrice[item.mpId].promotionPrice || rankPrice[item.mpId].price) | price }}</span>
+                <strong class="c9">¥{{rankPrice[item.mpId].price | price}}</strong>
+              </div>
+              <div class="my-vip-pirce-wrapper" v-else>
+                <span class="font" v-if="rankPrice[item.mpId]">¥{{rankPrice[item.mpId].price | price }}</span>
+              </div>
               <div class="my-vip-cart-add-wrapper" @click="addBuyListCart($event,item)">
                 <div class="my-vip-cart-add">
                   <i></i>
@@ -233,7 +238,7 @@
               const rankPrice = {}
               plist.forEach((item) => {
                 rankPrice[item.mpId] = {
-                  marketPrice: item.marketPrice,
+                  promotionPrice: item.promotionPrice,
                   price: item.price
                 }
               })
