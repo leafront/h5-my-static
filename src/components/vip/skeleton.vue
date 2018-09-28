@@ -73,9 +73,9 @@
     }
   }
   .vip-skeleton-best{
-    padding: 0 .3rem .3rem;
+    padding: 0 .3rem;
     .vip-skeleton-best-pic{
-      margin-top: .16rem;
+      margin-top: .3rem;
       height: 2.16rem;
     }
   }
