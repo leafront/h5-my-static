@@ -76,7 +76,7 @@
     margin-top: .3rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     span{
       width: 26%;
       height: 1.5rem;

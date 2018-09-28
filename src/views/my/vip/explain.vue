@@ -232,7 +232,7 @@
     padding: 0 .1rem;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     position: relative;
     .my-vip-explain-line{
       width: 5.35rem;
