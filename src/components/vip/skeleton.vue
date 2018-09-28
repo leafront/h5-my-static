@@ -12,7 +12,11 @@
     </div>
     <div class="vip-skeleton-des">
       <div class="vip-skeleton-title ui-skeleton-bg"></div>
-      <div class="vip-skeleton-des-pic ui-skeleton-bg"></div>
+    </div>
+    <div class="vip-skeleton-des-pic">
+      <span class="ui-skeleton-bg" v-for="n in 6"></span>
+    </div>
+    <div class="p30">
       <div class="vip-skeleton-title ui-skeleton-bg"></div>
     </div>
     <div class="vip-skeleton-best">
@@ -62,14 +66,21 @@
   }
   .vip-skeleton-title{
     width: 100%;
-    height: .76rem;
+    height: .5rem;
     margin-top: .3rem;
   }
   .vip-skeleton-des{
     padding: 0 .3rem;
-    .vip-skeleton-des-pic{
-      margin-top: .3rem;
-      height: 4.45rem;
+  }
+  .vip-skeleton-des-pic{
+    margin-top: .3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    span{
+      width: 26%;
+      height: 1.5rem;
+      margin-bottom: .3rem;
     }
   }
   .vip-skeleton-best{
