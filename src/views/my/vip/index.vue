@@ -68,6 +68,7 @@
       </div>
       <div class="user-fixed-cart" v-if="rankList && rankList.length" @click="routerAction('/cart.html')" :class="{'active': fixedCart}">
         <i></i>
+        <span v-if="cartCount"></span>
       </div>
     </div>
   </div>
@@ -105,7 +106,8 @@
         rankPrice: {},
         fixedCart: false,
         vipScrollEle: null,
-        cartTop: 0
+        cartTop: 0,
+        cartCount: 0
       }
     },
     components: {
@@ -288,9 +290,28 @@
           const data = result.data
           this.$hidePageLoading()
           if (result.code == 0 && data) {
+            this.cartCount = 1
             this.$toast('添加购物车成功')
           } else {
             this.$toast(result.message)
+          }
+        })
+      },
+      /**
+       *
+       */
+      getCartNum () {
+        const sessionId = utils.getSessionId()
+        Model.getCartNum({
+          type: 'GET',
+          data: {
+            sessionId
+          }
+        }).then((result) => {
+          const data = result.data
+
+          if (result.code == 0) {
+            this.cartCount = data
           }
         })
       },
@@ -322,6 +343,7 @@
       this.$showLoading()
       this.getUserInfo()
       this.getWalletInfo()
+      this.getCartNum()
       this.getDolphinList()
       this.getRankList()
     },
@@ -390,7 +412,7 @@
     }
   }
   .my-vip-cart{
-    padding: 0 .38rem;
+    padding: 0 .3rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -447,8 +469,12 @@
     display: flex;
     height: .76rem;
     align-items: center;
+    h5{
+      font-weight: 500;
+    }
     span{
       padding-left: .1rem;
+      padding-top: .08rem;
     }
   }
   .my-vip-user-level{
@@ -531,25 +557,39 @@
   }
   .user-fixed-cart{
     position: fixed;
-    right: .3rem;
-    bottom: 2.3rem;
-    width: 1rem;
-    height: 1rem;
-    background: linear-gradient(left,#FFAA2B,#FF6A22);
+    right: .4rem;
+    bottom: .7rem;
+    width: .92rem;
+    height: .92rem;
+    box-shadow: .02rem .02rem .02rem #EAEAEA;
     border-radius: 50%;
-    visibility: hidden;
-    padding: .23rem .2rem;
+    padding: .22rem;
     z-index: 100;
     display: block;
+    background: #fff;
+    visibility: hidden;
+    transition: all .5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+    transform: translateX(150%);
     &.active{
       visibility: visible;
+      transform: translateX(0);
     }
     i{
-      background: url(./images/vip-index-sprite.png) no-repeat -.06rem -.09rem;
+      background: url(./images/vip-index-sprite.png) no-repeat -.12rem -.11rem;
       background-size: 3.5rem auto;
-      width: .6rem;
-      height: .54rem;
+      width: .48rem;
+      height: .48rem;
       display: block;
+    }
+    span{
+      position: absolute;
+      width: .1rem;
+      height: .1rem;
+      display: block;
+      background: #FE1918;
+      border-radius: 50%;
+      right: .1rem;
+      top: .2rem;
     }
   }
 </style>
