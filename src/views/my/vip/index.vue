@@ -74,7 +74,7 @@
       <div class="my-vip-cart-bottom" v-if="rankList && rankList.length">
         <p class="c9">— Hi ! 你碰到我的底线了 —</p>
       </div>
-      <div class="user-fixed-cart" v-if="rankList && rankList.length" @click="routerAction('/cart.html')" :class="{'active': fixedCart}">
+      <div class="user-fixed-cart" v-if="rankList && rankList.length" @click="cartAction" :class="{'active': fixedCart}">
         <i></i>
         <span v-if="cartCount"></span>
       </div>
@@ -146,6 +146,13 @@
       routerAction (url) {
         if (url) {
           location.href = url
+        }
+      },
+      cartAction () {
+        if (utils.isApp()) {
+          location.href = 'lyf://shoppingCar'
+        } else {
+          location.href = '/cart.html'
         }
       },
       /**
