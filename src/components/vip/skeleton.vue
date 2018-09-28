@@ -63,16 +63,17 @@
   .vip-skeleton-title{
     width: 100%;
     height: .76rem;
-    margin-top: .2rem;
+    margin-top: .3rem;
   }
   .vip-skeleton-des{
     padding: 0 .3rem;
     .vip-skeleton-des-pic{
+      margin-top: .3rem;
       height: 4.45rem;
     }
   }
   .vip-skeleton-best{
-    padding: 0 .3rem .2rem;
+    padding: 0 .3rem .3rem;
     .vip-skeleton-best-pic{
       margin-top: .16rem;
       height: 2.16rem;
