@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper white-view" :class="{'visibility': pageView}">
       <div class="my-vip-explain">
         <div class="my-vip-explain-line"></div>
         <div class="my-vip-explain-item" @click="checkList(index)" :class="{'active': userLevel == index}" v-for="(item,index) in levelList">
