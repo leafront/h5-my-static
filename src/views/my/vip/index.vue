@@ -2,6 +2,9 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
     </AppHeader>
+    <div class="ui-skeleton-container" v-if="!pageView">
+      <UISkeleton></UISkeleton>
+    </div>
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
@@ -78,6 +81,8 @@
 
   import AppHeader from '@/components/common/header'
 
+  import UISkeleton from '@/components/vip/skeleton'
+
   import * as Model from '@/model/vip'
 
   import Banner from '@/components/vip/banner'
@@ -113,7 +118,8 @@
     components: {
       AppHeader,
       Banner,
-      LazyLoad
+      LazyLoad,
+      UISkeleton
     },
     methods: {
       backAction () {
@@ -244,7 +250,6 @@
           type: 'GET',
         }).then((result) => {
           const data = result.data
-          this.$hideLoading()
           if (result.code == 0 && data) {
             const headerPic = data.headPicUrl
             this.headerPic = headerPic || config.staticPath + '/my-static/images/logo-laiyifen.png'
@@ -340,7 +345,6 @@
       }
     },
     created () {
-      this.$showLoading()
       this.getUserInfo()
       this.getWalletInfo()
       this.getCartNum()

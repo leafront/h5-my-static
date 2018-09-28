@@ -31,12 +31,7 @@ body{
   overflow-scrolling: touch;
   padding-top: 1px;
   margin-top: -1px;
-	visibility: hidden;
-}
-
-.visibility{
-	visibility: visible;
-	animation: fadeIn .5s ease-out backwards;
+	display: none;
 }
 
 .scroll_view_hidden{
@@ -132,6 +127,26 @@ body{
   &:after{
     transform: rotate(-42.5deg);
   }
+}
+
+.ui-skeleton-container{
+  position: relative;
+  overflow-y: scroll;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  padding-top: 1px;
+  margin-top: -1px;
+  background: #fff;
+}
+
+.visibility{
+  display: block;
+  animation: fadeIn .5s ease-out backwards;
+}
+
+.ui-skeleton-bg{
+  background: #f5f5f5;
 }
 
 @keyframes loading {
