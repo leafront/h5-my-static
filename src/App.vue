@@ -15,9 +15,7 @@ export default {
   created () {
     //统一隐藏app头部
     if(utils.isApp()) {
-      // 新版本首页页签  需要根据url参数'hideHead' 判断是否postMessage。
-      let urlParams = utils.query()
-      if (urlParams.hideHead != 1) {
+      if (utils.getVersion() <= 5320) {
         app.postMessage('hiddenHead',{'isHidden':'1'})
       }
     }

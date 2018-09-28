@@ -24,7 +24,7 @@
 			},
 			isAutoPlay: {
 				type: Boolean,
-				default: true
+				default: false
 			},
 			sliderBtn: {
 				type: String,
@@ -46,7 +46,11 @@
 			autoTime: {
 				type: Number,
 				default: 5000
-			}
+			},
+      itemWidth: {
+        type: Number,
+        default: 750
+      }
 		},
 
 		data () {
@@ -54,7 +58,6 @@
 			return {
 				startTime: 0,
 				itemLength: 0,
-				itemWidth:0,
 				wrapper: null,
 				pagination: null,
 				startX: 0,
@@ -129,7 +132,7 @@
 
 				lastElement.insertAdjacentElement('afterend',firstEleClone)
 
-				this.itemWidth = this.$el.offsetWidth
+				this.itemWidth = parseFloat(this.itemWidth)
 
 				this.setWrapperPos(-this.index * this.itemWidth)
 
@@ -156,16 +159,12 @@
 			_end () {
 				const left = this.wrapper.style.transform;
 				const distance = -parseInt(left.match(/\(([-\.\d]+)px,/)[1], 10)
-				const width = this.itemWidth;
-
-
+				const width = this.itemWidth
 				if (this.startX > this.endX) {
 					this.x = - Math.ceil(distance / width) * width
 				} else {
 					this.x = - Math.floor(distance / width) * width
 				}
-
-
 				this.wrapper.style.cssText = 'transition:300ms cubic-bezier(0.22, 0.69, 0.72, 0.88);-webkit-transition:300ms cubic-bezier(0.22, 0.69, 0.72, 0.88)'
 				this.setWrapperPos(this.x)
 

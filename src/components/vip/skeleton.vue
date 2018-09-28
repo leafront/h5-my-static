@@ -23,7 +23,7 @@
     </div>
     <div class="vip-skeleton-shop">
       <div class="vip-skeleton-title ui-skeleton-bg"></div>
-      <div class="vip-skeleton-shop-item" v-for="n in 10">
+      <div class="vip-skeleton-shop-item" v-for="n in 4">
         <div class="vip-skeleton-shop-pic ui-skeleton-bg"></div>
         <span class="ui-skeleton-bg"></span>
         <strong class="ui-skeleton-bg"></strong>

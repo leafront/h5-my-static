@@ -38,7 +38,7 @@
     },
     computed: {
       showHeader () {
-        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ())
+        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() >= 5320)
       }
     },
     methods: {

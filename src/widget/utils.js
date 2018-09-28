@@ -260,6 +260,13 @@ const utils = {
   trim (text) {
     return text.replace(/\s+/g, "")
   },
+  getVersion () {
+    let version =  utils.getUaParams().version
+    if (version) {
+      version = version.replace(/\./g,'')
+    }
+    return version
+  },
   loadScript (url,success) {
     const script = document.createElement("script")
     script.type = 'text/javascript'

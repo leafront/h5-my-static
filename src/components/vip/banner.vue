@@ -1,6 +1,6 @@
 <template>
   <div class="my-vip-banner">
-    <swiper :list="bannerList" :preventDefault="true" :index="index" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
+    <swiper :list="bannerList" :preventDefault="true" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
       <ul slot="banner" class="slideshow-item" :style="{'height':itemHeight}">
         <li v-for="item in bannerList" :style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
           <img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
@@ -23,11 +23,14 @@
 
   import swiper from '@/components/widget/swiper.vue'
 
+  const itemWidth = document.documentElement.clientWidth * .92
+
   export default {
     data () {
       return {
         index: 1,
-        itemWidth: document.documentElement.clientWidth * .92 + 'px',
+        wrapperWidth: itemWidth,
+        itemWidth:itemWidth + 'px',
         itemHeight: '1.2rem'
       }
     },
