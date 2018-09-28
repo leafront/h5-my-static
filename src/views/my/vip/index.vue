@@ -367,6 +367,7 @@
   .my-vip-cart-price{
     position: relative;
     padding-top: .16rem;
+    height: .5rem;
     span{
       color: #FF6D00;
     }
