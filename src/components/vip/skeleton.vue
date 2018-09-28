@@ -114,7 +114,7 @@
     flex-direction: column;
     flex:1;
     span{
-      width: 100%;
+      width: 70%;
       height: .3rem;
     }
     strong{
