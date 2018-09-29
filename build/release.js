@@ -29,7 +29,7 @@ rm(path.join(config.release.assetsRoot, config.release.assetsSubDirectory), err 
     }) + '\n\n')
     const movePath = path.join(__dirname, '../target')
 
-    exec(`mv ${movePath}/sw.js ${movePath}/my-static/sw.js`,(err,stdout,stderr) => {
+    exec(`mv ${movePath}/serviceWorker.js ${movePath}/my-static/serviceWorker.js`,(err,stdout,stderr) => {
 
       if (err) {
         console.log(err);

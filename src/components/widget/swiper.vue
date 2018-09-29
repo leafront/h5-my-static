@@ -24,7 +24,7 @@
 			},
 			isAutoPlay: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			sliderBtn: {
 				type: String,

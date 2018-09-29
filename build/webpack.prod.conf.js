@@ -38,7 +38,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, '../src/sw.js'),
-      publicPath: config.production.assetsPublicPath
+      publicPath: config.production.assetsPublicPath,
+      filename: 'serviceWorker.js',
+      excludes: ['**/*.js','**/*.css']
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
@@ -71,7 +73,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      staticPath: 'https://mstatic.laiyifen.com',
+      staticPath: 'https://m.laiyifen.com',
       getTime: new Date().getTime(),
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'

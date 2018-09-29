@@ -8,7 +8,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img class="my-vip-info-pic" v-if="headerPic" @click="pageAction('/my/personal')" :src="headerPic"/>
+          <img class="my-vip-info-pic" v-if="headerPic" @click="pageAction('/my/personal')" :src="headerPic | httpsImg"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -29,8 +29,8 @@
           <h5 class="font-xb c3">会员权益</h5>
           <span class="font-s c9">RIGHTS</span>
         </div>
-        <div class="my-vip-des-pic">
-          <img :src="vip_description" class="pic-lazyLoad"/>
+        <div class="my-vip-des-pic" @click="explainAction">
+          <img :src="vip_description | httpsImg" class="pic-lazyLoad"/>
         </div>
         <div class="my-vip-des-btn" @click="explainAction">
           <span class="font-b cfff">查看权益详情</span>
@@ -42,7 +42,7 @@
       </div>
       <LazyLoad :list="vip_interests" :options="{ele:'my-vip-best-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-best">
-          <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
+          <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl | httpsImg" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
         </div>
       </LazyLoad>
       <div class="my-vip-title" v-if="rankList && rankList.length">
@@ -51,8 +51,8 @@
       </div>
       <LazyLoad :list="rankList" :options="{ele:'my-vip-cart-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-cart" id="my-vip-cart">
-          <div class="my-vip-cart-item" @click="routerAction(`/detail.html?itemId=${item.mpId}`)" v-for="item in rankList" v-if="rankList && rankList.length">
-            <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
+          <div class="my-vip-cart-item" @click="detailAction(item.mpId)" v-for="item in rankList" v-if="rankList && rankList.length">
+            <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300'] | httpsImg"></div>
             <p class="ui-ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
               <div class="my-vip-pirce-wrapper" v-if="rankPrice[item.mpId] && rankPrice[item.mpId].promotionPrice">
@@ -146,6 +146,14 @@
         if (url) {
           location.href = url
         }
+      },
+      detailAction (mpId) {
+        if (utils.isApp()) {
+          location.href = `lyf://productdetail?body={"mpId":${mpId}}`
+        } else {
+          location.href = `/detail.html?itemId=${mpId}`
+        }
+
       },
       cartAction () {
         if (utils.isApp()) {
