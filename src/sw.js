@@ -18,12 +18,19 @@ self.addEventListener('install', function (event) {
 })
 
 self.addEventListener('fetch', function(event) {
+  const request = event.request
   // Ignore not GET request.
-  if (event.request.method !== 'GET') {
+  if (request.method !== 'GET') {
+    return
+  }
+  const requestUrl = new URL(request.url)
+
+  // Ignore difference origin.
+  if (requestUrl.origin !== location.origin) {
     return
   }
   event.respondWith(
-    caches.match(event.request)
+    caches.match(request)
     .then(function(response) {
       if (response) {
         return response
@@ -31,7 +38,7 @@ self.addEventListener('fetch', function(event) {
 
       // 因为 event.request 流已经在 caches.match 中使用过一次，
       // 那么该流是不能再次使用的。我们只能得到它的副本，拿去使用。
-      const fetchRequest = event.request.clone()
+      const fetchRequest = request.clone()
 
       // fetch 的通过信方式，得到 Request 对象，然后发送请求
       return fetch(fetchRequest).then(
@@ -48,7 +55,7 @@ self.addEventListener('fetch', function(event) {
 
           caches.open(cacheKey)
           .then(function(cache) {
-            cache.put(event.request, responseToCache)
+            cache.put(request, responseToCache)
           })
 
           return response
