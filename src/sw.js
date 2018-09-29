@@ -18,6 +18,10 @@ self.addEventListener('install', function (event) {
 })
 
 self.addEventListener('fetch', function(event) {
+  // Ignore not GET request.
+  if (event.request.method !== 'GET') {
+    return
+  }
   event.respondWith(
     caches.match(event.request)
     .then(function(response) {
