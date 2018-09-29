@@ -19,16 +19,19 @@ self.addEventListener('install', function (event) {
 
 self.addEventListener('fetch', function(event) {
   const request = event.request
+	const requestUrl = new URL(request.url)
+	const fileType = /\.(?:png|jpg|gif|css|js)$/gi
   // Ignore not GET request.
   if (request.method !== 'GET') {
     return
   }
-  const requestUrl = new URL(request.url)
-	const fileType = /\.(?:png|jpg|gif|css|js)$/gi
   // Ignore difference origin.
-  if (requestUrl.origin !== location.origin && !fileType.test(requestUrl.pathname)) {
+  if (requestUrl.origin !== location.origin) {
     return
   }
+  if (!fileType.test(requestUrl.pathname)) {
+  	return
+	}
   event.respondWith(
     caches.match(request)
     .then(function(response) {
