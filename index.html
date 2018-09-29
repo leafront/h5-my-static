@@ -53,7 +53,7 @@
     <script type="text/javascript" defer="defer" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/fastclick/index.js"></script>
     <script type="text/javascript">
       if ('serviceWorker' in navigator && location.protocol == 'https:') {
-        navigator.serviceWorker.register('/my-static/sw.js?v=<%=htmlWebpackPlugin.options.getTime%>')
+        navigator.serviceWorker.register('/my-static/sw.js?v=<%=htmlWebpackPlugin.options.getTime%>',{scope: '/my/'})
       }
     </script>
     <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>-->
