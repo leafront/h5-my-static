@@ -17,19 +17,17 @@ self.addEventListener('install', function (event) {
   )
 })
 
-// 拦截网络请求
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
-    // 去缓存中查询对应的请求
-    caches.match(event.request).then(function (response) {
-        // 如果命中本地缓存，就直接返回本地的资源
-        if (response) {
-          return response
-        }
-        // 否则就去用 fetch 下载资源
-        return fetch(event.request)
-      }
-    )
+    caches.open(cacheKey).then(function(cache) {
+      return cache.match(event.request).then(function(response) {
+        const fetchPromise = fetch(event.request).then(function(networkResponse) {
+          cache.put(event.request, networkResponse.clone())
+          return networkResponse
+        })
+        return response || fetchPromise
+      })
+    })
   )
 })
 
