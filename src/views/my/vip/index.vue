@@ -51,7 +51,7 @@
       </div>
       <LazyLoad :list="rankList" :options="{ele:'my-vip-cart-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-cart" id="my-vip-cart">
-          <div class="my-vip-cart-item" @click="routerAction(`/detail.html?itemId=${item.mpId}`)" v-for="item in rankList" v-if="rankList && rankList.length">
+          <div class="my-vip-cart-item" @click="detailAction(item.mpId)" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300']"></div>
             <p class="ui-ellipsis c3">{{item.name}}</p>
             <div class="my-vip-cart-price">
@@ -147,6 +147,14 @@
         if (url) {
           location.href = url
         }
+      },
+      detailAction (mpId) {
+        if (utils.isApp()) {
+          location.href = `lyf://productdetail?body={"mpId":${mpId}}`
+        } else {
+          location.href = `/detail.html?itemId=${item.mpId}`
+        }
+
       },
       cartAction () {
         if (utils.isApp()) {
