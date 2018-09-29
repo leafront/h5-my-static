@@ -24,9 +24,12 @@ self.addEventListener('fetch', function(event) {
     return
   }
   const requestUrl = new URL(request.url)
-
+	const fileType = /\.(?:png|jpg|gif|css|js)$/gi
+	if (!fileType) {
+		return
+	}
   // Ignore difference origin.
-  if (requestUrl.origin !== location.origin) {
+  if (requestUrl.origin !== location.origin && !fileType.test(requestUrl.pathname)) {
     return
   }
   event.respondWith(
