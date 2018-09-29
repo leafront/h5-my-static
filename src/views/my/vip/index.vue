@@ -152,7 +152,7 @@
         if (utils.isApp()) {
           location.href = `lyf://productdetail?body={"mpId":${mpId}}`
         } else {
-          location.href = `/detail.html?itemId=${item.mpId}`
+          location.href = `/detail.html?itemId=${mpId}`
         }
 
       },
