@@ -29,7 +29,7 @@
           <h5 class="font-xb c3">会员权益</h5>
           <span class="font-s c9">RIGHTS</span>
         </div>
-        <div class="my-vip-des-pic">
+        <div class="my-vip-des-pic" @click="explainAction">
           <img :src="vip_description" class="pic-lazyLoad"/>
         </div>
         <div class="my-vip-des-btn" @click="explainAction">
