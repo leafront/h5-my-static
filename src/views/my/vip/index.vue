@@ -116,7 +116,6 @@
         rankPrice: {},
         fixedCart: false,
         vipScrollEle: null,
-        cartTop: 0,
         cartCount: 0
       }
     },
@@ -346,9 +345,11 @@
        * 固定底部购物车
        */
       fixedCartBottom () {
+				const cartEl = document.getElementById('my-vip-cart')
+	      const vipScrollEleHeight =  this.vipScrollEle.offsetHeight
+				const cartTop = cartEl.getBoundingClientRect().top
         utils.throttle(() => {
-          const scrollTop =  this.vipScrollEle.scrollTop
-          if (scrollTop > this.cartTop) {
+          if (cartTop <= vipScrollEleHeight) {
             this.fixedCart = true
           } else {
             this.fixedCart = false
@@ -360,9 +361,7 @@
        */
       fixedCartScroll () {
         const vipScrollEle = document.getElementById('my-vip-scroll')
-        const cartEl = document.getElementById('my-vip-cart')
         this.vipScrollEle = vipScrollEle
-        this.cartTop = cartEl.offsetTop
         vipScrollEle.addEventListener('scroll',this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
       }
     },
