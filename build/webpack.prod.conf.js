@@ -39,8 +39,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, '../src/sw.js'),
       publicPath: config.production.assetsPublicPath,
-      filename: 'serviceWorker.js',
-      excludes: ['**/*.js','**/*.css']
+      filename: 'serviceWorker.js'
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
