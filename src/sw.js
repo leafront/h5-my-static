@@ -25,10 +25,6 @@ self.addEventListener('fetch', function(event) {
   if (request.method !== 'GET') {
     return
   }
-  // Ignore difference origin.
-  if (requestUrl.origin !== location.origin) {
-    return
-  }
   if (!fileType.test(requestUrl.pathname)) {
   	return
 	}
