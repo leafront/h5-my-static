@@ -195,13 +195,3 @@
 		}
 	}
 </script>
-
-<style lang="scss">
-
-	.successImg {
-		-webkit-animation: fadeIn 1s ease 0.2s 1 both;
-		animation: fadeIn 1s ease 0.2s 1 both;
-	}
-
-</style>
-

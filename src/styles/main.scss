@@ -149,6 +149,15 @@ body{
   background: #f5f5f5;
 }
 
+.opacityImg {
+  opacity: 0;
+}
+
+.successImg {
+  -webkit-animation: fadeIn 1s ease 0.2s 1 both;
+  animation: fadeIn 1s ease 0.2s 1 both;
+}
+
 @keyframes loading {
   0% {
     transform: rotate3d(0, 0, 1, 0deg);
