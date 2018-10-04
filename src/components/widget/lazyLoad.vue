@@ -112,14 +112,12 @@
         if (imgUrl) {
           const img = new Image()
           img.src = imgUrl
-
           img.addEventListener('load', () => {
             el.style.backgroundImage = 'url('+imgUrl+')'
             el.style.backgroundSize = '100% auto'
             el.dataset.LazyLoadImgState = 'success'
             el.classList.add('successImg')
             delete el.dataset.src
-            this.isLazyLoad = false
           }, false)
 
           img.addEventListener('error', () => {
@@ -129,9 +127,9 @@
           }, false)
 
         } else {
-          this.isLazyLoad = false
           delete el.dataset.src
         }
+        this.isLazyLoad = false
       }
     }
   }

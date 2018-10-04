@@ -204,7 +204,6 @@
       },
       /**
        * 获取商品排行榜
-       *
        */
       getRankList () {
         Model.getRankList({

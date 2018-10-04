@@ -15,7 +15,9 @@ export default function request (url,{
   data,
   cache = false,
   expires = 30 * 60 * 1000,
-  headers
+  headers,
+  hostPath,
+  isParams = true
 }){
 
   const ut = app.getUserToken()
@@ -32,7 +34,8 @@ export default function request (url,{
       "Content-Type": "application/x-www-form-urlencoded",
       "X-Requested-With": "XMLHttpRequest",
       "Accept": "application/json"
-    }
+    },
+    hostPath
   }
   options.data = Object.assign({
     ut,
@@ -40,7 +43,6 @@ export default function request (url,{
     companyId: config.companyId,
     platformId: config.platformId
   },data)
-
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
