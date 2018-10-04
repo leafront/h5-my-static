@@ -349,7 +349,9 @@
 				const cartTop = cartEl.getBoundingClientRect().top
         utils.throttle(() => {
           if (cartTop <= vipScrollEleHeight) {
-            this.fixedCart = true
+            if (!this.fixedCart) {
+              this.fixedCart = true
+            }
           } else {
             this.fixedCart = false
           }
