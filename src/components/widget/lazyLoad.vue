@@ -8,6 +8,8 @@
 
   import utils from '@/widget/utils'
 
+  import '@/widget/requestAnimationFrame'
+
   export default {
     props: ['options','list'],
     data () {
@@ -81,7 +83,6 @@
           this.appView.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
         } else {
           list.forEach((el) => {
-
             if (!el.dataset.LazyLoadImgState && this.getClientRect(el, this.default.position)) {
               this.loadImg(el)
             } else {
