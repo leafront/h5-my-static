@@ -74,9 +74,7 @@
        * @return null
        *
        */
-
       scrollLoad () {
-
         const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
 
         if (!list.length && this.default.complete) {
@@ -99,6 +97,7 @@
         window.requestAnimationFrame(this.scrollLoad)
       },
       startLoad (){
+        this.scrollLoad()
         this.appView.addEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
       },
       /**
