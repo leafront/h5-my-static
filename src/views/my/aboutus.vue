@@ -6,7 +6,7 @@
       <div class="my-aboutUs">
         <img src="./images/about-us-logo.png"/>
         <p class="font" v-if="appVersion">V{{appVersion}}</p>
-        <p class="font">Copyright@2011-2017</p>
+        <p class="font">Copyright @2011-{{endYear}}</p>
         <p class="font">来伊份官网商城 All Right Reserved</p>
       </div>
       <div class="my-aboutUs-menu">
@@ -37,7 +37,8 @@
         isBorder: true,
         title: '关于我们',
         pageView: true,
-        appVersion: uaParams.version || ""
+        appVersion: uaParams.version || "",
+        endYear: new Date().getFullYear()
       }
     },
     components: {
