@@ -25,10 +25,12 @@ self.addEventListener('fetch', function(event) {
   if (request.method !== 'GET') {
     return
   }
-  // Ignore difference https.
+  // Ignore difference http.
   if (requestUrl.protocol !== 'https:') {
     return
   }
+
+  // Ignore not png jpg gif css js file type
   if (!fileType.test(requestUrl.pathname)) {
   	return
 	}
