@@ -25,6 +25,10 @@ self.addEventListener('fetch', function(event) {
   if (request.method !== 'GET') {
     return
   }
+  // Ignore difference https.
+  if (requestUrl.protocol !== 'https:') {
+    return
+  }
   if (!fileType.test(requestUrl.pathname)) {
   	return
 	}
