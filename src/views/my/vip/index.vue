@@ -488,7 +488,7 @@
     display: flex;
     img {
       width: 100%;
-      min-height: 4.65rem;
+      height: 62vw;
     }
   }
   .my-vip-title{
