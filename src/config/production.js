@@ -1,5 +1,6 @@
 const config = JSON.stringify({
   "hostPath":"http://m.laiyifen.com",
+  "apiPath": "https://api.laiyifen.com",
   "companyId": 30,
   "platformId": 3,  //H5
   "staticPath": "https://m.laiyifen.com",

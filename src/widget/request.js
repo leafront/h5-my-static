@@ -16,8 +16,7 @@ export default function request (url,{
   cache = false,
   expires = 30 * 60 * 1000,
   headers,
-  hostPath,
-  isParams = true
+  hostPath
 }){
 
   const ut = app.getUserToken()
@@ -45,10 +44,6 @@ export default function request (url,{
   },data)
   if (app.loggedIn()) {
     options.headers.ut = ut
-  }
-
-  if (type == 'GET') {
-    options.data.cashe = new Date().getTime()
   }
 
   if (headers &&

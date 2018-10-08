@@ -20,7 +20,6 @@ self.addEventListener('install', function (event) {
 self.addEventListener('fetch', function(event) {
   const request = event.request
 	const requestUrl = new URL(request.url)
-	const fileType = /\.(?:png|jpg|gif|css|js)$/gi
   // Ignore not GET request.
   if (request.method !== 'GET') {
     return
@@ -29,11 +28,6 @@ self.addEventListener('fetch', function(event) {
   if (requestUrl.protocol !== 'https:') {
     return
   }
-
-  // Ignore not png jpg gif css js file type
-  if (!fileType.test(requestUrl.pathname)) {
-  	return
-	}
   event.respondWith(
     caches.match(request)
     .then(function(response) {
