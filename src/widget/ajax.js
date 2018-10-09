@@ -5,10 +5,8 @@
  * @returns {Promise}
  */
 
-import config from '@/config/index'
-
 export default function ajax ({
-  hostPath,
+  hostPath = location.origin,
   url,
   async = true,
   timeout = 30000,
@@ -22,8 +20,6 @@ export default function ajax ({
 
 		const xhr = new XMLHttpRequest()
 
-    hostPath = hostPath || config.apiPath
-
 		xhr.open(type, hostPath + url, async)
 
 		xhr.timeout = timeout
@@ -33,6 +29,7 @@ export default function ajax ({
 
 			xhr.setRequestHeader(k, headers[k])
 		}
+    xhr.setRequestHeader("If-Modified-Since","0")
     xhr.setRequestHeader("Cache-Control","no-cache")
 
 		xhr.responseType = dataType
