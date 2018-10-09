@@ -66,7 +66,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'my-static',
-    assetsPublicPath: 'http://m.lyf.edu.laiyifen.com/',
+    assetsPublicPath: 'http://static.lyf.edu.laiyifen.com/',
 
     /**
      * Source Maps
@@ -157,7 +157,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../target'),
     assetsSubDirectory: 'my-static',
-    assetsPublicPath: 'https://m.laiyifen.com/',
+    assetsPublicPath: 'https://mstatic.laiyifen.com/',
 
     /**
      * Source Maps
