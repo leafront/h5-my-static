@@ -43,7 +43,6 @@ export default function ajax ({
 					resolve(xhr.response)
 
 				} else {
-
 					resolve({
 						data:[],
 						status: -500,

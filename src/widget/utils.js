@@ -284,8 +284,7 @@ const utils = {
     const script = document.createElement('script')
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
-
-  },
+  }
 }
 
 export default utils
