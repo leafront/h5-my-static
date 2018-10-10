@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
           // 那么返回的 response 就无法访问造成失败，所以，这里需要复制一份。
           const responseToCache = response.clone()
 
-          caches.open(cacheKey)
+          caches.open(VERSION)
           .then(function(cache) {
             cache.put(request, responseToCache)
           })
