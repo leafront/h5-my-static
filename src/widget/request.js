@@ -36,7 +36,7 @@ export default function request (url,{
     },
     hostPath
   }
-  if (dataType == 'json') {
+  if (dataType !== 'text') {
     options.data = Object.assign({
       platform: config.platform,
       companyId: config.companyId,
