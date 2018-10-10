@@ -211,6 +211,7 @@ const utils = {
   },
   getUaParams: function () {
     var matchers = this.ua.match(/\-\-\[([\s\S]+?)\]\-\-/i);
+    console.log(matchers)
     if (matchers && matchers.length>1) {
       var uaObj = JSON.parse(matchers[1]);
       return uaObj;

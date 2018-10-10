@@ -38,11 +38,19 @@ export default function request (url,{
   }
   if (dataType !== 'text') {
     options.data = Object.assign({
+      ut,
       platform: config.platform,
       companyId: config.companyId,
       platformId: config.platformId
     },data)
   }
+
+  let cacheData = Object.assign({
+    platform: config.platform,
+    companyId: config.companyId,
+    platformId: config.platformId
+  },data)
+
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
@@ -54,10 +62,13 @@ export default function request (url,{
     options.data = JSON.stringify(options.data)
   } else {
     options.data = utils.queryStringify(options.data)
+    cacheData = utils.queryStringify(cacheData)
   }
-  if (type == "GET") {
 
+  let cacheUrl = url
+  if (type == "GET") {
     options.url =  options.data ?  url + '?' + options.data: url
+    cacheUrl =  cacheData ?  url + '?' + cacheData: url
   }
 
   function httpRequest (resolve,reject) {
@@ -81,7 +92,7 @@ export default function request (url,{
         reject(results)
       } else {
         if (results.code == 0 && cache) {
-          store.set(options.url, cacheData,'local')
+          store.set(cacheUrl, cacheData,'local')
         }
       }
       resolve(results)
@@ -93,7 +104,7 @@ export default function request (url,{
 
     let currentTime = new Date().getTime()
 
-    const cacheData = store.get(options.url,'local')
+    const cacheData = store.get(cacheUrl,'local')
 
     if (cache && cacheData) {
 
@@ -101,13 +112,13 @@ export default function request (url,{
       if (currentTime < getCacheTime) {
         resolve(cacheData.results)
       } else {
-        store.remove(options.url,'local')
+        store.remove(cacheUrl,'local')
 
         httpRequest(resolve,reject)
       }
     } else {
 
-      store.remove(options.url,'local')
+      store.remove(cacheUrl,'local')
       httpRequest (resolve,reject)
 
     }

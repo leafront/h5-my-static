@@ -199,7 +199,7 @@
        */
       getUserInfo () {
         Model.getUserInfo({
-          type: 'POST'
+          type: 'GET'
         }).then((result) => {
 
           const data = result.data

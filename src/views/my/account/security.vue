@@ -54,7 +54,7 @@
        */
       getUserInfo () {
         return Model.getUserInfo({
-          type: 'POST'
+          type: 'GET'
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
