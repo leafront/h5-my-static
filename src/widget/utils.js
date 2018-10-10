@@ -275,7 +275,17 @@ const utils = {
     script.onload = () => {
       success && success()
     }
-  }
+  },
+  /**
+   * @param {String} res
+   */
+  appendScript (res) {
+
+    const script = document.createElement('script')
+    script.appendChild(document.createTextNode(res))
+    document.head.appendChild(script)
+
+  },
 }
 
 export default utils

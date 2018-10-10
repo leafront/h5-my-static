@@ -16,23 +16,27 @@ module.exports = {
         changeOrigin: true
       },
       '/osc-api': {
-        target: 'https://api.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-web': {
-        target: 'https://api.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'https://api.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-center': {
-        target: 'https://api.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
-        target: 'https://api.laiyifen.com',
+        target: 'https://m.laiyifen.com',
+        changeOrigin: true
+      },
+      '/webapp-static': {
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       }
     },
