@@ -179,6 +179,8 @@
       getDolphinList () {
         Model.getDolphinList({
           type: 'GET',
+          cache: true,
+          expires: 60 * 60 * 1000,
           data: {
             pageCode: 'H5_USER_VIP',
             adCode: 'vip_banner,vip_description,vip_interests'
@@ -208,6 +210,7 @@
       getRankList () {
         Model.getRankList({
           type: 'GET',
+          cache: true,
           data: {
             type: 1
           }
@@ -241,6 +244,7 @@
 	      mpIds = mpIds.join(',')
         Model.getRankPrice({
           type: 'GET',
+          cache: true,
           data: {
             mpIds
           }
@@ -268,6 +272,7 @@
       getUserInfo () {
         Model.getUserInfo({
           type: 'GET',
+          cache: true
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
@@ -286,6 +291,7 @@
       getWalletInfo () {
         Model.getWalletInfo({
           type: 'GET',
+          cache: true,
           data: {
             isPoint: 1
           }
