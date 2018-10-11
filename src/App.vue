@@ -29,22 +29,24 @@ export default {
       expires: cacheTimes
     }).then((res) => {
 
-      if (!store.get('/webapp-static/fastclick/index.js'), 'local') {
+      if (typeof res == 'string') {
 
-        let result = {
-          times: new Date().getTime() + cacheTimes,
-          results: res
+        if (!store.get('/webapp-static/fastclick/index.js'), 'local') {
+          let result = {
+            times: new Date().getTime() + cacheTimes,
+            results: res
+          }
+
+          utils.appendScript(res)
+
+          store.set('/webapp-static/fastclick/index.js', result, 'local')
         }
 
-        utils.appendScript(res)
-
-        store.set('/webapp-static/fastclick/index.js', result, 'local')
-      }
-
-      if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded', () => {
-          window.FastClick.attach(document.body)
-        }, false)
+        if ('addEventListener' in document) {
+          document.addEventListener('DOMContentLoaded', () =>{
+            window.FastClick.attach(document.body)
+          }, false)
+        }
       }
     })
   },
