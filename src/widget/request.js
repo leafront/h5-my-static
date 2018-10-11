@@ -45,7 +45,7 @@ export default function request (url,{
     },data)
   }
 
-  let cacheData = Object.assign({
+  let optionData = Object.assign({
     platform: config.platform,
     companyId: config.companyId,
     platformId: config.platformId
@@ -62,13 +62,13 @@ export default function request (url,{
     options.data = JSON.stringify(options.data)
   } else {
     options.data = utils.queryStringify(options.data)
-    cacheData = utils.queryStringify(cacheData)
+    optionData = utils.queryStringify(optionData)
   }
 
   let cacheUrl = url
   if (type == "GET") {
     options.url =  options.data ?  url + '?' + options.data: url
-    cacheUrl =  cacheData ?  url + '?' + cacheData: url
+    cacheUrl =  optionData ?  url + '?' + optionData: url
   }
 
   function httpRequest (resolve,reject) {
