@@ -11,7 +11,7 @@ import config from '@/config/index'
 export default function request (url,{
   type,
   timeout,
-  dataType,
+  dataType = 'json',
   data,
   cache = false,
   expires = 5 * 60 * 1000,
@@ -54,19 +54,20 @@ export default function request (url,{
   if (app.loggedIn()) {
     options.headers.ut = ut
   }
-
   if (headers &&
     headers['Content-Type'] == 'application/json'
   ) {
     options.headers["Content-Type"] = headers["Content-Type"]
     options.data = JSON.stringify(options.data)
   } else {
-    options.data = utils.queryStringify(options.data)
-    optionData = utils.queryStringify(optionData)
+    if (dataType == 'json') {
+      options.data = utils.queryStringify(options.data)
+      optionData = utils.queryStringify(optionData)
+    }
   }
 
   let cacheUrl = url
-  if (type == "GET") {
+  if (type == "GET" && dataType == 'json') {
     options.url =  options.data ?  url + '?' + options.data: url
     cacheUrl =  optionData ?  url + '?' + optionData: url
   }

@@ -12,7 +12,7 @@ export default function ajax ({
   timeout = 30000,
   type,
   headers,
-  dataType = 'json',
+  dataType,
   data
 }){
 
