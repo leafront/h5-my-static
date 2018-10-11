@@ -8,7 +8,7 @@
     <div class="scroll-view-wrapper white-view" id="my-vip-scroll" :class="{'visibility': pageView}">
       <div class="my-vip-user">
         <div class="my-vip-info">
-          <img class="my-vip-info-pic" v-if="headerPic" @click="pageAction('/my/personal')" :src="headerPic | httpsImg"/>
+          <img class="my-vip-info-pic" v-if="headerPic" @click="personalAction" :src="headerPic | httpsImg"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
@@ -131,6 +131,13 @@
           app.back()
         } else {
           location.href = '/index.html'
+        }
+      },
+      personalAction () {
+        if (utils.isApp () && utils.getVersion() >= 5320) {
+          location.href = 'lyf://personal'
+        } else {
+          location.href = '/my/personal'
         }
       },
       /**
