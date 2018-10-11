@@ -60,10 +60,8 @@ export default function request (url,{
     options.headers["Content-Type"] = headers["Content-Type"]
     options.data = JSON.stringify(options.data)
   } else {
-    if (dataType == 'json') {
-      options.data = utils.queryStringify(options.data)
-      optionData = utils.queryStringify(optionData)
-    }
+    options.data = utils.queryStringify(options.data)
+    optionData = utils.queryStringify(optionData)
   }
 
   let cacheUrl = url
