@@ -8,6 +8,7 @@ import filter from '@/filters'
 import Toast from '@/components/toast'
 import Loading from '@/components/loading'
 import PageLoading from '@/components/pageLoading'
+import '@/widget/h5EventEmit'
 
 Vue.use(Toast)
 Vue.use(Loading)
