@@ -385,20 +385,6 @@
       this.getCartNum()
       this.getDolphinList()
       this.getRankList()
-
-      PubSub.subscribe('getShareInfo', () => {
-        const shareConfig = {
-          link: '会员中心',
-          url: location.href,
-          title:'来伊份会员狂欢福利，拿红包拼手气！戳！',
-          desc: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-          description: '我刚领到一个大红包，快帮我拆一下！拆者有份，你也有红包拿哦~',
-          imgUrl: '/activity-static/images/redpack_icon.png?v=',
-          pic: '/activity-static/images/redpack_icon.png?v='
-        }
-        return shareConfig
-      })
-      PubSub.publish('getShareInfo')
     },
     mounted () {
       this.fixedCartScroll()
