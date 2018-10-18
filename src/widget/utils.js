@@ -282,6 +282,7 @@ const utils = {
   appendScript (res) {
 
     const script = document.createElement('script')
+    script.type = 'text/javascript'
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
   }
