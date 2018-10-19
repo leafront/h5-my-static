@@ -3,16 +3,8 @@ import utils from '@/widget/utils'
 
 const pageLoading = {
   installed: false,
-  install (Vue, options) {
+  install (Vue) {
     if(pageLoading.installed) return
-    let opt = {
-      // 默认持续时间
-      duration: '3000'
-    }
-    // 使用options的配置
-    for(let i in options) {
-      opt[i] = options[i]
-    }
     Vue.prototype.$showPageLoading = () => {
 
       // 如果页面有pageLoading则不继续执行
