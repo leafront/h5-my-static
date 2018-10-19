@@ -15,7 +15,7 @@ const pageLoading = {
     }
     Vue.prototype.$showLoading = () => {
 
-      // 如果页面有toast则不继续执行
+      // 如果页面有showLoading则不继续执行
       if(document.getElementById('showLoading')) return
       // 1、创建构造器，定义好提示信息的模板
       let loadingTpl = Vue.extend({
