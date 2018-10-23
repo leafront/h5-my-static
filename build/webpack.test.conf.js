@@ -10,7 +10,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 
 const env = require('../config/'+[process.env.NODE_ENV ]+'.env')
 
@@ -35,11 +34,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env,
       'process.config': require('../src/config/test')
-    }),
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, '../src/sw.js'),
-      publicPath: config.test.assetsPublicPath,
-      filename: 'serviceWorker.js'
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
