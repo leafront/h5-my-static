@@ -5,7 +5,7 @@
     <div class="ui-skeleton-container" v-if="!pageView">
       <UISkeleton></UISkeleton>
     </div>
-    <div class="scroll-view-wrapper white-view" :class="{'visibility': pageView}" >
+    <div class="scroll-view-wrapper white-view" :class="{'visibility': pageView}" id="my-vip-scroll">
       <div class="my-vip-user">
         <div class="my-vip-info">
           <img class="my-vip-info-pic" v-if="headerPic" @click="personalAction" :src="headerPic | httpsImg"/>
@@ -40,7 +40,7 @@
         <h5 class="font-xb c3">精选权益</h5>
         <span class="font-s c9">BEST</span>
       </div>
-      <LazyLoad :list="vip_interests" :options="{ele:'my-vip-best-pic'}">
+      <LazyLoad :list="vip_interests" :options="{ele:'my-vip-best-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-best">
           <div @click="routerAction(item.linkUrl)" :data-src="item.imageUrl | httpsImg" class="pic-lazyLoad my-vip-best-pic" v-for="item in vip_interests"></div>
         </div>
@@ -49,7 +49,7 @@
         <h5 class="font-xb c3">会员最爱买</h5>
         <span class="font-s c9">HOT</span>
       </div>
-      <LazyLoad :list="rankList" :options="{ele:'my-vip-cart-pic'}">
+      <LazyLoad :list="rankList" :options="{ele:'my-vip-cart-pic',scrollEle: 'my-vip-scroll'}">
         <div class="my-vip-cart" id="my-vip-cart">
           <div class="my-vip-cart-item" @click="detailAction(item.mpId)" v-for="item in rankList" v-if="rankList && rankList.length">
             <div class="pic-lazyLoad my-vip-cart-pic" :data-src="item['url300x300'] | httpsImg"></div>

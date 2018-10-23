@@ -160,4 +160,11 @@
       font-weight: 400;
     }
   }
+  .my-setting-logout {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+  }
 </style>

@@ -42,7 +42,7 @@
       }
     },
     beforeDestroy () {
-     window.removeEventListener('scroll',this.scrollImg,false)
+      window.removeEventListener('scroll',this.scrollImg,false)
     },
     methods: {
       /**
