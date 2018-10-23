@@ -42,7 +42,7 @@
       }
     },
     beforeDestroy () {
-      this.appView.removeEventListener('scroll',this.scrollImg,false)
+     window.removeEventListener('scroll',this.scrollImg,false)
     },
     methods: {
       /**
@@ -71,7 +71,7 @@
         const list = Array.prototype.slice.apply(this.appView.querySelectorAll('.' + this.default.ele + '[data-src]'))
 
         if (!list.length && this.default.complete) {
-          this.appView.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
+          window.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
         } else {
           list.forEach((el) => {
             if (!el.dataset.LazyLoadImgState && this.getClientRect(el, this.default.position)) {
@@ -88,7 +88,7 @@
       },
       startLoad (){
         this.scrollLoad()
-        this.appView.addEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
+        window.addEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
       },
       /**
        * @param {Object} el
