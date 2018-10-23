@@ -20,6 +20,12 @@ Object.keys(filter).forEach(key => {
 router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title
+  const bgColor = to.meta.bgColor
+  if (bgColor) {
+    document.body.style.backgroundColor = bgColor
+  } else {
+    document.body.style.backgroundColor = '#f5f5f5'
+  }
   if(
     to.matched.some(record => record.meta.requireLogin) &&
     process.env.NODE_ENV != 'develop'

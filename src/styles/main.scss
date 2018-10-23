@@ -1,6 +1,5 @@
 body,html{
   height:100%;
-  overflow: hidden;
   text-size-adjust: 100%;
   background: #f5f5f5;
 }
@@ -10,9 +9,21 @@ body{
   font-size: .24rem;
 }
 
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.safe-area-inset {
+  display: block;
+  background: #fff;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 #app{
   width:100%;
-  height:100%;
+  height: 100%;
 }
 
 .scroll-view-wrapper{
@@ -52,10 +63,11 @@ input {
 
 .pageView{
   width: 100%;
-  height:100%;
   overflow-x:hidden;
   display: flex;
   flex-direction: column;
+  padding-top: .88rem;
+  min-height: 100vh;
 }
 .pic-lazyLoad {
   background:url('/my-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;

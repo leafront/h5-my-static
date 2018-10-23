@@ -78,6 +78,7 @@
         <i></i>
         <span v-if="cartCount"></span>
       </div>
+      <div class="safe-area-inset"></div>
     </div>
   </div>
 </template>

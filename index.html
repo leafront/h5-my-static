@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon-precomposed" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
     <link rel="apple-touch-startup-image" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
     <link href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" rel="Shortcut Icon" type="image/x-icon" />
-	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
     <title>来伊份商城</title>
 	  <script type="text/javascript">
 			(function (win) {
@@ -53,7 +53,7 @@
               docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
             }
           }
-					metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
+					metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
 					doc.documentElement.style.fontSize = docFontSize;
 				};
 
@@ -61,7 +61,7 @@
 			})(window);
 	  </script>
   </head>
-  <body>
+  <body> 
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script type="text/javascript">

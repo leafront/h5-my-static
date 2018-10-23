@@ -66,4 +66,5 @@ export default {
   @import './styles/main.scss';
   @import './styles/loading.scss';
   @import './styles/toast.scss';
+  
 </style>

@@ -132,7 +132,8 @@ export default new Router({
       component: MyVipRule,
       meta: {
         title: '会员升降级规则',
-        requireLogin: true
+        requireLogin: true,
+        bgColor: '#fff'
       }
     }, {
       path: '/my/vip/explain',
@@ -140,7 +141,8 @@ export default new Router({
       component: MyVipExplain,
       meta: {
         title: '会员权益说明',
-        requireLogin: true
+        requireLogin: true,
+        bgColor: '#fff'
       }
     }
   ]
