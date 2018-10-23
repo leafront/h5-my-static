@@ -27,9 +27,10 @@ rm(path.join(config.production.assetsRoot, config.production.assetsSubDirectory)
       chunks: false,
       chunkModules: false
     }) + '\n\n')
-    const movePath = path.join(__dirname, '../target')
 
-    exec(`mv ${movePath}/serviceWorker.js ${movePath}/my-static/serviceWorker.js`,(err,stdout,stderr) => {
+    const currentPathName = path.join(__dirname, '..')
+
+    exec(`sh ${currentPathName}/serviceWorker.sh`,(err,stdout,stderr) => {
 
       if (err) {
         console.log(err);

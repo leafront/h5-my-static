@@ -19,7 +19,7 @@ rm(path.join(config.edu.assetsRoot, config.edu.assetsSubDirectory), err => {
   if (err) throw err
   webpack(webpackConfig, (err, stats) => {
     spinner.stop()
-    if (err) throw err
+    if (err) throw err  
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
@@ -27,9 +27,10 @@ rm(path.join(config.edu.assetsRoot, config.edu.assetsSubDirectory), err => {
       chunks: false,
       chunkModules: false
     }) + '\n\n')
-    const movePath = path.join(__dirname, '../target')
 
-    exec(`mv ${movePath}/serviceWorker.js ${movePath}/my-static/serviceWorker.js`,(err,stdout,stderr) => {
+    const currentPathName = path.join(__dirname, '..')
+
+    exec(`sh ${currentPathName}/serviceWorker.sh`,(err,stdout,stderr) => {
 
       if (err) {
         console.log(err);

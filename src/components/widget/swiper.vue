@@ -34,10 +34,6 @@
 				type: String,
 				default: '.slideshow-item'
 			},
-			sliderLi: {
-				type: String,
-				default: '.slideshow-item li'
-			},
 			// 阻止页面上下滑动
 			preventDefault: {
 				type: Boolean,
@@ -111,31 +107,17 @@
 			init () {
 
 				this.wrapper = document.querySelector(this.slideItem)
-
-				const slider = document.querySelectorAll(this.sliderLi)
-
 				this.pagination = document.querySelectorAll(this.sliderBtn)
-
 				this.startTime = new Date().getTime()
-
 				this.itemLength = this.pagination.length
-
 				const firstElement = this.wrapper.firstElementChild
-
 				const lastElement = this.wrapper.lastElementChild
-
 				const firstEleClone = firstElement.cloneNode(true)
-
 				const lastEleClone = lastElement.cloneNode(true)
-
 				firstElement.insertAdjacentElement('beforebegin',lastEleClone)
-
 				lastElement.insertAdjacentElement('afterend',firstEleClone)
-
 				this.itemWidth = parseFloat(this.itemWidth)
-
 				this.setWrapperPos(-this.index * this.itemWidth)
-
 				this.startAutoPlay()
 
 			},
