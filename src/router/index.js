@@ -124,7 +124,8 @@ export default new Router({
       component: MyVipIndex,
       meta: {
         title: '会员中心',
-        requireLogin: true
+        requireLogin: true,
+        bgColor: '#fff'
       }
     }, {
       path: '/my/vip/rule',
