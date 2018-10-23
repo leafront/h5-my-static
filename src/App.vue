@@ -50,11 +50,24 @@ export default {
       }
     })
   },
+  watch: {
+    '$route'() {
+      const isHidden = utils.query('isHidden')
+      if (utils.weixin() || utils.nativeQQ()){
+        document.getElementById('app').style.paddingTop = 0
+      } else {
+        document.getElementById('app').style.paddingTop = '.88rem'
+      }
+    }
+  },
   created () {
     //统一隐藏app头部
     if(utils.isApp()) {
       if (utils.getVersion() <= 5320) {
+        document.getElementById('app').style.paddingTop = '.88rem'
         app.postMessage('hiddenHead',{'isHidden':'1'})
+      } else {
+        document.getElementById('app').style.paddingTop = 0
       }
     }
   }
@@ -66,5 +79,5 @@ export default {
   @import './styles/main.scss';
   @import './styles/loading.scss';
   @import './styles/toast.scss';
-  
+
 </style>

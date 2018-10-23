@@ -71,12 +71,6 @@
     }
   }
 
-  .ui-header-wrapper{
-    width:100%;
-    height: .88rem;
-    background: #fff;
-  }
-
   .ui-header {
     width: 100%;
     height: .88rem;
