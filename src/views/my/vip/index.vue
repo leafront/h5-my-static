@@ -116,7 +116,6 @@
         rankList: [],
         rankPrice: {},
         fixedCart: false,
-        vipScrollEle: null,
         cartCount: 0
       }
     },
@@ -359,10 +358,10 @@
        */
       fixedCartBottom () {
 				const cartEl = document.getElementById('my-vip-cart')
-	      const vipScrollEleHeight =  this.vipScrollEle.offsetHeight
 				const cartTop = cartEl.getBoundingClientRect().top
+        const winHeight = window.innerHeight
         utils.throttle(() => {
-          if (cartTop <= vipScrollEleHeight) {
+          if (cartTop <= winHeight) {
             if (!this.fixedCart) {
               this.fixedCart = true
             }
@@ -375,8 +374,6 @@
        * 滚动和事件监听底部购物车
        */
       fixedCartScroll () {
-        const vipScrollEle = document.getElementById('my-vip-scroll')
-        this.vipScrollEle = vipScrollEle
         window.addEventListener('scroll',this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
       }
     },
