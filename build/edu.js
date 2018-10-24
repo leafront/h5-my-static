@@ -30,7 +30,7 @@ rm(path.join(config.edu.assetsRoot, config.edu.assetsSubDirectory), err => {
 
     const currentPathName = path.join(__dirname, '..')
 
-    exec(`sh ${currentPathName}/serviceWorker.sh`,(err,stdout,stderr) => {
+    exec(`sh ${currentPathName}/mac-serviceWorker.sh`,(err,stdout,stderr) => {
 
       if (err) {
         console.log(err);
