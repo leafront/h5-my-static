@@ -9,6 +9,7 @@ yarn-error.log*
 selenium-debug.log
 edu-release.sh
 serviceWorker.txt
+mac-serviceWorker.sh
 # Editor directories and files
 .idea
 .vscode
