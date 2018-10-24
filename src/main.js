@@ -21,12 +21,14 @@ router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
+  const shareConfig = to.meta.shareConfig
+
   if (bgColor) {
     document.body.style.backgroundColor = bgColor
   } else {
     document.body.style.backgroundColor = '#f5f5f5'
   }
-  if(
+  if (
     to.matched.some(record => record.meta.requireLogin) &&
     process.env.NODE_ENV != 'develop'
   ) {
@@ -34,6 +36,9 @@ router.beforeEach((to, from, next) => {
     //判断用户已经登录
     if (app.loggedIn()) {
       next()
+      if (shareConfig) {
+        app.setShareContent(shareConfig)
+      }
     } else {
       if (utils.isApp()) {
         app.login()
@@ -44,6 +49,9 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next()
+    if (shareConfig) {
+      app.setShareContent(shareConfig)
+    }
   }
 })
 
