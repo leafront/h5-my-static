@@ -22,14 +22,14 @@ function readfile ()
 folder="./target"
 readfile $folder
 
-sed -i '' 's/\.\/target//g' serviceWorker.txt
+sed -i 's/\.\/target//g' serviceWorker.txt
 
 filepath=$(cd "$(dirname "$0")"; pwd)  
 
 getFileName=$(cat "${filepath}/serviceWorker.txt")
 
-sed -i '' "s:CONFIG:${getFileName}:g" ${filepath}/target/my-static/serviceWorker.js
+sed -i "s:CONFIG:${getFileName}:g" ${filepath}/target/my-static/serviceWorker.js
 time=$(date "+%Y%m%d%H%M")
-sed -i '' "s:CACHE_VERSION:${time}:g" ${filepath}/target/my-static/serviceWorker.js
+sed -i "s:CACHE_VERSION:${time}:g" ${filepath}/target/my-static/serviceWorker.js
 
 
