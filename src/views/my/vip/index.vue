@@ -377,7 +377,7 @@
       fixedCartScroll () {
         const vipScrollEle = document.getElementById('my-vip-scroll')
         this.vipScrollEle = vipScrollEle
-        vipScrollEle.addEventListener('scroll',this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
+        window.addEventListener('scroll',this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
       }
     },
     created () {
@@ -390,8 +390,8 @@
     mounted () {
       this.fixedCartScroll()
     },
-    destroyed () {
-      this.vipScrollEle.removeEventListener('scroll', this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
+    beforeDestroy () {
+      window.removeEventListener('scroll', this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
     }
   }
 
