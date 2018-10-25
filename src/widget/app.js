@@ -68,96 +68,6 @@ const app = {
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
   },
-
-  //唤起app登录
-  login () {
-    window.location.href = "lyf://login";
-  },
-
-  //通知app退出
-  logout () {
-    window.location.href = "lyf://logout";
-  },
-  //user token name
-  utName: "lyfh5ut",
-
-  //判断用户是否已登录
-  loggedIn () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin()) {
-        return !!ut
-      }
-      utils.setCookie(this.utName, "");
-      return false;
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return ut && ut.length > 0;
-  },
-
-  //获取UT
-  getUserToken () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin() && !!ut) {
-        return ut
-      }
-      utils.setCookie(this.utName, "");
-      return '';
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return  ut;
-  },
-  //设置UT
-  setUserToken (ut) {
-    utils.setCookie(this.utName, ut);
-  },
-
-  //清空用户登录UT
-  //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
-  deleteUserToken () {
-    utils.setCookie(this.utName, "");
-  },
-  requireLogin (from) {
-    if (utils.isApp()) {
-      app.login()
-    } else {
-
-      const from = utils.getRelatedUrl()
-      window.location.href = `/login.html?from=` + encodeURIComponent(from)
-    }
-  },
   toast (text,times = 1500) {
     const tpl = `
       <div class="ui-toast-mask">
@@ -205,13 +115,13 @@ const app = {
   },
   loginAction () {
 
-    if (app.loggedIn()) {
+    if (utils.loggedIn()) {
       return
     } else {
 
       if (utils.isApp()) {
 
-        app.login()
+        utils.login()
 
       } else {
 

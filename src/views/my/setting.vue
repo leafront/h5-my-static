@@ -67,7 +67,7 @@
         pageView: true,
         isApp: utils.isApp(),
         cache: '0MB',
-        loggedIn: app.loggedIn(),
+        loggedIn: utils.loggedIn(),
         contactPopup: false
       }
     },
@@ -123,7 +123,7 @@
             store.remove('lyfuid','local')
             distribution.clearCurrentDistributionData() //清除分销商的信息
             if (this.isApp) {
-              app.logout()
+              utils.logout()
             } else {
               location.href = '/my/home.html'
             }

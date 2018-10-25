@@ -34,14 +34,14 @@ router.beforeEach((to, from, next) => {
   ) {
 
     //判断用户已经登录
-    if (app.loggedIn()) {
+    if (utils.loggedIn()) {
       next()
       if (shareConfig) {
         app.setShareContent(shareConfig)
       }
     } else {
       if (utils.isApp()) {
-        app.login()
+        utils.login()
       } else {
         const from = to.fullPath
         location.href = `/login.html?from=` + encodeURIComponent(from)
