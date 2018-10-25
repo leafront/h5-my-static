@@ -290,6 +290,7 @@
           if (result.code == 0 && data) {
             const headerPic = data.headPicUrl
             this.headerPic = headerPic || config.staticPath + '/my-static/images/logo-laiyifen.png'
+            data.userLevel = data.userLevlName.replace(/[a-zA-Z]/g,'')
             this.userInfo = data
             this.pageView = true
           } else {
