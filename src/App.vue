@@ -54,7 +54,7 @@ export default {
     '$route'() {
       const isHidden = utils.query('isHidden')
       if (utils.isApp()) {
-        if (utils.getVersion() <= 5320) {
+        if (utils.getVersion() < 5320) {
           if (isHidden == 1) {
             document.getElementById('app').style.paddingTop = 0
             app.postMessage('hiddenHead',{'isHidden':'0'})

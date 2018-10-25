@@ -139,7 +139,7 @@
         }
       },
       personalAction () {
-        if (utils.isApp () && utils.getVersion() >= 5320) {
+        if (utils.isApp () && utils.getVersion() > 5320) {
           location.href = 'lyf://personal'
         } else {
           location.href = '/my/personal'
