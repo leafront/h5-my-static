@@ -19,8 +19,6 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
       return Promise.all(
-        // 更新客户端
-        self.clients.claim(),
         cacheNames.map(function (cacheName) {
           // 不在白名单的缓存全部清理掉
           if (cacheName !== VERSION) {
