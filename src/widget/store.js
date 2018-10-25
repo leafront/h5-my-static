@@ -1,15 +1,11 @@
-import utils from './utils'
+import utils from '@/widget/utils'
 
-var store = {};
-
-var doc = document;
+const store = {}
 
 function getStorageType (storageType) {
 
   storageType = storageType == 'local' ? 'localStorage': 'sessionStorage'
-
   return window[storageType]
-
 }
 
 if (utils.isLocalStorageSupported()) {
@@ -40,46 +36,31 @@ if (utils.isLocalStorageSupported()) {
 	store.set = function(key, val,storageType) {
 
 		if (window.name) {
-
       windowStorage = utils.deserialize(window.name)
-
 		} else {
-
       windowStorage = {}
-
 		}
 
     windowStorage[key] = val
-
 		window.name = utils.serialize(windowStorage);
 
 	}
 	store.get = function(key,storageType) {
 
 		if (window.name) {
-
 			return utils.deserialize(window.name)[key]
-
 		} else {
-
 			return null
-
 		}
-
 	}
 	store.remove = function(key,storageType) {
 
     windowStorage = utils.deserialize(window.name)
-
 		delete windowStorage[key]
-
 		window.name = utils.serialize(windowStorage)
-
 	}
 	store.clear = function() {
-
 		window.name = ''
-
 	}
 }
 
