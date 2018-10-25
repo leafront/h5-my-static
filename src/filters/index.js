@@ -13,7 +13,11 @@ const httpsImg = (text) =>{
 
 const hideMobile = (text) =>{
   const pattern = /^(\d{3})(\d{4})(\d{4})$/
-  return text.replace(pattern,'$1****$3')
+  if (text && text.length == 11) {
+  	return text.replace(pattern,'$1****$3')
+  } else {
+  	return text
+  } 
 }
 
 export default { price, hideMobile, httpsImg }

@@ -11,7 +11,8 @@
           <img class="my-vip-info-pic" v-if="headerPic" @click="personalAction" :src="headerPic | httpsImg"/>
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
-              <span class="font cfff" v-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
+              <span class="font cfff" v-if="userInfo.nickname">{{userInfo.nickname}}</span>
+              <span class="font cfff" v-else="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
               <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
             <div class="my-vip-integral">
@@ -101,6 +102,8 @@
 
   import app from '@/widget/app'
 
+  import '@/widget/requestAnimationFrame'
+
   export default {
     data () {
       return {
@@ -116,7 +119,9 @@
         rankList: [],
         rankPrice: {},
         fixedCart: false,
-        cartCount: 0
+        cartCount: 0,
+        timer: null,
+        ticking: false
       }
     },
     components: {
@@ -357,18 +362,23 @@
        * 固定底部购物车
        */
       fixedCartBottom () {
-				const cartEl = document.getElementById('my-vip-cart')
-				const cartTop = cartEl.getBoundingClientRect().top
+        if(!this.ticking) {
+          this.timer = requestAnimationFrame(this.realFunc)
+          this.ticking = true
+        }
+      },
+      realFunc () {
+        const cartEl = document.getElementById('my-vip-cart')
+        const cartTop = cartEl.getBoundingClientRect().top
         const winHeight = window.innerHeight
-        utils.throttle(() => {
-          if (cartTop <= winHeight) {
-            if (!this.fixedCart) {
-              this.fixedCart = true
-            }
-          } else {
-            this.fixedCart = false
+        if (cartTop <= winHeight) {
+          if (!this.fixedCart) {
+            this.fixedCart = true
           }
-        },200)()
+        } else {
+          this.fixedCart = false
+        }
+        this.ticking = false
       },
       /**
        * 滚动和事件监听底部购物车
@@ -388,6 +398,7 @@
       this.fixedCartScroll()
     },
     beforeDestroy () {
+      cancelAnimationFrame(this.timer)
       window.removeEventListener('scroll', this.fixedCartBottom,utils.isPassive() ? {passive: true} : false)
     }
   }
