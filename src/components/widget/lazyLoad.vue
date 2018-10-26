@@ -74,6 +74,7 @@
           cancelAnimationFrame(this.timer)
           window.removeEventListener('scroll',this.scrollImg,utils.isPassive() ? {passive: true} : false)
         } else {
+          this.ticking = false
           list.forEach((el) => {
             if (!el.dataset.LazyLoadImgState && this.getClientRect(el, this.default.position)) {
               this.loadImg(el)
@@ -83,13 +84,12 @@
       },
       scrollImg () {
         if(!this.ticking) {
-          this.timer = requestAnimationFrame(this.realFunc)
           this.ticking = true
+          this.timer = requestAnimationFrame(this.realFunc)
         }
       },
       realFunc () {
         this.scrollLoad()
-        this.ticking = false
       },
       startLoad (){
         this.scrollLoad()
