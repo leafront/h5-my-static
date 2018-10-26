@@ -2,8 +2,8 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper" id="my-buy-list-scroll" @scroll="scrollLoadList" :class="{'visibility': pageView}">
-      <div class="my-buy-view" id="my-buy-view">
+    <div class="scroll-view-wrapper" id="my-buy-list-scroll" :class="{'visibility': pageView}">
+      <div class="my-buy-view">
         <div class="my-buy-list">
           <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-buy-list-scroll'}">
             <div class="my-buy-item ui-bottom-line" :key="index" v-for="(item,index) in list">
@@ -51,8 +51,9 @@
         currentPage: 1,
         totalPage: 1,
         showLoading: false,
-        isScrollLoad: true,
-        list: []
+        list: [],
+        timer: null,
+        isScrollLoad: false
       }
     },
     components: {
@@ -84,7 +85,7 @@
             if (currentPage > 1) {
               setTimeout(() => {
                 this.showLoading = false
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             if (type == 1) {
@@ -95,7 +96,7 @@
           } else {
             if (currentPage > 1) {
               setTimeout(() => {
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             this.$toast(result.message)
@@ -124,31 +125,36 @@
           }
         })
       },
-      /**
-       * 滚动加常购清单列表
+        /**
+       * 滚动加载团列表
        * @param event
        */
-      scrollLoadList (event) {
-
-        const pageViewHeight = event.target.clientHeight
-        const scrollTop = event.target.scrollTop
-        const pageHeight = document.getElementById('my-buy-view').clientHeight
-        if (pageViewHeight + scrollTop > pageHeight && this.list.length < this.totalPage) {
-          utils.throttle(() => {
-            if (!this.isScrollLoad) {
-              return
-            }
-            this.isScrollLoad = false
+      scrollLoadList () {
+        const pageViewHeight = window.innerHeight
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const pageHeight = document.documentElement.offsetHeight
+        const realFunc = () => {
+          if (pageViewHeight + scrollTop >= pageHeight && this.list.length < this.totalPage) {
             this.showLoading = true
             this.currentPage += 1
             this.getBuyList(1)
-          })()
+          }
+          this.isScrollLoad = false
+        }
+        if (!this.isScrollLoad) {
+          this.timer = requestAnimationFrame(realFunc)
+          this.isScrollLoad = true
         }
       }
     },
     created () {
       this.$showLoading()
       this.getBuyList()
+      window.addEventListener('scroll',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+    },
+    beforeDestroy () {
+      cancelAnimationFrame(this.timer)
+      window.removeEventListener('scroll', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     }
   }
 

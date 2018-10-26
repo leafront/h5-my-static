@@ -363,24 +363,25 @@
        * 固定底部购物车
        */
       fixedCartBottom () {
+        const winHeight = window.innerHeight
+        const cartEl = document.getElementById('my-vip-cart')
+        const realFunc = () => {
+          const cartTop = cartEl.getBoundingClientRect().top
+          if (cartTop <= winHeight) {
+            if (!this.fixedCart) {
+              this.fixedCart = true
+            }
+          } else {
+            this.fixedCart = false
+          }
+          this.ticking = false
+        }
         if(!this.ticking) {
-          this.timer = requestAnimationFrame(this.realFunc)
+          this.timer = requestAnimationFrame(realFunc)
           this.ticking = true
         }
       },
-      realFunc () {
-        const cartEl = document.getElementById('my-vip-cart')
-        const cartTop = cartEl.getBoundingClientRect().top
-        const winHeight = window.innerHeight
-        if (cartTop <= winHeight) {
-          if (!this.fixedCart) {
-            this.fixedCart = true
-          }
-        } else {
-          this.fixedCart = false
-        }
-        this.ticking = false
-      },
+
       /**
        * 滚动和事件监听底部购物车
        */

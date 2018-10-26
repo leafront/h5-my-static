@@ -2,39 +2,37 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper white-view" id="my-group-scroll" @scroll="scrollLoadList" :class="{'visibility': pageView}">
-      <div class="my-group-view" id="my-group-view">
-        <div class="my-group-menu">
-          <ul class="my-group-menu-list">
-            <li :class="{'active': index == status}" :key="item.orderCode" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>
-          </ul>
-        </div>
-        <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-group-scroll'}">
-          <div class="my-group-info" v-for="item in list">
-            <div class="my-group-item ui-bottom-line" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">
-              <div class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"></div>
-              <div class="my-group-item-des ui-ellipsis">
-                <h4 class="font c3">{{item.patchGrouponTitle}}</h4>
-                <p><strong>{{item.totalMembers}}人团</strong><span>¥</span><b>{{item.patchGrouponPrice}}</b><span>/件</span></p>
-              </div>
-              <div class="my-group-item-status">
-                <p class="font c3" :class="{'active': item.status == 1 || item.status == 2}">{{item.statusDesc}}</p>
-              </div>
+    <div class="scroll-view-wrapper white-view" id="my-group-scroll" :class="{'visibility': pageView}">
+      <div class="my-group-menu">
+        <ul class="my-group-menu-list">
+          <li :class="{'active': index == status}" :key="item.orderCode" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>
+        </ul>
+      </div>
+      <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-group-scroll'}">
+        <div class="my-group-info" v-for="item in list">
+          <div class="my-group-item ui-bottom-line" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">
+            <div class="my-group-item-pic pic-lazyLoad" :data-src="item.patchGrouponMainPicUrl"></div>
+            <div class="my-group-item-des ui-ellipsis">
+              <h4 class="font c3">{{item.patchGrouponTitle}}</h4>
+              <p><strong>{{item.totalMembers}}人团</strong><span>¥</span><b>{{item.patchGrouponPrice}}</b><span>/件</span></p>
             </div>
-            <div class="my-group-action">
-              <span class="font c3" v-if="item.status != 1 && item.status != 2" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">查看团详情</span>
-              <span class="font c3" @click="pageAction(`/my/order-detail.html?orderCode=${item.orderCode}`)">查看订单详情</span>
-              <span class="active font c3" @click="shareAction(item)" v-if="(item.status == 6 || item.status == 2) && (isApp || isWeixin)">邀请好友参团</span>
+            <div class="my-group-item-status">
+              <p class="font c3" :class="{'active': item.status == 1 || item.status == 2}">{{item.statusDesc}}</p>
             </div>
           </div>
-        </LazyLoad>
-        <PageLoading :showLoading="showLoading"></PageLoading>
-        <div class="my_group_empty" v-show="pageView && !list.length">
-          <img src="../images/my_empty_group.png"/>
-          <p>暂时没有相关团单哦</p>
+          <div class="my-group-action">
+            <span class="font c3" v-if="item.status != 1 && item.status != 2" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">查看团详情</span>
+            <span class="font c3" @click="pageAction(`/my/order-detail.html?orderCode=${item.orderCode}`)">查看订单详情</span>
+            <span class="active font c3" @click="shareAction(item)" v-if="(item.status == 6 || item.status == 2) && (isApp || isWeixin)">邀请好友参团</span>
+          </div>
         </div>
+      </LazyLoad>
+      <PageLoading :showLoading="showLoading"></PageLoading>
+      <div class="my_group_empty" v-show="pageView && !list.length">
+        <img src="../images/my_empty_group.png"/>
+        <p>暂时没有相关团单哦</p>
       </div>
-      <UIShare></UIShare>
+    <UIShare></UIShare>
     </div>
   </div>
 </template>
@@ -74,11 +72,12 @@
         currentPage: 1,
         status: 0,
         showLoading: false,
-        isScrollLoad: true,
+        isScrollLoad: false,
         totalPage: 1,
         shareCodeNum: null,
         isApp: utils.isApp(),
-        isWeixin: utils.weixin()
+        isWeixin: utils.weixin(),
+        timer: null
       }
     },
     components: {
@@ -127,7 +126,7 @@
             if (currentPage > 1) {
               setTimeout(() => {
                 this.showLoading = false
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             this.totalPage = data.total
@@ -139,7 +138,7 @@
           } else {
             if (currentPage > 1) {
               setTimeout(() => {
-                this.isScrollLoad = true
+                this.isScrollLoad = false
               }, 1000)
             }
             this.$toast(result.message)
@@ -150,21 +149,21 @@
        * 滚动加载团列表
        * @param event
        */
-      scrollLoadList (event) {
-
-        const pageViewHeight = event.target.clientHeight
-        const scrollTop = event.target.scrollTop
-        const pageHeight = document.getElementById('my-group-view').clientHeight
-        if (pageViewHeight + scrollTop > pageHeight && this.list.length < this.totalPage) {
-          utils.throttle(() => {
-            if (!this.isScrollLoad) {
-              return
-            }
-            this.isScrollLoad = false
+      scrollLoadList () {
+        const pageViewHeight = window.innerHeight
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        const pageHeight = document.documentElement.offsetHeight
+        const realFunc = () => {
+          if (pageViewHeight + scrollTop >= pageHeight && this.list.length < this.totalPage) {
             this.showLoading = true
             this.currentPage += 1
             this.getGroupList(1)
-          })()
+          }
+          this.isScrollLoad = false
+        }
+        if (!this.isScrollLoad) {
+          this.timer = requestAnimationFrame(realFunc)
+          this.isScrollLoad = true
         }
       },
       /**
@@ -247,16 +246,17 @@
       }
       this.$showLoading()
       this.getGroupList()
+      window.addEventListener('scroll',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+    },
+    beforeDestroy () {
+      cancelAnimationFrame(this.timer)
+      window.removeEventListener('scroll', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     }
   }
 
 </script>
 
 <style lang="scss">
-  .my-group-view{
-    display: flex;
-    flex-direction: column;
-  }
   .my_group_empty{
     display: flex;
     align-items: center;
