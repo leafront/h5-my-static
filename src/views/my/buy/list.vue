@@ -33,14 +33,11 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import PageLoading from '@/components/common/pageLoading'
-
   import LazyLoad from '@/components/widget/lazyLoad'
-
   import utils from '@/widget/utils'
-
   import * as Model from '@/model/buy'
+  import '@/widget/requestAnimationFrame'
 
   export default {
     data () {

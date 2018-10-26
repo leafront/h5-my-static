@@ -87,21 +87,13 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import UISkeleton from '@/components/vip/skeleton'
-
   import * as Model from '@/model/vip'
-
   import Banner from '@/components/vip/banner'
-
   import LazyLoad from '@/components/widget/lazyLoad'
-
   import utils from '@/widget/utils'
-
   import config from '@/config/index'
-
   import app from '@/widget/app'
-
   import '@/widget/requestAnimationFrame'
 
   export default {
