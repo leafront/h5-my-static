@@ -139,8 +139,8 @@
           this.isScrollLoad = false
         }
         if (!this.isScrollLoad) {
-          this.timer = requestAnimationFrame(realFunc)
           this.isScrollLoad = true
+          this.timer = requestAnimationFrame(realFunc)
         }
       }
     },
