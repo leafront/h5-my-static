@@ -36,7 +36,17 @@
     },
     computed: {
       showHeader () {
-        return this.isShowHeader || !(utils.weixin() || utils.nativeQQ() || utils.getVersion() > 5320 || (utils.query('isHidden') == 1 && utils.isApp()))
+        if (utils.isApp()) {
+          if (utils.query('hideHead') == 0) {
+            return true
+          } else {
+            return false
+          }
+        } else if (utils.weixin() || utils.nativeQQ()) {
+          return false
+        } else {
+          return this.isShowHeader || true
+        }
       }
     },
     methods: {

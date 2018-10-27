@@ -50,28 +50,19 @@ export default {
       }
     })
   },
-  watch: {
-    '$route'() {
-      const isHidden = utils.query('isHidden')
-      if (utils.isApp()) {
-        if (utils.getVersion() < 5320) {
-          if (isHidden == 1) {
-            document.getElementById('app').style.paddingTop = 0
-            app.postMessage('hiddenHead',{'isHidden':'0'})
-          } else {
-            document.getElementById('app').style.paddingTop = '.88rem'
-            app.postMessage('hiddenHead',{'isHidden':'1'})
-          }
-        } else {
-          document.getElementById('app').style.paddingTop = 0
-          app.postMessage('hiddenHead',{'isHidden':'0'})
-        }
-      } else if (utils.weixin() || utils.nativeQQ()){
-        document.getElementById('app').style.paddingTop = 0
+  created () {
+    const hideHead = utils.query('hideHead')
+    if (utils.isApp()) {
+      if (hideHead == 0) {
+        app.postMessage('hiddenHead',{'isHidden':'1'})
+        document.body.style.paddingTop = '.88rem'
       } else {
-        document.getElementById('app').style.paddingTop = '.88rem'
-      }
-    }
+        app.postMessage('hiddenHead',{'isHidden':'0'})
+        document.body.style.paddingTop = 0
+      } 
+    } else if (utils.weixin() || utils.nativeQQ()){
+      document.body.style.paddingTop = 0
+    } 
   }
 }
 </script>
