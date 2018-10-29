@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import Router from 'vue-router'
 
+import config from '@/config/index'
+
 const PageError = r => require.ensure([], () => r(require('@/views/my/error/404.vue')),'PageError')
 
 const MySetting = r => require.ensure([], () => r(require('@/views/my/setting.vue')),'MySetting')
