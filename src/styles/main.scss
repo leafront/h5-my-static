@@ -6,6 +6,7 @@ body{
   color:#666;
   font-size: .24rem;
   background: #f5f5f5;
+  padding-top: .88rem;
 }
 
 body::-webkit-scrollbar {
@@ -22,7 +23,6 @@ body::-webkit-scrollbar {
 
 #app{
   width:100%;
-  padding-top: .88rem;
 }
 
 .scroll-view-wrapper{
@@ -65,7 +65,7 @@ input {
   overflow-x:hidden;
 }
 .pic-lazyLoad {
-  background:url('/my-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;
+  background:url('/webapp-static/images/lazyLoad.jpeg') no-repeat #f5f5f5 center center;
   background-size: contain;
 }
 /**ui styles**/

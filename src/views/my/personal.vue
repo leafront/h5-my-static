@@ -208,7 +208,7 @@
             const headPicUrl = data.url160x160
             this.pageView = true
             this.userInfo = data
-            this.headPicUrl = headPicUrl || config.staticPath + '/my-static/images/logo-laiyifen.png'
+            this.headPicUrl = headPicUrl || config.staticPath + '/webapp-static/images/logo-laiyifen.png'
           } else {
             this.$toast(result.message)
           }

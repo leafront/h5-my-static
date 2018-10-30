@@ -103,7 +103,7 @@
         title: '会员中心',
         pageView: false,
         vip_banner: [],
-        vip_description: config.staticPath + '/my-static/images/lazyLoad.jpeg',
+        vip_description: config.staticPath + '/webapp-static/images/lazyLoad.jpeg',
         vip_interests: [],
         userInfo: {},
         headerPic: '',
@@ -281,7 +281,7 @@
           const data = result.data
           if (result.code == 0 && data) {
             const headerPic = data.headPicUrl
-            this.headerPic = headerPic || config.staticPath + '/my-static/images/logo-laiyifen.png'
+            this.headerPic = headerPic || config.staticPath + '/webapp-static/images/logo-laiyifen.png'
             data.userLevel = data.userLevlName.replace(/[a-zA-Z]/g,'')
             this.userInfo = data
             this.pageView = true

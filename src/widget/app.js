@@ -155,7 +155,7 @@ const app = {
         url160x160: imgUrl,
         pic: imgUrl
       }, () => {
-        
+       
       })
     }
   }

@@ -10,8 +10,6 @@
 	  <meta http-equiv="cache-control" content="no-cache">
 	  <meta http-equiv="expires" content="0">
     <meta http-equiv=pragma content=no-cache>
-    <meta name="full-screen" content="yes">
-    <meta name="x5-fullscreen" content="true">
     <meta content="telephone=no" name="format-detection">
     <meta name="applicable-device"content="mobile">
     <meta name="apple-mobile-web-app-title" content="来伊份">
@@ -63,13 +61,50 @@
   </head>
   <body> 
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <!-- built files will be auto injected --> 
+    <script type="text/javascript">
+      function isLocalStorageSupported() {
+        var testKey = 'test',
+          storage = window.sessionStorage
+        try {
+          storage.setItem(testKey, 'testValue')
+          storage.removeItem(testKey)
+          return true
+        } catch (error) {
+          return false
+        }
+      }
+      function appendScript (res) {
+        var script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.appendChild(document.createTextNode(res))
+        document.head.appendChild(script)
+      }
+      function writeLizard () {
+        document.write('<script type="text/javascript" src="<%=htmlWebpackPlugin.options.staticPath %>/webapp-static/lizard/index.js"><\/script>')
+      }
+      if (isLocalStorageSupported()) {
+        var results = localStorage.getItem('/webapp-static/lizard/index.js')
+        if (results && typeof results == 'string') {
+          var res = JSON.parse(results)
+          if (res && res.times > new Date().getTime()) {
+            appendScript(res.results)
+          } else {
+            writeLizard()
+          }
+        } else {
+          writeLizard()
+        }
+      } else {
+        writeLizard()
+      }
+    </script>
     <script type="text/javascript">
       if ('serviceWorker' in navigator && location.protocol == 'https:') {
         navigator.serviceWorker.register('/my-static/serviceWorker.js?v=<%=htmlWebpackPlugin.options.getTime%>',{scope: '/my/'})
       }
     </script>
-<!--     <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
+<!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
     <script>
       var vConsole = new VConsole()
     </script> -->
