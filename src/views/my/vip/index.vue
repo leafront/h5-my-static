@@ -134,7 +134,7 @@
         if (utils.isApp () && utils.getVersion() > 5320) {
           location.href = 'lyf://personal'
         } else {
-          location.href = '/my/personal'
+          this.pageAction('/my/personal')
         }
       },
       /**
