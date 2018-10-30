@@ -12,7 +12,7 @@ import app from '@/widget/app'
 
 import store from '@/widget/store'
 
-import * as Model from '@/model/common'
+import * as Model from '@/model/static'
 
 export default {
   name: 'App',
