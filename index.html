@@ -101,7 +101,9 @@
     </script>
     <script type="text/javascript">
       if ('serviceWorker' in navigator && location.protocol == 'https:') {
-        navigator.serviceWorker.register('/my-static/serviceWorker.js?v=<%=htmlWebpackPlugin.options.getTime%>',{scope: '/my/'})
+        window.onload = function () {
+          navigator.serviceWorker.register('/my-static/serviceWorker.js?v=<%=htmlWebpackPlugin.options.getTime%>',{scope: '/my/'})
+        }
       }
     </script>
 <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
