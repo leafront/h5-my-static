@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
 import config from '@/config/index'
 
@@ -32,9 +32,9 @@ const MyVipRule = r => require.ensure([], () => r(require('@/views/my/vip/rule.v
 
 const MyVipExplain = r => require.ensure([], () => r(require('@/views/my/vip/explain.vue')),'MyVipExplain')
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
+export default new VueRouter({
   mode:'history',
   scrollBehavior(to,from,savePosition){ 
     if (savePosition) {

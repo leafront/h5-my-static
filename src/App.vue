@@ -29,19 +29,17 @@ export default {
       expires: cacheTimes
     }).then((res) => {
 
-      if (typeof res == 'string') {
-
-        if (!store.get('/webapp-static/fastclick/index.js'), 'local') {
-          let result = {
-            times: new Date().getTime() + cacheTimes,
-            results: res
+      if (res && typeof res == 'string') {
+        if (utils.isLocalStorageSupported()) {
+          if (!store.get('/webapp-static/fastclick/index.js'), 'local') {
+            let result = {
+              times: new Date().getTime() + cacheTimes,
+              results: res
+            }
+            store.set('/webapp-static/fastclick/index.js', result, 'local')
           }
-
-          utils.appendScript(res)
-
-          store.set('/webapp-static/fastclick/index.js', result, 'local')
-        }
-
+        } 
+        utils.appendScript(res)
         if ('addEventListener' in document) {
           document.addEventListener('DOMContentLoaded', () =>{
             window.FastClick.attach(document.body)
@@ -49,6 +47,30 @@ export default {
         }
       }
     })
+  },
+  methods: {
+    getLizardCode () {
+      const cacheTimes = 30 * 24 * 60 * 60 * 1000
+      Model.getLizardCode({
+        type: 'GET',
+        dataType: 'text',
+        cache: true,
+        expires: cacheTimes
+      }).then((res) => {
+
+        if (res && typeof res == 'string') {
+          if (utils.isLocalStorageSupported()) {
+            if (!store.get('/webapp-static/lizard/index.js'), 'local') {
+              let result = {
+                times: new Date().getTime() + cacheTimes,
+                results: res
+              }
+              store.set('/webapp-static/lizard/index.js', result, 'local')
+            }
+          }
+        }
+      })
+    }
   },
   created () {
     const hideHead = utils.query('hideHead')
@@ -62,6 +84,9 @@ export default {
     } else if (utils.weixin() || utils.nativeQQ()){
       document.body.style.paddingTop = 0
     } 
+  },
+  mounted () {
+    this.getLizardCode()
   }
 }
 </script>
