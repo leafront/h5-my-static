@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+    <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
     <div class="ui-skeleton-container" v-if="!pageView">
       <UISkeleton></UISkeleton>
@@ -123,13 +123,6 @@
       UISkeleton
     },
     methods: {
-      backAction () {
-        if (utils.isApp()) {
-          app.back()
-        } else {
-          location.href = '/index.html'
-        }
-      },
       personalAction () {
         if (utils.isApp () && utils.getVersion() > 5320) {
           location.href = 'lyf://personal'
