@@ -348,7 +348,7 @@ ImageUpload.prototype = {
         break;
     }
 
-    var base64
+    var base64;
 
     // 修复IOS
     if (isIOS) {
