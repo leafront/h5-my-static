@@ -1,7 +1,5 @@
 /**
- *
  * @param {Object} options
- *
  * @returns {Promise}
  */
 

@@ -1,62 +1,70 @@
 import utils from './utils'
+import store from './store'
+import weixin_share from '@/common/weixin_share'
 
-//回调函数计数
-var count = 0;
+var count = 0  //回调函数计数
 
-/**
- * 访问app的API工具类
- */
 const app = {
   /**
-   * 发送app消息，通过callback处理返回
-   * @param func app提供的消息名称 [必填]
-   * @param params 传递给app的参数 [非必填]
-   * @param callback 消息处理后的回调函数 [非必填]
+   * @param {String} func
+   * @param {Object} params
+   * @param {Function} callback
    */
   postMessage (func, params, callback) {
-    //只有在app才执行
+    // 只有在app才执行
     if (!utils.isApp()) {
-      return;
+      return
     }
 
     if (!func) {
-      throw new Error("param [func]  is required");
+      throw new Error("param [func]  is required")
     }
 
     if (typeof params == "function") {
-      callback = params;
-      params = null;
+      callback = params
+      params = null
     }
 
-    var msgParams = {"function": func};
+    var msgParams = {"function": func}
     if (params) {
-      msgParams["param"] = params;
+      msgParams["param"] = params
     }
 
     if (callback) {
-      var funcName = this.getFunctionName(func);
-      window[funcName] = callback;
-      msgParams["callback"] = funcName;
-      // console.log("callback:" + funcName)
+      var funcName = this.getFunctionName(func)
+      window[funcName] = callback
+      msgParams["callback"] = funcName
     }
 
     if (utils.ios()) {
-      window.webkit.messageHandlers.mobileAPI.postMessage(msgParams);
+      window.webkit.messageHandlers.mobileAPI.postMessage(msgParams)
     } else if (utils.android()) {
-      window.mobileAPI.postMessage(JSON.stringify(msgParams));
+      window.mobileAPI.postMessage(JSON.stringify(msgParams))
     }
   },
-
-  //生成全局函数名字
+  /**
+   * 生成全局函数名字
+   * @param  {String} func
+   * @return {String} val
+   */
   getFunctionName (func) {
-    return "App_" + func + "_callback_" + (++count);
+    const val = "App_" + func + "_callback_" + (++count)
+    return val
   },
-
-  //通知app返回上一页，refresh指定是否刷新上一页内容。
-  //@params forceBack 是否强制app退出当前webview网页
+  /**
+   * forceBack 是否强制app退出当前webview网页
+   * 通知app返回上一页，refresh指定是否刷新上一页内容。
+   * @param  {String} refresh
+   * @param  {String} forceBack
+   */
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
   },
+  /**
+   * 提示框
+   * @param  {String} text
+   * @param  {Number} tims
+   */
   toast (text,times = 1500) {
     const tpl = `
       <div class="ui-toast-mask">
@@ -102,28 +110,22 @@ const app = {
     fragment = null
   },
   loginAction () {
-
     if (utils.loggedIn()) {
       return
     } else {
-
       if (utils.isApp()) {
-
         utils.login()
-
       } else {
-
         const from = utils.getRelatedUrl()
-
         if (from) {
-          window.location.href = `/login.html?from=` + encodeURIComponent(from)
+          location.href = `/login.html?from=` + encodeURIComponent(from)
         } else {
-          window.location.href = '/login.html'
+          location.href = '/login.html'
         }
       }
     }
   },
-    /**
+  /**
    * @param {String} link. 链接
    * @param {String} title 标题
    * @param {String} desc  描述
@@ -133,7 +135,8 @@ const app = {
     link,
     title,
     desc,
-    imgUrl
+    imgUrl,
+    platforms = null
   }) {
     if (utils.getVersion() >= 5320) {
       app.postMessage('setShareContent', {
@@ -141,10 +144,58 @@ const app = {
         title,
         description: desc,
         url160x160: imgUrl,
-        pic: imgUrl
+        pic: imgUrl,
+        platforms: platforms
       }, () => {
-       
+        
       })
+    }
+  },
+  /**
+   * 分享操作
+   * @param {String} link
+   * @param {String} title
+   * @param {String} description
+   * @param {String} imgUrl
+   */
+  shareAction ({
+    link,
+    title,
+    description,
+    imgUrl,
+    platforms = null  //WechatMoments,朋友圈 Wechat,微信 QQ,QZone,qq空间,ShortMessage 短信,IM 无聊
+  },callback) {
+    const shareConfig = {
+      link: link,
+      url: link,
+      title,
+      desc: description,
+      description,
+      imgUrl,
+      pic: imgUrl,
+      platforms: platforms
+    }
+    if (utils.isApp()) {
+      app.postMessage('share', {
+        url: shareConfig.url,
+        title: shareConfig.title,
+        description: shareConfig.description,
+        url160x160: shareConfig.pic,
+        pic: shareConfig.pic,
+        platforms: shareConfig.platforms
+      },() => {
+        callback && callback()
+      })
+      setTimeout(() => {
+        callback && callback()
+      },2000)
+    } else {
+      if (utils.weixin()) {
+        this.updateShareMenu(true)
+        weixin_share.weixinShare(shareConfig).then(() => {
+          callback && callback()
+        })
+      }
     }
   }
 }
