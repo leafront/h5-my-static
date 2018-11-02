@@ -9,7 +9,6 @@ var count = 0;
 const app = {
   /**
    * 发送app消息，通过callback处理返回
-   *
    * @param func app提供的消息名称 [必填]
    * @param params 传递给app的参数 [非必填]
    * @param callback 消息处理后的回调函数 [非必填]
@@ -58,15 +57,6 @@ const app = {
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
   },
-  requireLogin (from) {
-    if (utils.isApp()) {
-      utils.login()
-    } else {
-
-      const from = utils.getRelatedUrl()
-      window.location.href = `/login.html?from=` + encodeURIComponent(from)
-    }
-  },
   toast (text,times = 1500) {
     const tpl = `
       <div class="ui-toast-mask">
@@ -91,7 +81,6 @@ const app = {
    * @param {Object} el
    * @param {String} html
    */
-
   append (el, html) {
 
     var divTemp = document.createElement("div"),
