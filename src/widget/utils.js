@@ -3,68 +3,54 @@ import config from '@/config/index'
 
 const utils = {
   ua: navigator.userAgent,
-  webKit () {
-    return this.ua.indexOf('AppleWebKit') > -1;
-  },
-  mobile () {
-    return !!this.ua.match(/AppleWebKit.*Mobile.*/);
-  },
   ios () {
-    return this.iPhone() || this.iPad();
+    return this.ua && /iphone|ipad|ipod|ios/.test(this.ua) > 0
   },
   android () {
-    return this.ua.indexOf('Android') > -1 || this.ua.indexOf('Linux') > -1;
-  },
-  iPhone () {
-    return this.ua.indexOf('iPhone') > -1;
-  },
-  iPad () {
-    return this.ua.indexOf('iPad') > -1;
-  },
-  qq () {
-    return this.ua.indexOf('QQBrowser') > -1;
+    return this.ua.indexOf('Android') > -1 || this.ua.indexOf('Linux') > -1
   },
   nativeQQ () {
-    return (this.ios() && !this.isApp() && this.ua.indexOf('UIWebView') > -1) || (this.android() && !this.isApp() && this.ua.indexOf('Mobile MQQBrowser') > -1);
+    return (this.ios() && !this.isApp() && this.ua.indexOf('UIWebView') > -1) || (this.android() && !this.isApp() && this.ua.indexOf('Mobile MQQBrowser') > -1)
   },
   weixin () {
-    return this.ua.indexOf('MicroMessenger') > -1;
+    return this.ua.indexOf('MicroMessenger') > -1
   },
   isApp () {
-    return this.ua.indexOf('ody') > -1;
+    return this.ua.indexOf('ody') > -1
   },
+  /**
+   * @param  {String}  value
+   * @return {String}  value
+   */
   serialize(value) {
-    return JSON.stringify(value);
+    return JSON.stringify(value)
   },
-
+  /**
+   * @param  {String} value
+   * @return {String} value
+   */
   deserialize(value) {
-
     if (typeof value != 'string' || value == '') return ''
-
     try {
       return JSON.parse(value)
     } catch (e) {
-
       return ''
     }
   },
   isLocalStorageSupported() {
-    var testKey = 'test',
-      storage = window.sessionStorage
+    var testKey = 'test'
+    var storage = window.sessionStorage
     try {
       storage.setItem(testKey, 'testValue')
       storage.removeItem(testKey)
-      return true
+      return true;
     } catch (error) {
       return false
     }
   },
-
   /**
-   *
    * @param fn {Function}   实际要执行的函数
    * @param delay {Number}  执行间隔，单位是毫秒（ms）
-   *
    * @return {Function}     返回一个“节流”函数
    */
   throttle(fn, threshhold) {
@@ -108,11 +94,8 @@ const utils = {
   /**
    * @param {Object} obj
    * @returns {string}
-   * @example
-   * util.queryStringify({name:'leafront',age:23}) =>  'name=leafront&age=23'
    *
    */
-
   queryStringify (obj) {
 
     function toQueryPair(key,value) {
@@ -140,15 +123,12 @@ const utils = {
       }
     }
 
-    return result.join('&');
+    return result.join('&')
   },
   /**
-   *
    * @param {String || null } text
-   *
    * @return {Object}
    */
-
   query (strName){
 
     const queryObj = {}
@@ -186,9 +166,10 @@ const utils = {
         }
       }));
     } catch(e) {}
-    return supportsPassiveOption  //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+    return supportsPassiveOption   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
   },
+
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365
     var exp = new Date()
@@ -199,116 +180,77 @@ const utils = {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
     if (arr = document.cookie.match(reg))
       return unescape(arr[2])
-    else
+    else {
       return null
+    }
   },
   delCookie (name) {
     var exp = new Date()
     exp.setTime(exp.getTime() - 1)
     var cval = this.getCookie(name)
-    if (cval != null)
+    if (cval != null) {
       document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
+    }
   },
-
-  //唤起app登录
+  getUaParams: function () {
+    var matchers = this.ua.match(/\-\-\[([\s\S]+?)\]\-\-/i)
+    if (matchers && matchers.length>1) {
+      var uaObj = JSON.parse(matchers[1])
+      return uaObj;
+    }
+    return {}
+  },
+  /**
+   * @return {String} val
+   */
+  getRelatedUrl () {
+    const val = location.pathname + (location.search || "")
+    return val
+  },
   login () {
-    window.location.href = "lyf://login";
+    location.href = 'lyf://login'
   },
-
-  //通知app退出
   logout () {
-    window.location.href = "lyf://logout";
+    location.href = 'lyf://logout'
   },
-
+  /**
+   * @return {String} ut
+   */
+  loggedIn () {
+    let ut = utils.getCookie('lyfh5ut')
+    return ut && ut.length > 0
+  },
+  /**
+   * set user token 
+   * @param {String} ut
+   */
+  setUserToken (ut) {
+    utils.setCookie('lyfh5ut', ut)
+  },
   //清空用户登录UT
   //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
   deleteUserToken () {
-    utils.setCookie(this.utName, "");
-  },
-  //user token name
-  utName: "lyfh5ut",
-
-  //判断用户是否已登录
-  loggedIn () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin()) {
-        return !!ut
-      }
-      utils.setCookie(this.utName, "");
-      return false;
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return ut && ut.length > 0;
-  },
-
-  //获取UT
-  getUserToken () {
-    // 优先判断后端写入的ut是否存在
-    let checkUt = utils.getCookie('ut');
-    let ut = utils.getCookie(this.utName);
-    //后端ut不存在，并且不是app，直接判断为未登录,并且将备份的lyfh5ut设置为‘’
-    if(!utils.isApp() && !checkUt){
-      // 微信端ut 有效期是session级别，微信退出后 会需要重新登录
-      if (utils.weixin() && !!ut) {
-        return ut
-      }
-      utils.setCookie(this.utName, "");
-      return '';
-    }
-    //如果存在 后端有ut，但前端this.utName不存在的情况，将前端的this.utName，设置为后端的ut值
-    if(!ut && checkUt){
-      if(!utils.isApp()){
-        utils.setCookie(this.utName,checkUt);
-        ut = checkUt;
-      }
-    }
-    if(utils.isApp()){
-      if(!ut){//部分手机不能正常写入cookie
-        ut = utils.getUaParams().ut;
-      }
-    }
-    return  ut;
-  },
-  //设置UT
-  setUserToken (ut) {
-    utils.setCookie(this.utName, ut);
-  },
-  getUaParams: function () {
-    var matchers = this.ua.match(/\-\-\[([\s\S]+?)\]\-\-/i);
-    if (matchers && matchers.length>1) {
-      var uaObj = JSON.parse(matchers[1]);
-      return uaObj;
-    }
-    return {};
-
+    utils.setCookie("lyfh5ut", "")
+    utils.setCookie('ut', "")
   },
   /**
-   * 获得相对url
-   * 如果当前完整url是：http://pintuan.test.odianyun.com/my-center/home.html?p=1
-   * 返回：/my-center/home.html?p=1
+   * get user token
+   * @return {Sting} ut
    */
-  getRelatedUrl () {
-    return location.pathname + (location.search || "")
+  getUserToken () {
+    let ut = utils.getCookie('lyfh5ut')
+    if (utils.isApp()) {
+      if (!ut) {//部分手机不能正常写入cookie
+        ut = utils.getUaParams().ut
+      }
+    }
+    return  ut
   },
+  /**
+   * @return {String} sid
+   */
   getSessionId () {
-    let sid = ''
+    var sid
     if (utils.isApp()){
       sid = utils.getUaParams().sessionId
     } else {
@@ -316,9 +258,9 @@ const utils = {
     }
 
     if (!sid) {
-      const now = new Date()
+      var now = new Date()
       //随机数字
-      const randNum = Math.round(Math.random() * 1000)
+      var randNum = Math.round(Math.random() * 1000)
       sid = now.getTime() + "" + randNum
       utils.setCookie('sessionId', sid)
     }
@@ -328,25 +270,14 @@ const utils = {
   appViewFixed () {
 
     const appView = document.getElementById('app')
-
     if (appView.classList.contains('app_fixed')){
-
       appView.classList.remove('app_fixed')
-
     } else {
-
       appView.classList.add('app_fixed')
     }
   },
   trim (text) {
     return text.replace(/\s+/g, "")
-  },
-  getVersion () {
-    let version =  utils.getUaParams().version
-    if (version) {
-      version = version.replace(/\./g,'')
-    }
-    return version
   },
   loadScript (url,success) {
     const script = document.createElement("script")
@@ -366,6 +297,13 @@ const utils = {
     script.type = 'text/javascript'
     script.appendChild(document.createTextNode(res))
     document.head.appendChild(script)
+  },
+  getVersion () {
+    let version =  utils.getUaParams().version
+    if (version) {
+      version = version.replace(/\./g,'')
+    }
+    return version
   }
 }
 
