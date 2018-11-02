@@ -13,16 +13,6 @@ const app = {
    * @param func app提供的消息名称 [必填]
    * @param params 传递给app的参数 [非必填]
    * @param callback 消息处理后的回调函数 [非必填]
-   *
-   * Example1:
-   * app.postMessage("getLocation", {x: 1, y: 2}, (data1, data2) => {
-     *          alert("x=" + data1 + ",y=" + data2 + ",z=" + this.pageSize);
-     *  });
-   *
-   * Example2:
-   * app.postMessage("getLocation",  (data1, data2) => {
-     *          alert("x=" + data1 + ",y=" + data2 + ",z=" + this.pageSize);
-     *  });
    */
   postMessage (func, params, callback) {
     //只有在app才执行
@@ -67,6 +57,15 @@ const app = {
   //@params forceBack 是否强制app退出当前webview网页
   back (refresh,forceBack) {
     this.postMessage("webViewBack", {refresh: refresh ? 1 : 0, forceBack: forceBack ? 1 : 0});
+  },
+  requireLogin (from) {
+    if (utils.isApp()) {
+      utils.login()
+    } else {
+
+      const from = utils.getRelatedUrl()
+      window.location.href = `/login.html?from=` + encodeURIComponent(from)
+    }
   },
   toast (text,times = 1500) {
     const tpl = `
