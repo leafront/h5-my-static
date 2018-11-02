@@ -42,7 +42,7 @@ if (utils.isLocalStorageSupported()) {
 		}
 
     windowStorage[key] = val
-		window.name = utils.serialize(windowStorage);
+		window.name = utils.serialize(windowStorage)
 
 	}
 	store.get = function(key,storageType) {

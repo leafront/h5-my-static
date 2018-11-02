@@ -303,20 +303,6 @@ const utils = {
       version = version.replace(/\./g,'')
     }
     return version
-  },
-  setHeader() {
-    const hideHead = utils.query('hideHead')
-    if (utils.isApp()) {
-      if (hideHead == 0) {
-        app.postMessage('hiddenHead',{'isHidden':'1'})
-        document.body.style.paddingTop = '.88rem'
-      } else {
-        app.postMessage('hiddenHead',{'isHidden':'0'})
-        document.body.style.paddingTop = 0
-      } 
-    } else if (utils.weixin() || utils.nativeQQ()){
-      document.body.style.paddingTop = 0
-    } 
   }
 }
 
