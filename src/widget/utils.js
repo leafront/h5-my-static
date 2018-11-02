@@ -4,7 +4,7 @@ import config from '@/config/index'
 const utils = {
   ua: navigator.userAgent,
   ios () {
-    return this.ua && /iPhone|iPad|iPod/.test(this.ua) > 0
+    return this.ua && /iPhone|iPad|iPod/gi.test(this.ua) > 0
   },
   android () {
     return this.ua.indexOf('Android') > -1 || this.ua.indexOf('Linux') > -1
