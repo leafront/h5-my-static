@@ -17,11 +17,27 @@ Object.keys(filter).forEach(key => {
   Vue.filter(key, filter[key])
 })
 
+const setHeader = () => {
+  const hideHead = utils.query('hideHead')
+  if (utils.isApp()) {
+    if (hideHead == 0) {
+      app.postMessage('hiddenHead',{'isHidden':'1'})
+      document.body.style.paddingTop = '.88rem'
+    } else {
+      app.postMessage('hiddenHead',{'isHidden':'0'})
+      document.body.style.paddingTop = 0
+    } 
+  } else if (utils.weixin() || utils.nativeQQ()){
+    document.body.style.paddingTop = 0
+  } 
+}
+
 router.beforeEach((to, from, next) => {
+
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
   const shareConfig = to.meta.shareConfig
-
+  setHeader()
   if (bgColor) {
     document.body.style.backgroundColor = bgColor
   } else {
