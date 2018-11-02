@@ -2,7 +2,7 @@
 import config from '@/config/index'
 
 const utils = {
-  ua: navigator.userAgent,
+  ua: navigator.userAgent.toLowerCase(),
   ios () {
     return this.ua && /iphone|ipad|ipod|ios/.test(this.ua) > 0
   },
@@ -217,7 +217,7 @@ const utils = {
    * @return {String} ut
    */
   loggedIn () {
-    let ut = utils.getCookie('lyfh5ut')
+    let ut = utils.getUserToken()
     return ut && ut.length > 0
   },
   /**
