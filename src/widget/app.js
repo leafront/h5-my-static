@@ -163,7 +163,7 @@ const app = {
     title,
     description,
     imgUrl,
-    platforms = null  //WechatMoments,朋友圈 Wechat,微信 QQ,QZone,qq空间,ShortMessage 短信,IM 无聊
+    channel = null  //WechatMoments,朋友圈 Wechat,微信 QQ,QZone,qq空间,ShortMessage 短信,IM 无聊
   },callback) {
     const shareConfig = {
       link: link,
@@ -173,7 +173,7 @@ const app = {
       description,
       imgUrl,
       pic: imgUrl,
-      platforms: platforms
+      channel: channel
     }
     if (utils.isApp()) {
       app.postMessage('share', {
@@ -182,7 +182,7 @@ const app = {
         description: shareConfig.description,
         url160x160: shareConfig.pic,
         pic: shareConfig.pic,
-        platforms: shareConfig.platforms
+        channel: shareConfig.channel
       },() => {
         callback && callback()
       })
