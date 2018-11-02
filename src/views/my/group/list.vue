@@ -40,16 +40,27 @@
 <script type='text/javascript'>
 
   import AppHeader from '@/components/common/header'
+
   import PageLoading from '@/components/common/pageLoading'
+
   import UIShare from '@/components/widget/ui-share'
+
   import config from '@/config/index'
+
   import * as Model from '@/model/group'
+
   import utils from '@/widget/utils'
+
   import weixin_share from '@/common/weixin_share'
+
   import LazyLoad from '@/components/widget/lazyLoad'
+
   import store from '@/widget/store'
+
   import {mapGetters, mapActions} from 'vuex'
+
   import app from '@/widget/app'
+  
   import '@/widget/requestAnimationFrame'
 
   export default {
