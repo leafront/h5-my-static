@@ -20,7 +20,7 @@ Object.keys(filter).forEach(key => {
 const setHeader = () => {
   const hideHead = utils.query('hideHead')
   if (utils.isApp()) {
-    if (hideHead == 0) {
+    if (hideHead == 0 && utils.getVersion() < 5320) {
       app.postMessage('hiddenHead',{'isHidden':'1'})
       document.body.style.paddingTop = '.88rem'
     } else {

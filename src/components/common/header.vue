@@ -37,7 +37,7 @@
     computed: {
       showHeader () {
         if (utils.isApp()) {
-          if (utils.query('hideHead') == 0) {
+          if (utils.query('hideHead') == 0 && utils.getVersion() < 5320) {
             return true
           } else {
             return false
