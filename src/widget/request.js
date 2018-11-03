@@ -61,6 +61,7 @@ export default function request (url,{
     },
     hostPath
   }
+  clearStorage()
   if (dataType !== 'text') {
     options.data = Object.assign({
       ut,
