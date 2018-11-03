@@ -72,9 +72,6 @@ export default {
       })
     }
   },
-  created () {
- 
-  },
   mounted () {
     this.getLizardCode()
   }
