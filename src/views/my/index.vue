@@ -691,7 +691,7 @@
       position: absolute;
       background: #ff6900;
       top: -.15rem;
-      right: .3rem;
+      right: .1rem;
       &.active{
         padding: 0 .15rem;
         border-radius: .15rem;
