@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon-precomposed" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
     <link rel="apple-touch-startup-image" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
     <link href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" rel="Shortcut Icon" type="image/x-icon" />
-	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
     <title>来伊份商城</title>
 	  <script type="text/javascript">
 			(function (win) {
@@ -51,13 +51,7 @@
               docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
             }
           }
-          var isNativeApp = navigator.userAgent.indexOf('ody') > -1
-          if (isNativeApp) {           
-            metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
-
-          } else {
-            metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
-          }
+          metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
 					doc.documentElement.style.fontSize = docFontSize;
 				};
 
@@ -112,9 +106,9 @@
         }
       }
     </script>
-  <!--   <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
+<!--     <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
     <script>
       var vConsole = new VConsole()
-    </script> --> 
+    </script>  -->
   </body>
 </html>
