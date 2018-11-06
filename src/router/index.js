@@ -32,6 +32,8 @@ const MyVipRule = r => require.ensure([], () => r(require('@/views/my/vip/rule.v
 
 const MyVipExplain = r => require.ensure([], () => r(require('@/views/my/vip/explain.vue')),'MyVipExplain')
 
+const MyIndex = r => require.ensure([], () => r(require('@/views/my/index.vue')),'MyIndex')
+
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -153,6 +155,13 @@ export default new VueRouter({
         title: '会员权益说明',
         requireLogin: true,
         bgColor: '#fff'
+      }
+    }, {
+      path: '/my/index',
+      name: 'MyIndex',
+      component: MyIndex,
+      meta: {
+        title: '我的'
       }
     }
   ]
