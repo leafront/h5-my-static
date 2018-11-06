@@ -29,7 +29,9 @@ const setHeader = () => {
     } 
   } else if (utils.weixin() || utils.nativeQQ()){
     document.body.style.paddingTop = 0
-  } 
+  } else {
+    document.body.style.paddingTop = '.88rem'
+  }
 }
 
 router.beforeEach((to, from, next) => {

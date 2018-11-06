@@ -22,7 +22,7 @@
             <p v-else="loggedIn">- -</p>
             <span>会员等级</span>
           </div>
-          <div class="my-vip-pic" v-if="userInfo.headPicUrl" :style="{'background':'url('+userInfo.headPicUrl+')','backgroundSize': '1.28rem auto'}"></div>
+          <div class="my-vip-pic" @click="routerAction('/my/personal')" v-if="userInfo.headPicUrl" :style="{'background':'url('+userInfo.headPicUrl+')','backgroundSize': '1.28rem auto'}"></div>
           <div class="my-vip-pic" v-else></div>
           <div class="my-vip-txt" @click="pageAction('/my/yidou.html')">
             <p v-if="loggedIn">{{walletInfo.yBean || 0}}</p>
@@ -203,8 +203,6 @@
 
   import * as Model from '@/model/index'
 
-  import app from '@/widget/app'
-
   import config from '@/config/index'
 
   import utils from '@/widget/utils'
@@ -216,7 +214,7 @@
       return {
         title: '我的',
         pageView: false,
-        loggedIn: app.loggedIn(),
+        loggedIn: utils.loggedIn(),
         userInfo:  {},
         walletInfo: {},
         yCardBalanceState: false,
@@ -243,7 +241,7 @@
       },
       goOneWord () {
         if (this.loggedIn) {
-          const ut = app.getUserToken()
+          const ut = utils.getUserToken()
           const hostName = window.encodeURIComponent(location.origin)
           location.href =  config.redPacket + `/wap/wordgetcoupon.html?session=${ut}&source=${hostName}`
         } else {
@@ -395,7 +393,7 @@
           Model.getIMAppModule({
             type: 'GET',
             data: {
-              token: app.getUserToken(),
+              token: utils.getUserToken(),
               terminal: 'H5'
             }
           }).then((result) => {
@@ -520,6 +518,9 @@
         }
       }
     },
+    beforeCreate () {
+      document.body.style.paddingTop = 0
+    },
     created () {
       this.$showLoading()
       this.getUserInfo()
@@ -556,7 +557,7 @@
   }
   .my-index-column{
     margin-top: .2rem;
-    margin-bottom: .6rem;
+    margin-bottom: 1.5rem;
     background: #fff;
     display: flex;
     flex-wrap: wrap;
@@ -694,7 +695,7 @@
       &.active{
         padding: 0 .15rem;
         border-radius: .15rem;
-        right: .3rem;
+        right: .1rem;
       }
     }
   }

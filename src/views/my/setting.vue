@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder" :backFn="backAction">
+    <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-setting-list">
@@ -79,13 +79,6 @@
       toggleContactPopup (val) {
         this.contactPopup = val
       },
-      backAction () {
-        if (this.isApp) {
-          app.back()
-        } else {
-          location.href = '/my/home.html'
-        }
-      },
       /**
        * 清除缓存数据
        */
@@ -125,7 +118,7 @@
             if (this.isApp) {
               utils.logout()
             } else {
-              location.href = '/my/home.html'
+              location.href = '/my/index'
             }
           } else {
             this.$toast(result.message)

@@ -8,7 +8,7 @@
           <strong class="cfff">{{info.yCardBalance || 0}}</strong>
           <span class="font cfff">悠点卡</span>
         </div>
-        <i class="my-wallet-icon-line" v-if="info.eCardBalance"></i>
+        <i class="my-wallet-icon-line" v-if="info.yCardBalance"></i>
         <div class="my-wallet-card-item" @click="pageAction('/my/pointCards-list.html')">
           <strong class="cfff">{{info.eCardBalance || 0}}</strong>
           <span class="font cfff">伊点卡</span>
@@ -94,7 +94,14 @@
        */
       getWalletInfo () {
         Model.getWalletInfo({
-          type: 'GET'
+          type: 'GET',
+          data: {
+            isECard: 1,
+            isYCard: 1,
+            isBean: 1,
+            isCoupon: 1,
+            isPoint: 1
+          }
         }).then((result) => {
 
           this.$hideLoading()

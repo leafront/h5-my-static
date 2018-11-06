@@ -51,6 +51,12 @@
               docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
             }
           }
+          var isNativeApp = navigator.userAgent.indexOf('ody') > -1
+          if (isNativeApp) {
+            metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
+          } else {
+            metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
+          }
 					metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale);
 					doc.documentElement.style.fontSize = docFontSize;
 				};

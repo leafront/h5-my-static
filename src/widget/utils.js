@@ -18,6 +18,16 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1
   },
+  isWeixinIphoneX (){
+
+    const isWeixin = utils.weixi()
+
+    const ua = window.navigator.userAgent.toLowerCase()
+
+    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
+
+    return (isWeixin && isPhoneX)
+  },
   /**
    * @param  {String}  value
    * @return {String}  value
