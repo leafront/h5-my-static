@@ -22,8 +22,7 @@
             <p v-else="loggedIn">- -</p>
             <span>会员等级</span>
           </div>
-          <div class="my-vip-pic" @click="routerAction('/my/personal')" v-if="userInfo.headPicUrl" :style="{'background':'url('+userInfo.headPicUrl+')','backgroundSize': '1.28rem auto'}"></div>
-          <div class="my-vip-pic" v-else></div>
+          <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')" v-if="userInfo.headPicUrl"/>
           <div class="my-vip-txt" @click="pageAction('/my/yidou.html')">
             <p v-if="loggedIn">{{walletInfo.yBean || 0}}</p>
             <p v-else>- -</p>
@@ -256,11 +255,14 @@
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
-          const data = result.data
+          const data = result.data || {}
           this.$hideLoading()
           this.pageView = true
           if (result.code == 0 && data) {
-            store.set('kf_head_pic', data['url100x100'], 'session');
+            store.set('kf_head_pic', data['url100x100'], 'session')
+            this.userInfo = data
+          } else {
+            data.headPicUrl = config.staticPath + '/webapp-static/images/logo-laiyifen.png'
             this.userInfo = data
           }
         })
@@ -814,8 +816,6 @@
   .my-vip-pic{
     width: 1.28rem;
     height: 1.28rem;
-    background: url(./images/logo-laiyifen.png) no-repeat;
-    background-size: 1.28rem auto;
     border-radius: 50%;
     margin: 0 .4rem;
   }
