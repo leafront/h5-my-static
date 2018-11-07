@@ -27,7 +27,7 @@ const setHeader = () => {
       app.postMessage('hiddenHead',{'isHidden':'0'})
       document.body.style.paddingTop = 0
     } 
-  } else if (utils.weixin() || utils.nativeQQ()){
+  } else if (utils.weixin() || utils.nativeQQ()) {
     document.body.style.paddingTop = 0
   } else {
     document.body.style.paddingTop = '.88rem'
