@@ -1,7 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
-    <div class="scroll-view-wrapper">
+    <div class="scroll-view-wrapper visibility">
       <div class="svip_error">
         <img src="../images/error.png"/>
       </div>
@@ -11,7 +11,7 @@
 
 <style  lang="scss">
   .svip_error{
-    height: 100%;
+    margin-top: 2.8rem;
     display: flex;
     align-items: center;
     justify-content: center;

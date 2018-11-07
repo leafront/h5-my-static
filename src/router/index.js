@@ -21,7 +21,8 @@ export default new VueRouter({
       name: 'PageError',
       component: () => import('@/views/my/error/404.vue'),
       meta: {
-        title: '找不到页面'
+        title: '找不到页面',
+        bgColor: '#61b8ff'
       }
     }, {
       path: '/my/setting',
