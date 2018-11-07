@@ -730,6 +730,7 @@
       display: flex;
       justify-content: flex-end;
       padding-right: .1rem;
+      padding-top: .03rem;
     }
   }
   .my-finance{
