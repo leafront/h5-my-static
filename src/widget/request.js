@@ -109,22 +109,22 @@ export default function request (url,{
       ) {
         utils.deleteUserToken()
         if (!ignoreLogin) {
+          reject(results)
           if (utils.isApp()) {
             utils.login()
           } else {
             const from = utils.getRelatedUrl()
             location.href = `/login.html?from=` + encodeURIComponent(from)
           }
+        } else {
+          resolve(results)
         }
-        resolve(results)
-
       } else {
         if (results.code == 0 && cache) {
           store.set(cacheUrl, cacheData,'local')
         }
       }
       resolve(results)
-
     })
   }
 
