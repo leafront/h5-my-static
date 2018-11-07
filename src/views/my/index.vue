@@ -457,7 +457,11 @@
       // 打开七鱼客服
       _openCustom() {
         const QYKeFuKey = config.QYKeFuKey
-        utils.loadScript(`https://qiyukf.com/script/${QYKeFuKey}.js`, () => {
+        const script = document.createElement("script")
+        script.type = 'text/javascript'
+        script.src = `https://qiyukf.com/script/${QYKeFuKey}.js`
+        document.getElementsByTagName('head')[0].appendChild(script)
+        script.onload = () => {
           if (ysf) {
             ysf.config({
               uid: this.uid,
@@ -471,7 +475,7 @@
               }
             })
           }
-        })
+        }
       },
       /**
        * 获取阿里百川配置参数
