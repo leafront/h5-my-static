@@ -24,6 +24,7 @@
       </div>
     </div>
     <div class="safe-area-inset"></div>
+    <div class="safe-area-inset"></div>
   </div>
 </template>
 
