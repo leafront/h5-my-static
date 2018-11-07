@@ -4,36 +4,6 @@ import VueRouter from 'vue-router'
 
 import config from '@/config/index'
 
-const PageError = r => require.ensure([], () => r(require('@/views/my/error/404.vue')),'PageError')
-
-const MySetting = r => require.ensure([], () => r(require('@/views/my/setting.vue')),'MySetting')
-
-const MyPersonal = r => require.ensure([], () => r(require('@/views/my/personal.vue')),'MyPersonal')
-
-const MyAboutUs = r => require.ensure([], () => r(require('@/views/my/aboutus.vue')),'MyAboutUs')
-
-const MyProtocol = r => require.ensure([], () => r(require('@/views/my/protocol.vue')),'MyProtocol')
-
-const MySecurity = r => require.ensure([], () => r(require('@/views/my/security.vue')),'MySecurity')
-
-const MyMessage = r => require.ensure([], () => r(require('@/views/my/message.vue')),'MySecurity')
-
-const MyGroupList = r => require.ensure([], () => r(require('@/views/my/group/list.vue')),'MyGroupList')
-
-const MyBuyList = r => require.ensure([], () => r(require('@/views/my/buy/list.vue')),'MyBuyList')
-
-const MyAccountSecurity = r => require.ensure([], () => r(require('@/views/my/account/security.vue')),'MyAccountSecurity')
-
-const MyWallet = r => require.ensure([], () => r(require('@/views/my/wallet.vue')),'MyWallet')
-
-const MyVipIndex = r => require.ensure([], () => r(require('@/views/my/vip/index.vue')),'MyVipIndex')
-
-const MyVipRule = r => require.ensure([], () => r(require('@/views/my/vip/rule.vue')),'MyVipRule')
-
-const MyVipExplain = r => require.ensure([], () => r(require('@/views/my/vip/explain.vue')),'MyVipExplain')
-
-const MyIndex = r => require.ensure([], () => r(require('@/views/my/index.vue')),'MyIndex')
-
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -49,21 +19,21 @@ export default new VueRouter({
     {
       path: '*',
       name: 'PageError',
-      component: PageError,
+      component: () => import('@/views/my/error/404.vue'),
       meta: {
         title: '找不到页面'
       }
     }, {
       path: '/my/setting',
       name: 'MySetting',
-      component: MySetting,
+      component: () => import('@/views/my/setting.vue'),
       meta: {
         title: '个人设置'
       }
     }, {
       path: '/my/personal',
       name: 'MyPersonal',
-      component: MyPersonal,
+      component: () => import('@/views/my/personal.vue'),
       meta: {
         title: '个人资料',
         requireLogin: true
@@ -71,28 +41,28 @@ export default new VueRouter({
     }, {
       path: '/my/aboutus',
       name: 'MyAboutUs',
-      component: MyAboutUs,
+      component: () => import('@/views/my/aboutus.vue'),
       meta: {
         title: '关于我们'
       }
     }, {
       path: '/my/protocol',
       name: 'MyProtocol',
-      component: MyProtocol,
+      component: () => import('@/views/my/protocol.vue'),
       meta: {
         title: '软件使用许可协议'
       }
     }, {
       path: '/my/security',
       name: 'MySecurity',
-      component: MySecurity,
+      component: () => import('@/views/my/security.vue'),
       meta: {
         title: '特别说明'
       }
     }, {
       path: '/my/message',
       name: 'MyMessage',
-      component: MyMessage,
+      component: () => import('@/views/my/message.vue'),
       meta: {
         title: '消息设置',
         requireLogin: true
@@ -100,7 +70,7 @@ export default new VueRouter({
     }, {
       path: '/my/group/list',
       name: 'MyGroupList',
-      component: MyGroupList,
+      component: () => import('@/views/my/group/list.vue'),
       meta: {
         title: '我的团',
         requireLogin: true
@@ -108,7 +78,7 @@ export default new VueRouter({
     }, {
       path: '/my/buy/list',
       name: 'MyBuyList',
-      component: MyBuyList,
+      component: () => import('@/views/my/buy/list.vue'),
       meta: {
         title: '常购清单',
         requireLogin: true
@@ -116,7 +86,7 @@ export default new VueRouter({
     }, {
       path: '/my/account/security',
       name: 'MyAccountSecurity',
-      component: MyAccountSecurity,
+      component: () => import('@/views/my/account/security.vue'),
       meta: {
         title: '账户安全',
         requireLogin: true
@@ -124,7 +94,7 @@ export default new VueRouter({
     }, {
       path: '/my/wallet',
       name: 'MyWallet',
-      component: MyWallet,
+      component: () => import('@/views/my/wallet.vue'),
       meta: {
         title: '我的钱包',
         requireLogin: true
@@ -132,7 +102,7 @@ export default new VueRouter({
     }, {
       path: '/my/vip/index',
       name: 'MyVipIndex',
-      component: MyVipIndex,
+      component: () => import('@/views/my/vip/index.vue'),
       meta: {
         title: '会员中心',
         requireLogin: true,
@@ -141,7 +111,7 @@ export default new VueRouter({
     }, {
       path: '/my/vip/rule',
       name: 'MyVipRule',
-      component: MyVipRule,
+      component: () => import('@/views/my/vip/rule.vue'),
       meta: {
         title: '会员升降级规则',
         requireLogin: true,
@@ -150,7 +120,7 @@ export default new VueRouter({
     }, {
       path: '/my/vip/explain',
       name: 'MyVipExplain',
-      component: MyVipExplain,
+      component: () => import('@/views/my/vip/explain.vue'),
       meta: {
         title: '会员权益说明',
         requireLogin: true,
@@ -159,7 +129,7 @@ export default new VueRouter({
     }, {
       path: '/my/index',
       name: 'MyIndex',
-      component: MyIndex,
+      component: () => import ('@/views/my/index.vue'),
       meta: {
         title: '我的'
       }
