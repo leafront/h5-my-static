@@ -103,7 +103,7 @@
         title: '会员中心',
         pageView: false,
         vip_banner: [],
-        vip_description: config.staticPath + '/webapp-static/images/lazyLoad.jpeg',
+        vip_description: config.staticPath + '/webapp-static/images/lazyLoad.png',
         vip_interests: [],
         userInfo: {},
         headerPic: '',
