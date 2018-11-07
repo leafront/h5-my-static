@@ -33,9 +33,9 @@
         <div class="my-index-name">
           <p class="font-b cfff" v-if="loggedIn">{{userInfo.nickname}}</p>
           <div class="my-index-action cfff font" v-else>
-            <span class="my-index-login" @click="pageAction('/login.html?from=/my/home.html')">登录</span>
+            <span class="my-index-login" @click="pageAction('/login.html?from=/my/index')">登录</span>
             <i>/</i>
-            <span class="my-index-reg" @click="pageAction('/regis.html?from=/my/home.html')">注册</span>
+            <span class="my-index-reg" @click="pageAction('/regis.html?from=/my/index')">注册</span>
           </div>
           <div class="my-index-qrcode" @click="pageAction('/my/coupons-usercode.html')">
             <i></i>
