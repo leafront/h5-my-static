@@ -269,7 +269,7 @@ const utils = {
   },
   appViewFixed () {
 
-    const appView = document.getElementById('app')
+    const appView = document.body
     if (appView.classList.contains('app_fixed')){
       appView.classList.remove('app_fixed')
     } else {
