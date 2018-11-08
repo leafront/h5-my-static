@@ -18,16 +18,6 @@ const utils = {
   isApp () {
     return this.ua.indexOf('ody') > -1
   },
-  isWeixinIphoneX (){
-
-    const isWeixin = utils.weixi()
-
-    const ua = window.navigator.userAgent.toLowerCase()
-
-    const isPhoneX = /iphone/gi.test(ua) && (screen.height == 812 && screen.width == 375)
-
-    return (isWeixin && isPhoneX)
-  },
   /**
    * @param  {String}  value
    * @return {String}  value
@@ -279,7 +269,7 @@ const utils = {
   },
   appViewFixed () {
 
-    const appView = document.getElementById('app')
+    const appView = document.body
     if (appView.classList.contains('app_fixed')){
       appView.classList.remove('app_fixed')
     } else {
