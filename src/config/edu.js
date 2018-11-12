@@ -9,7 +9,8 @@ const config = JSON.stringify({
   "getTime": new Date().getTime(),
   "originalId": "gh_4a4a36db4c12",
   "QYKeFuKey": "5690717053c82f04333c095b681c5121",
-  "trackerPath": "http://10.3.3.109:8080"
+  "trackerPath": "http://10.3.3.109:8080",
+  "redPacket": "http://touch.laiyifen.com"
 })
 
 module.exports = config

@@ -134,6 +134,14 @@ export default new VueRouter({
       meta: {
         title: '我的'
       }
+    }, {
+      path: '/my/evaluate',
+      name: 'MyEvaluate',
+      component: () => import('@/views/my/evaluate'),
+      meta: {
+        title: '我的评价',
+        requireLogin: true
+      }
     }
   ]
 })
