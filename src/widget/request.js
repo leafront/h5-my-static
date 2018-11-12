@@ -65,6 +65,7 @@ export default function request (url,{
   if (dataType !== 'text') {
     options.data = Object.assign({
       ut,
+      times: new Date().getTime(),
       platform: config.platform,
       companyId: config.companyId,
       platformId: config.platformId

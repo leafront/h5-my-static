@@ -127,6 +127,7 @@
        * @param event
        */
       scrollLoadList () {
+        console.log(111)
         const pageViewHeight = window.innerHeight
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
         const pageHeight = document.documentElement.offsetHeight
@@ -147,11 +148,11 @@
     created () {
       this.$showLoading()
       this.getBuyList()
-      window.addEventListener('scroll',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+      window.addEventListener('touchmove',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     },
     beforeDestroy () {
       cancelAnimationFrame(this.timer)
-      window.removeEventListener('scroll', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+      window.removeEventListener('touchmove', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     }
   }
 

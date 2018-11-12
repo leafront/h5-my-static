@@ -1,13 +1,13 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
-    <div class="my-evaluate-nav">
+    <div class="my-evaluate-nav" :style="{top: navTop}">
       <ul class="my-evaluate-nav-list">
         <li v-for="(item,index) in menuList" :key="index" @click="checkedList(index)" :class="{'active': status == index}">{{item}}</li>
       </ul>
     </div>
     <div class="scroll-view-wrapper" id="my-evaluate-scroll" :class="{'visibility': pageView}">
-      <div class="my-evaluate" id="my-evaluate-view">
+      <div class="my-evaluate" id="my-evaluate-view" >
         <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-evaluate-scroll'}">
           <div class="my-evaluate-item" :key="item.id" v-for="item in list">
             <div class="my-evaluate-title">
@@ -84,7 +84,8 @@
         showLoading: false,
         isScrollLoad: false,
         totalPage: 1,
-        timer: null
+        timer: null,
+        navTop: '.88rem'
       }
     },
     components: {
@@ -175,12 +176,15 @@
     },
     created () {
       this.$showLoading()
+      if (utils.isApp()) {
+        this.navTop = '0'
+      }
       this.getEvaluateList()
-      window.addEventListener('scroll',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+      window.addEventListener('touchmove',this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     },
     beforeDestroy () {
       cancelAnimationFrame(this.timer)
-      window.removeEventListener('scroll', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
+      window.removeEventListener('touchmove', this.scrollLoadList,utils.isPassive() ? {passive: true} : false)
     }
   }
 
@@ -202,6 +206,13 @@
     p{
       font-size: .3rem;
     }
+  }
+  .my-evaluate-nav{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0;
+    z-index: 100;
   }
   .my-evaluate-cont{
     margin-top: .05rem;
@@ -296,6 +307,7 @@
   }
   .my-evaluate{
     margin-top: .2rem;
+    padding-top: .9rem;
   }
   .my-evaluate-item{
     margin-top: .2rem;
