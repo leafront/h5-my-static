@@ -8,6 +8,7 @@ import filter from '@/filters'
 import Toast from '@/components/toast'
 import Loading from '@/components/loading'
 import PageLoading from '@/components/pageLoading'
+import { sendTracker } from '@/widget/tracker'
 
 Vue.use(Toast)
 Vue.use(Loading)
@@ -39,6 +40,7 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
   const shareConfig = to.meta.shareConfig
+  const trackerConfig = to.meta.trackerConfig
   setHeader()
   if (bgColor) {
     document.body.style.backgroundColor = bgColor
@@ -56,6 +58,7 @@ router.beforeEach((to, from, next) => {
       if (shareConfig) {
         app.setShareContent(shareConfig)
       }
+      sendTracker(trackerConfig)
     } else {
       if (utils.isApp()) {
         utils.login()
@@ -69,6 +72,7 @@ router.beforeEach((to, from, next) => {
     if (shareConfig) {
       app.setShareContent(shareConfig)
     }
+    sendTracker(trackerConfig)
   }
 })
 

@@ -109,14 +109,30 @@ const app = {
     nodes = null
     fragment = null
   },
-  loginAction () {
+  loggedInAction (url) {
     if (utils.loggedIn()) {
-      return
+      if (url) {
+        location.href = url
+      }
     } else {
       if (utils.isApp()) {
         utils.login()
       } else {
-        const from = utils.getRelatedUrl()
+        const from = url || utils.getRelatedUrl()
+        if (from) {
+          location.href = `/login.html?from=` + encodeURIComponent(url)
+        } else {
+          location.href = '/login.html'
+        }
+      }
+    }
+  },
+  loginAction (url) {
+    if (!utils.loggedIn()) {
+      if (utils.isApp()) {
+        utils.login()
+      } else {
+        const from = url || utils.getRelatedUrl()
         if (from) {
           location.href = `/login.html?from=` + encodeURIComponent(from)
         } else {

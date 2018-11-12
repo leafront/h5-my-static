@@ -93,7 +93,7 @@
     i{
       width: .5rem;
       height: .5rem;
-      background: url(../../images/footer_icon.png) no-repeat;
+      background: url(./images/footer_icon.png) no-repeat;
       background-size: 3rem auto;
       display: block;
       margin-top: .1rem;
