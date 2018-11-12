@@ -23,15 +23,9 @@ const setHeader = () => {
   if (utils.isApp()) {
     if (hideHead == 0 && utils.getVersion() < 5320) {
       app.postMessage('hiddenHead',{'isHidden':'1'})
-      document.body.style.paddingTop = '.88rem'
     } else {
       app.postMessage('hiddenHead',{'isHidden':'0'})
-      document.body.style.paddingTop = 0
     } 
-  } else if (utils.weixin() || utils.nativeQQ()) {
-    document.body.style.paddingTop = 0
-  } else {
-    document.body.style.paddingTop = '.88rem'
   }
 }
 
