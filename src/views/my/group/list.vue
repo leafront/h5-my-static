@@ -22,7 +22,7 @@
           </div>
           <div class="my-group-action">
             <span class="font c3" v-if="item.status != 1 && item.status != 2" @click="pageAction(`/group/group-detail.html?instId=${item.patchGrouponInstId}`)">查看团详情</span>
-            <span class="font c3" @click="pageAction(`/my/order-detail.html?orderCode=${item.orderCode}`)">查看订单详情</span>
+            <span class="font c3" @click="appAction(item.orderCode)">查看订单详情</span>
             <span class="active font c3" @click="shareAction(item)" v-if="(item.status == 6 || item.status == 2) && (isApp || isWeixin)">邀请好友参团</span>
           </div>
         </div>
@@ -94,6 +94,13 @@
       ]),
       pageAction (url) {
         location.href = url
+      },
+      appAction (orderCode) {
+        if (utils.ios()) {
+          location.href = 'lyf://orderdetail?body={"orderCode":' + orderCode + '}'
+        } else {
+          location.href = `/my/order-detail.html?orderCode=${orderCode}`
+        }
       },
       checkedList (val) {
         if (val == this.status) {
