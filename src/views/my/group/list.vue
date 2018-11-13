@@ -96,7 +96,7 @@
         location.href = url
       },
       appAction (orderCode) {
-        if (utils.ios()) {
+        if (utils.ios() && utils.isApp()) {
           location.href = 'lyf://orderdetail?body={"orderCode":' + orderCode + '}'
         } else {
           location.href = `/my/order-detail.html?orderCode=${orderCode}`
