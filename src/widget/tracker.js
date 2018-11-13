@@ -4,6 +4,8 @@ import config from '@/config/index'
 
 import utils from '@/widget/utils'
 
+import store from '@/widget/store'
+
 /**
  * @return {String} uuid
  */
@@ -54,13 +56,14 @@ export const sendTracker = ({
 		p_id: 1
 	 }
   }
+  const uid = store.get('lyfuid', 'local') || ''
 	const params = {
 	  ev: '17',
-	  did: '',
+	  did: generateUUID(),
 	  tv: '1.0',
 	  v: '', //version 客户端版本号
 	  ut: utils.getUserToken(),
-	  uid: generateUUID(),
+	  uid: uid,
 	  pid, // 页面ID
 	  inf: '', // inFrom 内部来源 上一个页面的page id
 	  cha: 'H5', // channel 所属渠道编码：IOS／ANDROID／H5/APPLET（小程序）／WEBSITE（官网）
