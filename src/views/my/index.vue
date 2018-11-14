@@ -212,7 +212,7 @@
     data () {
       return {
         title: '我的',
-        pageView: false,
+        pageView: true,
         loggedIn: utils.loggedIn(),
         userInfo:  {},
         walletInfo: {},
@@ -256,8 +256,6 @@
           ignoreLogin: true
         }).then((result) => {
           const data = result.data || {}
-          this.$hideLoading()
-          this.pageView = true
           if (result.code == 0 && data) {
             store.set('kf_head_pic', data['url100x100'], 'session')
             this.userInfo = data
@@ -524,11 +522,7 @@
         }
       }
     },
-    beforeCreate () {
-      document.body.style.paddingTop = 0
-    },
     created () {
-      this.$showLoading()
       this.getUserInfo()
       this.getWalletInfo()
       this.orderSummary()
