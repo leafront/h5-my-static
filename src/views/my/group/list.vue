@@ -2,7 +2,7 @@
   <div class="pageView">
     <AppHeader :title="title" :isBorder="isBorder">
     </AppHeader>
-    <div class="scroll-view-wrapper white-view" id="my-group-scroll" :class="{'visibility': pageView}">
+    <div class="scroll-view-wrapper" id="my-group-scroll" :class="{'visibility': pageView}">
       <div class="my-group-menu">
         <ul class="my-group-menu-list">
           <li :class="{'active': index == status}" :key="item.orderCode" @click="checkedList(index)" v-for="(item,index) in menuList">{{item}}</li>

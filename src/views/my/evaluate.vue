@@ -1,12 +1,12 @@
 <template>
   <div class="pageView">
+    <div class="my-evaluate-nav" :style="{top: navTop}">
+      <ul class="my-evaluate-nav-list">
+        <li v-for="(item,index) in menuList" :key="index" @click="checkedList(index)" :class="{'active': status == index}">{{item}}</li>
+      </ul>
+    </div>
     <AppHeader :title="title" :isBorder="isBorder"></AppHeader>
     <div class="scroll-view-wrapper" id="my-evaluate-scroll" :class="{'visibility': pageView}">
-      <div class="my-evaluate-nav" :style="{top: navTop}">
-        <ul class="my-evaluate-nav-list">
-          <li v-for="(item,index) in menuList" :key="index" @click="checkedList(index)" :class="{'active': status == index}">{{item}}</li>
-        </ul>
-      </div>
       <div class="my-evaluate" id="my-evaluate-view" >
         <LazyLoad :list="list" :options="{ele:'pic-lazyLoad',scrollEle: 'my-evaluate-scroll'}">
           <div class="my-evaluate-item" :key="item.id" v-for="item in list">
