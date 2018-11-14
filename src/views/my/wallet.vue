@@ -18,14 +18,14 @@
         <div class="my-wallet-item" v-if="isApp" @click="pageAction('/my/my-paycode.html')">
           <i class="icon1"></i>
           <p>付款码</p>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-wallet-item-wrapper" @click="pageAction('/my/paycodebank-list.html')">
         <div class="my-wallet-item">
           <i class="icon2"></i>
           <p>银行卡</p>
-          <div class="ui-right-bottom">
+          <div class="ui-right-arrow">
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
         <div class="my-wallet-item ui-bottom-line">
           <i class="icon3"></i>
           <p>伊豆</p>
-          <div class="ui-right-bottom">
+          <div class="ui-right-arrow">
           </div>
         </div>
       </div>
@@ -41,14 +41,14 @@
         <div class="my-wallet-item">
           <i class="icon4"></i>
           <p>积分</p>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-wallet-item-wrapper mt20" @click="pageAction('/my/coupons-list.html')">
         <div class="my-wallet-item ui-bottom-line">
           <i class="icon5"></i>
           <p>优惠券</p>
-          <div class="ui-right-bottom">
+          <div class="ui-right-arrow">
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
         <div class="my-wallet-item">
           <i class="icon6"></i>
           <p>提货券</p>
-          <div class="ui-right-bottom">
+          <div class="ui-right-arrow">
           </div>
         </div>
       </div>

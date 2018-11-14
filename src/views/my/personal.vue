@@ -17,7 +17,7 @@
         <div class="my-personal-item ui-bottom-line" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
           <strong>{{userInfo.nickname}}</strong>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-personal-item ui-bottom-line">
           <span>手机号码</span>
@@ -26,12 +26,12 @@
         <div class="my-personal-item ui-bottom-line" @click="toggleLocation(true)">
           <span>地区</span>
           <strong>{{userInfo.addressDetail}}</strong>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-personal-item ui-bottom-line" @click="editPopup(2, '编辑地址')">
           <span>地址</span>
           <strong>{{userInfo.userAddress}}</strong>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-personal-item ui-bottom-line" @click="toggleSex(true)">
           <span>性别</span>
@@ -44,12 +44,12 @@
         <div class="my-personal-item ui-bottom-line" @click="editPopup(3, '编辑邮编')">
           <span>邮编</span>
           <strong>{{userInfo.zipCode}}</strong>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-personal-item" @click="editPopup(4, '编辑邮箱')">
           <span>邮箱</span>
           <strong>{{userInfo.email}}</strong>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-personal-auth">
@@ -58,7 +58,7 @@
       <div class="my-personal-auth-item" @click="identityAuth">
         <span>实名认证</span>
         <strong>{{isIdentityTips[identityStatus]}}</strong>
-        <div class="ui-right-bottom"></div>
+        <div class="ui-right-arrow"></div>
       </div>
     </div>
     <div class="my-personal_popup" v-show="personalPopup == 1">
@@ -498,7 +498,7 @@
     height: .88rem;
     align-items: center;
     padding: 0 .3rem;
-    .ui-right-bottom{
+    .ui-right-arrow{
       margin-left: .2rem;
     }
     span{
@@ -515,7 +515,7 @@
     height: .88rem;
     align-items: center;
     padding-right: .3rem;
-    .ui-right-bottom{
+    .ui-right-arrow{
       margin-left: .2rem;
     }
     span{

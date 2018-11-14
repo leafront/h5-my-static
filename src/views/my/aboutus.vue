@@ -12,11 +12,11 @@
       <div class="my-aboutUs-menu">
         <div class="my-aboutUs-item" @click="pageAction('/my/protocol')">
           <span class="c3">手机终端软件用户使用协议</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-aboutUs-item" @click="pageAction('/my/security')">
           <span class="c3">特别说明</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
     </div>

@@ -13,11 +13,11 @@
         </div>
         <div class="my-account-security-item" v-if="hasPassword" @click="pageAction('/setting/changepasswd1.html')">
           <span>密码修改</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
         <div class="my-account-security-item" v-if="!hasPassword" @click="pageAction('/setting/bindpassword.html')">
           <span>密码添加</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
     </div>

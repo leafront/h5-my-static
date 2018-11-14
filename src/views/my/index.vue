@@ -55,7 +55,7 @@
             <p>昨日成交预估金额</p>
             <span class="ff6900">￥{{yesterdayRecharge | price}}</span>
           </div>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-finance">
@@ -73,7 +73,7 @@
           <i class="order-icon"></i>
           <p class="c000 font-xb">我的订单</p>
           <span class="font-s">全部订单</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-index-order">
@@ -108,7 +108,7 @@
           <i class="money-icon"></i>
           <p class="c000 font-xb">我的钱包</p>
           <span class="font-s">查看全部</span>
-          <div class="ui-right-bottom"></div>
+          <div class="ui-right-arrow"></div>
         </div>
       </div>
       <div class="my-index-discount">
