@@ -21,7 +21,7 @@
                 <h4 class="ellipsis font c3">{{item.name}}</h4>
                 <div class="my-evaluate-button">
                   <p v-if="item.isComment == 0" @click="pageAction(`/evaluate/publish-evaluate.html?mpId=${item.orderCode}&soItemId=${item.soItemId}`)">去评价</p>
-                  <p v-if="item.isComment == 1" @click="pageAction(`/evaluate/update-evaluate.html?id=${item.id}&mpId=${item.orderCode}&soItemId=${item.soItemId}&id=${item.id}`)">去修改</p>
+                  <p v-if="item.canEdit == 1" @click="pageAction(`/evaluate/update-evaluate.html?id=${item.id}&mpId=${item.orderCode}&soItemId=${item.soItemId}`)">去修改</p>
                 </div>
               </div>
             </div>
@@ -217,7 +217,6 @@
   .my-evaluate-cont{
     margin-top: .05rem;
     padding-left: .3rem;
-    height: .4rem;
     display: flex;
     align-items: center;
   }
