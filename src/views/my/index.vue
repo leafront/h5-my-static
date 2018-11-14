@@ -22,7 +22,7 @@
             <p v-else="loggedIn">- -</p>
             <span>会员等级</span>
           </div>
-          <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')" v-if="userInfo.headPicUrl"/>
+          <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')"/>
           <div class="my-vip-txt" @click="pageAction('/my/yidou.html')">
             <p v-if="loggedIn">{{walletInfo.yBean || 0}}</p>
             <p v-else>- -</p>
