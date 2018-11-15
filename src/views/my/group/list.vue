@@ -75,7 +75,7 @@
         status: 0,
         showLoading: false,
         isScrollLoad: false,
-        totalPage: 1,
+        totalPage: 0,
         shareCodeNum: null,
         isApp: utils.isApp(),
         isWeixin: utils.weixin(),
