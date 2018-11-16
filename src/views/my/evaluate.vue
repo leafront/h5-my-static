@@ -49,7 +49,7 @@
           </div>
         </LazyLoad>
         <PageLoading :showLoading="showLoading"></PageLoading>
-        <div class="my_group_empty" v-show="pageView && !list.length">
+        <div class="my_evaluate_empty" v-show="pageView && !list.length">
           <img src="./images/evaluate_empty.png"/>
           <p>暂时没有相关评价哦</p>
         </div>
@@ -192,13 +192,14 @@
 
 
 <style lang="scss">
-  .my_group_empty{
+  .my_evaluate_empty{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     flex:1;
     padding-top: 3rem;
+    background: #fff;
     img{
       width: 2.94rem;
       height: 2.26rem;
@@ -306,6 +307,7 @@
   }
   .my-evaluate{
     padding-top: .9rem;
+    background: #f5f5f5;
   }
   .my-evaluate-item{
     margin-top: .2rem;

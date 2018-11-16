@@ -141,7 +141,8 @@ export default new VueRouter({
       component: () => import('@/views/my/evaluate'),
       meta: {
         title: '我的评价',
-        requireLogin: true
+        requireLogin: true,
+        bgColor: '#fff'
       }
     }
   ]
