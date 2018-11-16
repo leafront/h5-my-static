@@ -633,7 +633,7 @@
     padding: .3rem 0;
     background: #fff;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .my-index-discount-item{
     display: flex;
@@ -651,7 +651,7 @@
     display: flex;
     background: #fff;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .my-index-order-item{
     display: flex;
@@ -737,7 +737,7 @@
     padding: .3rem 0;
     background: #fff;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .my-finance-item{
     display: flex;
