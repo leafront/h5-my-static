@@ -302,7 +302,7 @@
         })
       },
       /**
-       * 添加常购清单
+       * 添加购物车
        */
       addBuyListCart ($event,item) {
         $event.stopPropagation()
@@ -327,7 +327,7 @@
         })
       },
       /**
-       *
+       * 获取购物车数量
        */
       getCartNum () {
         const sessionId = utils.getSessionId()

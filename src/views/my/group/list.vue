@@ -158,7 +158,7 @@
        * 滚动加载团列表
        */
       scrollLoadList () {
-        const pageViewHeight = window.innerHeight
+        const pageViewHeight = window.innerHeight 
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
         const pageHeight = document.documentElement.offsetHeight
         const realFunc = () => {

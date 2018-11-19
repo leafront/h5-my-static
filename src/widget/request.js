@@ -36,7 +36,7 @@ export default function request (url,{
   type,
   timeout,
   dataType = 'json',
-  data,
+  data = {} ,
   cache = false,
   expires = 5 * 60 * 1000,
   headers,
@@ -71,7 +71,9 @@ export default function request (url,{
       platformId: config.platformId
     },data)
   }
-
+  if (type == 'GET') {
+    options.data.times = new Date().getTime()
+  }
   let optionData = Object.assign({
     platform: config.platform,
     companyId: config.companyId,
