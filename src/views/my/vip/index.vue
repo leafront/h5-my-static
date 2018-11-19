@@ -177,7 +177,7 @@
         Model.getDolphinList({
           type: 'GET',
           cache: true,
-          expires: 60 * 60 * 1000,
+          expires: 10 * 60 * 1000,
           data: {
             pageCode: 'H5_USER_VIP',
             adCode: 'vip_banner,vip_description,vip_interests'
