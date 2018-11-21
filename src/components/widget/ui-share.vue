@@ -57,7 +57,7 @@
     }
   }
   .ui-share-arrow{
-    background: url(../../images/weixin_tips.png) no-repeat;
+    background: url('/webapp-static/images/weixin_tips.png') no-repeat;
     background-size: 1.13rem auto;
     width: 1.13rem;
     height: 1.39rem;

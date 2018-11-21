@@ -58,7 +58,7 @@
         padding-left: .15rem;
       }
       .icon {
-        background: url(/webapp-static/images/share_sprite.png) no-repeat;
+        background: url('/webapp-static/images/share_sprite.png') no-repeat;
         background-size: 1.65rem auto;
         width: .34rem;
         height: .34rem;
@@ -89,7 +89,7 @@
     i{
       width: .42rem;
       height: .11rem;
-      background: url(/webapp-static/images/share_sprite.png) no-repeat -.05rem -.1rem;
+      background: url('/webapp-static/images/share_sprite.png') no-repeat -.05rem -.1rem;
       background-size: 1.65rem auto;
       transition: transform .4s linear;
       &.active{

@@ -24,7 +24,7 @@
     background: #fff;
     padding-bottom: .2rem;
     .ui-showPageLoading-gif{
-      background:url('./images/loading.png') no-repeat;
+      background:url('/webapp-static/images/showPageLoading.png') no-repeat;
       width: 2.5rem;
       margin: 0 auto;
       height: 1.13rem;
