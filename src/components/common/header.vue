@@ -113,26 +113,6 @@
       text-align: center;
     }
   }
-  .ui-header-right-icon{
-    position:absolute;
-    right:0;
-    top:0;
-    display: flex;
-    align-items: center;
-    height: .88rem;
-    width: 1.2rem;
-    padding-right: .2rem;
-    justify-content: flex-end;
-    .icon-gengduo{
-      font-size: .5rem;
-      color:#999;
-      transition: transform .4s linear;
-      &.active{
-        transform: rotate(90deg);
-      }
-    }
-  }
-
   .ui-header-back_btn{
     position:relative;
     width: .26rem;
