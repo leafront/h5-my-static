@@ -6,10 +6,6 @@
         <i class="icon icon-home"></i>
         <span class="font">首页</span>
       </li>
-      <li @click="showShareMenu" v-if="isApp">
-        <i class="icon icon-share"></i>
-        <span class="font">分享</span>
-      </li>
       <li @click="myAction('/my/index')">
         <i class="icon icon-my"></i>
         <span class="font">我&nbsp;&nbsp;</span>
@@ -106,11 +102,6 @@
   import utils from '@/widget/utils'
 
   export default {
-    data () {
-      return {
-        isApp: utils.isApp()
-      }
-    },
     computed: {
       ...mapGetters({
         'headerMenu': 'getHeaderMenu'
@@ -134,9 +125,6 @@
         } else {
           location.href = url
         }
-      },
-      showShareMenu () {
-       this.$emit('weixinShare','click')
       }
     }
   }
