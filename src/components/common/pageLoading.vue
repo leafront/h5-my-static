@@ -1,6 +1,6 @@
 <template>
   <div class="pageLoading" v-show="showLoading">
-    <div class="ui-pageLoading-gif"></div>
+    <div class="ui-showPageLoading-gif"></div>
   </div>
 
 </template>
@@ -23,7 +23,7 @@
   .pageLoading {
     background: #fff;
     padding-bottom: .2rem;
-    .ui-pageLoading-gif{
+    .ui-showPageLoading-gif{
       background:url('./images/loading.png') no-repeat;
       width: 2.5rem;
       margin: 0 auto;

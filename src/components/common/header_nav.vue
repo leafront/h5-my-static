@@ -2,23 +2,16 @@
   <div class="ui-header-nav" :class="{'active': headerMenu}">
     <i class="ui-header-arrow"></i>
     <ul class="ui-header-nav-list">
-      <li @click="linkAction('/index.html')">
-        <svg class="icon icon-home" aria-hidden="true">
-          <use xlink:href="#icon-home"></use>
-        </svg>
+      <li @click="homeAction('/index.html')">
+        <i class="icon icon-home"></i>
         <span class="font">首页</span>
-
       </li>
-      <li @click="showShareMenu">
-        <svg class="icon icon-share" aria-hidden="true">
-          <use xlink:href="#icon-connection"></use>
-        </svg>
+      <li @click="showShareMenu" v-if="isApp">
+        <i class="icon icon-share"></i>
         <span class="font">分享</span>
       </li>
-      <li @click="linkAction('/my/home.html')">
-        <svg class="icon icon-my" aria-hidden="true">
-          <use xlink:href="#icon-wode"></use>
-        </svg>
+      <li @click="myAction('/my/index')">
+        <i class="icon icon-my"></i>
         <span class="font">我&nbsp;&nbsp;</span>
       </li>
     </ul>
@@ -30,7 +23,6 @@
   .ui-header-nav{
     position: fixed;
     width: 1.6rem;
-    height: 2.4rem;
     right: .2rem;
     top: .88rem;
     background: #3d3d3d;
@@ -65,17 +57,43 @@
         color: #fff;
         padding-left: .15rem;
       }
+      .icon {
+        background: url(/webapp-static/images/share_sprite.png) no-repeat;
+        background-size: 1.65rem auto;
+        width: .34rem;
+        height: .34rem;
+      }
       .icon-home{
-        font-size: .3rem;
-        color:#999;
+        background-position: -.53rem 0;
       }
       .icon-share {
-        font-size: .3rem;
-        color:#999;
+        width: .3rem;
+        background-position: -.9rem .01rem;
       }
       .icon-my {
-        font-size: .34rem;
-        color:#999;
+        height: .38rem;
+        background-position: -1.22rem .01rem;
+      }
+    }
+  }
+  .ui-header-right-icon{
+    position:absolute;
+    right:0;
+    top:0;
+    display: flex;
+    align-items: center;
+    height: .88rem;
+    width: 1.2rem;
+    padding-right: .3rem;
+    justify-content: flex-end;
+    i{
+      width: .42rem;
+      height: .11rem;
+      background: url(/webapp-static/images/share_sprite.png) no-repeat -.05rem -.1rem;
+      background-size: 1.65rem auto;
+      transition: transform .4s linear;
+      &.active{
+        transform: rotate(90deg);
       }
     }
   }
@@ -85,7 +103,14 @@
 
   import {mapGetters, mapActions} from 'vuex'
 
+  import utils from '@/widget/utils'
+
   export default {
+    data () {
+      return {
+        isApp: utils.isApp()
+      }
+    },
     computed: {
       ...mapGetters({
         'headerMenu': 'getHeaderMenu'
@@ -96,11 +121,19 @@
         'updateHeaderMenu',
         'updateShareMenu'
       ]),
-      linkAction (url) {
-        location.href = url
+      homeAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://home'
+        } else {
+          location.href = url
+        }
       },
-      pageAction (url){
-        location.href = ''
+      myAction (url) {
+        if (utils.isApp()) {
+          location.href = 'lyf://myhome'
+        } else {
+          location.href = url
+        }
       },
       showShareMenu () {
        this.$emit('weixinShare','click')

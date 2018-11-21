@@ -26,7 +26,7 @@
         type: String
       },
       isBorder: {
-        default: false,
+        default: true,
         type: Boolean
       },
       isShowHeader: {
