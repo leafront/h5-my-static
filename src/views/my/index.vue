@@ -258,6 +258,7 @@
           const data = result.data || {}
           if (result.code == 0 && data) {
             store.set('kf_head_pic', data['url100x100'], 'session')
+            data.headPicUrl = data.headPicUrl || config.staticPath + '/webapp-static/images/logo-laiyifen.png'
             this.userInfo = data
           } else {
             data.headPicUrl = config.staticPath + '/webapp-static/images/logo-laiyifen.png'

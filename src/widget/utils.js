@@ -244,7 +244,7 @@ const utils = {
         ut = utils.getUaParams().ut
       }
     }
-    return  ut
+    return ut
   },
   /**
    * @return {String} sid
