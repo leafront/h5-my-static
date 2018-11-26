@@ -268,8 +268,7 @@
        */
       getUserInfo () {
         Model.getUserInfo({
-          type: 'GET',
-          cache: true
+          type: 'GET'
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
