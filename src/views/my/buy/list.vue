@@ -214,10 +214,10 @@
     right:0;
     bottom:0;
     .icon{
-      width: .44rem;
-      height: .44rem;
-      background: url(./images/cart.png) no-repeat;
-      background-size: .44rem auto;
+      width: .46rem;
+      height: .42rem;
+      background: url('/webapp-static/images/cart_icon.png') no-repeat;
+      background-size: .46rem auto;
       display: block;
     }
   }
