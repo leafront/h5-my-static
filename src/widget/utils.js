@@ -238,7 +238,7 @@ const utils = {
    * @return {Sting} ut
    */
   getUserToken () {
-    let ut = utils.getCookie('lyfh5ut')
+    let ut = utils.getCookie('lyfh5ut') || ""
     if (utils.isApp()) {
       ut = utils.getUaParams().ut
     }
