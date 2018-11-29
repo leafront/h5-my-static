@@ -288,7 +288,6 @@
       getWalletInfo () {
         Model.getWalletInfo({
           type: 'GET',
-          cache: true,
           data: {
             isPoint: 1
           }
