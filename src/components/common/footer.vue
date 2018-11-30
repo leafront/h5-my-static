@@ -5,7 +5,7 @@
         <i class="icon1"></i>
         <span>首页</span>
       </div>
-      <div class="footer-item" @click="pageAction('/category.html')">
+      <div class="footer-item" @click="pageAction('/webapp/category')">
         <i class="icon2"></i>
         <span>分类</span>
       </div>
