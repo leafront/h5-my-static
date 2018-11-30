@@ -1,24 +1,24 @@
 <template>
-  <div class="footer_wrapper">
+  <div class="footer_wrapper" id="footer_wrapper">
     <div class="footer">
-      <div class="footer-item" @click="pageAction('/index.html')">
+      <div class="footer-item" :class="{'active': index == 0}" @click="pageAction('/index.html')">
         <i class="icon1"></i>
         <span>首页</span>
       </div>
-      <div class="footer-item" @click="pageAction('/webapp/category')">
+      <div class="footer-item" :class="{'active': index == 1}" @click="pageAction('/webapp/category')">
         <i class="icon2"></i>
         <span>分类</span>
       </div>
-      <div class="footer-item" @click="pageAction('/view/h5/30.html')">
+      <div class="footer-item" :class="{'active': index == 2}" @click="pageAction('/view/h5/30.html')">
         <i class="icon3"></i>
         <span>全球尖货</span>
       </div>
-      <div class="footer-item" @click="pageAction('/cart.html')">
+      <div class="footer-item" :class="{'active': index == 3}" @click="pageAction('/cart.html')">
         <i class="icon4"></i>
         <span>购物车</span>
         <strong v-if="cartCount > 0">{{cartCount}}</strong>
       </div>
-      <div class="footer-item active">
+      <div class="footer-item" @click="pageAction('/my/index')" :class="{'active': index == 4}">
         <i class="icon5"></i>
         <span>我</span>
       </div>
@@ -38,19 +38,31 @@
   export default {
     data () {
       return {
-        cartCount: 0
+        cartCount: 0,
+        index: -1
       }
     },
     methods: {
       pageAction (url) {
+        if (url == location.pathname) {
+          return
+        }
         location.href = url
+      },
+      setFooterActive () {
+        const routerList = ['/index.html','/webapp/category','/view/h5/30.html','/cart.html','/my/index']
+        const index = routerList.indexOf(location.pathname)
+        if (index > -1) {
+          this.index = index
+        }
       }
     },
     created () {
-       const sessionId = utils.getSessionId()
-       const params = {
-         sessionId
-       }    
+      const sessionId = utils.getSessionId()
+      const params = {
+        sessionId
+      }    
+      this.setFooterActive()
       request('/api/cart/count', {
         type: 'GET',
         data: params
@@ -89,12 +101,15 @@
       .icon5 {
         background-position: -2.55rem 0;
       }
+      .icon2{
+        background-position: -.56rem -.46rem;
+      }
     }
     i{
       width: .5rem;
       height: .5rem;
-      background: url(./images/footer_icon.png) no-repeat;
-      background-size: 3rem auto;
+      background: url('/webapp-static/images/footer_icon.png') no-repeat;
+      background-size: 2.6rem auto;
       display: block;
       margin-top: .1rem;
     }
