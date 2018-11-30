@@ -99,7 +99,7 @@
     position: relative;
     &.active {
       .icon5 {
-        background-position: -2.55rem 0;
+        background-position: -2.15rem -.46rem;
       }
       .icon2{
         background-position: -.56rem -.46rem;
