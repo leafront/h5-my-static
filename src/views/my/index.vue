@@ -128,7 +128,7 @@
           <p class="c3">积分</p>
         </div>
         <div class="my-index-discount-item" @click="pageAction('/my/coupons-list.html')">
-          <span class="ff6900" v-if="loggedIn">{{(walletInfo.coupon || 0) | price}}</span>
+          <span class="ff6900" v-if="loggedIn">{{(walletInfo.coupon || 0)}}</span>
           <span class="ff6900" v-else>- -</span>
           <p class="c3">优惠券</p>
         </div>
