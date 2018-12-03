@@ -44,10 +44,7 @@ const getParseUrl = (url) => {
 export const sendTracker = ({
 	pid = '',
   ppid = ''
- } = {
- 	pid: '',
- 	ppid: ''
- }) => {
+ } = {} => {
  	const getTracker = (data) => request('/tracker/post', data)
 	const referrer = document.referrer
 	const pageInfo = {
