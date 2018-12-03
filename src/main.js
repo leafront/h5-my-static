@@ -34,7 +34,8 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title
   const bgColor = to.meta.bgColor
   const shareConfig = to.meta.shareConfig
-  const trackerConfig = to.meta.trackerConfig
+  const trackerConfig = to.meta.trackerConfig || {}
+  trackerConfig.referrer = from.name ? location.origin + from.fullPath : ''
   setHeader()
   if (bgColor) {
     document.body.style.backgroundColor = bgColor

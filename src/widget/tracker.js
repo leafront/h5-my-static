@@ -6,6 +6,8 @@ import utils from '@/widget/utils'
 
 import store from '@/widget/store'
 
+import pageInfo from '@/config/tracker'
+
 /**
  * @return {String} uuid
  */
@@ -43,16 +45,11 @@ const getParseUrl = (url) => {
  */
 export const sendTracker = ({
 	pid = '',
-  ppid = ''
- } = {} => {
+  ppid = '',
+  referrer = ''
+ } = {}) => {
  	const getTracker = (data) => request('/tracker/post', data)
-	const referrer = document.referrer
-	const pageInfo = {
-	 'index.html': {
-		p_name: 'home',
-		p_id: 1
-	 }
-  }
+  referrer = referrer || document.referrer
   const uid = store.get('lyfuid', 'local') || ''
   let did = utils.getCookie('pika_did')
   if (!did) {

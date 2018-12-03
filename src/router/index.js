@@ -133,7 +133,10 @@ export default new VueRouter({
       name: 'MyIndex',
       component: () => import ('@/views/my/index.vue'),
       meta: {
-        title: '我的'
+        title: '我的',
+        trackerConfig: {
+          pid: 'userCenter' 
+        }
       }
     }, {
       path: '/my/evaluate',
