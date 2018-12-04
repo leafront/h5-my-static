@@ -34,7 +34,7 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .ui-cancel-button{
     width:100%;
     background:#fff;
