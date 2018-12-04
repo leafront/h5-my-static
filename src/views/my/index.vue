@@ -883,7 +883,7 @@
   }
   .my_message_icon{
     display: flex;
-    padding: .3rem;
+    padding: .3rem 0 .3rem .3rem;
     position: relative;
     i{
       width: .42rem;
@@ -914,7 +914,7 @@
   }
   .my_setting_icon{
     display: flex;
-    padding: .3rem .3rem .3rem 0;
+    padding: .3rem;
     i{
       width: .42rem;
       height: .42rem;
