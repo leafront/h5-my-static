@@ -147,6 +147,14 @@ export default new VueRouter({
         requireLogin: true,
         bgColor: '#fff'
       }
+    }, {
+      path: '/my/integral',
+      name: 'MyIntegral',
+      component: () => import('@/views/my/integral'),
+      meta: {
+        title: '我的积分',
+        requireLogin: true
+      }
     }
   ]
 })

@@ -1,7 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
-    </AppHeader>
+    <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-message">
         <div class="my-message-item" @click="settingMessage('pushStatus')">
@@ -46,7 +45,6 @@
   export default {
     data () {
       return {
-        isBorder: true,
         title: '消息设置',
         pageView: false,
         isApp: utils.isApp(),
