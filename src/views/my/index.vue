@@ -122,7 +122,7 @@
           <span class="ff6900" v-else>- -</span>
           <p class="c3">伊点卡</p>
         </div>
-        <div class="my-index-discount-item" @click="pageAction('/my/integral.html')">
+        <div class="my-index-discount-item" @click="routerAction('/my/integral')">
           <span class="ff6900" v-if="loggedIn">{{(walletInfo.point || 0) | price}}</span>
           <span class="ff6900" v-else>- -</span>
           <p class="c3">积分</p>
