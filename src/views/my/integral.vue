@@ -10,7 +10,7 @@
     		</div>	
     	</div>	
     	<div class="my_integral_title">
-    		<p>明细</p>
+    		<p class="font">明细</p>
     	</div>
     	<div class="my_integral_nav font">
     		<div class="my_integral_nav_item" @click="selectNav(index)" v-for="(item,index) in navList">
@@ -70,6 +70,7 @@
 		methods: {
 			selectNav (index) {
 				this.pointStatus = index
+				this.getPointList()
 			},
 			getPointList (type) {
 				const {
