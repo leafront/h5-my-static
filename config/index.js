@@ -36,7 +36,7 @@ module.exports = {
         changeOrigin: true
       },
       '/webapp-static': {
-        target: 'https://m.laiyifen.com',
+        target: 'http://m.lyf.edu.laiyifen.com',
         changeOrigin: true
       }
     },
