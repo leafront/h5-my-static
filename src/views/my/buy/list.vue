@@ -122,9 +122,8 @@
           }
         })
       },
-        /**
-       * 滚动加载团列表
-       * @param event
+      /**
+       * 滚动加载列表
        */
       scrollLoadList () {
         const pageViewHeight = window.innerHeight
