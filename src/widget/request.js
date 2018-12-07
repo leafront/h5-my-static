@@ -3,32 +3,24 @@ import store from '@/widget/store'
 import utils from '@/widget/utils'
 import config from '@/config/index'
 
-const clearStorage = () => {
+function clearStorage () {
   const currentTime = new Date().getTime()
-  if (utils.isLocalStorageSupported()) {
-
-    for (let i = 0; i < localStorage.length; i++) {
-
-      const key = localStorage.key(i);
-      const cacheData = store.get(key,'local')
-      if (cacheData && cacheData.times) {
+  const winName = window.name
+  let cacheStorage = localStorage
+  if (!utils.isLocalStorageSupported()) { 
+    cacheStorage = winName
+  }
+  if (cacheStorage) {
+    Object.keys(cacheStorage).forEach((item) => {
+      const cacheData = store.get(item,'local')
+      if (cacheData && 
+        cacheData.times
+      ) {
         if (currentTime > cacheData.times) {
-          store.remove(key,'local')
+          store.remove(item,'local')
         }
       }
-    }
-  } else {
-    if (window.name) {
-      const storage = utils.deserialize(window.name)
-      for (let attr in storage) {
-        const cacheData = store.get(attr,'local')
-        if (cacheData && cacheData.times) {
-          if (currentTime > cacheData.times) {
-            store.remove(attr,'local')
-          }
-        }
-      }
-    }
+    })
   }
 }
 
