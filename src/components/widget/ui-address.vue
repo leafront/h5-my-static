@@ -61,29 +61,15 @@
     },
     watch: {
       isPicker () {
-
         /**
-         *
          * 阻止弹层外的元素滚动
          */
         document.getElementById('addressList').addEventListener('touchmove',(event) => {
-
           if (!utils.isPassive()) {
-
             event.preventDefault()
-
           }
-        })
-
-        document.getElementById('addressList').addEventListener('touchmove',(event) => {
-
           event.stopPropagation()
-        },utils.isPassive() ? {passive: true} : false)
-
-        document.getElementById('addressList').addEventListener('scroll',(event) => {
-
-          event.stopPropagation()
-        },utils.isPassive() ? {passive: true} : false)
+        }, utils.isPassive() ? {passive: true} : false)
       }
     },
     methods: {
