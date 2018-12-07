@@ -5,10 +5,9 @@ import config from '@/config/index'
 
 function clearStorage () {
   const currentTime = new Date().getTime()
-  const winName = window.name
   let cacheStorage = localStorage
   if (!utils.isLocalStorageSupported()) { 
-    cacheStorage = winName
+    cacheStorage = window.name
   }
   if (cacheStorage) {
     Object.keys(cacheStorage).forEach((item) => {
