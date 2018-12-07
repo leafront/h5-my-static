@@ -73,12 +73,6 @@
       }
     },
     methods: {
-      preventPopup (event) {
-        event.preventDefault()
-      },
-      stopPopup (event) {
-        event.stopPropagation()
-      },
       /**
        * 获取用户地址省份列表
        */
