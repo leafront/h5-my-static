@@ -29,7 +29,9 @@
       </LazyLoad>
       <PageLoading :showLoading="showLoading"></PageLoading>
       <UIShare></UIShare>
-      <UIEmpty v-show="pageView && !list.length"></UIEmpty>
+      <div class="ui-empty-wrapper" v-show="pageView && !list.length">
+        <UIEmpty ></UIEmpty>
+      </div>  
     </div>
   </div>
 </template>

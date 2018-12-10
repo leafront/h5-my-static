@@ -23,7 +23,9 @@
         </div>
         <PageLoading :showLoading="showLoading"></PageLoading>
       </div>
-      <UIEmpty v-show="pageView && !list.length"></UIEmpty>
+      <div class="ui-empty-wrapper" v-show="pageView && !list.length">
+        <UIEmpty ></UIEmpty>
+      </div>  
     </div>
   </div>
 </template>
