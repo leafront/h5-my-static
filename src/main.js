@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   if (bgColor) {
     document.body.style.backgroundColor = bgColor
   } else {
-    document.body.style.backgroundColor = '#f5f5f5'
+    document.body.style.backgroundColor = '#f8f8f8'
   }
   if (
     to.matched.some(record => record.meta.requireLogin) &&

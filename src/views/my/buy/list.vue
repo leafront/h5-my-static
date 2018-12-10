@@ -22,10 +22,8 @@
           </LazyLoad>
         </div>
         <PageLoading :showLoading="showLoading"></PageLoading>
-        <div class="my_buy_empty" v-show="pageView && !list.length">
-          <p>暂时没有相关常购清单</p>
-        </div>
       </div>
+      <UIEmpty v-show="pageView && !list.length"></UIEmpty>
     </div>
   </div>
 </template>
@@ -33,10 +31,17 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
+
   import PageLoading from '@/components/common/pageLoading'
+
   import LazyLoad from '@/components/widget/lazyLoad'
+
   import utils from '@/widget/utils'
+
   import * as Model from '@/model/buy'
+
+  import UIEmpty from '@/components/common/ui-empty'
+
   import '@/widget/requestAnimationFrame'
 
   export default {
@@ -56,7 +61,8 @@
     components: {
       AppHeader,
       PageLoading,
-      LazyLoad
+      LazyLoad,
+      UIEmpty
     },
     methods: {
       /**
@@ -157,20 +163,8 @@
 </script>
 
 <style lang="scss">
-  .my_buy_empty{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex:1;
-    padding-top: .5rem;
-    p{
-      font-size: .3rem;
-    }
-  }
   .my-buy-view{
     padding-top: .2rem;
-    background: #f0f0f0;
   }
   .my-buy-list{
     background: #fff;

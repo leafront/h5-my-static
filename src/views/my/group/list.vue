@@ -28,11 +28,8 @@
         </div>
       </LazyLoad>
       <PageLoading :showLoading="showLoading"></PageLoading>
-      <div class="my_group_empty" v-show="pageView && !list.length">
-        <img src="../images/my_empty_group.png"/>
-        <p>暂时没有相关团单哦</p>
-      </div>
-    <UIShare></UIShare>
+      <UIShare></UIShare>
+      <UIEmpty v-show="pageView && !list.length"></UIEmpty>
     </div>
   </div>
 </template>
@@ -54,6 +51,8 @@
   import weixin_share from '@/common/weixin_share'
 
   import LazyLoad from '@/components/widget/lazyLoad'
+
+  import UIEmpty from '@/components/common/ui-empty'
 
   import store from '@/widget/store'
 
@@ -86,7 +85,8 @@
       AppHeader,
       PageLoading,
       LazyLoad,
-      UIShare
+      UIShare,
+      UIEmpty
     },
     methods: {
       ...mapActions([
@@ -265,22 +265,6 @@
 </script>
 
 <style lang="scss">
-  .my_group_empty{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: #fff;
-    flex:1;
-    padding-top: 3rem;
-    img{
-      width: 3rem;
-      height: 3rem;
-    }
-    p{
-      font-size: .3rem;
-    }
-  }
   .my-group-action{
     display: flex;
     justify-content: flex-end;

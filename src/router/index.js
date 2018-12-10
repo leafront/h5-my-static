@@ -74,8 +74,7 @@ export default new VueRouter({
       component: () => import('@/views/my/group/list.vue'),
       meta: {
         title: '我的团',
-        requireLogin: true,
-        bgColor:'#fff'
+        requireLogin: true
       }
     }, {
       path: '/my/buy/list',

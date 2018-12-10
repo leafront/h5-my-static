@@ -5,7 +5,7 @@ body,html{
 body{
   color:#666;
   font-size: .24rem;
-  background: #f5f5f5;
+  background: #f8f8f8;
 }
 
 body::-webkit-scrollbar {
@@ -67,7 +67,7 @@ input {
   overflow-x:hidden;
 }
 .pic-lazyLoad {
-  background:url('/webapp-static/images/lazyLoad.png') no-repeat #f5f5f5 center center;
+  background:url('/webapp-static/images/lazyLoad.png') no-repeat #f8f8f8 center center;
   background-size: contain;
 }
 /**ui styles**/
@@ -147,7 +147,7 @@ input {
 }
 
 .ui-skeleton-bg{
-  background: #f5f5f5;
+  background: #f8f8f8;
 }
 
 .successImg {
