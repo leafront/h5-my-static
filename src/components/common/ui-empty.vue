@@ -31,12 +31,6 @@
 		transform: translateY(-50%);
 		width: 100%;
 		z-index:100;
-		display: none;
-	}
-	.ui-empty-wrapper{
-		&.show{
-			display: block;
-		}
 	}
 	.ui-empty{
 		display: flex;
