@@ -34,12 +34,8 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function(event) {
   const request = event.request
 	const requestUrl = new URL(request.url)
-  // Ignore not GET request.
-  if (request.method !== 'GET') {
-    return
-  }
-  // Ignore difference http.
-  if (requestUrl.protocol !== 'https:') {
+  // Ignore not GET https origin request.
+  if (request.method !== 'GET' || requestUrl.protocol !== 'https:' || requestUrl.origin == location.origin) {
     return
   }
   event.respondWith(
