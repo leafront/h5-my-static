@@ -30,7 +30,7 @@
       <PageLoading :showLoading="showLoading"></PageLoading>
       <UIShare></UIShare>
       <div class="ui-empty-wrapper" v-show="pageView && !list.length">
-        <UIEmpty ></UIEmpty>
+        <UIEmpty :pic="emptyURL"></UIEmpty>
       </div>  
     </div>
   </div>
@@ -80,6 +80,7 @@
         shareCodeNum: null,
         isApp: utils.isApp(),
         isWeixin: utils.weixin(),
+        emptyURL: config.staticPath + '/my-static/images/group-empty.png',
         timer: null
       }
     },

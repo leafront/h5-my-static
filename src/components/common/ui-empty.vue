@@ -42,8 +42,8 @@
 		flex-direction: column;
 		align-items: center;
 		.ui-empty-pic{
-			width: 3rem;
-			height: 3rem;
+			width: 2.98rem;
+			height: 2.4rem;
 		}
 		p{
 			padding-top: .16rem;
