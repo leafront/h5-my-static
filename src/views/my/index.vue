@@ -133,62 +133,10 @@
           <p class="c3">优惠券</p>
         </div>
       </div>
-      <div class="my-index-column clearfix">
-        <div class="my-index-column-item" @click="routerAction('/my/group/list')">
-          <i class="icon1"></i>
-          <span>我的团</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/my/pickup-goods.html')">
-          <i class="icon2"></i>
-          <span>提货券</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/my/address-manage.html')">
-          <i class="icon3"></i>
-          <span>收货地址</span>
-        </div>
-        <div class="my-index-column-item" @click="routerAction('/my/buy/list')">
-          <i class="icon4"></i>
-          <span>常购清单</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/my/collect.html')">
-          <i class="icon5"></i>
-          <span>我的收藏</span>
-        </div>
-        <div class="my-index-column-item" @click="routerAction('/my/evaluate')">
-          <i class="icon6"></i>
-          <span>我的评价</span>
-        </div>
-        <div class="my-index-column-item" @click="goOneWord">
-          <i class="icon7"></i>
-          <span>一句话福利</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/specialFun/findFreePoint.html')">
-          <i class="icon8"></i>
-          <span>查询伊点卡</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/specialFun/findShop.html')">
-          <i class="icon9"></i>
-          <span>查询门店</span>
-        </div>
-        <div class="my-index-column-item" @click="goCustomService">
-          <i class="icon10"></i>
-          <span>在线客服</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/joinus/joinus.html')">
-          <i class="icon11"></i>
-          <span>加盟来伊份</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/my/my-awards.html')">
-          <i class="icon12"></i>
-          <span>中奖纪录</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/VAT/vat.html')">
-          <i class="icon13"></i>
-          <span>增票资质</span>
-        </div>
-        <div class="my-index-column-item" @click="pageAction('/order/invoice/list')">
-          <i class="icon14"></i>
-          <span>我的发票</span>
+      <div class="my-index-column clearfix" v-if="personalItem.length">
+        <div class="my-index-column-item" v-for="item in personalItem" @click="personalAction(item.linkUrlH5, item.name)">
+          <img :src="item.logoUrl"/>
+          <span>{{item.name}}</span>
         </div>
       </div>
     </div>
@@ -224,7 +172,8 @@
         readyCount: 0,
         serviceStatus: -1,
         uid: '',
-        crmInfo: []
+        crmInfo: [],
+        personalItem: []
       }
     },
     components: {
@@ -235,8 +184,16 @@
         location.href = url
       },
       routerAction (url) {
-
         this.$router.push(url)
+      },
+      personalAction (url, name) {
+        if (url) {
+          if (name == '在线客服') {
+            this._openCustom() 
+          } else {
+            location.href = url
+          }
+        }
       },
       goOneWord () {
         if (this.loggedIn) {
@@ -306,6 +263,19 @@
             this.walletInfo = data
             if (data.yCardBalance !== null) {
               this.yCardBalanceState = true
+            }
+          }
+        })
+      },
+      getPersonalItem () {
+        Model.getPersonalItem({
+          type: 'GET'
+        }).then((result) => {
+
+          const data = result.data
+          if (result.code == 0 && data) {
+            if (data[0] && data[0].moduleList.length) {
+              this.personalItem = data[0].moduleList
             }
           }
         })
@@ -527,6 +497,7 @@
       this.getUserInfo()
       this.getWalletInfo()
       this.orderSummary()
+      this.getPersonalItem()
       if (this.loggedIn) {
         this.getMessageInfo()
       }
@@ -572,55 +543,11 @@
     &:nth-child(4n) {
       border-right: 0;
     }
-    i{
+    img{
       width: .6rem;
       height: .6rem;
-      background: url(./images/my_icon.png) no-repeat;
-      background-size: 3rem auto;
       display: block;
       margin: 0 auto;
-    }
-    .icon1{
-      background-position: -1.1rem -1.06rem;
-    }
-    .icon2 {
-      background-position: -1.8rem -1.1rem;
-    }
-    .icon3 {
-      background-position: -2.42rem -1.15rem;
-    }
-    .icon4 {
-      background-position: -.03rem -1.51rem;
-    }
-    .icon5 {
-      background-position: -.78rem -1.71rem;
-    }
-    .icon6 {
-      background-position: -1.55rem -1.75rem;
-    }
-    .icon7 {
-      background-position: -2.32rem -1.78rem;
-    }
-    .icon8 {
-      background-position: -.05rem -2.2rem;
-    }
-    .icon9 {
-      background-position: -.76rem -2.39rem;
-    }
-    .icon10 {
-      background-position: -1.51rem -2.45rem;
-    }
-    .icon11 {
-      background-position: -2.32rem -2.37rem;
-    }
-    .icon12 {
-      background-position: -.03rem -2.81rem;
-    }
-    .icon13 {
-      background-position: -.72rem -2.32rem;
-    }
-    .icon14 {
-      background-position: -1.45rem -3.06rem;
     }
     span{
       color: #333;

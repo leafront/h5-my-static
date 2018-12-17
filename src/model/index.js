@@ -15,3 +15,5 @@ export const getBaichuanConfig = (data) => request('/search-backend-web/getTaoBa
 export const getCustomerInfo = (data) => request('/customer/user/getInfo.do', data)
 
 export const getIMAppModule = (data) => request('/im/appModule', data)
+
+export const getPersonalItem  = (data) => request('/ouser-web/personalCenter/queryMy.do', data)
