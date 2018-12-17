@@ -134,7 +134,7 @@
         </div>
       </div>
       <div class="my-index-column clearfix" v-if="personalItem.length">
-        <div class="my-index-column-item" v-for="item in personalItem" @click="personalAction(item.linkUrlH5, item.name)">
+        <div class="my-index-column-item" v-for="item in personalItem" @click="personalAction(item.linkUrlH5, item.linkUrlIos)">
           <img :src="item.logoUrl"/>
           <span>{{item.name}}</span>
         </div>
@@ -188,7 +188,7 @@
       },
       personalAction (url, name) {
         if (url) {
-          if (name == '在线客服') {
+          if (name == 'lyf://callcustomservice') {
             this._openCustom() 
           } else {
             location.href = url
