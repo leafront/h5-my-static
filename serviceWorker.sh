@@ -23,6 +23,7 @@ folder="./target"
 readfile $folder
 
 sed -i 's/\.\/target//g' serviceWorker.txt
+sed -i '$s/,$//' serviceWorker.txt
 
 filepath=$(cd "$(dirname "$0")"; pwd)  
 
