@@ -31,6 +31,9 @@
     		</div>
     	</div>
     	<PageLoading :showLoading="showLoading"></PageLoading>		
+    	<div class="integral-empty" v-show="pageView && !list.length">
+        <UIEmpty></UIEmpty>
+      </div> 
    	</div>
   </div> 	 	
 </template>	
@@ -46,6 +49,8 @@
 	import PageLoading from '@/components/common/pageLoading'
 
 	import * as Model from '@/model/integral'
+
+	import UIEmpty from '@/components/common/ui-empty'
 	
 	export default {
 		data () {
@@ -65,11 +70,13 @@
 		},
 		components: {
 			AppHeader,
-			PageLoading
+			PageLoading,
+			UIEmpty
 		},
 		methods: {
 			selectNav (index) {
 				this.pointStatus = index
+				this.currentPage  = 1
 				this.getPointList()
 			},
 			getPointList (type) {
@@ -163,6 +170,9 @@
 </script>
 
 <style lang="scss">
+	.integral-empty{
+		padding-top: 30%;
+	}
 	.my_integral_txt{
 		display: flex;
 		span {
