@@ -99,11 +99,7 @@
         location.href = url
       },
       appAction (orderCode) {
-        if (utils.ios() && utils.isApp()) {
-          location.href = 'lyf://orderdetail?body={"orderCode":' + orderCode + '}'
-        } else {
-          location.href = `/my/order-detail.html?orderCode=${orderCode}`
-        }
+        location.href = `/my/order-detail.html?orderCode=${orderCode}`
       },
       checkedList (val) {
         if (val == this.status) {
