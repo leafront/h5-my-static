@@ -188,11 +188,10 @@
       },
       personalAction (url, name) {
         if (url) {
-          if (name == 'lyf://callcustomservice') {
-            this._openCustom() 
-          } else {
-            location.href = url
-          }
+          location.href = url
+        }
+        if (name == 'lyf://callcustomservice') {
+          this._openCustom() 
         }
       },
       goOneWord () {
