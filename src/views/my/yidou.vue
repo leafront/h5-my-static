@@ -1,7 +1,7 @@
 <template>
 	<div class="pageView">
     <AppHeader :title="title">
-    	<div class="ui-header-right" @click="pageAction('/order/invoice/rule')">
+    	<div class="ui-header-right" @click="pageAction('/rules/eBean-rule.html?')">
       	<span>伊豆规则</span>
       </div>
     </AppHeader>
@@ -78,6 +78,9 @@
 			UIEmpty
 		},
 		methods: {
+			pageAction (url) {
+				location.href = url
+			},
 			selectNav (index) {
 				this.pointStatus = index
 				this.currentPage  = 1
