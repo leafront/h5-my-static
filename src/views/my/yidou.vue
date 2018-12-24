@@ -1,29 +1,33 @@
 <template>
 	<div class="pageView">
-    <AppHeader :title="title"></AppHeader>
+    <AppHeader :title="title">
+    	<div class="ui-header-right" @click="pageAction('/order/invoice/rule')">
+      	<span>伊豆规则</span>
+      </div>
+    </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
-    	<div class="my_integral_header">
+    	<div class="my_yidou_header">
     		<i class="icon"></i>
-    		<div class="my_integral_number">
-    			<span>当前积分</span>
-    			<p v-if="amountBalance">{{amountBalance}}</p>
+    		<div class="my_yidou_number">
+    			<span>当前伊豆数</span>
+    			<p v-if="amountBalance">{{amountBalance}}个</p>
     		</div>	
     	</div>	
-    	<div class="my_integral_title">
-    		<p class="font">积分明细</p>
+    	<div class="my_yidou_title">
+    		<p class="font">伊豆明细</p>
     	</div>
-    	<div class="my_integral_nav font ui-bottom-line">
-    		<div class="my_integral_nav_item" @click="selectNav(index)" v-for="(item,index) in navList">
+    	<div class="my_yidou_nav font ui-bottom-line">
+    		<div class="my_yidou_nav_item" @click="selectNav(index)" v-for="(item,index) in navList">
     			<span :class="{'active': pointStatus == index}">{{item}}</span>
     		</div>	
     	</div>
-    	<div class="my_integral_list">	
-    		<div class="my_integral_item ui-bottom-line" :key="item.createTime" v-for="item in list">
-    			<div class="my_integral_info">
+    	<div class="my_yidou_list">	
+    		<div class="my_yidou_item" :key="item.createTime" v-for="item in list">
+    			<div class="my_yidou_info">
     				<span class="font c3">{{item.actionTypeName}}</span>
     				<strong class="c3">{{item.createTimeStr}}</strong>
     			</div>
-    			<div class="my_integral_txt">	
+    			<div class="my_yidou_txt">	
     				<span class="font" v-if="item.actionType == 1">+</span>
     				<span class="font" v-if="item.actionType == 2">-</span>
     				<strong class="font-xb c3">{{item.balance}}</strong>
@@ -31,7 +35,7 @@
     		</div>
     	</div>
     	<PageLoading :showLoading="showLoading"></PageLoading>		
-    	<div class="integral-empty" v-show="pageView && !list.length">
+    	<div class="yidou-empty" v-show="pageView && !list.length">
         <UIEmpty></UIEmpty>
       </div> 
    	</div>
@@ -89,7 +93,7 @@
 					data: {
 						pageNo: 1,
 						pageSize: 10,
-						accountType: 1,
+						accountType: 2,
 						pointStatus
 					}
 				}).then((result) => {
@@ -123,7 +127,7 @@
 				Model.getPointNumber({
 					type: 'POST',
 					data: {
-						accountType: 1
+						accountType: 2
 					}
 				}).then((result) => {
 					const data = result.data 
@@ -170,21 +174,21 @@
 </script>
 
 <style lang="scss">
-	.integral-empty{
+	.yidou-empty{
 		padding-top: 30%;
 	}
-	.my_integral_txt{
+	.my_yidou_txt{
 		display: flex;
 		span {
 			color: #777;
 			padding-right: .05rem;
 		}
 	}
-	.my_integral_list{
+	.my_yidou_list{
 		background: #fff;
 		padding-left: .3rem;
 	}
-	.my_integral_item{
+	.my_yidou_item{
 		padding: .3rem 0;
 		display: flex;
 		justify-content: space-between;
@@ -193,12 +197,11 @@
 			border-bottom: 0;
 		}
 	}
-	.my_integral_nav{
+	.my_yidou_nav{
 		height: .88rem;
 		display: flex;
 		background: #fff;
-		border-bottom: .01rem solid #e0e0e0;
-		.my_integral_nav_item{
+		.my_yidou_nav_item{
 			flex:1;
 			display: flex;
 			justify-content: center;
@@ -212,14 +215,14 @@
 			}
 		}
 	}
-	.my_integral_info{
+	.my_yidou_info{
 		display: flex;
 		flex-direction: column;
 	}
-	.my_integral_title{
+	.my_yidou_title{
 		padding: .2rem .3rem;
 	}
-  .my_integral_header{
+  .my_yidou_header{
   	height: 2rem;
   	background: url(./images/integral.png) no-repeat;
   	background-size: 100% auto;
@@ -232,7 +235,7 @@
   		background: url(./images/integral-header.png) no-repeat;
   		background-size: 100% auto;
   	}
-  	.my_integral_number{
+  	.my_yidou_number{
   		display: flex;
   		flex-direction: column;
   		color: #fff;

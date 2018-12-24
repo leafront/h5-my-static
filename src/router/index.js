@@ -154,6 +154,14 @@ export default new VueRouter({
         title: '我的积分',
         requireLogin: true
       }
+    }, {
+      path: '/my/yidou',
+      name: 'MyYidou',
+      component: () => import('@/views/my/yidou'),
+      meta: {
+        title: '伊豆',
+        requireLogin: true
+      }
     }
   ]
 })
