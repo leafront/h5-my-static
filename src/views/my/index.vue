@@ -23,7 +23,7 @@
             <span>会员等级</span>
           </div>
           <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')"/>
-          <div class="my-vip-txt" @click="pageAction('/my/yidou.html')">
+          <div class="my-vip-txt" @click="routerAction('/my/yidou')">
             <p v-if="loggedIn">{{walletInfo.yBean || 0}}</p>
             <p v-else>- -</p>
             <span>伊豆</span>
