@@ -243,6 +243,9 @@
   		padding-top: .1rem;
   		p{
   			font-size: .6rem;
+  			span{
+  				padding-left: .1rem;
+  			}
   		}
   	}
   }
