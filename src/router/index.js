@@ -157,9 +157,17 @@ export default new VueRouter({
     }, {
       path: '/my/yidou',
       name: 'MyYidou',
-      component: () => import('@/views/my/yidou'),
+      component: () => import('@/views/my/yidou/index'),
       meta: {
         title: '伊豆',
+        requireLogin: true
+      }
+    }, {
+      path: '/my/yidou/rule',
+      name: 'MyYidouRule',
+      component: () => import('@/views/my/yidou/rule'),
+      meta: {
+        title: '伊豆规则',
         requireLogin: true
       }
     }

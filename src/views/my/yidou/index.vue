@@ -1,7 +1,7 @@
 <template>
 	<div class="pageView">
     <AppHeader :title="title">
-    	<div class="ui-header-right" @click="pageAction('/rules/eBean-rule.html?')">
+    	<div class="ui-header-right" @click="pageAction('/my/yidou/rule')">
       	<span>伊豆规则</span>
       </div>
     </AppHeader>
@@ -79,7 +79,7 @@
 		},
 		methods: {
 			pageAction (url) {
-				location.href = url
+				this.$router.push(url)
 			},
 			selectNav (index) {
 				this.pointStatus = index
@@ -227,7 +227,7 @@
 	}
   .my_yidou_header{
   	height: 2rem;
-  	background: url(./images/integral.png) no-repeat;
+  	background: url(../images/integral.png) no-repeat;
   	background-size: 100% auto;
   	padding-left: .3rem;
   	display: flex;
@@ -235,7 +235,7 @@
   	.icon{
   		width: 1.1rem;
   		height: 1.1rem;
-  		background: url(./images/integral-header.png) no-repeat;
+  		background: url(../images/integral-header.png) no-repeat;
   		background-size: 100% auto;
   	}
   	.my_yidou_number{
