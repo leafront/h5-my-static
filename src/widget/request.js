@@ -65,11 +65,7 @@ export default function request (url,{
   if (type == 'GET') {
     options.data.times = new Date().getTime()
   }
-  let optionData = Object.assign({
-    platform: config.platform,
-    companyId: config.companyId,
-    platformId: config.platformId
-  },data)
+  let optionData = data
 
   if (utils.loggedIn()) {
     options.headers.ut = ut
@@ -87,7 +83,7 @@ export default function request (url,{
   let cacheUrl = url
   if (type == 'GET' && dataType == 'json') {
     options.url =  options.data ?  url + '?' + options.data: url
-    cacheUrl =  optionData ?  url + '?' + optionData: url
+    cacheUrl =  optionData ?  url + '?' + optionData : url
   }
 
   function httpRequest (resolve,reject) {
