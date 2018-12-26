@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="my-wallet-item-wrapper mt20" @click="pageAction('/my/yidou.html')">
+      <div class="my-wallet-item-wrapper mt20" @click="routerAction('/my/yidou')">
         <div class="my-wallet-item ui-bottom-line">
           <i class="icon3"></i>
           <p>伊豆</p>
@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <div class="my-wallet-item-wrapper" @click="pageAction('/my/integral.html')">
+      <div class="my-wallet-item-wrapper" @click="routerAction('/my/integral')">
         <div class="my-wallet-item">
           <i class="icon4"></i>
           <p>积分</p>
@@ -88,6 +88,9 @@
     methods: {
       pageAction (url) {
         location.href = url
+      },
+      routerAction (url) {
+        this.$router.push(url)
       },
       /**
        * 获取钱包信息
