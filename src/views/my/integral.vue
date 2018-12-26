@@ -75,6 +75,9 @@
 		},
 		methods: {
 			selectNav (index) {
+				if (this.pointStatus == index) {
+					return
+				}
 				this.pointStatus = index
 				this.currentPage  = 1
 				this.getPointList()

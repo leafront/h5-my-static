@@ -144,10 +144,9 @@
        * @param {Number}  val
        */
       checkedList (val) {
-        if (val == this.status) {
+        if (this.status == val) {
           return
         }
-
         this.status = val
         this.currentPage  = 1
         this.getEvaluateList()
