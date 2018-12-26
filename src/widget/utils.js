@@ -167,13 +167,14 @@ const utils = {
       }));
     } catch(e) {}
     return supportsPassiveOption   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
+
   },
 
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365
     var exp = new Date()
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=laiyifen.com"
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
   },
   getCookie (name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
@@ -188,7 +189,7 @@ const utils = {
     exp.setTime(exp.getTime() - 1)
     var cval = this.getCookie(name)
     if (cval != null) {
-      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/; domain=laiyifen.com"
+      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
     }
   },
   getUaParams: function () {
