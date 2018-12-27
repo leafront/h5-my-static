@@ -1,5 +1,4 @@
 #!/bin/bash
-cp my-static/serviceWorker.js target/my-static
 rm -f serviceWorker.txt
 function readfile ()
 {

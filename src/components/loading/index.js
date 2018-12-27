@@ -4,11 +4,15 @@ import utils from '@/widget/utils'
 const pageLoading = {
   installed: false,
   install (Vue) {
-    if(pageLoading.installed) return
+    if (pageLoading.installed) {
+      return
+    } 
     Vue.prototype.$showLoading = () => {
 
       // 如果页面有showLoading则不继续执行
-      if(document.getElementById('showLoading')) return
+      if (document.getElementById('showLoading')) {
+        return
+      } 
       // 1、创建构造器，定义好提示信息的模板
       let loadingTpl = Vue.extend({
         template: `
