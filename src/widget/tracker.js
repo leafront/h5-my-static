@@ -68,7 +68,7 @@ export const sendTracker = ({
       cpu: location.href
     } 
   }
-	
+  
   if (referrer) {
     const referrerPath = getParseUrl(referrer)
     if (pageInfo[referrerPath.path]) {
@@ -79,7 +79,7 @@ export const sendTracker = ({
   params.data = JSON.stringify(params.data)
   getTracker({
     type: 'POST',
-		data: params,
-		hostPath: config.trackerPath
-	})
+    data: params,
+    hostPath: config.trackerPath
+  })
 }

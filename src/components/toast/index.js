@@ -9,11 +9,11 @@ const Toast = {
       // 1、创建构造器，定义好提示信息的模板
       let toastTpl = Vue.extend({
         template: `
-			 <div class="ui-toast-mask">
-				 <div class="ui-toast">
-					<span>${toast}</span>
-				 </div>
-			 </div>	 
+       <div class="ui-toast-mask">
+         <div class="ui-toast">
+          <span>${toast}</span>
+         </div>
+       </div>  
        `
       })
 

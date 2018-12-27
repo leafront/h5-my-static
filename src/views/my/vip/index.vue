@@ -238,7 +238,7 @@
         if (!mpIds.length) {
           return
         }
-	      mpIds = mpIds.join(',')
+        mpIds = mpIds.join(',')
         Model.getRankPrice({
           type: 'GET',
           cache: true,

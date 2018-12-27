@@ -12,14 +12,14 @@ const pageLoading = {
       // 1、创建构造器，定义好提示信息的模板
       let pageLoadingTpl = Vue.extend({
         template: `
-			<div class="ui-pageLoading-mask">
-			 <div class="ui-mask-cont">
+      <div class="ui-pageLoading-mask">
+       <div class="ui-mask-cont">
          <i class="pageLoading-icon">
           </i>
           <p>努力加载中...</p>
-			 </div>   
-			 </div>
-			`
+       </div>   
+       </div>
+      `
       })
       // 2、创建实例，挂载到文档以后的地方
       let tpl = new pageLoadingTpl().$mount().$el
