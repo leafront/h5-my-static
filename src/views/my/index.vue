@@ -134,7 +134,7 @@
       </div>
       <div class="my-index-column clearfix" v-if="personalItem.length">
         <div class="my-index-column-item" v-for="item in personalItem" :key="item.id" @click="personalAction(item.linkUrlH5, item.linkUrlIos)">
-          <img :src="item.logoUrl"/>
+          <img :src="item.logoUrl | httpsImg"/>
           <span>{{item.name}}</span>
         </div>
       </div>
