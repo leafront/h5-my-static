@@ -6,7 +6,7 @@
     		<i class="icon"></i>
     		<div class="my_integral_number">
     			<span>当前积分</span>
-    			<p v-if="amountBalance">{{amountBalance}}</p>
+    			<p>{{amountBalance}}</p>
     		</div>	
     	</div>	
     	<div class="my_integral_title">

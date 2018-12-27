@@ -10,7 +10,7 @@
     		<i class="icon"></i>
     		<div class="my_yidou_number">
     			<span>当前伊豆数</span>
-    			<p v-if="amountBalance">{{amountBalance}}<span class="font-xs">个</span></p>
+    			<p>{{amountBalance}}<span class="font-xs">个</span></p>
     		</div>	
     	</div>	
     	<div class="my_yidou_title">
