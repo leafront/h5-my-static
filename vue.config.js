@@ -26,6 +26,7 @@ module.exports = {
     config.plugins.push(new HtmlWebpackPlugin({
       template: 'public/index.html',
       filename: path.resolve(__dirname, 'target/index.html'),
+      staticPath: process.env.VUE_APP_STATIC_PATH,
       inject: true,
       minify: {
         removeComments: true,
