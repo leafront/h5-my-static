@@ -2,6 +2,7 @@
 node_modules
 /target
 edu-release.sh
+serviceWorker.txt
 
 # local env files
 .env.local
