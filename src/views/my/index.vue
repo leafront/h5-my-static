@@ -18,8 +18,7 @@
         </div>
         <div class="my-index-personal">
           <div class="my-vip-txt">
-            <p v-if="loggedIn">{{userInfo.userLevlName}}</p>
-            <p v-else="loggedIn">- -</p>
+            <p>{{loggedIn ? userInfo.userLevlName : '- -'}}</p>
             <span>会员等级</span>
           </div>
           <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')"/>
@@ -134,7 +133,7 @@
         </div>
       </div>
       <div class="my-index-column clearfix" v-if="personalItem.length">
-        <div class="my-index-column-item" v-for="item in personalItem" @click="personalAction(item.linkUrlH5, item.linkUrlIos)">
+        <div class="my-index-column-item" v-for="item in personalItem" :key="item.id" @click="personalAction(item.linkUrlH5, item.linkUrlIos)">
           <img :src="item.logoUrl"/>
           <span>{{item.name}}</span>
         </div>
@@ -430,12 +429,12 @@
         script.src = `https://qiyukf.com/script/${QYKeFuKey}.js`
         document.getElementsByTagName('head')[0].appendChild(script)
         script.onload = () => {
-          if (ysf) {
-            ysf.config({
+          if (window.ysf) {
+            window.ysf.config({
               uid: this.uid,
               data: JSON.stringify(this.crmInfo),
               success (){     // 成功回调
-                ysf.open()
+                window.ysf.open()
               },
               error: (error) => {       // 错误回调
                 console.log(error)
@@ -856,7 +855,6 @@
 
   }
   .my-index-info{
-    background: linear-gradient(top,#ffb300,#ff6c00);
-    background: -webkit-linear-gradient(top,#ffb300,#ff6c00);
+    background: linear-gradient(to bottom,#ffb300,#ff6c00);
   }
 </style>

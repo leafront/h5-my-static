@@ -12,7 +12,7 @@
           <div class="my-vip-user-txt">
             <div class="my-vip-user-info">
               <span class="font cfff" v-if="userInfo.nickname">{{userInfo.nickname}}</span>
-              <span class="font cfff" v-else="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
+              <span class="font cfff" v-else-if="userInfo.mobile">{{userInfo.mobile | hideMobile}}</span>
               <p :class="{'icon1': userInfo.userLevel == 1,'icon2': userInfo.userLevel == 2,'icon3': userInfo.userLevel == 3,'icon4': userInfo.userLevel == 4,'icon5': userInfo.userLevel == 5,'icon6': userInfo.userLevel > 5}"></p>
             </div>
             <div class="my-vip-integral">
@@ -418,7 +418,7 @@
     width: .32rem;
     height: .32rem;
     border-radius: 50%;
-    background: linear-gradient(left,#FFAA2B,#FF6A22);
+    background: linear-gradient(to right,#FFAA2B,#FF6A22);
     box-shadow:0 .04rem .06rem 0 rgba(255,154,0,0.2);
     position: relative;
     &:before{
@@ -483,7 +483,7 @@
       align-items: center;
       width: 5.8rem;
       height: .86rem;
-      background: linear-gradient(left, #FFAA2B, #FF6A22);
+      background: linear-gradient(to right, #FFAA2B, #FF6A22);
       box-shadow: 0 .02rem .04rem #FF9A00;
     }
   }
@@ -528,7 +528,7 @@
   .my-vip-user {
     height: 2.1rem;
     padding: 0 .3rem;
-    background: linear-gradient(left, #FF8E0C, #FF5E28);
+    background: linear-gradient(to right, #FF8E0C, #FF5E28);
     display: flex;
     align-items: center;
   }

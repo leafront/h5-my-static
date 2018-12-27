@@ -90,8 +90,7 @@ input {
   }
 }
 .ui-submit {
-  background: linear-gradient(top,#ff7c20,#ff6900);
-  background: -webkit-linear-gradient(top,#ff7c20,#ff6900);
+  background: linear-gradient(to bottom,#ff7c20,#ff6900);
   height: 1rem;
   display: flex;
   align-items: center;

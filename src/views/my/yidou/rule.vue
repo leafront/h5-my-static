@@ -1,5 +1,5 @@
 <template>
-	<div class="pageView">
+  <div class="pageView">
 	  <AppHeader :title="title"></AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
     	<div class="my-yidou-rule">

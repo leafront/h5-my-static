@@ -14,7 +14,7 @@ export default function ajax ({
   data
 }){
     
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
 
     const xhr = new XMLHttpRequest()
 

@@ -5,7 +5,7 @@
     <div class="scroll-view-wrapper white-view" :class="{'visibility': pageView}">
       <div class="my-vip-explain">
         <div class="my-vip-explain-line"></div>
-        <div class="my-vip-explain-item" @click="checkList(index)" :class="{'active': userLevel == index}" v-for="(item,index) in levelList">
+        <div class="my-vip-explain-item" @click="checkList(index)" :key="index"  :class="{'active': userLevel == index}" v-for="(item,index) in levelList">
           <p>{{item}}</p>
           <span></span>
         </div>
@@ -228,7 +228,7 @@
   }
   .my-vip-explain{
     height: 1.76rem;
-    background: linear-gradient(top,#FF8E0C,#FF5E28);
+    background: linear-gradient(to bottom,#FF8E0C,#FF5E28);
     padding: 0 .1rem;
     display: flex;
     align-items: center;
@@ -269,7 +269,7 @@
       width: 1.1rem;
       height: 1.1rem;
       p{
-        background: linear-gradient(top,#FFCF00,#FF9600);
+        background: linear-gradient(to bottom,#FFCF00,#FF9600);
         font-size: .3rem;
       }
       span{

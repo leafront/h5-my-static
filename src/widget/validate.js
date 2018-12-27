@@ -31,7 +31,7 @@ const validate = {
    */
   isZipCode (text){
 
-    var pattern = /^[0-9]{6}$/;
+    const pattern = /^[0-9]{6}$/;
 
     return pattern.test(text);
   }

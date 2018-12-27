@@ -38,9 +38,9 @@ function drawImageIOSFix(ctx, img) {
   // Fixes a bug which squash image vertically while drawing into canvas for some images.
   // This is a bug in iOS6 (and IOS7) devices. This function from https://github.com/stomita/ios-imagefile-megapixel
   function detectVerticalSquash(img) {
-    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var ih = img.naturalHeight;
     var canvas = document.createElement("canvas");
-    canvas.width = 1
+    canvas.width = iw
     canvas.height = ih
     var ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)

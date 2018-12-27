@@ -8,31 +8,29 @@ const state = {
 const getters = {
   getHeaderMenu: state => state.headerMenu,
   getShareMenu: state => state.shareMenu
-
 }
 
 const actions = {
-  updateHeaderMenu ({commit},info) {
-	  commit(types.UPDATE_HEADER_MENU,info)
+  updateHeaderMenu ({commit}, info) {
+    commit(types.UPDATE_HEADER_MENU, info)
   },
-  updateShareMenu ({commit},info) {
-	  commit(types.UPDATE_SHARE_MENU,info)
+  updateShareMenu ({commit}, info) {
+    commit(types.UPDATE_SHARE_MENU, info)
   }
 }
 
 const mutations = {
-  [types.UPDATE_HEADER_MENU] (state,info) {
+  [types.UPDATE_HEADER_MENU] (state, info) {
     state.headerMenu = info
   },
-  [types.UPDATE_SHARE_MENU] (state,info) {
-
-	  state.shareMenu = info
+  [types.UPDATE_SHARE_MENU] (state, info) {
+    state.shareMenu = info
   }
 }
 
 export default {
-	state,
-	getters,
-	actions,
-	mutations
+  state,
+  getters,
+  actions,
+  mutations
 }

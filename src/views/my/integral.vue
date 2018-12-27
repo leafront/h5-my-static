@@ -13,12 +13,12 @@
     		<p class="font">积分明细</p>
     	</div>
     	<div class="my_integral_nav font ui-bottom-line">
-    		<div class="my_integral_nav_item" @click="selectNav(index)" v-for="(item,index) in navList">
+    		<div class="my_integral_nav_item" @click="selectNav(index)" v-for="(item,index) in navList" :key="index">
     			<span :class="{'active': pointStatus == index}">{{item}}</span>
     		</div>	
     	</div>
     	<div class="my_integral_list">	
-    		<div class="my_integral_item ui-bottom-line" :key="item.createTime" v-for="item in list">
+    		<div class="my_integral_item ui-bottom-line" v-for="item in list" :key="item.createTime">
     			<div class="my_integral_info">
     				<span class="font c3">{{item.actionTypeName}}</span>
     				<strong class="c3">{{item.createTimeStr}}</strong>

@@ -154,7 +154,6 @@
     },
     components: {
       AppHeader,
-      ImageUpload,
       UIDatePicker,
       UIAddress,
       UISex
@@ -291,8 +290,6 @@
           type: 'POST',
           data
         }).then((result) => {
-
-          const data = result.data
           if (result.code == 0 ) {
             this.$toast(messageStr)
           } else {

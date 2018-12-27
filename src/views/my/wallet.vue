@@ -185,7 +185,7 @@
     .my-wallet-icon-line {
       width: .01rem;
       height: 1.2rem;
-      background: linear-gradient(to top, rgba(251, 251, 251, 0.09),rgba(251, 251, 251, 0.59),#fff,rgba(251, 251, 251, 0.09));
+      background: linear-gradient(to bottom, rgba(251, 251, 251, 0.09),rgba(251, 251, 251, 0.59),#fff,rgba(251, 251, 251, 0.09));
     }
   }
   .my-wallet-card-item{

@@ -83,7 +83,7 @@ const MallSettings = {
     var localSettings = store.get(this.settingsKey,'local')
     var expired = false
 
-    if(store.get(this.expireDateKey),'local') { //检测settings是否过期
+    if (store.get(this.expireDateKey),'local') { //检测settings是否过期
       var expDate = new Date(store.get(this.expireDateKey,'local'))
       var now = new Date()
 
@@ -110,7 +110,6 @@ const MallSettings = {
     })
     .then((result) => {
 
-      const data = result.data
       if (result.code == 0) {
         this.settings = result.resultData || {}
         store.set(this.settingsKey, this.settings,'local')

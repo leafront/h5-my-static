@@ -17,12 +17,12 @@
     		<p class="font">伊豆明细</p>
     	</div>
     	<div class="my_yidou_nav font ui-bottom-line">
-    		<div class="my_yidou_nav_item" @click="selectNav(index)" v-for="(item,index) in navList">
+    		<div class="my_yidou_nav_item" @click="selectNav(index)" v-for="(item,index) in navList" :key="index">
     			<span :class="{'active': pointStatus == index}">{{item}}</span>
     		</div>	
     	</div>
     	<div class="my_yidou_list">	
-    		<div class="my_yidou_item" :key="item.createTime" v-for="item in list">
+    		<div class="my_yidou_item" v-for="item in list" :key="item.createTime">
     			<div class="my_yidou_info">
     				<span class="font c3">{{item.actionTypeName}}</span>
     				<strong class="c3">{{item.createTimeStr}}</strong>
@@ -37,7 +37,7 @@
     	<PageLoading :showLoading="showLoading"></PageLoading>		
     	<div class="yidou-empty" v-show="pageView && !list.length">
         <UIEmpty></UIEmpty>
-      </div> 
+      </div>
    	</div>
   </div> 	 	
 </template>	

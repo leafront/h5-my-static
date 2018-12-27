@@ -1,11 +1,7 @@
 import request from '@/widget/request'
-
 import config from '@/config/index'
-
 import utils from '@/widget/utils'
-
 import store from '@/widget/store'
-
 import pageInfo from '@/config/tracker'
 
 /**
@@ -44,46 +40,45 @@ const getParseUrl = (url) => {
  * @return {Null}
  */
 export const sendTracker = ({
-	pid = '',
-  ppid = '',
+  pid = '',
   referrer = ''
  } = {}) => {
- 	const getTracker = (data) => request('/tracker/post', data)
+  const getTracker = (data) => request('/tracker/post', data)
   referrer = referrer || document.referrer
   const uid = store.get('lyfuid', 'local') || ''
   let did = utils.getCookie('pika_did')
   if (!did) {
-  	did = generateUUID()
-  	utils.setCookie('pika_did', did)
+    did = generateUUID()
+    utils.setCookie('pika_did', did)
   }
-	const params = {
-	  ev: '17',
-	  did: did,
-	  tv: '1.0',
-	  v: '', //version 客户端版本号
-	  ut: utils.getUserToken(),
-	  uid: uid,
-	  pid, // 页面ID
-	  inf: '', // inFrom 内部来源 上一个页面的page id
-	  cha: 'H5', // channel 所属渠道编码：IOS／ANDROID／H5/APPLET（小程序）／WEBSITE（官网）
-	  ct:  + new Date, // curTime 当前时间戳毫秒
-	  bt: 'pv', //businessType 业务类型：init/pv/event
-	  data: {
-	  	ru: referrer,
-	  	cpu: location.href
-	  } 
-	}
+  const params = {
+    ev: '17',
+    did: did,
+    tv: '1.0',
+    v: '', //version 客户端版本号
+    ut: utils.getUserToken(),
+    uid: uid,
+    pid, // 页面ID
+    inf: '', // inFrom 内部来源 上一个页面的page id
+    cha: 'H5', // channel 所属渠道编码：IOS／ANDROID／H5/APPLET（小程序）／WEBSITE（官网）
+    ct:  + new Date, // curTime 当前时间戳毫秒
+    bt: 'pv', //businessType 业务类型：init/pv/event
+    data: {
+    ru: referrer,
+      cpu: location.href
+    } 
+  }
 	
-	if (referrer) {
-		const referrerPath = getParseUrl(referrer)
-		if (pageInfo[referrerPath.path]) {
-			params.inf = pageInfo[referrerPath.path].p_name
-			params.data.ppid = pageInfo[referrerPath.path].p_id
-		}
-	}
-	params.data = JSON.stringify(params.data)
-	getTracker({
-		type: 'POST',
+  if (referrer) {
+    const referrerPath = getParseUrl(referrer)
+    if (pageInfo[referrerPath.path]) {
+      params.inf = pageInfo[referrerPath.path].p_name
+      params.data.ppid = pageInfo[referrerPath.path].p_id
+    }
+  }
+  params.data = JSON.stringify(params.data)
+  getTracker({
+    type: 'POST',
 		data: params,
 		hostPath: config.trackerPath
 	})
