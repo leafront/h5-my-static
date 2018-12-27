@@ -1,6 +1,6 @@
 #!/bin/bash
-cp ./my-static/serviceWorker.js target/my-static
-rm -rf serviceWorker.txt
+cp my-static/serviceWorker.js target/my-static
+rm -f serviceWorker.txt
 function readfile ()
 {
 #这里`为esc下面的按键符号

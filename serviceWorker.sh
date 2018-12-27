@@ -1,5 +1,5 @@
 #!/bin/bash
-rm -rf serviceWorker.txt
+rm -f serviceWorker.txt
 cp my-static/serviceWorker.js target/my-static
 function readfile ()
 {
