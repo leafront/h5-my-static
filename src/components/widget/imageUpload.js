@@ -40,7 +40,7 @@ function drawImageIOSFix(ctx, img) {
   function detectVerticalSquash(img) {
     var ih = img.naturalHeight;
     var canvas = document.createElement("canvas");
-    canvas.width = iw
+    canvas.width = 1
     canvas.height = ih
     var ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
