@@ -7,8 +7,12 @@ const price = (value) => {
 }
 
 const httpsImg = (text) =>{
-  const pattern = /http:\/\//
-  return text.replace(pattern,'https://')
+  if (text) {
+    const pattern = /http:\/\//
+    return text.replace(pattern,'https://')
+  } else {
+    return text
+  }
 }
 
 const hideMobile = (text) =>{
