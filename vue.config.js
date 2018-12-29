@@ -2,7 +2,7 @@ const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 function resolve (dir) {
-    return path.join(__dirname, dir)
+  return path.join(__dirname, dir)
 }
 
 module.exports = {
@@ -27,6 +27,7 @@ module.exports = {
       template: 'public/index.html',
       filename: path.resolve(__dirname, 'target/index.html'),
       staticPath: process.env.VUE_APP_STATIC_PATH,
+      getTime: new Date().getTime(),
       inject: true,
       minify: {
         removeComments: true,
@@ -56,7 +57,7 @@ module.exports = {
   assetsDir: 'my-static',//放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认'')
   indexPath: 'index.html',//指定生成的 index.html 的输出路径(相对于 outputDir)也可以是一个绝对路径。
   productionSourceMap: false,
-  lintOnSave: true,
+  lintOnSave: false,
     // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
@@ -74,7 +75,7 @@ module.exports = {
     port: 8081,
     https: false,
     hotOnly: false,
-    open: true, //配置自动启动浏览器
+    open: false, //配置自动启动浏览器
     proxy: {
       '/api': {
         target: 'https://m.laiyifen.com',
