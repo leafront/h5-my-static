@@ -33,7 +33,7 @@ body::-webkit-scrollbar {
   overflow-scrolling: touch;
   overflow-y: scroll;
 }
-.ui-header + .scroll-view-wrapper{
+.ui-header ~ .scroll-view-wrapper{
   padding-top: .88rem;
 }
 

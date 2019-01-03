@@ -36,13 +36,7 @@
     },
     computed: {
       showHeader () {
-        if (utils.isApp()) {
-          if (utils.query('hideHead') == 0 && utils.getVersion() < 5320) {
-            return true
-          } else {
-            return false
-          }
-        } else if (utils.weixin() || utils.nativeQQ()) {
+        if (utils.isApp() || utils.weixin() || utils.nativeQQ()) {
           return false
         } else {
           return this.isShowHeader || true
@@ -60,7 +54,6 @@
             this.$router.back()
           }
         }
-
       }
     }
   }
