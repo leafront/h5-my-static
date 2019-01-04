@@ -170,6 +170,14 @@ export default new VueRouter({
         title: '伊豆规则',
         requireLogin: true
       }
+    }, {
+      path: '/my/bank/recharge',
+      name: 'MyBankRecharge',
+      component: () => import('@/views/my/bank/recharge'),
+      meta: {
+        title: '悠点卡',
+        requireLogin: true
+      }
     }
   ]
 })

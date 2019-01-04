@@ -111,7 +111,7 @@
         </div>
       </div>
       <div class="my-index-discount">
-        <div class="my-index-discount-item" v-if="yCardBalanceState" @click="pageAction('/pay/youdianCard.html')">
+        <div class="my-index-discount-item" v-if="yCardBalanceState" @click="pageAction('/my/bank/recharge')">
           <span class="ff6900" v-if="loggedIn">{{(walletInfo.yCardBalance || 0) | price}}</span>
           <span class="ff6900" v-else>- -</span>
           <p class="c3">悠点卡</p>
