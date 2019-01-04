@@ -3,7 +3,6 @@ node_modules
 /target
 edu-release.sh
 serviceWorker.txt
-vue.config.js
 
 # local env files
 .env.local
