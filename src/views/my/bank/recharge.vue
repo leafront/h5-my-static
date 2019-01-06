@@ -47,12 +47,11 @@
 
   import AppHeader from '@/components/common/header'
   import config from '@/config/index'
-  import app from '@/widget/app'
   import utils from '@/widget/utils'
   import store from '@/widget/store'
   import * as Model from '@/model/bank'
   import PayPopup from '@/components/common/pay'
-  import MallSettings from '@/widget/mall_setting'
+  import app from '@/widget/app'
   import validate from '@/widget/validate'
 
   export default {
@@ -91,12 +90,6 @@
           this.$toast('充值金额不可超过3000元')
           return
         }
-        if (paymentThirdparty.indexOf('微信') > -1 && !openId) {
-          setTimeout(() => {
-            this.createPay()
-          }, 300)
-          return
-        }
         if (utils.isApp()) {
           const url = 'lyf://pay?body={"amount":'+ money +', "url": '+ returnUrl +', "orderType": 1}'
           location.href = url
@@ -113,7 +106,6 @@
         } = this
         const submitData = {
           sessionId: utils.getUserToken(),
-          paymentConfigId,
           orderType: 1,
           returnUrl,
           money
@@ -121,8 +113,14 @@
         if (paymentThirdparty) {
           submitData.paymentThirdparty = paymentThirdparty
         }
+        if (paymentConfigId) {
+          submitData.paymentConfigId = paymentConfigId
+        }
         if (openId) {
           submitData.openId = openId
+        } else {
+          this.$toast('充值失败')
+          return
         }
         Model.createPay({
           type: 'POST',
@@ -142,8 +140,6 @@
               submitPayEle.setattribute('action', payJumpUrl)
               submitPayEle.submit()
             }
-          } else {
-            this.$toast(result.message)
           }
         })
       },
@@ -157,7 +153,8 @@
             "paySign": sign
         }, (res) => {
           //微信支付成功，如果缓存中有ycartreturnurl，就跳转对应连接
-          if (res.err_msg == "get_brand_wcpay_request:ok") {
+          const err_msg = res.err_msg
+          if (err_msg == "get_brand_wcpay_request:ok") {
             const ycartreturnurl = store.get('ycartreturnurl', 'session')
             if (ycartreturnurl) {
               location.href = ycartreturnurl
@@ -165,8 +162,10 @@
             } else {
               location.href = this.returnUrl
             }
-          } else {
-            this.$toast(res.err_msg)
+          } else if (err_msg == "get_brand_wcpay_request:cancel") {
+            this.$toast('取消支付')
+          } else if (err_msg == "get_brand_wcpay_request:fail") {
+            this.$toast('支付失败')
           }
         })
       },
@@ -259,9 +258,11 @@
       toggleBankPopup (val) {
         this.isBankPopup = val
       },
-      getWeixinAuthUrl (url) {
-        const weixinUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +MallSettings.getAppId() + "&redirect_uri="+encodeURIComponent(url)+"&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
-        return weixinUrl
+      setWeixinAuthUrl (url) {
+        return app.getWeixinAppId().then((appId) => {
+          const weixinUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +appId + "&redirect_uri="+encodeURIComponent(url)+"&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+          location.replace(weixinUrl)
+        })
       },
       setRefrrer () {
         const referUrl = document.referrer
@@ -283,13 +284,12 @@
         if (utils.weixin()) {
           const {
             code
-          } = this.$router.query
+          } = this.$route.query
           if (code) {
-            this.getOpenIdByCode()
+            this.getOpenIdByCode(code)
           } else {
-            const url = '/my/bank/recharge'
-            const weixinAuthUrl = this.getWeixinAuthUrl()
-            location.replace(weixinAuthUrl)
+            const url = location.origin + '/my/bank/recharge'
+            this.setWeixinAuthUrl(url)
           }
         }
       }

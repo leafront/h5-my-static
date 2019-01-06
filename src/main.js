@@ -25,6 +25,8 @@ const setHeader = () => {
   }
 }
 
+app.getWeixinAppId()
+
 router.beforeEach((to, from, next) => {
 
   document.title = to.meta.title

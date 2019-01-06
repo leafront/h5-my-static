@@ -1,8 +1,6 @@
 import utils from '@/widget/utils'
-
 import * as Model from '@/model/wx_share'
-
-import mall_setting from '@/widget/mall_setting'
+import app from '@/widget/app'
 
 const weixin_share = {
 
@@ -12,7 +10,6 @@ const weixin_share = {
   initWeixinShare () {
 
     if (utils.weixin()) {
-
       const returnURL = location.href
       Model.getSign({
         type: 'GET',
@@ -22,7 +19,7 @@ const weixin_share = {
       }).then((data) => {
         return data
       }).then((result) => {
-        mall_setting._getWeixinAppId().then(() => {
+        app.getWeixinAppId().then((appId) => {
           const {
             data: {
               data: {
@@ -33,7 +30,6 @@ const weixin_share = {
             }
           } = result
 
-          const appId = mall_setting.getAppId()
           wx.config({
             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId, // 必填，公众号的唯一标识
