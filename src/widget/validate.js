@@ -23,6 +23,19 @@ const validate = {
 
     return pattern.test(text)
   },
+    /**
+   *
+   * @param {string} text
+   * @return {boolean}
+   */
+
+  isNumber (text) {
+
+    const pattern = /^[1-9]\d{0,8}$/
+
+    return pattern.test(text)
+
+  },
   /**
    * @param {string} zipCode
    * @returns {boolean}

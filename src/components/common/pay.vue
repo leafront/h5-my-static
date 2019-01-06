@@ -1,35 +1,59 @@
 <template>
-	<div class="ui-mask active">
-		<div class="ui-pay-cont bgfff">
-			<div class="ui-pay-close">
+	<div class="ui-pay">
+		<div class="ui-mask" :class="{'active': isPopup}" @click="togglePopup(false)"></div>
+		<div class="ui-pay-cont bgfff" :class="{'active': isPopup}">
+			<div class="ui-pay-close" @click="togglePopup(false)">
 				<span class="ui-pay-close-btn"></span>
 			</div>	
 			<div class="ui-pay-title ui-bottom-line">
 				<h4>选择充值方式</h4>
 			</div>
-			<div class="ui-pay-list p30">
-				<div class="ui-pay-item">
-					<img class="ui-pay-pic"/>
+			<div class="ui-pay-list">
+				<div class="ui-pay-item p30 ui-bottom-line" :key="item.paymentConfigId" @click="createPay(item.paymentConfigId)" v-for="item in payGateWays">
+					<img class="ui-pay-pic" :src="item.paymentLogoUrl"/>
 					<div class="ui-pay-info">
-						<h4 class="font-s c3">支付宝</h4>
-						<p class="font">支付宝快捷支付</p>
+						<h4 class="font-s c3">{{item.paymentThirdparty}}</h4>
+						<p class="font">{{item.paymentThirdparty}}快捷支付</p>
 					</div>
 					<div class="ui-right-arrow"></div>		
 				</div>	
 			</div>	
-		</div>		
+		</div>	
+	</div>	
 	</div>		
 </template>
+
+<script type="text/javascript">
+
+	export default {
+		props: {
+			payGateWays: {
+				type: Array,
+				defalut: []
+			},
+			isPopup: {
+				type: Boolean,
+				defalut: false
+			}
+		},
+		methods: {
+			togglePopup (val) {
+				this.$emit('togglePopup', false)
+			},
+			createPay (paymentConfigId) {
+				this.$emit('createPay', paymentConfigId)
+			}
+		}
+	}
+
+</script>
+
 
 <style lang="scss">
 	.ui-pay-item{
 		height: 1.06rem;
 		display: flex;
 		align-items: center;
-		border-bottom: .01rem solid #e0e0e0;
-		&:last-child{
-			border-bottom: 0;
-		}
 		.ui-pay-pic{
 			width: .62rem;
 			&:last-child{
@@ -64,6 +88,11 @@
 		bottom: 0;
 		width: 100%;
 		min-height: 5rem;
+		transition: all .5s cubic-bezier(0.4, 0.01, 0.165, 0.99);
+		transform: translateY(110%);
+		&.active{
+			transform: translateY(0)
+		}
 	}
 	.ui-pay-close {
 		position: absolute;

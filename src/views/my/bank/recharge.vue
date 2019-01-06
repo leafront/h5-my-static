@@ -20,16 +20,25 @@
         <h4 class="font">充值金额</h4>
         <div class="bank-recharge-form ui-bottom-line">
           <span class="c0">¥</span>
-          <input type="tel" maxlength="4" class="bank-recharge-input">
+          <input type="tel" v-model="money" maxlength="4" class="bank-recharge-input">
         </div> 
         <p class="font">充值金额不可超过 3000元</p>
       </div>
-      <div class="bank-recharge-submit p30">
+      <div class="bank-recharge-submit p30" @click="submitPay">
         <div class="ui-submit">
           <span>充值</span>
         </div>  
       </div> 
-      <PayPopup></PayPopup> 
+      <form id="submitPay" method="post">
+        <input type="hidden" name="paymentConfigId" v-model="payGateWayConfigId">
+        <input type="hidden" name="returnUrl" v-model="returnUrl">
+      </form>
+      <PayPopup 
+        :isPopup="isPopup" 
+        :payGateWays="payGateWays"
+        @createPay="createPay"
+        @togglePopup="togglePopup">
+      </PayPopup> 
     </div>
   </div>
 </template>
@@ -44,6 +53,7 @@
   import * as Model from '@/model/bank'
   import PayPopup from '@/components/common/pay'
   import MallSettings from '@/widget/mall_setting'
+  import validate from '@/widget/validate'
 
   export default {
     data () {
@@ -51,9 +61,15 @@
         title: '悠点卡',
         pageView: false,
         yCardBalance: 0,
-        money: '',
+        money: 100,
         openId: '',
-        ycartreturnurl: ''
+        ycartreturnurl: '',
+        payGateWayConfigId:'',
+        paymentThirdparty: '',
+        payGateWays: [],
+        isPopup: false,
+        returnUrl: location.origin + '/my/bank/recharge',
+        payJumpUrl: ''
       }
     },
     components: {
@@ -61,6 +77,99 @@
       PayPopup
     },
     methods: {
+      submitPay () {
+        const {
+          money,
+          paymentThirdparty,
+          openId
+        } = this
+        if (!money || !validate.isNumber(money)) {
+          this.$toast('请输入有效的充值金额')
+          return
+        }
+        if (money > 3000) {
+          this.$toast('充值金额不可超过3000元')
+          return
+        }
+        if (paymentThirdparty.indexOf('微信') > -1 && !openId) {
+          setTimeout(() => {
+            this.createPay()
+          }, 300)
+          return
+        }
+        if (utils.isApp()) {
+          const url = 'lyf://pay?body={"amount":'+ money +', "url": '+ returnUrl +', "orderType": 1}'
+          location.href = url
+        } else {
+          this.togglePopup(true)
+        }
+      },
+      createPay (paymentConfigId) {
+        const {
+          openId,
+          returnUrl,
+          money,
+          paymentThirdparty
+        } = this
+        const submitData = {
+          sessionId: utils.getUserToken(),
+          paymentConfigId,
+          orderType: 1,
+          returnUrl,
+          money
+        }
+        if (paymentThirdparty) {
+          submitData.paymentThirdparty = paymentThirdparty
+        }
+        if (openId) {
+          submitData.openId = openId
+        }
+        Model.createPay({
+          type: 'POST',
+          data: submitData
+        }).then((result) => {
+
+          const data = result.data
+          if (result.code == 0 && data) {
+
+            if (paymentThirdparty.indexOf('支付宝') > -1) {
+              location.href = data.od
+            } else if (paymentThirdparty.indexOf('微信') > -1) {
+              this.createWechatpay(data)
+            } else if (paymentThirdparty.indexOf('银联') > -1) {
+              const payJumpUrl = data.od
+              const submitPayEle = document.getElementById('submitPay')
+              submitPayEle.setattribute('action', payJumpUrl)
+              submitPayEle.submit()
+            }
+          } else {
+            this.$toast(result.message)
+          }
+        })
+      },
+      createWechatpay ({appid, timestamp, noncestr, prepayid, sign}) {
+        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+            "appId": appid, //公众号名称，由商户传入
+            "timeStamp": timestamp, //时间戳，自1970年以来的秒数
+            "nonceStr": noncestr, //随机串
+            "package": 'prepay_id=' + prepayid,
+            "signType": 'MD5', //微信签名方式:
+            "paySign": sign
+        }, (res) => {
+          //微信支付成功，如果缓存中有ycartreturnurl，就跳转对应连接
+          if (res.err_msg == "get_brand_wcpay_request:ok") {
+            const ycartreturnurl = store.get('ycartreturnurl', 'session')
+            if (ycartreturnurl) {
+              location.href = ycartreturnurl
+              store.remove('ycartreturnurl', 'session')
+            } else {
+              location.href = this.returnUrl
+            }
+          } else {
+            this.$toast(res.err_msg)
+          }
+        })
+      },
       /**
        * [getOpenIdByCode 获取微信的openId]
        * @param  {String} code [微信授权返回的code]
@@ -77,6 +186,9 @@
             this.openId = data.data
           }
         })
+      },
+      togglePopup (val) {
+        this.isPopup = val
       },
       /**
        * 获取悠点卡金额
@@ -95,6 +207,41 @@
             this.$toast(result.message)
           }
         })
+      },
+      getPayGateway () {
+        Model.getPayGateway({
+          type: 'GET',
+          data: {
+            businessType: 2
+          }
+        }).then((result) => {
+
+          const data = result.data
+          if (result.code == 0 && data) {
+
+            const payGateWays = data.payGatewayList.concat(data.commonPayGatewayList) || []
+            this.setGateWays(payGateWays)
+          }
+        })
+      },
+      /**
+       * [setGateWays 设置支付方式]  微信端过滤掉支付宝，普通浏览器端过滤掉微信
+       * @param {Array/Objet} payGateWays [支付方式列表]
+       */
+      setGateWays (payGateWays) {
+        if (payGateWays && payGateWays.length > 0) {
+          payGateWays.forEach((item, index) => {
+            if (utils.weixin() && item.paymentThirdparty.indexOf('支付宝') > -1) {
+              payGateWays.splice(index, 1)
+            }
+            if (!utils.weixin() && item.paymentThirdparty.indexOf('微信') > -1) {
+              payGateWays.splice(index, 1)
+            }
+          })
+          this.payGateWays = payGateWays
+          this.payGateWayConfigId = this.payGateWays[0].paymentConfigId
+          this.paymentThirdparty = this.payGateWays[0].paymentThirdparty
+        }
       },
       submitAction () {
         const {
@@ -131,23 +278,29 @@
           location.replace(ycartreturnurl)
         }
         store.remove('ycartreturnurl', 'local')
+      },
+      setWeixinAuth () {
+        if (utils.weixin()) {
+          const {
+            code
+          } = this.$router.query
+          if (code) {
+            this.getOpenIdByCode()
+          } else {
+            const url = '/my/bank/recharge'
+            const weixinAuthUrl = this.getWeixinAuthUrl()
+            location.replace(weixinAuthUrl)
+          }
+        }
       }
     },
     created () {
       this.$showLoading()
       this.getWalletInfo()
-      if (utils.weixin()) {
-        const {
-          code
-        } = this.$router.query
-        if (code) {
-          this.getOpenIdByCode()
-        } else {
-          const url = '/my/bank/recharge'
-          const weixinAuthUrl = this.getWeixinAuthUrl()
-          location.replace(weixinAuthUrl)
-        }
-      }
+      this.setWeixinAuth()
+      if (!utils.isApp()) {
+        this.getPayGateway()
+      } 
     }
   }
 
