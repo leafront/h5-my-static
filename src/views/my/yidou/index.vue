@@ -97,7 +97,7 @@
         Model.getPointList({
           type: 'POST',
           data: {
-            pageNo: 1,
+            pageNo: currentPage,
             pageSize: 10,
             accountType: 2,
             pointStatus
