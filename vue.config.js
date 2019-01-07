@@ -32,7 +32,7 @@ module.exports = {
         // https://github.com/kangax/html-minifier#options-quick-reference
       }
     }))
-    if (process.env.NODE_ENV == 'production') {
+    if (process.env.VUE_APP_CURRENTMODE == 'production') {
       config.plugins.push(new UglifyJsPlugin({
         uglifyOptions: {
           compress: {

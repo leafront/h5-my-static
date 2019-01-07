@@ -178,6 +178,14 @@ export default new VueRouter({
         title: '悠点卡',
         requireLogin: true
       }
+    }, {
+      path: '/my/recharge/list',
+      name: 'MyRechargeList',
+      component: () => import('@/views/my/bank/list'),
+      meta: {
+        title: '充值记录',
+        requireLogin: true
+      }
     }
   ]
 })

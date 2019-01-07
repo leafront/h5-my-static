@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="my-index-personal">
-          <div class="my-vip-txt">
+          <div class="my-vip-txt" @click="routerAction('/my/vip/index')">
             <p>{{loggedIn ? userInfo.userLevlName : '- -'}}</p>
             <span>会员等级</span>
           </div>

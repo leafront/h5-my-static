@@ -1,7 +1,7 @@
 <template>
   <div class="pageView">
     <AppHeader :title="title" :backFn="backAction">
-      <div class="ui-header-right">
+      <div class="ui-header-right" @click="pageAction('/my/recharge/list')">
         <span>充值记录</span>
       </div>
     </AppHeader>
@@ -119,8 +119,10 @@
         if (openId) {
           submitData.openId = openId
         } else {
-          this.$toast('充值失败')
-          return
+          if (utils.weixin()) {
+            this.$toast('充值失败')
+            return
+          }
         }
         Model.createPay({
           type: 'POST',
@@ -178,7 +180,8 @@
           type: 'GET',
           data: {
             code
-          }
+          },
+          cache: true
         }).then((result) => {
           const data = result.data
           if (result.code == 0 && data) {
