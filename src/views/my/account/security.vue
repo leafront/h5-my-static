@@ -27,9 +27,7 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import * as Model from '@/model/setting'
-
   import store from '@/widget/store'
 
   export default {
