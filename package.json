@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve --mode development",
     "edu": "vue-cli-service build --mode staging.local",
+    "test": "vue-cli-service build --mode test",
     "release": "vue-cli-service build --mode staging",
     "production": "vue-cli-service build --mode production"
   },
