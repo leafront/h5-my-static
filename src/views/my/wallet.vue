@@ -4,7 +4,7 @@
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-wallet-card">
-        <div class="my-wallet-card-item" v-if="info.yCardBalance" @click="pageAction('/pay/youdianCard.html')">
+        <div class="my-wallet-card-item" v-if="info.yCardBalance" @click="routerAction('/my/bank/recharge')">
           <strong class="cfff">{{info.yCardBalance || 0}}</strong>
           <span class="font cfff">悠点卡</span>
         </div>
