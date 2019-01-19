@@ -1,6 +1,7 @@
 const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPluginCrossorigin = require('html-webpack-plugin-crossorigin')
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
@@ -23,6 +24,9 @@ module.exports = {
       staticPath: process.env.VUE_APP_STATIC_PATH,
       getTime: new Date().getTime(),
       inject: true,
+      attributes: {
+        crossorigin: 'anonymous'
+      },
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -31,6 +35,9 @@ module.exports = {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       }
+    }))
+    config.plugins.push(new HtmlWebpackPluginCrossorigin({
+      inject: true
     }))
     if (process.env.VUE_APP_CURRENTMODE == 'production') {
       config.plugins.push(new UglifyJsPlugin({
