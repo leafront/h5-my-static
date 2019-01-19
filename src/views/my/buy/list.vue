@@ -86,7 +86,7 @@
           const data = result.data
           if (result.code == 0 && data) {
             this.pageView = true
-            this.totalPage = data.totalPage
+            this.totalPage = data.totalCount
             if (currentPage > 1) {
               setTimeout(() => {
                 this.showLoading = false
