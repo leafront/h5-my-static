@@ -269,7 +269,7 @@
       },
       setRefrrer () {
         const referUrl = document.referrer
-        if (referUrl.indexOf('.laiyifen.com') >  -1) {
+        if (!referUrl.indexOf('.laiyifen.com') >  -1) {
           store.set('ycartreturnurl', referUrl, 'session')
           this.ycartreturnurl = referUrl
         }
@@ -279,7 +279,7 @@
         if (ycartreturnurl && ycartreturnurl.indexOf('youdianCard-pay-list.html') > -1) {
           location.replace('/my/index')
         } else if (ycartreturnurl) {
-          location.replace(ycartreturnurl)
+          this.$router.back()
         }
         store.remove('ycartreturnurl', 'local')
       },
