@@ -44,8 +44,6 @@
 
   import UIEmpty from '@/components/common/ui-empty'
 
-  import '@/widget/requestAnimationFrame'
-
   export default {
     data () {
       return {

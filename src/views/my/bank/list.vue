@@ -54,7 +54,6 @@
 
 	import AppHeader from '@/components/common/header'
   import utils from '@/widget/utils'
-  import '@/widget/requestAnimationFrame'
   import PageLoading from '@/components/common/pageLoading'
   import * as Model from '@/model/bank'
   import UIEmpty from '@/components/common/ui-empty'

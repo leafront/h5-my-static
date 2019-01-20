@@ -61,8 +61,6 @@
   import {mapGetters, mapActions} from 'vuex'
 
   import app from '@/widget/app'
-  
-  import '@/widget/requestAnimationFrame'
 
   export default {
     data () {

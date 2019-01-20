@@ -94,7 +94,6 @@
   import utils from '@/widget/utils'
   import config from '@/config/index'
   import app from '@/widget/app'
-  import '@/widget/requestAnimationFrame'
 
   export default {
     data () {

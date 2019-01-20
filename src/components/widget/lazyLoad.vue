@@ -8,8 +8,6 @@
 
   import utils from '@/widget/utils'
 
-  import '@/widget/requestAnimationFrame'
-
   export default {
     props: ['options','list'],
     data () {
