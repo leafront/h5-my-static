@@ -157,7 +157,7 @@ export default new VueRouter({
       name: 'MyYidou',
       component: () => import('@/views/my/yidou/index'),
       meta: {
-        title: '伊豆',
+        title: '我的伊豆',
         requireLogin: true
       }
     }, {

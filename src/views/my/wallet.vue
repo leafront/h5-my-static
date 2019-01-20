@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :isBorder="isBorder">
+    <AppHeader :title="title">
     </AppHeader>
     <div class="scroll-view-wrapper" :class="{'visibility': pageView}">
       <div class="my-wallet-card">

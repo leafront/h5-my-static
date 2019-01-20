@@ -271,7 +271,7 @@
         const referUrl = document.referrer
         if (referUrl.indexOf('.laiyifen.com') >  -1) {
           store.set('ycartreturnurl', referUrl, 'session')
-          this.ycartreturnurl = ycartreturnurl
+          this.ycartreturnurl = referUrl
         }
       },
       backAction () {
@@ -301,6 +301,7 @@
       this.$showLoading()
       this.getWalletInfo()
       this.setWeixinAuth()
+      this.setRefrrer()
       if (!utils.isApp()) {
         this.getPayGateway()
       } 
