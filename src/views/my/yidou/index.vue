@@ -60,7 +60,7 @@
     data () {
       return {
         pageView: false,
-        title: '我的积分',
+        title: '我的伊豆',
         list: [],
         pointStatus: 0,
         navList: ['全部','收入','支出'],
@@ -107,7 +107,7 @@
           const data = result.data
           if (result.code == 0 && data) {
             this.pageView = true
-            this.totalPage = data.totalPage
+            this.totalPage = data.totalCount
             if (currentPage > 1) {
               setTimeout(() => {
                 this.showLoading = false
