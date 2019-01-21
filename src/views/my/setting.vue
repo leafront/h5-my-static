@@ -46,17 +46,11 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import UIContact from '@/components/common/ui-contact'
-
   import utils from '@/widget/utils'
-
   import app from '@/widget/app'
-
   import * as Model from '@/model/setting'
-
   import store from '@/widget/store'
-
   import distribution from '@/common/distribution'
 
   export default {

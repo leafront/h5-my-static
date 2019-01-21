@@ -1,4 +1,3 @@
-
 import request from '@/widget/request'
 
 export const getDolphinList = (data) => request('/api/dolphin/list', data)

@@ -91,7 +91,6 @@
 
   import AppHeader from '@/components/common/header'
 
-
   export default {
     data () {
       return {

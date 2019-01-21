@@ -35,11 +35,8 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
-
   import store from '@/widget/store'
-
   import app from '@/widget/app'
 
   export default {

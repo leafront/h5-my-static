@@ -27,7 +27,6 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
 
   export default {

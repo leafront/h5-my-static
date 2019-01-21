@@ -1,4 +1,3 @@
-
 import utils from '@/widget/utils'
 
 const pageLoading = {

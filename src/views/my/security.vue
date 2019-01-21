@@ -10,17 +10,6 @@
   </div>
 </template>
 
-<style lang="scss">
-
-  .my-security{
-    padding: .3rem .3rem 0;
-    p{
-      font-size: .26rem;
-    }
-  }
-
-</style>
-
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
@@ -39,3 +28,14 @@
   }
 
 </script>
+
+<style lang="scss">
+
+  .my-security{
+    padding: .3rem .3rem 0;
+    p{
+      font-size: .26rem;
+    }
+  }
+
+</style>

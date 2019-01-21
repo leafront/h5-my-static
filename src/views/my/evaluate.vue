@@ -61,16 +61,11 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
-  import * as Model from '@/model/evaluate'
-
-  import utils from '@/widget/utils'
-
   import LazyLoad from '@/components/widget/lazyLoad'
-
   import PageLoading from '@/components/common/pageLoading'
-
   import UIEmpty from '@/components/common/ui-empty'
+  import * as Model from '@/model/evaluate'
+  import utils from '@/widget/utils'
 
   export default {
     data () {

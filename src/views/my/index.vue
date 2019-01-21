@@ -146,13 +146,9 @@
 <script type="text/javascript">
 
   import AppFooter from '@/components/common/footer'
-
   import * as Model from '@/model/index'
-
   import config from '@/config/index'
-
   import utils from '@/widget/utils'
-
   import store from '@/widget/store'
 
   export default {

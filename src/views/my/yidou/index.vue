@@ -45,13 +45,9 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
-
   import PageLoading from '@/components/common/pageLoading'
-
   import * as Model from '@/model/integral'
-
   import UIEmpty from '@/components/common/ui-empty'
   
   export default {

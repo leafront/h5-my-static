@@ -26,9 +26,7 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import utils from '@/widget/utils'
-
   const uaParams = utils.getUaParams()
 
   export default {

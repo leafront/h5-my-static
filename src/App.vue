@@ -7,11 +7,8 @@
 <script type="text/javascript">
 
 import utils from '@/widget/utils'
-
 import app from '@/widget/app'
-
 import store from '@/widget/store'
-
 import * as Model from '@/model/static'
 
 export default {

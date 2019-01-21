@@ -105,23 +105,14 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
   import ImageUpload from '@/components/widget/imageUpload'
-
   import UIAddress from '@/components/widget/ui-address'
-
   import UISex from '@/components/common/ui-sex'
-
   import UIDatePicker from '@/components/widget/ui-date-picker'
-
   import config from '@/config/index'
-
   import utils from '@/widget/utils'
-
   import validate from '@/widget/validate'
-
   import app from '@/widget/app'
-
   import * as Model from '@/model/setting'
 
   export default {

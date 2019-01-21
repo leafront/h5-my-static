@@ -18,20 +18,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .my-protocol{
-    padding: .1rem .3rem;
-    p{
-      font-size: .26rem;
-      margin-top: .2rem;
-    }
-    .my-protocol-name{
-      text-align: center;
-      padding-top: .2rem;
-    }
-  }
-</style>
-
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
@@ -50,3 +36,17 @@
   }
 
 </script>
+
+<style lang="scss">
+  .my-protocol{
+    padding: .1rem .3rem;
+    p{
+      font-size: .26rem;
+      margin-top: .2rem;
+    }
+    .my-protocol-name{
+      text-align: center;
+      padding-top: .2rem;
+    }
+  }
+</style>

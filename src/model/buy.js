@@ -1,4 +1,3 @@
-
 import request from '@/widget/request'
 
 export const getBuyList = (data) => request('/api/my/behavior/record', data)

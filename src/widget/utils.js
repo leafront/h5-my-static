@@ -1,4 +1,3 @@
-
 import config from '@/config/index'
 
 const utils = {

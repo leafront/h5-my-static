@@ -67,10 +67,8 @@
 <script type="text/javascript">
 
   import AppHeader from '@/components/common/header'
-
-  import * as Model from '@/model/wallet'
-
   import utils from '@/widget/utils'
+  import * as Model from '@/model/wallet'
 
   export default {
     data () {
@@ -124,7 +122,6 @@
       this.getWalletInfo()
     }
   }
-
 </script>
 
 <style lang="scss">

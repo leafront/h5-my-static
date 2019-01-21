@@ -1,4 +1,3 @@
-
 const config = {
   "companyId": 30,
   "platformId": 3,  //H5

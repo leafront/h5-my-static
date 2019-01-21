@@ -1,4 +1,3 @@
-
 import request from '@/widget/request'
 
 export const getPointList = (data) => request('/api/my/point/list', data)

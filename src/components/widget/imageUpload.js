@@ -1,7 +1,5 @@
 import EXIF from 'exif-js'
 
-
-
 window.URL = window.URL || window.webkitURL;
 /*
 
