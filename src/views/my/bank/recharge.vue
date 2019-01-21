@@ -124,6 +124,7 @@
             return
           }
         }
+        this.$showPageLoading()
         Model.createPay({
           type: 'POST',
           data: submitData
@@ -131,7 +132,7 @@
 
           const data = result.data
           if (result.code == 0 && data) {
-
+            this.$hidePageLoading()
             if (paymentThirdparty.indexOf('支付宝') > -1) {
               location.href = data.od
             } else if (paymentThirdparty.indexOf('微信') > -1) {
@@ -142,6 +143,8 @@
               submitPayEle.setattribute('action', payJumpUrl)
               submitPayEle.submit()
             }
+          } else {
+            this.$toast(result.message)
           }
         })
       },
