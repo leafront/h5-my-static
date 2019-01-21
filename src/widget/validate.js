@@ -4,11 +4,8 @@ const validate = {
    * @return {boolean}
    */
   isMobile (text) {
-
     const pattern = /^1[3-9]\d{9}$/
-
     return pattern.test(text)
-
   },
   /**
    * 邮箱验证
@@ -18,23 +15,17 @@ const validate = {
    * validate.isEmail('leafront@126.com')
    */
   isEmail (text) {
-
     const pattern = /^([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[-_.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/
-
     return pattern.test(text)
   },
-    /**
+  /**
    *
    * @param {string} text
    * @return {boolean}
    */
-
   isNumber (text) {
-
     const pattern = /^[1-9]\d{0,8}$/
-
     return pattern.test(text)
-
   },
   /**
    * @param {string} zipCode
@@ -43,10 +34,8 @@ const validate = {
    * Lizard.isZipCode('430406')
    */
   isZipCode (text){
-
-    const pattern = /^[0-9]{6}$/;
-
-    return pattern.test(text);
+    const pattern = /^[0-9]{6}$/
+    return pattern.test(text)
   }
 }
 

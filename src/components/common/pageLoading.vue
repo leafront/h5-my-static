@@ -19,7 +19,6 @@
 </script>
 
 <style lang="scss">
-
   .pageLoading {
     background: #fff;
     padding-bottom: .2rem;

@@ -48,7 +48,6 @@
 
 </script>
 
-
 <style lang="scss">
 	.ui-pay-item{
 		height: 1.06rem;

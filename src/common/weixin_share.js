@@ -3,7 +3,6 @@ import * as Model from '@/model/wx_share'
 import app from '@/widget/app'
 
 const weixin_share = {
-
   /**
    * 初始化微信分享
    */
@@ -52,7 +51,6 @@ const weixin_share = {
       })
     }
   },
-
   /**
    * 微信分享
    * 朋友圈和发送给朋友的success不会触发，未知原因，放在trigger中触发回调
@@ -114,7 +112,6 @@ const weixin_share = {
 
 if (utils.weixin()) {
   utils.loadScript('/webapp-static/weixin-js-sdk/index.js',() => {
-
     //初始化微信分享
     weixin_share.initWeixinShare()
   })

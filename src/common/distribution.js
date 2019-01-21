@@ -1,6 +1,4 @@
-
 import utils from '@/widget/utils'
-
 import store from '@/widget/store'
 
 //上家的sharecode
