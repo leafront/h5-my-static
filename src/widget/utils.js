@@ -168,12 +168,12 @@ const utils = {
     return supportsPassiveOption   //{passive: true} 就不会调用 preventDefault 来阻止默认滑动行为
 
   },
-
   setCookie (name, value, options ) {
     var Days = (options && options.day) || 365
+    var domain = (options && options.domain) || location.hostname
     var exp = new Date()
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000)
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=" + location.hostname
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + "; path=/; domain=" + domain
   },
   getCookie (name) {
     var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
@@ -230,6 +230,7 @@ const utils = {
   //因为在iphone6 se版本的微信里无法删除cookie，所以只能通过设置为空来标识用户退出登录状态。
   deleteUserToken () {
     utils.setCookie("lyfh5ut", "")
+    utils.setCookie("ut", "", {domain: 'laiyifen.com'})
   },
   /**
    * get user token
