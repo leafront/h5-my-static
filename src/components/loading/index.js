@@ -13,14 +13,14 @@ const pageLoading = {
         return
       } 
       // 1、创建构造器，定义好提示信息的模板
-      let loadingTpl = Vue.extend({
+      const loadingTpl = Vue.extend({
         template: `
         <div class="ui-showLoading" id="showLoading">
           <div class="ui-showLoading-gif"></div>
         </div>`
       })
       // 2、创建实例，挂载到文档以后的地方
-      let tpl = new loadingTpl().$mount().$el
+      const tpl = new loadingTpl().$mount().$el
       // 3、把创建的实例添加到body中
       document.body.appendChild(tpl)
 
