@@ -5,7 +5,7 @@
     <div class="ui-skeleton-container" v-if="!pageView">
       <UISkeleton></UISkeleton>
     </div>
-    <div class="scroll-view-wrapper white-view" :class="{'visibility': pageView}" id="my-vip-scroll">
+    <div class="scroll-view-wrapper" :class="{'visibility': pageView}" id="my-vip-scroll">
       <div class="my-vip-user">
         <div class="my-vip-info">
           <img class="my-vip-info-pic" v-if="headerPic" @click="personalAction" :src="headerPic | httpsImg"/>
