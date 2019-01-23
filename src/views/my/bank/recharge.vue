@@ -19,7 +19,7 @@
       <div class="bgfff bank-recharge-cont p30">
         <h4 class="font">充值金额</h4>
         <div class="bank-recharge-form ui-bottom-line">
-          <span class="c0">¥</span>
+          <span>¥</span>
           <input type="tel" v-model="money" maxlength="4" class="bank-recharge-input">
         </div> 
         <p class="font">充值金额不可超过 3000元</p>
@@ -336,10 +336,14 @@
     span{
       font-family: "Microsoft YaHei";
       padding-right: .2rem;
+      font-weight: lighter;
+      color: #000;
     }
     .bank-recharge-input{
       height: .7rem;
       padding: .1rem 0;
+      font-weight: lighter;
+      color: #000;
     }
   }
   .bank-recharge{
