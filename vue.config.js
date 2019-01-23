@@ -79,27 +79,27 @@ module.exports = {
     open: false, //配置自动启动浏览器
     proxy: {
       '/api': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/osc-api': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-web': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/opay-web': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/ouser-center': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/customer': {
-        target: 'http://m.lyf.edu.laiyifen.com',
+        target: 'https://m.laiyifen.com',
         changeOrigin: true
       },
       '/webapp-static': {

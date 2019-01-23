@@ -31,7 +31,7 @@
           <span class="font-s c9">RIGHTS</span>
         </div>
         <div class="my-vip-des-pic" @click="explainAction">
-          <img :src="vip_description" class="pic-lazyLoad"/>
+          <div class="my-vip-des-pic-img" :style="{'backgroundImage':'url('+vip_description+')','backgroundSize': '100% auto'}"></div>
         </div>
         <div class="my-vip-des-btn" @click="explainAction">
           <span class="font-b cfff">查看权益详情</span>
@@ -102,7 +102,7 @@
         title: '会员中心',
         pageView: false,
         vip_banner: [],
-        vip_description: config.staticPath + '/webapp-static/images/lazyLoad.png',
+        vip_description: '',
         vip_interests: [],
         userInfo: {},
         headerPic: '',
@@ -491,9 +491,10 @@
   }
   .my-vip-des-pic{
     display: flex;
-    img {
+    .my-vip-des-pic-img {
       width: 100%;
-      height: 62vw;
+      height: 4.65rem;
+      background: #f5f5f5;
     }
   }
   .my-vip-title{
