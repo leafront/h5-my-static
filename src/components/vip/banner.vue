@@ -1,8 +1,8 @@
 <template>
   <div class="my-vip-banner">
-    <swiper :list="bannerList" :preventDefault="true" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
+    <swiper :list="list" :preventDefault="preventDefault" :index="index" :itemWidth="wrapperWidth" @toggleIndex="toggleIndex" :style="{'height':itemHeight}">
       <ul slot="banner" class="slideshow-item" :style="{'height':itemHeight}">
-        <li v-for="item in bannerList" :style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
+        <li v-for="item in list" :style="{'width':itemWidth}" @click="pageAction(item.linkUrl)">
           <img :src="item.imageUrl" :style="{'width':itemWidth, 'height':itemHeight}">
         </li>
       </ul>
@@ -31,7 +31,8 @@
         index: 1,
         wrapperWidth: itemWidth,
         itemWidth:itemWidth + 'px',
-        itemHeight: '1.2rem'
+        itemHeight: '1.2rem',
+        preventDefault: true
       }
     },
     props: {
@@ -45,16 +46,24 @@
     components:{
       swiper
     },
-    methods: {
-
-      pageAction (url) {
-
-        if (url) {
-
-          location.href = url
-
+    computed: {
+      list () {
+        const list = Object.assign([],this.bannerList)
+        if (list && list.length) {
+          const len = list.length
+          const firstEl = list[len - 1]
+          const lastEl = list[0]
+          list.unshift(lastEl)
+          list.push(firstEl)
         }
-
+        return list
+      }
+    },
+    methods: {
+      pageAction (url) {
+        if (url) {
+          location.href = url
+        }
       },
       toggleIndex (val) {
         this.index = val
