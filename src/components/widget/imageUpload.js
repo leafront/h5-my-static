@@ -282,9 +282,6 @@ ImageUpload.prototype = {
 
     })
   },
-  getBlob (imageUploadDatabase) {
-    return  imageUploadDatabase.img.src;
-  },
   drawImage(img,orientation,imageUploadDatabase) {
 
     const params = imageUploadDatabase
