@@ -45,13 +45,6 @@ export default {
       }
     })
   },
-  watch: {
-    '$route'() {
-      this.$nextTick(() => {
-        document.querySelector('.scroll-view-wrapper').style.minHeight = window.innerHeight + 'px'
-      })
-    }
-  },
   methods: {
     getLizardCode () {
       const cacheTimes = 30 * 24 * 60 * 60 * 1000
