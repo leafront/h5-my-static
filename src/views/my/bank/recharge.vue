@@ -334,7 +334,7 @@
     display: flex;
     align-items: flex-start;
     span{
-      font-family: "Microsoft YaHei";
+      font-family: 'Microsoft Yahei',PingFangSC-Regular;
       padding-right: .2rem;
       font-weight: lighter;
       color: #000;
@@ -342,7 +342,6 @@
     .bank-recharge-input{
       height: .7rem;
       padding: .1rem 0;
-      font-weight: lighter;
       color: #000;
     }
   }
