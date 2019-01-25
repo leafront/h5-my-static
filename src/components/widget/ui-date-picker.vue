@@ -24,7 +24,7 @@
           <div class="ui-picker__mask"></div>
           <div class="ui-picker__indicator"></div>
         </div>
-        <div class="ui-picker__group" v-if="isDays">
+        <div class="ui-picker__group">
           <ul class="ui-picker__content ui-ellipsis">
             <li v-for="num in 3"></li>
             <li class="ui-picker__item" :class="{'active': checkedDate[2]== index}" v-for="(item,index) in dates">{{item.label}}</li>
@@ -40,7 +40,7 @@
 
 <script>
 
-  import IScroll from '@/libs/IScroll'
+  import IScroll from 'better-scroll'
   export default {
     props: {
       start: {
@@ -150,16 +150,14 @@
         const itemHeight = parseFloat(document.documentElement.style.fontSize) * .68
         const groupEle = document.querySelectorAll('.ui-picker__group')
         const len = groupEle.length
-
         Array.from(groupEle).forEach((item,idx) => {
           var iscroll = new IScroll(item, {
-            scrollX: false
+            scrollX: false,
+            probeType: 2
           })
-
           self.scroll.push(iscroll)
-
+          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
           iscroll.on('scrollEnd', function () {
-
             const itemLen = item.querySelectorAll('.ui-picker__content li').length - 7
 
             let result = ( -this.y / itemHeight)
@@ -177,7 +175,6 @@
             }
 
             self.checkedDate.splice(idx,1,index)
-            self.scroll[len-1].refresh()
             if (idx == 1) {
               const prevDays = self.checkedDate[2]
               const nextDays =  self.months[index].children.length - 1
@@ -187,7 +184,6 @@
             }
             iscroll.scrollTo(0, -index * itemHeight)
           })
-          this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
         })
       },
       cancel () {
