@@ -19,7 +19,6 @@ Object.keys(filter).forEach(key => {
 })
 
 const setHeader = () => {
-  const hideHead = utils.query('hideHead')
   if (utils.isApp()) {
     app.postMessage('hiddenHead', {'isHidden':'0'})
   }

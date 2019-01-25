@@ -149,6 +149,7 @@
         this.checkedDate =  [this.selectYear, this.selectMonth, this.selectDate]
         const itemHeight = parseFloat(document.documentElement.style.fontSize) * .68
         const groupEle = document.querySelectorAll('.ui-picker__group')
+
         const len = groupEle.length
         Array.from(groupEle).forEach((item,idx) => {
           var iscroll = new IScroll(item, {
@@ -158,6 +159,7 @@
           self.scroll.push(iscroll)
           this.scroll[idx].scrollTo(0, -self.checkedDate[idx] * itemHeight)
           iscroll.on('scrollEnd', function () {
+
             const itemLen = item.querySelectorAll('.ui-picker__content li').length - 7
 
             let result = ( -this.y / itemHeight)
@@ -175,6 +177,7 @@
             }
 
             self.checkedDate.splice(idx,1,index)
+            self.scroll[len-1].refresh()
             if (idx == 1) {
               const prevDays = self.checkedDate[2]
               const nextDays =  self.months[index].children.length - 1
