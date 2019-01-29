@@ -107,14 +107,11 @@
           const img = new Image()
           img.src = imgUrl
           img.addEventListener('load', () => {
-            setTimeout(() => {
-              el.style.backgroundImage = 'url('+imgUrl+')'
-              el.style.backgroundSize = '100% auto'
-              delete el.dataset.src
-              el.dataset.LazyLoadImgState = 'success'
-              el.classList.add('successImg')
-            },70)
-
+            el.style.backgroundImage = 'url('+imgUrl+')'
+            el.style.backgroundSize = '100% auto'
+            delete el.dataset.src
+            el.dataset.LazyLoadImgState = 'success'
+            el.classList.add('successImg')
           }, false)
 
           img.addEventListener('error', () => {
