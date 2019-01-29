@@ -155,10 +155,10 @@
     data () {
       return {
         title: '我的',
-        pageView: true,
+        pageView: false,
         loggedIn: utils.loggedIn(),
         userInfo:  {},
-        headPicUrl: config.staticPath + '/webapp-static/images/lazyLoad.png',
+        headPicUrl: '',
         walletInfo: {},
         yCardBalanceState: false,
         yesterdayRecharge: 0, //昨日收入
@@ -203,16 +203,21 @@
        * 获取用户信息
        */
       getUserInfo () {
+        this.$showLoading()
         Model.getUserInfo({
           type: 'GET',
           ignoreLogin: true
         }).then((result) => {
           const data = result.data || {}
           this.userInfo = data
+          this.pageView = true
+          this.$hideLoading()
           if (result.code == 0 && data) {
             store.set('kf_head_pic', data['url100x100'], 'session')
             this.headPicUrl = data.headPicUrl
-          } 
+          } else {
+            this.headPicUrl = config.staticPath + '/webapp-static/images/lazyLoad.png' 
+          }
         })
       },
       /**

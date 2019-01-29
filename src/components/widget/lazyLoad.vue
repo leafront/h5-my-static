@@ -113,7 +113,7 @@
               delete el.dataset.src
               el.dataset.LazyLoadImgState = 'success'
               el.classList.add('successImg')
-            },150)
+            },70)
 
           }, false)
 
