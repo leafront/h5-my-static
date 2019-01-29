@@ -303,7 +303,6 @@ ImageUpload.prototype = {
     var styleWidth = canvas.style.width
     var styleHeight = canvas.style.height
     if (orientation > 4) {
-
       canvas.width = h;
       canvas.style.width = styleHeight
       canvas.height = w;
@@ -324,13 +323,11 @@ ImageUpload.prototype = {
         break;
       case 5:
         ctx.rotate(0.5 * Math.PI)
-        ctx.scale(1, -1);
+        ctx.scale(1, -1)
         break;
       case 6:
         ctx.rotate(0.5 * Math.PI)
-
         ctx.translate(0, -h)
-
         break;
       case 7:
         ctx.rotate(0.5 * Math.PI)

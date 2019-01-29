@@ -12,7 +12,7 @@
         <div class="my-personal-upload ui-bottom-line">
           <span class="c3">头像</span>
           <img v-if="headPicUrl" :src="headPicUrl" class="my-personal-pic"/>
-          <input type="file" @change="uploadHeadPic($event)" @click="appUploadHeadPic" class="my-personal-file" accept="image/png,image/jpeg,image/jpg"/>
+          <input type="file" @change="uploadHeadPic($event)" class="my-personal-file" accept="image/*"/>
         </div>
         <div class="my-personal-item ui-bottom-line" @click="editPopup(1, '编辑昵称')">
           <span>昵称</span>
@@ -342,36 +342,11 @@
 
       },
       /**
-       * app图片上传
-       */
-      appUploadHeadPic () {
-        if (utils.isApp()) {
-          app.postMessage("uploadPhoto", {
-            maxCount:  1,
-            isNeedCut: 1
-          }, (result)=> {
-            const data = { headPicUrl:result }
-            this.headPicUrl = result
-            Model.updateUserInfo({
-              type: 'POST',
-              data
-            }).then((result) => {
-              if (result.code != 0) {
-                this.$toast(result.message)
-              }
-            })
-          })
-        }
-      },
-      /**
        * H5 图片上传
        * @param event
        */
       uploadHeadPic (event) {
 
-        if (utils.isApp()) {
-          return
-        }
         this.$showPageLoading()
         const file = event.currentTarget.files[0]
 
