@@ -21,7 +21,7 @@
             <p>{{loggedIn ? userInfo.userLevlName : '- -'}}</p>
             <span>会员等级</span>
           </div>
-          <img class="my-vip-pic" :src="userInfo.headPicUrl" @click="routerAction('/my/personal')"/>
+          <img class="my-vip-pic" :src="headPicUrl" @click="routerAction('/my/personal')"/>
           <div class="my-vip-txt" @click="routerAction('/my/yidou')">
             <p v-if="loggedIn">{{walletInfo.yBean || 0}}</p>
             <p v-else>- -</p>
@@ -158,6 +158,7 @@
         pageView: true,
         loggedIn: utils.loggedIn(),
         userInfo:  {},
+        headPicUrl: config.staticPath + '/webapp-static/images/lazyLoad.png',
         walletInfo: {},
         yCardBalanceState: false,
         yesterdayRecharge: 0, //昨日收入
@@ -207,14 +208,11 @@
           ignoreLogin: true
         }).then((result) => {
           const data = result.data || {}
+          this.userInfo = data
           if (result.code == 0 && data) {
             store.set('kf_head_pic', data['url100x100'], 'session')
-            data.headPicUrl = data.headPicUrl || config.staticPath + '/webapp-static/images/logo-laiyifen.png'
-            this.userInfo = data
-          } else {
-            data.headPicUrl = config.staticPath + '/webapp-static/images/logo-laiyifen.png'
-            this.userInfo = data
-          }
+            this.headPicUrl = data.headPicUrl
+          } 
         })
       },
       /**
