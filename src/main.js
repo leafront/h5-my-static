@@ -21,14 +21,6 @@ Object.keys(filter).forEach(key => {
 app.getWeixinAppId()
 
 router.beforeEach((to, from, next) => {
-
-  document.title = to.meta.title
-  const bgColor = to.meta.bgColor
-  if (bgColor) {
-    document.body.style.backgroundColor = bgColor
-  } else {
-    document.body.style.backgroundColor = '#f5f5f5'
-  }
   if (
     to.matched.some(record => record.meta.requireLogin) &&
     process.env.NODE_ENV != 'develop'
@@ -50,6 +42,13 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
+  document.title = to.meta.title
+  const bgColor = to.meta.bgColor
+  if (bgColor) {
+    document.body.style.backgroundColor = bgColor
+  } else {
+    document.body.style.backgroundColor = '#f5f5f5'
+  }
   const trackerConfig = to.meta.trackerConfig || {}
   trackerConfig.referrer = from.name ? location.origin + from.fullPath : ''
   const shareConfig = to.meta.shareConfig
