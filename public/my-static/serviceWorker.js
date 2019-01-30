@@ -32,13 +32,13 @@ self.addEventListener('activate', function (event) {
 })
 
 var isCORSRequest = function(url, host) {
-  return url.search(location.host) === -1
+  return url.indexOf(location.host) === -1
 }
 
 var isNeedCache = function(url) {
   var CACHE_HOST = ['static.stg.laiyifen.com','mstatic.laiyifen.com','images.laiyifen.com','images1.laiyifen.com','images2.laiyifen.com','images3.laiyifen.com','images4.laiyifen.com','images5.laiyifen.com']
   return CACHE_HOST.some(function(host) {
-      return url.search(host) !== -1
+      return url.indexOf(host) !== -1
   })
 }
 self.addEventListener('fetch', function(event) {
