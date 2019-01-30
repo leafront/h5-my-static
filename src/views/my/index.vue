@@ -216,7 +216,7 @@
             store.set('kf_head_pic', data['url100x100'], 'session')
             this.headPicUrl = data.headPicUrl
           } else {
-            this.headPicUrl = config.staticPath + '/webapp-static/images/lazyLoad.png' 
+            this.headPicUrl = config.staticPath + '/webapp-static/images/logo-laiyifen.png' 
           }
         })
       },
