@@ -31,13 +31,17 @@ self.addEventListener('activate', function (event) {
   )
 })
 
+var isCORSRequest = function(url, host) {
+  return url.search(location.host) === -1
+}
 self.addEventListener('fetch', function(event) {
-  const request = event.request
-	const requestUrl = new URL(request.url)
+  var url = event.request.url
+	var requestUrl = new URL(url)
   // Ignore not GET https origin request.
   if (request.method !== 'GET' || requestUrl.protocol !== 'https:' || requestUrl.origin == location.origin) {
     return
   }
+  var request = isCORSRequest(url) ? new Request(url, {mode: 'cors'}) : url
   event.respondWith(
     caches.match(request)
     .then(function(response) {
@@ -47,21 +51,20 @@ self.addEventListener('fetch', function(event) {
 
       // 因为 event.request 流已经在 caches.match 中使用过一次，
       // 那么该流是不能再次使用的。我们只能得到它的副本，拿去使用。
-      const fetchRequest = request.clone()
+      var fetchRequest = request.clone()
 
       // fetch 的通过信方式，得到 Request 对象，然后发送请求
       return fetch(fetchRequest).then(
         function(httpRes) {
           // 检查是否成功
-          if(!httpRes || httpRes.status !== 200 || httpRes.type !== 'basic') {
+          if(!httpRes || httpRes.status !== 200 || (httpRes.type !== 'basic' && httpRes.type !== 'cors') {
             return httpRes
           }
 
           // 如果成功，该 response 一是要拿给浏览器渲染，而是要进行缓存。
           // 不过需要记住，由于 caches.put 使用的是文件的响应流，一旦使用，
           // 那么返回的 response 就无法访问造成失败，所以，这里需要复制一份。
-          const responseToCache = httpRes.clone()
-
+          var responseToCache = httpRes.clone()
           caches.open(VERSION)
           .then(function(cache) {
             cache.put(request, responseToCache)
