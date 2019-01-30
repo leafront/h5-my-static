@@ -57,7 +57,7 @@ self.addEventListener('fetch', function(event) {
       return fetch(fetchRequest).then(
         function(httpRes) {
           // 检查是否成功
-          if(!httpRes || httpRes.status !== 200 || (httpRes.type !== 'basic' && httpRes.type !== 'cors') {
+          if(!httpRes || httpRes.status !== 200 || (httpRes.type !== 'basic' && httpRes.type !== 'cors')) {
             return httpRes
           }
 
