@@ -64,7 +64,7 @@ export const sendTracker = ({
     ct:  + new Date, // curTime 当前时间戳毫秒
     bt: 'pv', //businessType 业务类型：init/pv/event
     data: {
-    ru: referrer,
+      ru: referrer,
       cpu: location.href
     } 
   }
