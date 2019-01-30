@@ -38,7 +38,7 @@ self.addEventListener('fetch', function(event) {
   var url = event.request.url
 	var requestUrl = new URL(url)
   // Ignore not GET https origin request.
-  if (request.method !== 'GET' || requestUrl.protocol !== 'https:' || requestUrl.origin == location.origin) {
+  if (event.request.method !== 'GET' || requestUrl.protocol !== 'https:' || requestUrl.origin == location.origin) {
     return
   }
   var request = isCORSRequest(url) ? new Request(url, {mode: 'cors'}) : url
