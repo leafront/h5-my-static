@@ -138,7 +138,7 @@
       scrollLoadList () {
         const pageViewHeight = window.innerHeight
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-        const pageHeight = document.documentElement.offsetHeight
+        const pageHeight = document.querySelector('.scroll-view-wrapper').offsetHeight
         const realFunc = () => {
           if (pageViewHeight + scrollTop >= pageHeight && this.list.length < this.totalPage) {
             this.showLoading = true
