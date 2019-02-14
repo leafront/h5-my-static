@@ -149,7 +149,6 @@
         } else {
           location.href = `/detail.html?itemId=${mpId}`
         }
-
       },
       cartAction () {
         if (utils.isApp()) {
