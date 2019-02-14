@@ -38,7 +38,6 @@ export default function request (url,{
   const ut = utils.getUserToken()
   const errorCode = 99
   const options = {
-    isHeader:true,
     type,
     data,
     async: true,
