@@ -99,13 +99,14 @@ export default function request (url,{
       ) {
         utils.deleteUserToken()
         if (!ignoreLogin) {
-          reject(results)
           if (utils.isApp()) {
             utils.login()
           } else {
             const from = utils.getRelatedUrl()
             location.href = `/login.html?from=` + encodeURIComponent(from)
           }
+          reject(results)
+          return
         } else {
           resolve(results)
         }
