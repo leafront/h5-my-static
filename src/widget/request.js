@@ -51,7 +51,6 @@ export default function request (url,{
     },
     hostPath
   }
-  clearStorage()
   if (dataType !== 'text') {
     options.data = Object.assign({
       ut,
@@ -119,17 +118,15 @@ export default function request (url,{
   }
 
   return new Promise((resolve, reject) => {
-
-    let currentTime = new Date().getTime()
+    const currentTime = new Date().getTime()
     const cacheData = store.get(cacheUrl,'local')
-
+    clearStorage()
     if (cache && cacheData) {
       const getCacheTime = cacheData.times
       if (currentTime < getCacheTime) {
         resolve(cacheData.results)
       } else {
         store.remove(cacheUrl,'local')
-
         httpRequest(resolve,reject)
       }
     } else {
