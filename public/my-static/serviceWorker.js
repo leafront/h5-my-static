@@ -36,7 +36,7 @@ var isCORSRequest = function(url, host) {
 }
 
 var isNeedCache = function(url) {
-  var CACHE_HOST = ['static.stg.laiyifen.com','mstatic.laiyifen.com','images.laiyifen.com','images1.laiyifen.com','images2.laiyifen.com','images3.laiyifen.com','images4.laiyifen.com','images5.laiyifen.com']
+  var CACHE_HOST = ['static.stg.laiyifen.com','mstatic.laiyifen.com','images.laiyifen.com','images1.laiyifen.com','images2.laiyifen.com','images3.laiyifen.com','images4.laiyifen.com','images5.laiyifen.com','static1.laiyifen.com','static2.laiyifen.com','static3.laiyifen.com','static4.laiyifen.com','static5.laiyifen.com']
   return CACHE_HOST.some(function(host) {
     return url.indexOf(host) !== -1
   })
