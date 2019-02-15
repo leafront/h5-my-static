@@ -148,7 +148,7 @@
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
         const pageHeight = document.querySelector('.scroll-view-wrapper').offsetHeight
         const realFunc = () => {
-          if (pageViewHeight + scrollTop > pageHeight && this.list.length < this.totalPage) {
+          if (pageViewHeight + scrollTop >= pageHeight && this.list.length < this.totalPage) {
             this.showLoading = true
             this.currentPage += 1
             this.getGroupList(1)

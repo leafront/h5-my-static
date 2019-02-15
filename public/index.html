@@ -41,7 +41,8 @@
             metaEl.setAttribute('name', 'viewport');
             doc.head.appendChild(metaEl);
           }
-          var clientWidth = doc.documentElement.clientWidth || 375;
+          var docElement = doc.documentElement;
+          var clientWidth = docElement.getBoundingClientRect ? docElement.getBoundingClientRect().width : docElement.clientWidth;
 
           var docFontSize = 50 + 'px'
           if (clientWidth <= 1200) {
@@ -51,7 +52,7 @@
             }
           }
           metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
-          doc.documentElement.style.fontSize = docFontSize;
+          docElement.style.fontSize = docFontSize;
         };
         function isLocalStorageSupported() {
           var testKey = 'test',
