@@ -7,7 +7,6 @@ const weixin_share = {
    * 初始化微信分享
    */
   initWeixinShare () {
-
     if (utils.weixin()) {
       const returnURL = location.href
       Model.getSign({
