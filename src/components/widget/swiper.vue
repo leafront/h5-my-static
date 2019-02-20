@@ -1,5 +1,5 @@
 <template>
-  <div class="slideshow-wrap pic-lazyLoad">
+  <div class="slideshow-wrap" :class="{'pic-lazyLoad': picLazyLoad}">
     <slot name="banner"></slot>
     <slot name="dot"></slot>
   </div>
@@ -26,10 +26,6 @@
         type: Boolean,
         default: true
       },
-      sliderBtn: {
-        type: String,
-        default: '.slideshow-dots li'
-      },
       slideItem:{
         type: String,
         default: '.slideshow-item'
@@ -46,6 +42,10 @@
       itemWidth: {
         type: Number,
         default: 750
+      },
+      picLazyLoad: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -70,7 +70,8 @@
         this.startY = this.endY = point.pageY
         this.isValid = true
         this.isCheck = false
-        this._start(e);
+        this.stopAutoPlay()
+        this._start(e)
       },
       touchmove (e) {
         if (!this.isValid) return;
@@ -131,7 +132,6 @@
         this.wrapper.style.transition = '300ms ease-in'
         this.wrapper.style.WebkitTransition = '300ms ease-in'
         this.setWrapperPos(this.x)
-
         let index = -this.x / width
         // 最后控制
         if (this.x >= 0) {
@@ -150,6 +150,7 @@
           this.startTime = new Date().getTime()
         }
         this.$emit('toggleIndex', index)
+        this.startAutoPlay()
       },
       setWrapperPos (x) {
         this.wrapper.style.transform = 'translate3d(' + x + 'px, 0, 0)'
