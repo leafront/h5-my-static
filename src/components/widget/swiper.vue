@@ -132,7 +132,7 @@
         this.wrapper.style.transition = '300ms ease-in'
         this.wrapper.style.WebkitTransition = '300ms ease-in'
         this.setWrapperPos(this.x)
-        let index = -this.x / width
+        let index = Math.ceil(Math.abs(this.x / width))
         // 最后控制
         if (this.x >= 0) {
           index = this.itemLength
