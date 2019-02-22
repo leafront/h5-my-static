@@ -54,45 +54,7 @@
           metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
           docElement.style.fontSize = docFontSize;
         };
-        function isLocalStorageSupported() {
-          var testKey = 'test',
-            storage = window.sessionStorage;
-          try {
-            storage.setItem(testKey, 'testValue');
-            storage.removeItem(testKey);
-            return true;
-          } catch (error) {
-            return false;
-          }
-        };
-        function appendScript (res) {
-          var script = doc.createElement('script');
-          script.type = 'text/javascript';
-          script.appendChild(doc.createTextNode(res));
-          doc.head.appendChild(script);
-        };
-        function writeLizard () {
-          doc.write('<script crossorigin="anonymous" type="text/javascript" src="<%=htmlWebpackPlugin.options.staticPath %>/webapp-static/lizard/index.js"><\/script>');
-        };
-        function loadLizardScript () {
-          if (isLocalStorageSupported()) {
-            var results = localStorage.getItem('/webapp-static/lizard/index.js');
-            if (results && typeof results == 'string') {
-              var res = JSON.parse(results);
-              if (res && res.times > new Date().getTime()) {
-                appendScript(res.results);
-              } else {
-                writeLizard();
-              }
-            } else {
-              writeLizard();
-            }
-          } else {
-            writeLizard();
-          }
-        };
         flex();
-        loadLizardScript();
       })(window,document);
 	  </script>
   </head>
@@ -107,6 +69,46 @@
       }
     </script>
     <script crossorigin="anonymous" type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/polyfill/index.js?v=<%=htmlWebpackPlugin.options.getTime%>"></script>
+    <script type="text/javascript">
+      function isLocalStorageSupported() {
+        var testKey = 'test',
+          storage = window.sessionStorage;
+        try {
+          storage.setItem(testKey, 'testValue');
+          storage.removeItem(testKey);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      };
+      function appendScript (res) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.appendChild(document.createTextNode(res));
+        document.head.appendChild(script);
+      };
+      function writeLizard () {
+        document.write('<script crossorigin="anonymous" type="text/javascript" src="<%=htmlWebpackPlugin.options.staticPath %>/webapp-static/lizard/index.js"><\/script>');
+      };
+      function loadLizardScript () {
+        if (isLocalStorageSupported()) {
+          var results = localStorage.getItem('/webapp-static/lizard/index.js');
+          if (results && typeof results == 'string') {
+            var res = JSON.parse(results);
+            if (res && res.times > new Date().getTime()) {
+              appendScript(res.results);
+            } else {
+              writeLizard();
+            }
+          } else {
+            writeLizard();
+          }
+        } else {
+          writeLizard();
+        }
+      };
+      loadLizardScript();
+    </script>  
 <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
     <script>
       var vConsole = new VConsole()
