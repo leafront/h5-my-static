@@ -1,6 +1,6 @@
 <template>
   <div class="pageView">
-    <AppHeader :title="title" :backFn="backAction">
+    <AppHeader :title="title">
       <div class="ui-header-right" @click="pageAction('/my/recharge/list')">
         <span>充值记录</span>
       </div>
@@ -62,12 +62,11 @@
         yCardBalance: 0,
         money: 100,
         openId: '',
-        ycartreturnurl: '',
         payGateWayConfigId:'',
         paymentThirdparty: '',
         payGateWays: [],
         isPopup: false,
-        returnUrl: location.origin + '/my/bank/recharge',
+        returnUrl: location.origin + '/my/index',
         payJumpUrl: ''
       }
     },
@@ -157,16 +156,9 @@
             "signType": 'MD5', //微信签名方式:
             "paySign": sign
         }, (res) => {
-          //微信支付成功，如果缓存中有ycartreturnurl，就跳转对应连接
           const err_msg = res.err_msg
           if (err_msg == "get_brand_wcpay_request:ok") {
-            const ycartreturnurl = store.get('ycartreturnurl', 'session')
-            if (ycartreturnurl) {
-              location.href = ycartreturnurl
-              store.remove('ycartreturnurl', 'session')
-            } else {
-              location.href = this.returnUrl
-            }
+            location.replace(this.returnUrl )
           } else if (err_msg == "get_brand_wcpay_request:cancel") {
             this.$toast('取消支付')
           } else if (err_msg == "get_brand_wcpay_request:fail") {
@@ -270,22 +262,6 @@
           location.replace(weixinUrl)
         })
       },
-      setRefrrer () {
-        const referUrl = document.referrer
-        if (!referUrl.indexOf('.laiyifen.com') >  -1) {
-          store.set('ycartreturnurl', referUrl, 'session')
-          this.ycartreturnurl = referUrl
-        }
-      },
-      backAction () {
-        const { ycartreturnurl } = this
-        if (ycartreturnurl && ycartreturnurl.indexOf('youdianCard-pay-list.html') > -1) {
-          location.replace('/my/index')
-        } else if (ycartreturnurl) {
-          this.$router.back()
-        }
-        store.remove('ycartreturnurl', 'local')
-      },
       setWeixinAuth () {
         if (utils.weixin()) {
           const {
@@ -304,7 +280,6 @@
       this.$showLoading()
       this.getWalletInfo()
       this.setWeixinAuth()
-      this.setRefrrer()
       if (!utils.isApp()) {
         this.getPayGateway()
       } 
