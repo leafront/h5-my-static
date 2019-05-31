@@ -42,8 +42,8 @@ module.exports = {
     if (process.env.VUE_APP_CURRENTMODE == 'production') {
       config.plugins.push(new UglifyJsPlugin({
         uglifyOptions: {
+          warnings: false,
           compress: {
-            warnings: false,
             drop_debugger: true,
             drop_console: true,
           },
