@@ -20,7 +20,7 @@ module.exports = {
     }
     config.plugins.push(new HtmlWebpackPlugin({
       template: 'public/index.html',
-      filename: path.resolve(__dirname, 'target/index.html'),
+      filename: path.resolve(__dirname, 'target/my-static/index.html'),
       staticPath: process.env.VUE_APP_STATIC_PATH,
       getTime: new Date().getTime(),
       inject: true,

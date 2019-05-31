@@ -33,7 +33,7 @@ const utils = {
     try {
       return JSON.parse(value)
     } catch (e) {
-      return ''
+      return value
     }
   },
   isLocalStorageSupported() {
